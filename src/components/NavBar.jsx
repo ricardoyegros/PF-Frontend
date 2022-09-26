@@ -13,7 +13,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from '@emotion/react';
-import logo from "../images/geometric tech logo - Hecho con PosterMyWall.png";
+import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 
 
 
@@ -169,7 +169,7 @@ const theme = createTheme({
   return (
     <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1}}>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="relative" color="primary">
         <Toolbar>
             {/* logo de la pagina */}
           <div style={{"height": "8rem","width":"8rem","margin": "0","padding":"0"}}>
