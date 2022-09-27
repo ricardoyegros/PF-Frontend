@@ -7,9 +7,8 @@ import Card from "./Card";
 
 
 export default function Home () {
-
     const dispatch = useDispatch();
-    const allProducts = useSelector(state => state.allProducts);
+    const allProducts = useSelector(state => state.allProductsReducer.allProducts);
     useEffect(()=>{
         dispatch(getAllProducts());
     }, [dispatch]);
