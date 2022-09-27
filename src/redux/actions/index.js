@@ -1,5 +1,6 @@
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
+export const DELETE_FILTER = "DELETE_FILTER";
 
 export function getAllProducts () {
     return async function (dispatch){
@@ -10,9 +11,14 @@ export function getAllProducts () {
     }
 };
 
-export function filterByCategory(category) { 
+export function filterByCategory(category, products) { 
     return function(dispatch) {
-        dispatch({ type: FILTER_BY_CATEGORY, payload: category})
+        dispatch({ type: FILTER_BY_CATEGORY, payload: {category, products}})
     }
 }
 
+export function deleteFilter(marca) {
+    return function(dispatch) {
+        dispatch({ type: DELETE_FILTER, payload: marca})
+    }
+}

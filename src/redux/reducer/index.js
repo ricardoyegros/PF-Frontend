@@ -1,8 +1,12 @@
-import {GET_ALL_PRODUCTS, FILTER_BY_CATEGORY} from "../actions";
+import {
+    GET_ALL_PRODUCTS, 
+    FILTER_BY_CATEGORY,
+    DELETE_FILTER
+} from "../actions";
 
 const initialState = {
     products: [],
-    allProducts: []
+    allProducts: [],
 }
 
 export default function reducer(state = initialState, action) {
@@ -14,13 +18,17 @@ export default function reducer(state = initialState, action) {
                 products : action.payload
            }
         case FILTER_BY_CATEGORY:
-            console.log(state.allProducts)
-            const productsFiltered = state.products.filter(product => product.gender === action.payload)
-            console.log(productsFiltered)
+            const products = action.payload.products
+            const productsFiltered = products.filter(product => product.gender === action.payload.category)
             return {
                 ...state,
                 allProducts: productsFiltered
             }
+        // case DELETE_FILTER:
+        //     return {
+        //         ...state,
+        //         allProducts : 
+        //     }    
         default:
             return state;
     }
