@@ -1,8 +1,11 @@
 import {Typography, Card, CardContent, Grid, TextField, Button} from "@mui/material";
+import Navbar from "./NavBar";
+import Footer from "./Footer";
 
 export default function Contact(){
     return(
         <>
+            <Navbar/>
             <Typography gutterBottom variant="h3" align="center">
                 TechStore - Contacto
             </Typography>
@@ -40,6 +43,7 @@ export default function Contact(){
                     </form>
                 </CardContent>
             </Card>
+            <Footer/>
         </>
     )
 };
