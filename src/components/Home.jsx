@@ -1,6 +1,7 @@
 import {React, useEffect} from "react";
 import Navbar from "./NavBar";
 import Footer from "./Footer";
+import { NavLink } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import { getAllProducts } from "../redux/actions/index.js";
 import Card from "./Card";
@@ -16,7 +17,18 @@ export default function Home () {
     return (
         <div>
             <Navbar/>
-            {products?.map((el, i) => <Card key={i} nombre={el.name} imagen={el.image} categoria={el.gender} precio={el.status} rating={el.species}/>)}
+            
+            {products?.map((el, i) => 
+            <NavLink to={`/detalle/${i}`}>
+            <Card 
+             key={i}
+             nombre={el.name}
+             imagen={el.image}
+             categoria={el.gender}
+             precio={el.status}
+             rating={el.species}/>
+             </NavLink>
+             )}
             <Footer/>
         </div>
     )
