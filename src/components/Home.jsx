@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import {useSelector, useDispatch} from "react-redux";
 import { getAllProducts } from "../redux/actions/index.js";
 import Card from "./Card";
+import CategoryFilter from "./CategoryFilter.jsx";
 
 
 export default function Home () {
@@ -17,6 +18,7 @@ export default function Home () {
     return (
         <div>
             <Navbar/>
+            <CategoryFilter />
             {products?.map((el, i) => <Card key={i} nombre={el.name} imagen={el.image} categoria={el.gender} precio={el.status} rating={el.species}/>)}
             <Footer/>
         </div>
