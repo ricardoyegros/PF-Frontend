@@ -4,7 +4,7 @@ export const DETAIL_PRODUCT = "DETAIL_PRODUCT"
 
 export function getAllProducts () {
     return async function (dispatch){
-        let allProducts = await fetch("https://rickandmortyapi.com/api/character").then(
+        let allProducts = await fetch("https://my-json-server.typicode.com/ricardoyegros/mockForTesting/db").then(
             res => res.json()
         ).then(products => products.results);
         return dispatch({type: GET_ALL_PRODUCTS, payload: allProducts});
