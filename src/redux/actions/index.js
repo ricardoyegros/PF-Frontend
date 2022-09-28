@@ -1,5 +1,4 @@
 
-
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const DETAIL_PRODUCT = "DETAIL_PRODUCT"
 
@@ -16,8 +15,9 @@ export function getDetailProduct(i){
     return async function(dispatch){
         let detailProduct =  await fetch(`https://rickandmortyapi.com/api/character/${i}`).then(
             res => res.json()
-        ).then(product => product.results)
-        return dispatch({type:DETAIL_PRODUCT})
+        ).then(product => product)
+        console.log(detailProduct,"actions")
+        return dispatch({type:DETAIL_PRODUCT,payload:detailProduct})
 
     }
 }
