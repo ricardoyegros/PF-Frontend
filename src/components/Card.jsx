@@ -10,7 +10,7 @@ import { Card,CardHeader, CardMedia, CardContent, Typography } from "@mui/materi
         />
       </CardContent>
       <CardMedia component="img"
-        height="180"
+        height="200"
         image={imagen}/>
       <CardContent>
         <Typography component="p" variant="h6">
