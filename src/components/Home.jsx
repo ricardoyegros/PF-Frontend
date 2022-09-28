@@ -1,10 +1,8 @@
 import {React, useEffect} from "react";
-import Navbar from "./NavBar";
-import Footer from "./Footer";
-import { NavLink } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import { getAllProducts } from "../redux/actions/index.js";
-import Card from "./Card";
+import CardProduct from "./Card";
+import {Grid, Typography, Link} from "@mui/material"
 
 
 export default function Home () {
@@ -13,23 +11,24 @@ export default function Home () {
     useEffect(()=>{
         dispatch(getAllProducts());
     }, [dispatch]);
-    let products =allProducts.slice(0,5);
+    let products =allProducts.slice(0,6);
     return (
         <div>
-            <Navbar/>
-            
+            <Typography m={2} variant="h3" align="center" >Productos</Typography>
+            <Grid  mb={5} container spacing={12} justifyContent="center">
             {products?.map((el, i) => 
-            <NavLink to={`/detalle/${i}`}>
-            <Card 
-             key={i}
+            <Grid item key={i} >
+            <Link href={`/detalle/${i}`} >
+            <CardProduct
              nombre={el.name}
              imagen={el.image}
              categoria={el.gender}
              precio={el.status}
              rating={el.species}/>
-             </NavLink>
+             </Link>
+             </Grid>
              )}
-            <Footer/>
+             </Grid>
         </div>
     )
 };
