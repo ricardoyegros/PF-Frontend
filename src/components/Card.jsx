@@ -1,14 +1,32 @@
 import React from "react";
-import styles from "../components/Styles/card.css"
+import { Card,CardHeader, CardMedia, CardContent, Typography } from "@mui/material";
 
-export default function Card ({nombre, imagen, categoria, precio, rating}) {
+ export default function CardProduct({ nombre, imagen, categoria, precio, rating }) {
     return (
-        <div className="product-card">
-            <h2>{nombre}</h2>
-            <img src={imagen} />
-            <h4>Categoria: {categoria}</h4>
-            <h4>Precio : {precio}</h4>
-            <h4>Rating: {rating}</h4>
-        </div>
-    )
-};
+    <Card sx={{ width: 345, height: 500 }} >
+      <CardContent>
+        <CardHeader 
+          action={<Typography component="p" variant="h5">{nombre}</Typography>}
+        />
+      </CardContent>
+      <CardMedia component="img"
+        height="180"
+        image={imagen}/>
+      <CardContent>
+        <Typography component="p" variant="h6">
+          Categoria:{categoria}
+        </Typography>
+      </CardContent>
+      <CardContent>
+        <Typography component="p" variant="h6">
+          Precio: ${precio}
+        </Typography>
+      </CardContent>
+      <CardContent>
+        <Typography component="p" variant="h6">
+          Marca:{rating}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+}
