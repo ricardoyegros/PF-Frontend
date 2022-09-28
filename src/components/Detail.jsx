@@ -44,7 +44,7 @@ export default function Detail () {
 
     return (
         <ThemeProvider theme={theme}>
-        <Box bgcolor={"white"} mb={10}>
+        <Box bgcolor={"white"} mb={10} flexGrow={1}>
             <Box 
             borderBottom={"solid 1px"} 
             bgcolor={"whitesmoke"} 
