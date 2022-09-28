@@ -9,7 +9,7 @@ export default function detailProductReducer(state = initialState, action) {
         case DETAIL_PRODUCT :
            return{
             ...state,
-            DETAIL_PRODUCT : action.payload
+            detailProduct : action.payload
            } 
         
         default: return state;
