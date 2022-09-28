@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,6 +15,8 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from '@emotion/react';
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
+import { useDispatch } from 'react-redux';
+import { getItem } from '../redux/actions';
 
 
 
@@ -58,8 +61,10 @@ const Search = styled('div')(({ theme }) => ({
 
   export default function Navbar () {
   
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [ search, setSearch] = useState("")
+  let dispatch = useDispatch()
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -80,6 +85,17 @@ const Search = styled('div')(({ theme }) => ({
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+//aqui las funciones de busqueda , falta linkear con back
+  const handleSearchInput = (event) =>{
+    setSearch(event.target.value)
+  }  
+
+  const handleSubmitSearch = (event) => {
+      event.preventDefault()
+      dispatch(getItem(search))
+      setSearch("")
+  }
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -180,9 +196,13 @@ const theme = createTheme({
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            {/* aqui meti la funcion onsubmit para la busqueda, */}
+            <form onSubmit={handleSubmitSearch}>
             <StyledInputBase
               inputProps={{ 'aria-label': 'search' }}
-            />
+              onChange={handleSearchInput}
+              value={search}/>
+            </form>
           </Search>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
