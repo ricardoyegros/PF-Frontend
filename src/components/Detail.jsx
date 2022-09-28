@@ -1,17 +1,15 @@
-import { Box, Typography , Grid, CardMedia, AppBar, Toolbar, Button } from "@mui/material";
+import { Box, Typography , Grid, CardMedia, Button } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom";
 import { getDetailProduct } from "../redux/actions";
-import image from "../assets/images/image-detail.png"
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from '@emotion/react';
-import { margin, textAlign } from "@mui/system";
+
 
 
 
 export default function Detail () {
-
     const { i } = useParams();
     let dispatch = useDispatch();
     useEffect(() => {
@@ -37,7 +35,7 @@ export default function Detail () {
         },
         //aqui aumente un poco el tamaño de todo
         typography : {
-          fontSize: 15
+          fontSize: 12
         }
       });
 
@@ -46,11 +44,11 @@ export default function Detail () {
 
     return (
         <ThemeProvider theme={theme}>
-        <Box bgcolor={theme.palette.primary.main}>
-            <Box borderTop={"solid 1px"} 
+        <Box bgcolor={"white"} mb={10}>
+            <Box 
             borderBottom={"solid 1px"} 
             bgcolor={"whitesmoke"} 
-            borderColor={theme.palette.secondary.main} 
+            borderColor={theme.palette.primary.main} 
             width={"100%"} 
             height={80}
             display="flex"
@@ -60,7 +58,7 @@ export default function Detail () {
             <Box 
             display="flex"
             justifyContent={"space-evenly"}
-            width="40%">
+            width="50%">
             <Typography variant={"h5"}>
                 Price
             </Typography>
@@ -71,20 +69,17 @@ export default function Detail () {
             <Button 
             variant="contained"
             size="large"
-            
-            >Add to Cart</Button>
+             >Add to Cart</Button>
             </Box>
             </Box>
-        <Grid container spacing={0}>
-        <Grid item xs={6}>
-          <Box sx={{
-         height:"100vh",
-         display:"flex",
-         flexDirection:"column",
-         alignItems:"center",
-         justifyContent:"center",
-         textAlign:"justify"
-         }}>
+        <Grid container spacing={12} justifyContent="center" alignItems="center" >
+          <Grid item>
+          <Box>
+            <CardMedia component={"img"} src={detailProduct.image} sx={{height:"20rem", width:"20rem"}}/>
+          </Box>
+          </Grid>
+          <Grid item>
+          <Box>
             <Typography variant="subtitle1" component="p">
                  {`categoria : ${detailProduct.gender}`}
             </Typography>
@@ -97,33 +92,7 @@ export default function Detail () {
 
           </Box>
           </Grid>
-          <Grid item xs={6}>
-          <Box  sx={{
-            height:"100vh"}}>
-            <CardMedia component={"img"} src={detailProduct.image} sx={{height:"100%"}}/>
-          </Box>
           </Grid>
-          </Grid>
-           <Box sx={{
-            backgroundColor:"black",
-            height:"100%", width:"100%"}}>
-          <Grid container spacing={0}>
-          <Grid item xs={6}>
-            <Typography variant="h2" align="center" sx={{color:"white",marginTop:10,fontWeight:"700"}}>
-            Superior Creating Experience
-            </Typography>
-            <Typography variant="h4" align="justify" component="p" sx={{color:"white",marginTop:30,marginLeft:15,marginRight:15}}>
-            The 13th Gen Intel® Core™ processor family offers faster P-cores and more 
-            E-cores with support for DDR4/DDR5 and PCIe 4.0/5.0. That provides a 
-            platform that can max out multitasking and choice for configurability.
-            </Typography>
-            
-          </Grid>
-          <Grid item xs={6}>
-            <CardMedia component={"img"} src={image} height="100%" width="25%"/>
-          </Grid>
-          </Grid>
-          </Box>
           </Box>
           </ThemeProvider>
     )
