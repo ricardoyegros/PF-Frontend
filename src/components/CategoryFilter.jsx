@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { filterByCategory } from '../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterByCategory } from '../redux/actions/actionFilterByCategory';
 
 export default function CategoryFilter({ productsPerPage, paginate }) {
+  const products = useSelector(state => state.categoryFilterReducer.allProducts)
+  console.log(products)
   const [category, setCategory] = useState("");
   const dispatch = useDispatch();
 
@@ -20,7 +22,7 @@ export default function CategoryFilter({ productsPerPage, paginate }) {
 
   const handleOnClickButton = (e) => {
     e.preventDefault()
-    
+    console.log(e)
   }
 
   return (
