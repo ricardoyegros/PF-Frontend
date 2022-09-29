@@ -5,6 +5,7 @@ import Detail from './components/Detail';
 import {Route, Routes} from "react-router-dom";
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
+import CreateForm from './components/CreateForm';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/detalle/:i" element={<Detail />}/>
+        <Route path="/creacion" element={<CreateForm />} />
       </Routes>
       <Footer />
     </div>
