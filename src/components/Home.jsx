@@ -2,29 +2,31 @@ import {React, useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import { getAllProducts } from "../redux/actions/index.js";
 import CardProduct from "./Card";
-import {Grid, Typography, Link} from "@mui/material"
+import { Grid, Typography, Link} from "@mui/material"
 
 
 export default function Home () {
     const dispatch = useDispatch();
-    const allProducts = useSelector(state => state.allProductsReducer.allProducts);
+    const products = useSelector(state => state.allProductsReducer.allProducts);
     useEffect(()=>{
         dispatch(getAllProducts());
     }, [dispatch]);
-    let products =allProducts.slice(0,6);
     return (
         <div>
             <Typography m={2} variant="h3" align="center" >Productos</Typography>
-            <Grid  mb={5} container spacing={12} justifyContent="center">
+            <Grid container spacing={6} justifyContent="center" >
+            <Grid item>  
+              <Typography>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non iusto omnis illum laboriosam ea inventore assumenda aspernatur explicabo minima repellat sunt consequuntur adipisci officia, debitis voluptatum nam! Repellat, quod earum.</Typography>
+            </Grid>
             {products?.map((el, i) => 
-            <Grid item key={i} >
+            <Grid item mb={5}  key={i} >
             <Link href={`/detalle/${i}`} >
             <CardProduct
              nombre={el.name}
-             imagen={el.image}
-             categoria={el.gender}
-             precio={el.status}
-             rating={el.species}/>
+             imagen={el.images[0].url}
+             categoria={el.category.name}
+             precio={el.salePrice}
+             marca={el.brand.name}/>
              </Link>
              </Grid>
              )}
