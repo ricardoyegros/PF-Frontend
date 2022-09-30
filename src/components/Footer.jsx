@@ -43,7 +43,7 @@ export default function Footer () {
                         <Grid item xs={12} sm={4}>
                         <Box borderBottom={1} color="red">Cuenta</Box>
                         <Box>
-                            <Link href="/register" color="secondary">
+                            <Link href="/users/register" color="secondary">
                                 Registro
                             </Link>
                         </Box>
