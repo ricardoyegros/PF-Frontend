@@ -53,7 +53,7 @@ export function createUsers(form){
   return async () => {
     try{
       let newUser = await axios.post(
-        "http://localhost:3001/users",
+        "http://localhost:3001/users/register",
          form
          );
          alert("A new user is registred!")
