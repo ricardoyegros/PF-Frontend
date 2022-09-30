@@ -3,13 +3,17 @@ import {useSelector, useDispatch} from "react-redux";
 import { getAllProducts } from "../redux/actions/index.js";
 import CardProduct from "./Card";
 import { Grid, Typography, Link} from "@mui/material"
+import FilterCategories from "./FilterCategories.jsx";
+import FilterBrand from "./MarcasFilter.jsx";
 
 
 export default function Home () {
     const dispatch = useDispatch();
-    const products = useSelector(state => state.allProductsReducer.allProducts);
+    let products = useSelector(state => state.allProductsReducer.allProducts);
     const item = useSelector(state => state.searchReducer.productItem)
-  
+    let filterCategory = useSelector(state => state.filterCategoriesReducer.categoryProduct)
+    if(filterCategory.length) products = filterCategory; 
+    console.log(filterCategory)
     useEffect(()=>{
         dispatch(getAllProducts());
     }, [dispatch]);
@@ -18,7 +22,8 @@ export default function Home () {
             <Typography m={2} variant="h3" align="center" >Productos</Typography>
             <Grid container spacing={6} justifyContent="center" >
             <Grid item>  
-              <Typography>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non iusto omnis illum laboriosam ea inventore assumenda aspernatur explicabo minima repellat sunt consequuntur adipisci officia, debitis voluptatum nam! Repellat, quod earum.</Typography>
+            <FilterCategories/>
+            <FilterBrand/>
             </Grid>
             {!item.length ? products.map((el, i) => 
             <Grid item mb={5}  key={el.id} >
