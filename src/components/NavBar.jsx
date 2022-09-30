@@ -181,16 +181,12 @@ const theme = createTheme({
     fontSize: 18
   }
 });
-console.log(theme)
+
   return (
     <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="relative" color="primary">
         <Toolbar>
-            {/* logo de la pagina */}
-          {/* <div style={{"height": "8rem","width":"8rem","margin": "0","padding":"0"}}>
-           <img src={logo} style={{"width": "100%", "height": "100%"}}/>
-          </div> */}
           <Link href="/">
           <Box
           component={"img"}
