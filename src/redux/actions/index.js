@@ -2,6 +2,8 @@ import axios from "axios";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const DETAIL_PRODUCT = "DETAIL_PRODUCT";
 export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
+export const FILTER_CATEGORIES = "FILTER_CATEGORIES";
+export const FILTER_BRANDS = "FILTER_BRANDS";
 
 export function getAllProducts() {
   return async function (dispatch) {
@@ -46,4 +48,18 @@ export function createProduct(form) {
       .post("https://pf-tech-store.herokuapp.com/products", form)
       .catch((error) => console.log(error));
   };
+}
+
+export function getCategories(category) {
+  return async function (dispatch) {
+    try {
+      let detailProduct = await axios.get(
+        `https://pf-tech-store.herokuapp.com/filter?page=1&size=25`,category
+        )
+        console.log(detailProduct.data.content)
+        return dispatch({ type: FILTER_CATEGORIES, payload:detailProduct.data.content });
+    } catch (error) {
+      console.log(error)
+    }
+    };
 }
