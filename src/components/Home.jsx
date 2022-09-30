@@ -23,7 +23,7 @@ export default function Home () {
             <Link href={`/detalle/${i}`} >
             <CardProduct
              nombre={el.name}
-             imagen={el.images[0].url}
+             imagen={el.images.length > 0 ? el.images[0].url : "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"}
              categoria={el.category.name}
              precio={el.salePrice}
              marca={el.brand.name}/>
