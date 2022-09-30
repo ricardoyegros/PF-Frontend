@@ -1,7 +1,8 @@
 import {GET_ALL_PRODUCTS} from "../actions";
 
 const initialState = {
-    allProducts : []
+    allProducts : [],
+
 }
 
 export default function allProductsReducer(state = initialState, action) {
@@ -10,6 +11,7 @@ export default function allProductsReducer(state = initialState, action) {
            return{
             ...state,
             allProducts : action.payload
+            
            } 
         
         default: return state;

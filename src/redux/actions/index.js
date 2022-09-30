@@ -29,7 +29,7 @@ export function getDetailProduct(i) {
 export function getItem(product) {
   return async function (dispatch) {
     let item = await fetch(
-      `https://rickandmortyapi.com/api/character/?name=${product}`
+      `https://pf-tech-store.herokuapp.com/products?name=${product}`
     )
       .then((res) => res.json())
       .then((item) => item)

@@ -59,8 +59,6 @@ export default function CreateForm() {
     let stock = state.stock;
     let brand = state.brand;
     let category = state.category;
-    let status = state.status;
-    let rating = state.rating;
     let formData = new FormData();
     formData.append("image", image);
     formData.append("name", name);
@@ -70,8 +68,6 @@ export default function CreateForm() {
     formData.append("stock", stock);
     formData.append("brand", brand);
     formData.append("category", category);
-    formData.append("status", status);
-    formData.append("rating", rating);
     e.preventDefault();
     dispatch(createProduct(formData));
     dispatch(getAllProducts());
@@ -193,31 +189,6 @@ export default function CreateForm() {
                     </MenuItem>
                   ))}
                 </TextField>
-              </Grid>
-              <Grid xs={12} item>
-                <TextField
-                  label="Status"
-                  placeholder="Please enter a category name..."
-                  variant="outlined"
-                  fullWidth
-                  required
-                  name="status"
-                  value={state.status}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid xs={12} item>
-                <TextField
-                  label="Rating"
-                  type="number"
-                  placeholder="Please enter a category name..."
-                  variant="outlined"
-                  fullWidth
-                  required
-                  name="rating"
-                  value={state.rating}
-                  onChange={handleChange}
-                />
               </Grid>
               <Grid xs={12} item>
                 <Button variant="contained" component="label" name="image">
