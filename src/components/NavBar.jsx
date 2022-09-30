@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { createTheme } from "@mui/material";
+import { createTheme, Link } from "@mui/material";
 import { ThemeProvider } from '@emotion/react';
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 import { useDispatch } from 'react-redux';
@@ -188,9 +188,15 @@ const theme = createTheme({
       <AppBar position="relative" color="primary">
         <Toolbar>
             {/* logo de la pagina */}
-          <div style={{"height": "8rem","width":"8rem","margin": "0","padding":"0"}}>
+          {/* <div style={{"height": "8rem","width":"8rem","margin": "0","padding":"0"}}>
            <img src={logo} style={{"width": "100%", "height": "100%"}}/>
-          </div>
+          </div> */}
+          <Link href="/">
+          <Box
+          component={"img"}
+          sx={{maxHeight:130,maxWidth:130}}
+          src={logo}/>
+          </Link>
           <Box sx={{ flexGrow: 1 }} />  
           <Search >
             <SearchIconWrapper>
