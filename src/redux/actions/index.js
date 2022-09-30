@@ -1,7 +1,8 @@
 
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const DETAIL_PRODUCT = "DETAIL_PRODUCT";
-export const SEARCH_PRODUCT = "SEARCH_PRODUCT"
+export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
+export const CREATE_USER = "CREATE_USER";
 
 export function getAllProducts () {
     return async function (dispatch){
@@ -21,7 +22,7 @@ export function getDetailProduct(i){
         return dispatch({type:DETAIL_PRODUCT,payload:detailProduct})
 
     }
-}
+};
 //aqui funcion para el fecth de la ruta de busqueda
 export function getItem(product){
     return async function(dispatch){
@@ -32,4 +33,4 @@ export function getItem(product){
         return dispatch({type:SEARCH_PRODUCT,payload: item})
         
     }
-}
+};
