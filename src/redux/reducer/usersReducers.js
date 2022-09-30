@@ -20,4 +20,4 @@ export default function createUsers(state = initialState, action){
                        
             default: return state;
         }
-}
+};
