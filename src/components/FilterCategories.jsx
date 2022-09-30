@@ -54,8 +54,8 @@ export default function FilterCategories() {
   const handleChange = (event) => {
     event.preventDefault()
     setPersonName({...personName, categoryId : names.indexOf(event.target.value) + 1})
-    dispatch(getCategories(event.target.value))
-    console.log(personName)
+    dispatch(getCategories({...personName, categoryId : names.indexOf(event.target.value) + 1}))
+    console.log(names.indexOf(event.target.value) + 1)
   };
 
   return (

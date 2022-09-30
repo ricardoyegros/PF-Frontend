@@ -56,7 +56,7 @@ export function getCategories(category) {
       let detailProduct = await axios.get(
         `https://pf-tech-store.herokuapp.com/filter?page=1&size=25`,category
         )
-        console.log(detailProduct.data.content)
+        console.log(category, "hola23")
         return dispatch({ type: FILTER_CATEGORIES, payload:detailProduct.data.content });
     } catch (error) {
       console.log(error)

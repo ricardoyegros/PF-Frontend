@@ -73,15 +73,15 @@ export default function Detail () {
             </Box>
             </Box>
          <Grid container spacing={12} justifyContent="center" alignItems="center" >
-     {/*      <Grid item>
+     {      <Grid item>
            <Box>
-            <CardMedia component={"img"} src={detailProduct?.images[0].url} sx={{height:"20rem", width:"20rem"}}/>
+           <CardMedia component={"img"} src={detailProduct.images && detailProduct.images[0].url} sx={{ height: "20rem", width: "20rem" }} />
           </Box> 
-          </Grid>  */}
+          </Grid>  }
           <Grid item>
            <Box>
             <Typography variant="subtitle1" component="p">
-                 {`categoria : ${detailProduct?.category.name}`}
+                 {`categoria : ${detailProduct.name && detailProduct.category.name}`}
             </Typography> 
            <Typography variant="h4" component="p"  marginTop={10}>
                  {detailProduct?.name}

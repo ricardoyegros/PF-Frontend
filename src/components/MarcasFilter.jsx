@@ -47,6 +47,7 @@ export default function FilterBrand() {
   const handleChange = (event) => {
     event.preventDefault()
     setPersonName({...personName, [event.target.name] : event.target.value})
+    console.log({...personName, [event.target.name] : event.target.value})
   };
 
   return (
