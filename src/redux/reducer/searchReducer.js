@@ -9,7 +9,6 @@ const initialState = {
 }
 // hay q ver la ruta de donde trae los productos
 export default function searchReducer(state = initialState, action,) {
-        
     switch(action.type){
         case SEARCH_PRODUCT :
             if(!action.payload.length) alert("Producto no encontrado, seras redireccionado al home")

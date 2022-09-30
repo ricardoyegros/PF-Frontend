@@ -16,14 +16,15 @@ export function getAllProducts() {
 
 export function getDetailProduct(i) {
   return async function (dispatch) {
-    let detailProduct = await fetch(
-      `https://rickandmortyapi.com/api/character/${i}`
-    )
-      .then((res) => res.json())
-      .then((product) => product);
-
-    return dispatch({ type: DETAIL_PRODUCT, payload: detailProduct });
-  };
+    try {
+      let detailProduct = await axios.get(
+        `https://pf-tech-store.herokuapp.com/products/${i}`
+        )
+        return dispatch({ type: DETAIL_PRODUCT, payload: detailProduct.data });
+    } catch (error) {
+      console.log(error)
+    }
+    };
 }
 //aqui funcion para el fecth de la ruta de busqueda
 export function getItem(product) {

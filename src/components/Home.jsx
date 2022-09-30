@@ -9,8 +9,7 @@ export default function Home () {
     const dispatch = useDispatch();
     const products = useSelector(state => state.allProductsReducer.allProducts);
     const item = useSelector(state => state.searchReducer.productItem)
-    console.log(products,"all")
-    console.log(item,"item")
+  
     useEffect(()=>{
         dispatch(getAllProducts());
     }, [dispatch]);
@@ -22,8 +21,8 @@ export default function Home () {
               <Typography>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non iusto omnis illum laboriosam ea inventore assumenda aspernatur explicabo minima repellat sunt consequuntur adipisci officia, debitis voluptatum nam! Repellat, quod earum.</Typography>
             </Grid>
             {!item.length ? products.map((el, i) => 
-            <Grid item mb={5}  key={i} >
-            <Link href={`/detalle/${i}`} >
+            <Grid item mb={5}  key={el.id} >
+            <Link href={`/detalle/${el.id}`} >
             <CardProduct
              nombre={el.name}
              imagen={el.images.length > 0 ? el.images[0].url : "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"}
@@ -33,8 +32,8 @@ export default function Home () {
              </Link>
              </Grid>
              ) : item.map((el, i) => 
-             <Grid item mb={5}  key={i} >
-             <Link href={`/detalle/${i}`} >
+             <Grid item mb={5}  key={el.id} >
+             <Link href={`/detalle/${el.id}`} >
              <CardProduct
               nombre={el.name}
               imagen={el.images.length > 0 ? el.images[0].url : "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"}
