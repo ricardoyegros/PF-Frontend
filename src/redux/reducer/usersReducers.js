@@ -1,4 +1,5 @@
-//importar { ACTIONS } from "../actions";
+import { CREATE_USER } from "../actions";
+
 
 const initialState = {
     usuarios: [],
@@ -9,8 +10,9 @@ const initialState = {
 }; 
 
 export default function createUsers(state = initialState, action){
+    
         switch(action.type){
-            case CREATE_USER:
+            case CREATE_USER :
                 return {
                     ...state,
                     usuarios: action.payload,
@@ -18,4 +20,4 @@ export default function createUsers(state = initialState, action){
                        
             default: return state;
         }
-};
+}

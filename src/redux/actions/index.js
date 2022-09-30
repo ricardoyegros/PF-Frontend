@@ -2,6 +2,8 @@ import axios from "axios";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const DETAIL_PRODUCT = "DETAIL_PRODUCT";
 export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
+export const CREATE_USER = "CREATE_USER";
+//export const CLEAR  = "CLEAR";
 
 export function getAllProducts() {
   return async function (dispatch) {
@@ -44,4 +46,41 @@ export function createProduct(form) {
       .post("https://pf-tech-store.herokuapp.com/products", form)
       .catch((error) => console.log(error));
   };
-}
+};
+
+//=====================>>>>>>  JULIAN
+export function createUsers(form){
+  return async () => {
+    try{
+      let newUser = await axios.post(
+        "http://localhost:3001/users",
+         form
+         );
+         alert("A new user is registred!")
+         return newUser;
+
+    }catch(error){
+      alert("name already exist");
+      console.log(error);
+
+    }
+  };
+
+
+};
+  
+  /* return function (dispatch){
+      axios
+      .post("https://pf-tech-store.herokuapp.com/users/register", form)
+      .catch((error) => console.log(error)); 
+  }; */
+
+
+
+/* export function clear (){
+  return { 
+    type: CLEAR,
+     payload: [] 
+    };
+
+}; */
