@@ -39,6 +39,7 @@ export function getItem(product) {
 }
 
 export function createProduct(form) {
+  console.log(form)
   return function (dispatch) {
     axios
       .post("https://pf-tech-store.herokuapp.com/products", form)
