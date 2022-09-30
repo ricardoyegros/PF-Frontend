@@ -15,8 +15,9 @@ export default function Detail () {
     useEffect(() => {
         dispatch(getDetailProduct(i));
     },[dispatch,i])
-    let detailProduct = useSelector(state =>state.detailProductReducer.detailProduct )
+    let detailProduct = useSelector(state =>state.detailProductReducer.detailProduct)
     console.log(detailProduct)
+    console.log(i)
 
     const theme = createTheme({
         palette: {
@@ -63,37 +64,37 @@ export default function Detail () {
                 Price
             </Typography>
             <Typography variant={"h5"} >
-                {`$ ${detailProduct.status}`}
+                {` $ ${detailProduct?.salePrice}`}
             </Typography>
-            {/* falta onclick funcion para añadir a carrito */}
-            <Button 
+             <Button 
             variant="contained"
             size="large"
              >Add to Cart</Button>
             </Box>
             </Box>
-        <Grid container spacing={12} justifyContent="center" alignItems="center" >
+         <Grid container spacing={12} justifyContent="center" alignItems="center" >
+     {      <Grid item>
+           <Box>
+           <CardMedia component={"img"} src={detailProduct.images && detailProduct.images[0].url} sx={{ height: "20rem", width: "20rem" }} />
+          </Box> 
+          </Grid>  }
           <Grid item>
-          <Box>
-            <CardMedia component={"img"} src={detailProduct.image} sx={{height:"20rem", width:"20rem"}}/>
-          </Box>
-          </Grid>
-          <Grid item>
-          <Box>
+           <Box>
             <Typography variant="subtitle1" component="p">
-                 {`categoria : ${detailProduct.gender}`}
-            </Typography>
-            <Typography variant="h4" component="p"  marginTop={10}>
-                 {detailProduct.name}
+                 {`categoria : ${detailProduct.name && detailProduct.category.name}`}
+            </Typography> 
+           <Typography variant="h4" component="p"  marginTop={10}>
+                 {detailProduct?.name}
             </Typography>
             <Typography variant="h6" component="p"  marginTop={10}>
-                 {` Aqui deberia ir descripcion: ${detailProduct.species}`}
-            </Typography>
+                 {`${detailProduct?.description}`}
+            </Typography>  
 
           </Box>
           </Grid>
-          </Grid>
+          </Grid>     
           </Box>
-          </ThemeProvider>
+          </ThemeProvider>  
+        
     )
 };

@@ -5,7 +5,7 @@ import Detail from './components/Detail';
 import {Route, Routes} from "react-router-dom";
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
-import FormForUpload from './components/FormForUpload'
+import CreateUsers from './components/CreateUsers'
 import CreateForm from './components/CreateForm';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/detalle/:i" element={<Detail />}/>
-        <Route path= "/register" element={<FormForUpload/>}/>
+        <Route path= "/users/register" element={<CreateUsers/>}/>
         <Route path="/creacion" element={<CreateForm />} />
       </Routes>
       <Footer />

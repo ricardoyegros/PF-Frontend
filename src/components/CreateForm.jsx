@@ -1,31 +1,81 @@
-import {React, useState} from "react";
-import {useDispatch} from "react-redux";
-import {getAllProducts, createProduct} from "../redux/actions/index.js"
+import { React, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAllProducts, createProduct } from "../redux/actions/index.js";
+import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Card,
   CardContent,
   Grid,
   TextField,
-  Button
+  Button,
+  MenuItem,
 } from "@mui/material";
 
+const categories = [
+  { value: "Mother Board", label: "Mother Board" },
+  { value: "Memory", label: "Memory" },
+  { value: "Processor", label: "Processor" },
+  { value: "Disk", label: "Disk" },
+  { value: "Case", label: "Case" },
+  { value: "Graphics card GPU", label: "Graphics card GPU" },
+  { value: "Monitor", label: "Monitor" },
+  { value: "Keyboard", label: "Keyboard" },
+  { value: "Cooler", label: "Cooler" },
+];
+
+const brands = [
+  { value: "Intel", label: "Intel" },
+  { value: "AMD", label: "AMD" },
+  { value: "Asus", label: "Asus" },
+  { value: "MSI", label: "MSI" },
+  { value: "Gigabyte", label: "Gigabyte" },
+  { value: "Kingstone", label: "Kingstone" },
+  { value: "Cougar", label: "Cougar" },
+  { value: "HyperX", label: "HyperX" },
+  { value: "LG", label: "LG" },
+  { value: "Adata", label: "Adata" },
+];
 
 export default function CreateForm() {
-    const dispatch = useDispatch();
-    const [state, setState] = useState({});
+  const dispatch = useDispatch();
+  const [state, setState] = useState({});
+  const [file, setFile] = useState({});
+  const navigate = useNavigate();
 
-    function handleChange(e){
-        setState({...state, [e.target.name]: e.target.value})
-    }
-    console.log(state)
+  function handleChange(e) {
+    setState({ ...state, [e.target.name]: e.target.value });
+  }
 
-    function handleSubmit (){
-        dispatch(getAllProducts());
-        dispatch(createProduct(state));
-    }
-    
-    return (
+  function handleChangeFile(e) {
+    setFile({ ...file, [e.target.name]: e.target.files[0] });
+  }
+  function handleSubmit(e) {
+    let image = file.image;
+    let name = state.name;
+    let description = state.description;
+    let purchasePrice = state.purchasePrice;
+    let salePrice = state.salePrice;
+    let stock = state.stock;
+    let brand = state.brand;
+    let category = state.category;
+    let formData = new FormData();
+    formData.append("image", image);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("purchasePrice", purchasePrice);
+    formData.append("salePrice", salePrice);
+    formData.append("stock", stock);
+    formData.append("brand", brand);
+    formData.append("category", category);
+    e.preventDefault();
+    dispatch(createProduct(formData));
+    dispatch(getAllProducts());
+    alert("New product has been created");
+    navigate("/");
+  }
+
+  return (
     <>
       <Typography gutterBottom variant="h3" align="center">
         TechStore - Create Product
@@ -104,6 +154,7 @@ export default function CreateForm() {
               </Grid>
               <Grid xs={12} item>
                 <TextField
+                  select
                   label="Brand"
                   placeholder="Please enter a brand name..."
                   variant="outlined"
@@ -112,10 +163,17 @@ export default function CreateForm() {
                   name="brand"
                   value={state.brand}
                   onChange={handleChange}
-                />
+                >
+                  {brands.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
               <Grid xs={12} item>
                 <TextField
+                  select
                   label="Category"
                   placeholder="Please enter a category name..."
                   variant="outlined"
@@ -124,14 +182,27 @@ export default function CreateForm() {
                   name="category"
                   value={state.category}
                   onChange={handleChange}
-                />
+                >
+                  {categories.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
               <Grid xs={12} item>
                 <Button variant="contained" component="label" name="image">
                   Upload your images
-                  <input name="image" value={state.image} hidden accept="image/*" muiltiple type="file" onChange={handleChange}  />
+                  <input
+                    name="image"
+                    value={state.image}
+                    hidden
+                    accept="image/*"
+                    muiltiple
+                    type="file"
+                    onChange={handleChangeFile}
+                  />
                 </Button>
-                <p>{state.image}</p>
               </Grid>
               <Grid xs={12} item>
                 <Button
@@ -151,12 +222,3 @@ export default function CreateForm() {
   );
 }
 
-// <Grid xs={12} item>
-//   <TextField
-//     type="image"
-//     label="Select your Images"
-//     placeholder="Please enter images..."
-//     fullWidth
-//     required
-//   />
-// </Grid>
