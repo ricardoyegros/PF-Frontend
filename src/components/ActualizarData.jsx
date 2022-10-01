@@ -18,7 +18,7 @@ export default function ActualizarData() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
+    useEffect((e) => {
         dispatch(getIdUsers(id));
     }, [dispatch, id]);
 
