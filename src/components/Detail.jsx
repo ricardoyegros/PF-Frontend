@@ -58,12 +58,14 @@ export default function Detail () {
             >
             <Box 
             display="flex"
-            justifyContent={"space-evenly"}
-            width="50%">
-            <Typography variant={"h5"}>
+            justifyContent={"flex-end"}
+            alignItems={"center"}
+            width="50%"
+            marginRight={15}>
+            <Typography variant={"h5"} sx={{marginRight:3}}>
                 Price
             </Typography>
-            <Typography variant={"h5"} >
+            <Typography variant={"h5"} sx={{marginRight:5}}>
                 {` $ ${detailProduct?.salePrice}`}
             </Typography>
              <Button 
@@ -72,21 +74,26 @@ export default function Detail () {
              >Add to Cart</Button>
             </Box>
             </Box>
-         <Grid container spacing={12} justifyContent="center" alignItems="center" >
-     {      <Grid item>
-           <Box>
-           <CardMedia component={"img"} src={detailProduct.images && detailProduct.images[0].url} sx={{ height: "20rem", width: "20rem" }} />
+         <Grid container spacing={0} justifyContent="center" alignItems="center" direction="row"  wrap="wrap-reverse">
+           <Grid item xs="10" sm="auto" xl="3" md="4"  >
+           <Box 
+            component="img"
+            src={detailProduct.images && detailProduct.images[0].url}
+            sx={
+           { maxHeight:300,
+            maxWidth:300,
+            padding:5}}>
           </Box> 
-          </Grid>  }
-          <Grid item>
+          </Grid>  
+          <Grid item xs="10" sm="auto" xl="3" md="4" >
            <Box>
-            <Typography variant="subtitle1" component="p">
+            <Typography variant="h6" component="p" marginTop={5}>
                  {`categoria : ${detailProduct.name && detailProduct.category.name}`}
             </Typography> 
-           <Typography variant="h4" component="p"  marginTop={10}>
+           <Typography variant="h4" component="p"  marginTop={5}>
                  {detailProduct?.name}
             </Typography>
-            <Typography variant="h6" component="p"  marginTop={10}>
+            <Typography variant="h6" component="p"  marginTop={4}>
                  {`${detailProduct?.description}`}
             </Typography>  
 
