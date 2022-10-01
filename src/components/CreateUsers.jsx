@@ -7,7 +7,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
+//import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
@@ -37,8 +37,8 @@ const MenuProps = {
 
 export default function CreateUsers() {
     const dispatch = useDispatch();
-    const [state, setState] = useState({});
-    const [typeIdent, setTypeIdent] = React.useState([]);
+    //const [state, setState] = useState({});
+    const [typeIdent, setTypeIdent] = useState([]);
     const namesDNI = ["CC", "DNI", "PASSPORT", "GREENCARD", "OTRO"];
 
     const [input, setInput] = useState({
@@ -52,6 +52,7 @@ export default function CreateUsers() {
         password: "",
     });
 
+    //==========el change del select
     const handleChangeTypeIdent = (event) => {
         const {
             target: { value },
@@ -61,12 +62,15 @@ export default function CreateUsers() {
             typeof value === "string" ? value.split(",") : value
         );
     };
+    console.log(typeIdent);
 
+    //======>>>>>>> el change de los input's
     function handleChange(e) {
-        setState({ ...state, [e.target.name]: e.target.value });
+        setInput({ ...input, [e.target.name]: e.target.value });
     }
-    console.log(state);
 
+
+    //======>>>>>>> el change del boton submit
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -111,9 +115,7 @@ export default function CreateUsers() {
                                     required
                                     name="name"
                                     value={input.name}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                    }}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid xs={12} item>
@@ -125,9 +127,7 @@ export default function CreateUsers() {
                                     required
                                     name="lastName"
                                     value={input.lastName}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                    }}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid xs={12} item>
@@ -138,11 +138,8 @@ export default function CreateUsers() {
                                     <Select
                                         labelId="demo-multiple-checkbox-label"
                                         id="demo-multiple-checkbox"
-                                        multiple
                                         value={typeIdent}
-                                        onChange={(e) => {
-                                            handleChangeTypeIdent();
-                                        }}
+                                        onChange={handleChangeTypeIdent}
                                         input={
                                             <OutlinedInput label="TypeIdent" />
                                         }
@@ -153,13 +150,6 @@ export default function CreateUsers() {
                                     >
                                         {namesDNI.map((name) => (
                                             <MenuItem key={name} value={name}>
-                                                <Checkbox
-                                                    checked={
-                                                        typeIdent.indexOf(
-                                                            name
-                                                        ) > -1
-                                                    }
-                                                />
                                                 <ListItemText primary={name} />
                                             </MenuItem>
                                         ))}
@@ -176,9 +166,7 @@ export default function CreateUsers() {
                                     required
                                     name="Identification"
                                     value={input.identification}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                    }}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid xs={12} item>
@@ -191,9 +179,7 @@ export default function CreateUsers() {
                                     required
                                     name="contact"
                                     value={input.contact}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                    }}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid xs={12} item>
@@ -206,9 +192,7 @@ export default function CreateUsers() {
                                     required
                                     name="email"
                                     value={input.email}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                    }}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid xs={12} item>
@@ -220,9 +204,7 @@ export default function CreateUsers() {
                                     required
                                     name="address"
                                     value={input.address}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                    }}
+                                    onChange={handleChange}
                                 />
                             </Grid>
 
@@ -235,9 +217,7 @@ export default function CreateUsers() {
                                     required
                                     name="address"
                                     value={input.password}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                    }}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid xs={12} item>
