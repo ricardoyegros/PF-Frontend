@@ -18,9 +18,12 @@ export default function ActualizarData() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect((e) => {
-        dispatch(getIdUsers(id));
-    }, [dispatch, id]);
+    useEffect(
+        (e) => {
+            dispatch(getIdUsers(id));
+        },
+        [dispatch, id]
+    );
 
     let detailUser = useSelector((state) => state.userIdReducer.userId);
 
@@ -57,7 +60,7 @@ export default function ActualizarData() {
             >
                 <CardContent>
                     <Typography gutterBottom variant="h5">
-                        Update-Info ready!
+                        Please read all the fields !
                     </Typography>
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={1}>
@@ -72,7 +75,7 @@ export default function ActualizarData() {
                                     variant={"h5"}
                                     sx={{ marginRight: 5 }}
                                 >
-                                    {` $ ${detailUser?.name}`}
+                                    {`${detailUser?.name}`}
                                 </Typography>
                             </Grid>
                             <Grid xs={12} item>
@@ -86,7 +89,7 @@ export default function ActualizarData() {
                                     variant={"h5"}
                                     sx={{ marginRight: 5 }}
                                 >
-                                    {` $ ${detailUser?.lastName}`}
+                                    {`${detailUser?.lastName}`}
                                 </Typography>
                             </Grid>
                             <Grid xs={12} item>
@@ -100,7 +103,7 @@ export default function ActualizarData() {
                                     variant={"h5"}
                                     sx={{ marginRight: 5 }}
                                 >
-                                    {` $ ${detailUser?.typeIdentification}`}
+                                    {`${detailUser?.typeIdentification}`}
                                 </Typography>
                             </Grid>
                             <Grid xs={12} item>
@@ -114,7 +117,7 @@ export default function ActualizarData() {
                                     variant={"h5"}
                                     sx={{ marginRight: 5 }}
                                 >
-                                    {` $ ${detailUser?.identidication}`}
+                                    {`${detailUser?.identification}`}
                                 </Typography>
                             </Grid>
                             <Grid xs={12} item>
@@ -128,11 +131,11 @@ export default function ActualizarData() {
                                     variant={"h5"}
                                     sx={{ marginRight: 5 }}
                                 >
-                                    {` $ ${detailUser?.contact}`}
+                                    {`${detailUser?.contact}`}
                                 </Typography>
                             </Grid>
-                            <Grid xs={12} item> 
-                            <Typography
+                            <Grid xs={12} item>
+                                <Typography
                                     variant={"h5"}
                                     sx={{ marginRight: 3 }}
                                 >
@@ -142,11 +145,11 @@ export default function ActualizarData() {
                                     variant={"h5"}
                                     sx={{ marginRight: 5 }}
                                 >
-                                    {` $ ${detailUser?.email}`}
+                                    {`${detailUser?.email}`}
                                 </Typography>
                             </Grid>
                             <Grid xs={12} item>
-                            <Typography
+                                <Typography
                                     variant={"h5"}
                                     sx={{ marginRight: 3 }}
                                 >
@@ -156,10 +159,10 @@ export default function ActualizarData() {
                                     variant={"h5"}
                                     sx={{ marginRight: 5 }}
                                 >
-                                    {` $ ${detailUser?.address}`}
+                                    {`${detailUser?.address}`}
                                 </Typography>
                             </Grid>
-{/* 
+                            {/* 
                             <Grid xs={12} item>
                                 <TextField
                                     label="Password"
