@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,7 +18,7 @@ const MenuProps = {
   },
 };
 
-const names = [
+const categoryNames = [
   "Mother Board",
   "Memory",
   "Processor",
@@ -31,32 +30,49 @@ const names = [
   "Cooler"
 ];
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+const brandNames = [
+  "Intel",
+  "AMD",
+  "Asus",
+  "MSI",
+  "Gigabyte",
+  "Kingstone",
+  "Western Digital",
+  "Cougar",
+  "HyperX",
+  "LG",
+  "Adata"
+];
+
 
 export default function FilterCategories() {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState({
-    categoryId: "",
-    sortBy:{
-      type:"id",
-      sort:"ASC"
-    }
-  });
+//########### Dispatch y Estados Aca###############
   const dispatch = useDispatch()
-
+  // const [brand] = React.useState({});
+  const [personName, setPersonName] = React.useState({
+    categoryId: false,
+    brandId: false,
+    sort: false,
+    type: false,
+    page: false,
+    size: false
+  });
+  //#######################################################
+  // Handles Changes Aca###################################
   const handleChange = (event) => {
     event.preventDefault()
-    setPersonName({...personName, categoryId : names.indexOf(event.target.value) + 1})
-    dispatch(getCategories({...personName, categoryId : names.indexOf(event.target.value) + 1}))
-    console.log(names.indexOf(event.target.value) + 1)
+    setPersonName({...personName, categoryId : categoryNames.indexOf(event.target.value) + 1})
+    dispatch(getCategories({...personName, categoryId : categoryNames.indexOf(event.target.value) + 1}))
   };
+
+
+  const handleChangeBrand = (event) => {
+    event.preventDefault()
+    setPersonName({...personName, [event.target.name] : event.target.value})
+    dispatch(getCategories({...personName, brandId : brandNames.indexOf(event.target.value) + 1}))
+    console.log(brandNames.indexOf(event.target.value) + 1, "soy brandId")
+  };
+//#################################################################
 
   return (
     <div>
@@ -71,7 +87,28 @@ export default function FilterCategories() {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {categoryNames.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">Marcas</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          value={personName.name}
+          name={"name"}
+          onChange={handleChangeBrand}
+          input={<OutlinedInput label="Name" />}
+          MenuProps={MenuProps}
+        >
+          {brandNames.map((name) => (
             <MenuItem
               key={name}
               value={name}
