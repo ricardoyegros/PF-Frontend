@@ -1,7 +1,7 @@
 import {FILTER_CATEGORIES} from "../actions";
 
 const initialState = {
-    categoryProduct : []
+    categoryProduct : undefined
 }
 
 
