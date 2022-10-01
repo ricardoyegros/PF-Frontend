@@ -44,9 +44,21 @@ const brandNames = [
   "Adata"
 ];
 
+const ascDesc = [
+  "ASC",
+  "DESC",
+];
+
+const sortBy = [
+  "rating",
+  "salePrice",
+  "id"
+];
+
+
 
 export default function FilterCategories() {
-//########### Dispatch y Estados Aca###############
+  //########### Dispatch y Estados Aca###############
   const dispatch = useDispatch()
   // const [brand] = React.useState({});
   const [personName, setPersonName] = React.useState({
@@ -61,18 +73,31 @@ export default function FilterCategories() {
   // Handles Changes Aca###################################
   const handleChange = (event) => {
     event.preventDefault()
-    setPersonName({...personName, categoryId : categoryNames.indexOf(event.target.value) + 1})
-    dispatch(getCategories({...personName, categoryId : categoryNames.indexOf(event.target.value) + 1}))
+    setPersonName({ ...personName, categoryId: categoryNames.indexOf(event.target.value) + 1 })
+    dispatch(getCategories({ ...personName, categoryId: categoryNames.indexOf(event.target.value) + 1 }))
   };
 
 
   const handleChangeBrand = (event) => {
     event.preventDefault()
-    setPersonName({...personName, [event.target.name] : event.target.value})
-    dispatch(getCategories({...personName, brandId : brandNames.indexOf(event.target.value) + 1}))
+    setPersonName({ ...personName, [event.target.name]: event.target.value })
+    dispatch(getCategories({ ...personName, brandId: brandNames.indexOf(event.target.value) + 1 }))
     console.log(brandNames.indexOf(event.target.value) + 1, "soy brandId")
   };
-//#################################################################
+
+  const handleSort = (event) => {
+    event.preventDefault();
+    setPersonName({ ...personName, sort: event.target.value });
+    dispatch(getCategories({...personName}));
+  };
+
+  const handleType = (event) => {
+    event.preventDefault();
+    setPersonName({...personName, sort: event.target.value});
+    dispatch(getCategories({...personName}));
+  };
+
+  //#################################################################
 
   return (
     <div>
@@ -118,6 +143,49 @@ export default function FilterCategories() {
           ))}
         </Select>
       </FormControl>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">ASC-DESC</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          value={personName.sort}
+          name={"name"}
+          onChange={handleSort}
+          input={<OutlinedInput label="Name" />}
+          MenuProps={MenuProps}
+        >
+          {ascDesc.map(e => (
+            <MenuItem
+              key={ascDesc.indexOf(e)}
+              value={e}
+            >
+              {e}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">Ordenar Por</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          value={personName.type}
+          name={"name"}
+          onChange={handleType}
+          input={<OutlinedInput label="Name" />}
+          MenuProps={MenuProps}
+        >
+          {sortBy.map(e => (
+            <MenuItem
+              key={sortBy.indexOf(e)}
+              value={e}
+            >
+              {e}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 }
+
