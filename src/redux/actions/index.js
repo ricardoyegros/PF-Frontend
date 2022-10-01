@@ -57,21 +57,23 @@ export function createProduct(form) {
 
 //=====================>>>>>>  JULIAN
 export function createUsers(form) {
-  return async () => {
-    try {
-      let newUser = await axios.post(
-        "http://localhost:3001/users/register",
-        form
-      );
-      alert("A new user is registred!");
-      return newUser;
-    } catch (error) {
-      alert("name already exist");
-      console.log(error);
-    }
-  };
-}
-//==============================================
+    return async () => {
+        try {
+            let newUser = await axios.post(
+                "http://localhost:3001/users/register",
+                form
+            );
+            alert("A new user is registred!");
+            return newUser;
+        } catch (error) {
+            alert("name already exist");
+            console.log(error);
+        }
+    };
+};
+
+//==================================  fin julian
+
 export function getCategories(category) {
   return async function (dispatch) {
     try {
