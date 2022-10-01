@@ -10,10 +10,10 @@ export const FILTER_BRANDS = "FILTER_BRANDS";
 export function getAllProducts() {
   return async function (dispatch) {
     let allProducts = await fetch(
-      "https://pf-tech-store.herokuapp.com/products"
+      "https://techstore123.herokuapp.com/products"
     )
       .then((res) => res.json())
-      .then((products) => products);
+      .then((products) => products.content);
     return dispatch({ type: GET_ALL_PRODUCTS, payload: allProducts });
   };
 }
@@ -22,7 +22,7 @@ export function getDetailProduct(i) {
   return async function (dispatch) {
     try {
       let detailProduct = await axios.get(
-        `https://pf-tech-store.herokuapp.com/products/${i}`
+        `https://techstore123.herokuapp.com/products/${i}`
       );
       return dispatch({
         type: DETAIL_PRODUCT,
@@ -37,12 +37,13 @@ export function getDetailProduct(i) {
 export function getItem(product) {
   return async function (dispatch) {
     let item = await fetch(
-      `https://pf-tech-store.herokuapp.com/products?name=${product}`
+      `https://techstore123.herokuapp.com/products?name=${product}`
     )
       .then((res) => res.json())
       .then((item) => item)
       .catch((error) => alert(error));
-    return dispatch({ type: SEARCH_PRODUCT, payload: item });
+    console.log(item);
+    return dispatch({ type: SEARCH_PRODUCT, payload: item.content });
   };
 }
 
@@ -50,27 +51,27 @@ export function createProduct(form) {
   console.log(form);
   return function (dispatch) {
     axios
-      .post("https://pf-tech-store.herokuapp.com/products", form)
+      .post("https://techstore123.herokuapp.com/products", form)
       .catch((error) => console.log(error));
   };
 }
 
 //=====================>>>>>>  JULIAN
 export function createUsers(input) {
-    console.log(input);
-    return async () => {
-        try {
-            let newUser = await axios.post(
-                "http://localhost:3001/users/register",
-                input
-            );
-            alert("A new user is registred!");
-            return newUser;
-        } catch (error) {
-            alert("name already exist");
-            console.log(error);
-        }
-    };
+  console.log(input);
+  return async () => {
+    try {
+      let newUser = await axios.post(
+        "http://localhost:3001/users/register",
+        input
+      );
+      alert("A new user is registred!");
+      return newUser;
+    } catch (error) {
+      alert("name already exist");
+      console.log(error);
+    }
+  };
 }
 
 //==================================  fin julian
@@ -78,13 +79,11 @@ export function createUsers(input) {
 export function getCategories(category) {
   return async function (dispatch) {
     try {
-      console.log(category,"soy category")
+      console.log(category, "soy category")
       let { categoryId, brandId, type, sort, page, size } = category;
-      let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${
-        sort || ""
-      }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${
-        page || ""
-      }&size=${size || ""}`;
+      let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
+        }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page || ""
+        }&size=${size || ""}`;
       let detailProduct = await axios.get(url);
       console.log(url, "soy url");
       return dispatch({
