@@ -56,12 +56,13 @@ export function createProduct(form) {
 }
 
 //=====================>>>>>>  JULIAN
-export function createUsers(form) {
+export function createUsers(input) {
+    console.log(input);
     return async () => {
         try {
             let newUser = await axios.post(
                 "http://localhost:3001/users/register",
-                form
+                input
             );
             alert("A new user is registred!");
             return newUser;
@@ -70,7 +71,7 @@ export function createUsers(form) {
             console.log(error);
         }
     };
-};
+}
 
 //==================================  fin julian
 
