@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../redux/actions/index.js";
 import CardProduct from "./Card";
 import { Grid, Typography, Link } from "@mui/material";
-import FilterCategories from "./FilterCategories.jsx";
-import {getCategories} from "../redux/actions/index.js"
+// import FilterCategories from "./FilterCategories.jsx";
+// import {getCategories} from "../redux/actions/index.js"
 
 export default function Home() {
   const dispatch = useDispatch();
