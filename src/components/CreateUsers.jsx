@@ -38,7 +38,7 @@ export default function CreateUsers() {
         e.preventDefault();
         dispatch(createUsers(input));
         setInput({});
-        navigate("/");
+        navigate("/users/:id/updateprofile");
     }
 
     return (
