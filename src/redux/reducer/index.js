@@ -4,6 +4,7 @@ import detailProductReducer from "./detailReducer";
 import searchReducer from "./searchReducer";
 import usersReducers from "./usersReducers";
 import filterCategoriesReducer from "./filterCategoryReducer";
+import categorysNameReducer from "./categorysReducer";
 import userIdReducer from "./userIdReducer";
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
     searchReducer,
     filterCategoriesReducer,
     usersReducers,
-    userIdReducer,
+    categorysNameReducer,
+    userIdReducer
 });

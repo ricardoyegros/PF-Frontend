@@ -35,9 +35,6 @@ export default function Home() {
         Productos
       </Typography>
       <Grid container spacing={6} justifyContent="center">
-        <Grid item>
-          <FilterCategories />
-        </Grid>
         {!item.length
           ? products.map((el, i) => (
               <Grid item mb={5} key={el.id}>
