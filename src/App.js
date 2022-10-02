@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import CreateUsers from "./components/CreateUsers";
 import CreateForm from "./components/CreateForm";
 import ActualizarData from "./components/ActualizarData";
+import Welcom from "./components/Welcom"
+
 
 function App() {
     return (
@@ -23,6 +25,7 @@ function App() {
                     path="/users/:id/updateprofile"
                     element={<ActualizarData />}
                 />
+                <Route path="/welcom" element={<Welcom/>} />
             </Routes>
             <Footer />
         </div>
