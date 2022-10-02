@@ -6,14 +6,18 @@ export const CREATE_USER = "CREATE_USER";
 //export const CLEAR  = "CLEAR";
 export const FILTER_CATEGORIES = "FILTER_CATEGORIES";
 export const FILTER_BRANDS = "FILTER_BRANDS";
+export const GET_CATEGORYS_NAMES = "GET_CATEGORYS_NAMES";
+export const PRE_FILTER = "PRE_FILTER";
+export const FILTER_BRAND2 = "FILTER_BRAND2";
 
-export function getAllProducts() {
+export function getAllProducts(page) {
   return async function (dispatch) {
+    console.log(page)
     let allProducts = await fetch(
-      "https://techstore123.herokuapp.com/products"
+      `https://techstore123.herokuapp.com/products?page=${page}`
     )
       .then((res) => res.json())
-      .then((products) => products.content);
+      .then((products) => products);
     return dispatch({ type: GET_ALL_PRODUCTS, payload: allProducts });
   };
 }
@@ -94,4 +98,49 @@ export function getCategories(category) {
       console.log(error);
     }
   };
+}
+
+export function getCategoryNames() {
+  return async (dispatch) => {
+    try {
+      await axios.get("https://techstore123.herokuapp.com/categorys").then(r => {
+        return dispatch({ type: GET_CATEGORYS_NAMES, payload: r.data })
+      })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
+
+export function preFilter(filtros) {
+  return async (dispatch) => {
+    try {
+      let { categoryId, brandId, type, sort, page, size } = filtros;
+      let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
+        }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page || ""
+        }&size=${size || ""}`
+      await axios.get(url)
+        .then(r => {
+          return dispatch({ type: PRE_FILTER, payload: r.data })
+        })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
+
+export function getBrands() {
+  return async (dispatch) => {
+    try {
+      await axios.get('https://techstore123.herokuapp.com/brands')
+        .then(r => {
+          return dispatch({
+            type: FILTER_BRAND2,
+            payload: r.data
+          })
+        })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 }

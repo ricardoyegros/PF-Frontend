@@ -88,13 +88,15 @@ export default function FilterCategories() {
   const handleSort = (event) => {
     event.preventDefault();
     setPersonName({ ...personName, sort: event.target.value });
-    dispatch(getCategories({...personName}));
+    dispatch({ ...personName, sort: event.target.value });
+    console.log(personName)
   };
 
   const handleType = (event) => {
     event.preventDefault();
-    setPersonName({...personName, sort: event.target.value});
-    dispatch(getCategories({...personName}));
+    setPersonName({ ...personName, type: event.target.value });
+    dispatch({ ...personName, type: event.target.value });
+    console.log(personName);
   };
 
   //#################################################################
