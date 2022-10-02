@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Grid, Pagination } from "@mui/material";
+import { Alert, Button, ButtonGroup, Grid, Pagination } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBrands, getCategoryNames, preFilter } from "../redux/actions";
@@ -10,15 +10,17 @@ export default function Categorys() {
 
     const dispatch = useDispatch()
     const [state, setState] = useState({});
+    const [page, setPage] = useState(1);
     useEffect(() => {
         dispatch(getCategoryNames());
         dispatch(getBrands());
     }, [dispatch, state]);
 
-
     const reduxState = useSelector(state => state.categorysNameReducer.categorys);
     const reduxState2 = useSelector(state => state.categorysNameReducer.filtrado);
     const reduxState3 = useSelector(state => state.categorysNameReducer.brands);
+ 
+    if (!reduxState2) dispatch(preFilter({}));
 
     let pages = reduxState2 || 1
 
@@ -30,7 +32,7 @@ export default function Categorys() {
     const handleNull = () => {
         if (Array.isArray(reduxState2.content) && !reduxState2.content[0]) {
             setState({});
-            setTimeout(alert('No se encontraron Productos'), 2000)
+            setTimeout(alert('no se encontro ningun producto!'), 2000)
             setTimeout(handleReset(), 2000);
         }
     }
@@ -40,6 +42,7 @@ export default function Categorys() {
         setState({ ...state, categoryId: e.target.value });
         dispatch(preFilter({ ...state, categoryId: e.target.value }));
         setTimeout(handleNull(), 2000);
+        setPage(1);
 
     };
 
@@ -48,6 +51,7 @@ export default function Categorys() {
         setState({ ...state, brandId: e.target.value })
         dispatch(preFilter({ ...state, brandId: e.target.value }));
         setTimeout(handleNull(), 2000);
+        setPage(1);
     }
 
     const handleSort = (e) => {
@@ -55,6 +59,7 @@ export default function Categorys() {
         setState({ ...state, sort: e.target.value });
         dispatch(preFilter({ ...state, sort: e.target.value }));
         setTimeout(handleNull(), 2000);
+        setPage(1);
     }
 
     const handlePage = (e, p) => {
@@ -62,6 +67,7 @@ export default function Categorys() {
         setState({ ...state, page: (p - 1) })
         dispatch(preFilter({ ...state, page: (p - 1) }));
         setTimeout(handleNull(), 2000);
+        setPage(p);
     };
 
     const handleType = (e) => {
@@ -69,6 +75,7 @@ export default function Categorys() {
         setState({ ...state, type: e.target.value });
         dispatch(preFilter({ ...state, type: e.target.value }))
         setTimeout(handleNull(), 2000);
+        setPage(1);
     }
 
     return (
@@ -76,10 +83,12 @@ export default function Categorys() {
             <Box justifyContent={'center'} alignItems='center' display={'grid'}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     {
-                        reduxState && reduxState.map(e => <Button value={e.id} onClick={handleChange} >{e.name}</Button>)
+                        reduxState && reduxState.map(e => <Button variant='outlined' style={{ marginTop: '5px' }}
+                            value={e.id} onClick={handleChange} >{e.name}</Button>)
                     }
                 </ButtonGroup>
             </Box>
+
             <Box justifyContent={'center'} alignItems='center' display={'grid'}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     {
@@ -97,6 +106,11 @@ export default function Categorys() {
                     <Button onClick={handleSort} value={"DESC"} color="success">{"DESC"}</Button>
                 </ButtonGroup>
             </Box>
+            {
+                (Array.isArray(reduxState2?.content) && !reduxState2?.content[0])
+                    ? <Alert severity="error">No se encontraron Productos!</Alert>
+                    : null
+            }
             <Grid container spacing={0.5}>
                 {
                     reduxState2 && reduxState2.content.map(e =>
@@ -121,8 +135,8 @@ export default function Categorys() {
                     margin: '20px 0px',
                 }}
             >
-                <Pagination
-                    count={pages !== 4 ? pages.totalPage : 4} color={'primary'} onChange={(e, p) => handlePage(e, p)}
+                <Pagination size="large" color={'primary'}
+                    count={pages !== 4 ? pages.totalPage : 4} page={page} onChange={(e, p) => handlePage(e, p)}
                 />
             </Box>
         </>

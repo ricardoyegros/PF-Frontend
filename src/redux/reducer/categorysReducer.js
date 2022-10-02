@@ -4,7 +4,7 @@ import { FILTER_BRAND2, GET_CATEGORYS_NAMES, PRE_FILTER } from "../actions";
 const initialState = {
     categorys: [],
     brands: [],
-    filtrado: undefined
+    filtrado: undefined 
 };
 
 export default function categorysNameReducer(state = initialState, action) {
