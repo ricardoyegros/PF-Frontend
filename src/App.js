@@ -10,7 +10,7 @@ import CreateForm from './components/CreateForm';
 import Categorys from './components/Categorys';
 import ActualizarData from './components/ActualizarData';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Navbar />
@@ -26,5 +26,4 @@ function App() {
       <Footer />
     </div>
   );
-
-export default App;
+}
