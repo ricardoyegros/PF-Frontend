@@ -3,9 +3,10 @@ import { Button, ButtonGroup, Grid, Pagination, } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBrands, getCategoryNames, preFilter } from "../redux/actions";
-import CardProduct from "./Card";
+// import CardProduct from "./Card";
 import { useState } from "react";
 import { Box } from "@mui/system";
+import CardProduct2 from "./Card2";
 
 export default function Categorys() {
 
@@ -21,7 +22,8 @@ export default function Categorys() {
     const reduxState = useSelector(state => state.categorysNameReducer.categorys);
     const reduxState2 = useSelector(state => state.categorysNameReducer.filtrado);
     const reduxState3 = useSelector(state => state.categorysNameReducer.brands);
-    let numPagination = reduxState2 ? reduxState.totalPage : 3;
+
+    let pages = reduxState2 || 4
 
     const handleReset = () => {
         setState({});
@@ -87,35 +89,13 @@ export default function Categorys() {
                         }
                     </ButtonGroup>
                 </Grid>
-
-
-                {/* <FormControl sx={{ m: 1, width: 300 }}>
-                    <InputLabel id="demo-multiple-name-label">Marca</InputLabel>
-                    <Select
-                        labelId="demo-multiple-name-label"
-                        id="demo-multiple-name"
-                        value={state.brandId}
-                        name={"name"}
-                        onChange={handleSelect}
-                        input={<OutlinedInput label="Name" />}
-                    >
-                        {reduxState3 && reduxState3.map(e => (
-                            <MenuItem
-                                key={e.id}
-                                value={e.id}
-                                onClick={handleSelect}
-                            >
-                                {e.name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl> */}
                 <Button onClick={handleReset} value={{}} variant="contained" color="success">RESET FILTERS</Button>
                 <Button onClick={handleSort} value={"ASC"} variant="contained" color="success">{"ASC"}</Button>
                 <Button onClick={handleSort} value={"DESC"} variant="contained" color="success">{"DESC"}</Button>
                 <Grid>
                     {
-                        reduxState2 && reduxState2.content.map(e => <CardProduct
+                        reduxState2 && reduxState2.content.map(e => <CardProduct2
+                            id={e.id}
                             key={e.id}
                             nombre={e.name}
                             imagen={e.images[0].url}
@@ -133,7 +113,7 @@ export default function Categorys() {
                 }}
             >
                 <Pagination
-                    count={numPagination} color={'primary'} onChange={(e, p) => handlePage(e, p)}
+                    count={pages !== 4 ? pages.totalPage : 4} color={'primary'} onChange={(e, p) => handlePage(e, p)}
                 />
             </Box>
         </>
