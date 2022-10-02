@@ -1,15 +1,12 @@
-// import React, { useState } from "react";
-import { Button, ButtonGroup, Grid, Pagination, } from "@mui/material";
+import { Button, ButtonGroup, Grid, Pagination } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBrands, getCategoryNames, preFilter } from "../redux/actions";
-// import CardProduct from "./Card";
 import { useState } from "react";
 import { Box } from "@mui/system";
 import CardProduct2 from "./Card2";
 
 export default function Categorys() {
-
 
     const dispatch = useDispatch()
     const [state, setState] = useState({});
@@ -23,7 +20,7 @@ export default function Categorys() {
     const reduxState2 = useSelector(state => state.categorysNameReducer.filtrado);
     const reduxState3 = useSelector(state => state.categorysNameReducer.brands);
 
-    let pages = reduxState2 || 4
+    let pages = reduxState2 || 1
 
     const handleReset = () => {
         setState({});
@@ -67,45 +64,57 @@ export default function Categorys() {
         setTimeout(handleNull(), 2000);
     };
 
+    const handleType = (e) => {
+        e.preventDefault();
+        setState({ ...state, type: e.target.value });
+        dispatch(preFilter({ ...state, type: e.target.value }))
+        setTimeout(handleNull(), 2000);
+    }
+
     return (
         <>
-            <Box justifyContent={'center'} alignItems='center' display={'grid'}
-                sx={{
-                    margin: '20px 0px',
-                }}
-            >
-                <Grid alignSelf={'center'}>
-                    <ButtonGroup style={{ marginLeft: '150px' }} variant="contained" aria-label="outlined primary button group">
-                        {
-                            reduxState && reduxState.map(e => <Button value={e.id} onClick={handleChange} >{e.name}</Button>)
-                        }
-                    </ButtonGroup>
-                </Grid>
-
-                <Grid alignSelf={'center'}>
-                    <ButtonGroup style={{ marginLeft: '150px' }} variant="contained" aria-label="outlined primary button group">
-                        {
-                            reduxState3 && reduxState3.map(e => <Button value={e.id} onClick={handleSelect} >{e.name}</Button>)
-                        }
-                    </ButtonGroup>
-                </Grid>
-                <Button onClick={handleReset} value={{}} variant="contained" color="success">RESET FILTERS</Button>
-                <Button onClick={handleSort} value={"ASC"} variant="contained" color="success">{"ASC"}</Button>
-                <Button onClick={handleSort} value={"DESC"} variant="contained" color="success">{"DESC"}</Button>
-                <Grid>
+            <Box justifyContent={'center'} alignItems='center' display={'grid'}>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     {
-                        reduxState2 && reduxState2.content.map(e => <CardProduct2
-                            id={e.id}
-                            key={e.id}
-                            nombre={e.name}
-                            imagen={e.images[0].url}
-                            categoria={e.category.name}
-                            precio={e.salePrice}
-                            marca={e.brand.name}
-                        />)
+                        reduxState && reduxState.map(e => <Button value={e.id} onClick={handleChange} >{e.name}</Button>)
                     }
-                </Grid>
+                </ButtonGroup>
             </Box>
+            <Box justifyContent={'center'} alignItems='center' display={'grid'}>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                    {
+                        reduxState3 && reduxState3.map(e => <Button value={e.id} onClick={handleSelect} >{e.name}</Button>)
+                    }
+                </ButtonGroup>
+            </Box>
+
+            <Box justifyContent={'center'} alignItems='center' display={'grid'}>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                    <Button onClick={handleReset} value={{}} color="success">RESET FILTERS</Button>
+                    <Button onClick={handleType} value={"salePrice"} color="success">{"Precio"}</Button>
+                    <Button onClick={handleType} value={"id"} color="success">{"Creacion"}</Button>
+                    <Button onClick={handleSort} value={"ASC"} color="success">{"ASC"}</Button>
+                    <Button onClick={handleSort} value={"DESC"} color="success">{"DESC"}</Button>
+                </ButtonGroup>
+            </Box>
+            <Grid container spacing={0.5}>
+                {
+                    reduxState2 && reduxState2.content.map(e =>
+                        <Grid item xs={2} sm={4} md={4} key={e.id}>
+                            <CardProduct2
+                                id={e.id}
+                                key={e.id}
+                                nombre={e.name}
+                                imagen={e.images[0].url}
+                                categoria={e.category.name}
+                                precio={e.salePrice}
+                                marca={e.brand.name}
+                            />
+                        </Grid>
+                    )
+                }
+            </Grid>
+
 
             <Box justifyContent={'center'} alignItems='center' display={'flex'}
                 sx={{

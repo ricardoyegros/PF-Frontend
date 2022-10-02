@@ -118,7 +118,7 @@ export function preFilter(filtros) {
       let { categoryId, brandId, type, sort, page, size } = filtros;
       let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
         }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page || ""
-        }&size=${size || ""}`
+        }&size=${size || "9"}`
       await axios.get(url)
         .then(r => {
           return dispatch({ type: PRE_FILTER, payload: r.data })
