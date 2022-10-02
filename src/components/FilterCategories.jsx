@@ -18,6 +18,8 @@ const MenuProps = {
   },
 };
 
+
+
 const categoryNames = [
   "Mother Board",
   "Memory",
@@ -50,12 +52,10 @@ const ascDesc = [
 ];
 
 const sortBy = [
-  "rating",
-  "salePrice",
-  "id"
+  'Rating',
+  'Mas Reciente',
+  'Precio'
 ];
-
-
 
 export default function FilterCategories() {
   //########### Dispatch y Estados Aca###############
@@ -88,13 +88,22 @@ export default function FilterCategories() {
   const handleSort = (event) => {
     event.preventDefault();
     setPersonName({ ...personName, sort: event.target.value });
-    dispatch(getCategories({...personName}));
+    dispatch(getCategories({ ...personName, sort: event.target.value }));
   };
 
   const handleType = (event) => {
     event.preventDefault();
-    setPersonName({...personName, sort: event.target.value});
-    dispatch(getCategories({...personName}));
+    setPersonName({...personName, type: event.target.value});
+    if(event.target.value === 'Mas Reciente'){
+      dispatch(getCategories({...personName, type: "id"}));
+      console.log({...personName, type: "id"}, "if")
+    }else if(event.target.value === 'Rating'){
+      dispatch(getCategories({...personName, type: "rating"}));
+      console.log({...personName, type: "rating"}, "else if")
+    }else{
+      dispatch(getCategories({...personName, type: "salePrice"}));
+      console.log({...personName, type: "salePrice"}, "else")
+    }
   };
 
   //#################################################################

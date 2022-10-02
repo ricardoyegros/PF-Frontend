@@ -4,6 +4,7 @@ import { getAllProducts } from "../redux/actions/index.js";
 import CardProduct from "./Card";
 import { Grid, Typography, Link } from "@mui/material";
 import FilterCategories from "./FilterCategories.jsx";
+import {getCategories} from "../redux/actions/index.js"
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function Home() {
     alert("No hay coincidencias, seras redireccionado al Home");
     filterCategory = undefined;
   }
+
   if (typeof filterCategory === "object") {
     products = filterCategory;
   }
