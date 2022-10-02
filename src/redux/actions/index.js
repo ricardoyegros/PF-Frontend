@@ -97,25 +97,25 @@ export function getIdUsers(id) {
 
 //==================================  fin julian
 
-export function getCategories(category) {
-  return async function (dispatch) {
-    try {
-      console.log(category, "soy category")
-      let { categoryId, brandId, type, sort, page, size } = category;
-      let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
-        }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page || ""
-        }&size=${size || ""}`;
-      let detailProduct = await axios.get(url);
-      console.log(url, "soy url");
-      return dispatch({
-        type: FILTER_CATEGORIES,
-        payload: detailProduct.data.content
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+// export function getCategories(category) {
+//   return async function (dispatch) {
+//     try {
+//       console.log(category, "soy category")
+//       let { categoryId, brandId, type, sort, page, size } = category;
+//       let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
+//         }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page || ""
+//         }&size=${size || ""}`;
+//       let detailProduct = await axios.get(url);
+//       console.log(url, "soy url");
+//       return dispatch({
+//         type: FILTER_CATEGORIES,
+//         payload: detailProduct.data.content
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
 
 export function getCategoryNames() {
   return async (dispatch) => {
