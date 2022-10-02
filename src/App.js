@@ -8,8 +8,7 @@ import Footer from "./components/Footer";
 import CreateUsers from "./components/CreateUsers";
 import CreateForm from "./components/CreateForm";
 import ActualizarData from "./components/ActualizarData";
-import Welcom from "./components/Welcom"
-
+import Welcome from "./components/Welcome";
 
 function App() {
     return (
@@ -19,13 +18,10 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/contacto" element={<Contact />} />
                 <Route path="/detalle/:i" element={<Detail />} />
-                <Route path="/users/register" element={<CreateUsers />} />
+                <Route path="/register" element={<CreateUsers />} />
                 <Route path="/creacion" element={<CreateForm />} />
-                <Route
-                    path="/users/:id/updateprofile"
-                    element={<ActualizarData />}
-                />
-                <Route path="/welcom" element={<Welcom/>} />
+                <Route path="/updateprofile" element={<ActualizarData />} />
+                <Route path="/welcome" element={<Welcome />} />
             </Routes>
             <Footer />
         </div>

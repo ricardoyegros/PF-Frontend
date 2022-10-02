@@ -39,7 +39,7 @@ export default function CreateUsers() {
         e.preventDefault();
         dispatch(createUsers(input));
         setInput({});
-        navigate("/welcom");
+        navigate("/welcome");
     }
 
     return (

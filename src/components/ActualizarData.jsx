@@ -1,9 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {usersReducers} from "../redux/reducer/usersReducers"
-import { createUsers } from "../redux/actions/index.js";
+import { usersReducers } from "../redux/reducer/usersReducers";
+import { updateUser } from "../redux/actions/index.js";
 
 import MenuItem from "@mui/material/MenuItem";
 
@@ -16,14 +16,20 @@ import {
     Button,
 } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 export default function CreateUsers() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const user = useSelector((state) => state.usersReducers.user);
+    const [input, setInput] = useState({});
 
-    
+    const token = user.token;
+
+    useEffect(() => {
+        setInput(user);
+        console.log(input);
+    }, [user]);
 
     const namesDNI = [
         { value: "CC", label: "CC" },
@@ -33,24 +39,18 @@ export default function CreateUsers() {
         { value: "OTRO", label: "OTRO" },
     ];
 
-
-
-    //const [user, setUser] = useState({ user });
-
     function handleChange(e) {
-       e.preventDefault();
-        // setUser({ ...user, [e.target.name]: e.target.value });
-       
+        e.preventDefault();
+        setInput({ ...input, [e.target.name]: e.target.value });
     }
-    
 
-
+   
 
     function handleSubmit(e) {
         e.preventDefault();
-        /* dispatch(createUsers(input));
-        setInput({});
-        navigate("/welcom"); */
+
+        dispatch(updateUser(input, token));
+        
     }
 
     return (
@@ -75,7 +75,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="name"
-                                    value={user.name}
+                                    value={input.name}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -87,7 +87,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="lastName"
-                                    value={user.lastName}
+                                    value={input.lastName}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -100,7 +100,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="typeIdentification"
-                                    value={user.typeIdentification}
+                                    value={input.typeIdentification}
                                     onChange={handleChange}
                                 >
                                     {namesDNI.map((option) => (
@@ -122,7 +122,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="identification"
-                                    value={user.identification}
+                                    value={input.identification}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -135,7 +135,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="contact"
-                                    value={user.contact}
+                                    value={input.contact}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -148,7 +148,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="email"
-                                    value={user.email}
+                                    value={input.email}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -160,7 +160,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="address"
-                                    value={user.address}
+                                    value={input.address}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -174,7 +174,20 @@ export default function CreateUsers() {
                                     required
                                     type="password"
                                     name="password"
-                                    value={user.password}
+                                    value={input.password}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+
+                            <Grid xs={12} item>
+                                <TextField
+                                    label="Country"
+                                    placeholder="Please enter you actual country..."
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    name="country"
+                                    value={input.country}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -184,7 +197,6 @@ export default function CreateUsers() {
                                     type="submit"
                                     variant="contained"
                                     fullWidth
-                                    disable={!user.email || !user.password}
                                 >
                                     Update !!
                                 </Button>

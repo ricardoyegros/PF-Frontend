@@ -110,10 +110,10 @@ export default function Navbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <Link href={"/users/register"}>
+            <Link href={"/register"}>
                 <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
             </Link>
-            <Link href={"/users/login"}>
+            <Link href={"/login"}>
                 <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
             </Link>
         </Menu>
@@ -192,7 +192,7 @@ export default function Navbar() {
                                 src={logo}
                             />
                         </Link>
-                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ flexGrow: 1 }}  />
                         <Button
                             href="/creacion"
                             color="secondary"
