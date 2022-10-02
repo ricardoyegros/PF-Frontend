@@ -9,6 +9,7 @@ export const FILTER_BRANDS = "FILTER_BRANDS";
 export const GET_CATEGORYS_NAMES = "GET_CATEGORYS_NAMES";
 export const PRE_FILTER = "PRE_FILTER";
 export const FILTER_BRAND2 = "FILTER_BRAND2";
+export const IS_IN_USE = "IS_IN_USE";
 
 export function getAllProducts(page) {
   return async function (dispatch) {
@@ -139,6 +140,16 @@ export function getBrands() {
             payload: r.data
           })
         })
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+}
+
+export function isInUse(filtros) {
+  return async (dispatch) => {
+    try {
+      return dispatch({ type: IS_IN_USE, payload: filtros });
     } catch (error) {
       console.log(error.message)
     }

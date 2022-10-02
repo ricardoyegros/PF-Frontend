@@ -1,14 +1,14 @@
 import { Alert, Button, ButtonGroup, Grid, Pagination } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getBrands, getCategoryNames, preFilter } from "../redux/actions";
+import { getBrands, getCategoryNames, isInUse, preFilter } from "../redux/actions";
 import { useState } from "react";
 import { Box } from "@mui/system";
 import CardProduct2 from "./Card2";
 
 export default function Categorys() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [state, setState] = useState({});
     const [page, setPage] = useState(1);
     useEffect(() => {
@@ -19,7 +19,8 @@ export default function Categorys() {
     const reduxState = useSelector(state => state.categorysNameReducer.categorys);
     const reduxState2 = useSelector(state => state.categorysNameReducer.filtrado);
     const reduxState3 = useSelector(state => state.categorysNameReducer.brands);
- 
+    const reduxState4 = useSelector(state => state.categorysNameReducer);
+
     if (!reduxState2) dispatch(preFilter({}));
 
     let pages = reduxState2 || 1
@@ -27,64 +28,71 @@ export default function Categorys() {
     const handleReset = () => {
         setState({});
         dispatch(preFilter({}));
+        dispatch(isInUse({}));
     }
 
     const handleNull = () => {
         if (Array.isArray(reduxState2.content) && !reduxState2.content[0]) {
             setState({});
-            setTimeout(alert('no se encontro ningun producto!'), 2000)
-            setTimeout(handleReset(), 2000);
-        }
-    }
+            setTimeout(alert('no se encontro ningun producto!'), 1000)
+            setTimeout(handleReset(), 1000);
+        };
+    };
 
-    const handleChange = (e) => {
+    const handleCategory = (e) => {
         e.preventDefault();
-        setState({ ...state, categoryId: e.target.value });
-        dispatch(preFilter({ ...state, categoryId: e.target.value }));
-        setTimeout(handleNull(), 2000);
+        setState({ ...state, categoryId: e.target.value, categoryName: e.target.name });
+        dispatch(preFilter({ ...state, categoryId: e.target.value, categoryName: e.target.name }));
+        dispatch(isInUse({ ...state, categoryId: e.target.value, categoryName: e.target.name }))
+        setTimeout(handleNull(), 1000);
         setPage(1);
 
     };
 
-    const handleSelect = (e) => {
+    const handleBrand = (e) => {
         e.preventDefault();
-        setState({ ...state, brandId: e.target.value })
-        dispatch(preFilter({ ...state, brandId: e.target.value }));
-        setTimeout(handleNull(), 2000);
+        setState({ ...state, brandId: e.target.value, brandName: e.target.name });
+        dispatch(preFilter({ ...state, brandId: e.target.value, brandName: e.target.name }));
+        dispatch(isInUse({ ...state, brandId: e.target.value, brandName: e.target.name }))
+        setTimeout(handleNull(), 1000);
         setPage(1);
-    }
+    };
 
     const handleSort = (e) => {
         e.preventDefault();
         setState({ ...state, sort: e.target.value });
         dispatch(preFilter({ ...state, sort: e.target.value }));
-        setTimeout(handleNull(), 2000);
+        dispatch(isInUse({ ...state, typeName: e.target.value }));
+        setTimeout(handleNull(), 1000);
         setPage(1);
-    }
+    };
 
     const handlePage = (e, p) => {
         e.preventDefault();
-        setState({ ...state, page: (p - 1) })
+        setState({ ...state, page: (p - 1) });
         dispatch(preFilter({ ...state, page: (p - 1) }));
-        setTimeout(handleNull(), 2000);
+        setTimeout(handleNull(), 1000);
         setPage(p);
     };
 
     const handleType = (e) => {
         e.preventDefault();
         setState({ ...state, type: e.target.value });
-        dispatch(preFilter({ ...state, type: e.target.value }))
-        setTimeout(handleNull(), 2000);
+        dispatch(preFilter({ ...state, type: e.target.value }));
+        dispatch(isInUse({ ...state, typeName: e.target.name }));
+        setTimeout(handleNull(), 1000);
         setPage(1);
-    }
+    };
+
 
     return (
         <>
             <Box justifyContent={'center'} alignItems='center' display={'grid'}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     {
-                        reduxState && reduxState.map(e => <Button variant='outlined' style={{ marginTop: '5px' }}
-                            value={e.id} onClick={handleChange} >{e.name}</Button>)
+                        reduxState && reduxState.map(e => <Button value={e.id} name={e.name}
+                            variant={reduxState4?.categoryName === e.name ? 'outlined' : 'contained'} style={{ marginTop: '5px' }}
+                            onClick={handleCategory} >{e.name}</Button>)
                     }
                 </ButtonGroup>
             </Box>
@@ -92,18 +100,23 @@ export default function Categorys() {
             <Box justifyContent={'center'} alignItems='center' display={'grid'}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     {
-                        reduxState3 && reduxState3.map(e => <Button value={e.id} onClick={handleSelect} >{e.name}</Button>)
+                        reduxState3 && reduxState3.map(e => <Button value={e.id} name={e.name}
+                            variant={reduxState4?.brandName === e.name ? 'outlined' : 'contained'} onClick={handleBrand}>{e.name}</Button>)
                     }
                 </ButtonGroup>
             </Box>
 
             <Box justifyContent={'center'} alignItems='center' display={'grid'}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                    <Button onClick={handleReset} value={{}} color="success">RESET FILTERS</Button>
-                    <Button onClick={handleType} value={"salePrice"} color="success">{"Precio"}</Button>
-                    <Button onClick={handleType} value={"id"} color="success">{"Creacion"}</Button>
-                    <Button onClick={handleSort} value={"ASC"} color="success">{"ASC"}</Button>
-                    <Button onClick={handleSort} value={"DESC"} color="success">{"DESC"}</Button>
+                    <Button onClick={handleReset} value={{}} color="success">Limpiar Filtros</Button>
+                    <Button onClick={handleType} 
+                        value={"salePrice"} color="success">Precio</Button>
+                    <Button onClick={handleType}
+                        value={"id"} color="success">Creacion</Button>
+                    <Button onClick={handleSort}
+                        value={"ASC"} color="success">Ascendente</Button>
+                    <Button onClick={handleSort}
+                        value={"DESC"} color="success">Descendente</Button>
                 </ButtonGroup>
             </Box>
             {
@@ -119,7 +132,7 @@ export default function Categorys() {
                                 id={e.id}
                                 key={e.id}
                                 nombre={e.name}
-                                imagen={e.images[0].url}
+                                imagen={e.images[0]?.url || 'https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg'}
                                 categoria={e.category.name}
                                 precio={e.salePrice}
                                 marca={e.brand.name}
@@ -128,7 +141,6 @@ export default function Categorys() {
                     )
                 }
             </Grid>
-
 
             <Box justifyContent={'center'} alignItems='center' display={'flex'}
                 sx={{
@@ -141,5 +153,4 @@ export default function Categorys() {
             </Box>
         </>
     );
-}
-
+};

@@ -78,7 +78,7 @@ export default function Detail() {
           <Grid item xs="10" sm="auto" xl="3" md="4"  >
             <Box
               component="img"
-              src={detailProduct.images && detailProduct.images[0].url}
+              src={detailProduct.images && detailProduct.images[0]?.url || 'https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg'}
               sx={
                 {
                   maxHeight: 300,

@@ -18,10 +18,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Categorys />} />
+        <Route path="/search" element={<Home />} />
+        <Route path='/creacion' element={<CreateForm />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/detalle/:i" element={<Detail />} />
         <Route path="/users/register" element={<CreateUsers />} />
-        <Route path="/creacion" element={<CreateForm />} />
       </Routes>
       <Footer />
     </div>
