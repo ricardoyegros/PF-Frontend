@@ -163,7 +163,7 @@ export default function Categorys() {
         </ButtonGroup>
       </Box>
 
-      <Box justifyContent={"center"} alignItems="center" display={"grid"}>
+      <Box justifyContent={"center"} alignItems="center" display={"grid"} marginBottom={8}>
         <ButtonGroup
           variant="contained"
           aria-label="outlined primary button group"
@@ -188,13 +188,10 @@ export default function Categorys() {
       {Array.isArray(reduxState2?.content) && !reduxState2?.content[0] ? (
         <Alert severity="error">No se encontraron Productos!</Alert>
       ) : null}
-      <Typography m={2} variant="h3" align="center">
-        Productos
-      </Typography>
-      <Grid container spacing={12} justifyContent="center">
+      <Grid container gridColumn={3} spacing={4} justifyContent="center" alignItems={"center"}>
         {reduxState2 &&
           reduxState2.content.map((e) => (
-            <Grid item mb={5} key={e.id}>
+            <Grid item mb={5}  sm={3.1}  key={e.id}>
               <CardProduct2
                 id={e.id}
                 key={e.id}
