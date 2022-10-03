@@ -10,11 +10,11 @@ export default function Categorys() {
 
     const dispatch = useDispatch();
     const [state, setState] = useState({});
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     useEffect(() => {
         dispatch(getCategoryNames());
         dispatch(getBrands());
-    }, [dispatch, state]);
+    }, [dispatch, setState]);
 
     const reduxState = useSelector(state => state.categorysNameReducer.categorys);
     const reduxState2 = useSelector(state => state.categorysNameReducer.filtrado);
@@ -29,61 +29,42 @@ export default function Categorys() {
         setState({});
         dispatch(preFilter({}));
         dispatch(isInUse({}));
-    }
-
-    const handleNull = () => {
-        if (Array.isArray(reduxState2.content) && !reduxState2.content[0]) {
-            setState({});
-            setTimeout(alert('no se encontro ningun producto!'), 1000)
-            setTimeout(handleReset(), 1000);
-        };
     };
 
     const handleCategory = (e) => {
-        e.preventDefault();
-        setState({ ...state, categoryId: e.target.value, categoryName: e.target.name });
-        dispatch(preFilter({ ...state, categoryId: e.target.value, categoryName: e.target.name }));
-        dispatch(isInUse({ ...state, categoryId: e.target.value, categoryName: e.target.name }))
-        setTimeout(handleNull(), 1000);
         setPage(1);
-
+        setState({ ...state, categoryId: e.target.value, categoryName: e.target.name, page: '' });
+        dispatch(preFilter({ ...state, categoryId: e.target.value, categoryName: e.target.name, page: '' }));
+        dispatch(isInUse({ ...state, categoryId: e.target.value, categoryName: e.target.name }));
+        setTimeout(onclick(e));
     };
 
-    const handleBrand = (e) => {
-        e.preventDefault();
-        setState({ ...state, brandId: e.target.value, brandName: e.target.name });
-        dispatch(preFilter({ ...state, brandId: e.target.value, brandName: e.target.name }));
+    const handleBrand = async (e) => {
+        setState({ ...state, brandId: e.target.value, brandName: e.target.name, page: '' });
+        dispatch(preFilter({ ...state, brandId: e.target.value, brandName: e.target.name, page: '' }));
         dispatch(isInUse({ ...state, brandId: e.target.value, brandName: e.target.name }))
-        setTimeout(handleNull(), 1000);
         setPage(1);
     };
 
     const handleSort = (e) => {
-        e.preventDefault();
-        setState({ ...state, sort: e.target.value });
-        dispatch(preFilter({ ...state, sort: e.target.value }));
+        setState({ ...state, sort: e.target.value, page: '' });
+        dispatch(preFilter({ ...state, sort: e.target.value, page: '' }));
         dispatch(isInUse({ ...state, typeName: e.target.value }));
-        setTimeout(handleNull(), 1000);
         setPage(1);
     };
 
     const handlePage = (e, p) => {
-        e.preventDefault();
-        setState({ ...state, page: (p - 1) });
-        dispatch(preFilter({ ...state, page: (p - 1) }));
-        setTimeout(handleNull(), 1000);
+        setState({ ...state, page: (p) });
+        dispatch(preFilter({ ...state, page: (p) }));
         setPage(p);
     };
 
     const handleType = (e) => {
-        e.preventDefault();
         setState({ ...state, type: e.target.value });
         dispatch(preFilter({ ...state, type: e.target.value }));
         dispatch(isInUse({ ...state, typeName: e.target.name }));
-        setTimeout(handleNull(), 1000);
         setPage(1);
     };
-
 
     return (
         <>
@@ -109,7 +90,7 @@ export default function Categorys() {
             <Box justifyContent={'center'} alignItems='center' display={'grid'}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button onClick={handleReset} value={{}} color="success">Limpiar Filtros</Button>
-                    <Button onClick={handleType} 
+                    <Button onClick={handleType}
                         value={"salePrice"} color="success">Precio</Button>
                     <Button onClick={handleType}
                         value={"id"} color="success">Creacion</Button>
@@ -148,7 +129,7 @@ export default function Categorys() {
                 }}
             >
                 <Pagination size="large" color={'primary'}
-                    count={pages !== 4 ? pages.totalPage : 4} page={page} onChange={(e, p) => handlePage(e, p)}
+                    count={pages !== 1 ? pages.totalPage : 1} page={page} onChange={(e, p) => handlePage(e, p)}
                 />
             </Box>
         </>
