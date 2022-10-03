@@ -81,18 +81,18 @@ export function createUsers(input) {
 }
 
 export function getIdUsers(id) {
-    return async function (dispatch) {
-        try {
-            let user = await axios.get(`http://localhost:3001/users/${id}`);
-            return dispatch({
-                type: GET_USER_ID,
-                payload: user.data,
-            });
-        } catch (error) {
-            alert("User not Found");
-            console.log(error);
-        }
-    };
+  return async function (dispatch) {
+    try {
+      let user = await axios.get(`http://localhost:3001/users/${id}`);
+      return dispatch({
+        type: GET_USER_ID,
+        payload: user.data,
+      });
+    } catch (error) {
+      alert("User not Found");
+      console.log(error);
+    }
+  };
 }
 
 //==================================  fin julian
@@ -133,8 +133,9 @@ export function preFilter(filtros) {
   return async (dispatch) => {
     try {
       let { categoryId, brandId, type, sort, page, size } = filtros;
+      console.log(filtros);
       let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
-        }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page || ""
+        }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page - 1 || "0"
         }&size=${size || "9"}`
       await axios.get(url)
         .then(r => {

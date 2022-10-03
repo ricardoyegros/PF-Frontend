@@ -9,8 +9,14 @@ import CreateUsers from './components/CreateUsers'
 import CreateForm from './components/CreateForm';
 import Categorys from './components/Categorys';
 import ActualizarData from './components/ActualizarData';
+import { useEffect } from 'react';
 
 export default function App() {
+
+useEffect(() => {
+  
+},[])
+
   return (
     <div className="App">
       <Navbar />
