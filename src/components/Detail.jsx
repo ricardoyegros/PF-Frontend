@@ -63,7 +63,7 @@ export default function Detail() {
             width="50%"
             marginRight={15}>
             <Typography variant={"h5"} sx={{ marginRight: 3 }}>
-              Price
+              Precio
             </Typography>
             <Typography variant={"h5"} sx={{ marginRight: 5 }}>
               {` $ ${detailProduct?.salePrice}`}
@@ -71,7 +71,7 @@ export default function Detail() {
             <Button
               variant="contained"
               size="large"
-            >Add to Cart</Button>
+            >Agregar al carrito</Button>
           </Box>
         </Box>
         <Grid container spacing={0} justifyContent="center" alignItems="center" direction="row" wrap="wrap-reverse">
