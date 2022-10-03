@@ -1,8 +1,10 @@
 import { CREATE_USER } from "../actions";
 import { UPDATE_USER } from "../actions";
+import { LOGIN_USER } from "../actions";
 
 const initialState = {
     user: {},
+    token: ""
 };
 
 export default function createUsers(state = initialState, action) {
@@ -11,11 +13,18 @@ export default function createUsers(state = initialState, action) {
             return {
                 ...state,
                 user: action.payload,
+                token: action.payload.token
             };
         case UPDATE_USER:
             return {
                 ...state,
                 user: action.payload,
+            };
+        case LOGIN_USER:
+            return {
+                ...state,
+                user: action.payload,
+                token: action.payload.token
             };
 
         default:

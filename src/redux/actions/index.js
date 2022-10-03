@@ -8,6 +8,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const FILTER_CATEGORIES = "FILTER_CATEGORIES";
 export const FILTER_BRANDS = "FILTER_BRANDS";
 export const GET_USER_ID = "GET_USER_ID";
+export const LOGIN_USER = "LOGIN_USER";
 
 export function getAllProducts() {
     return async function (dispatch) {
@@ -92,18 +93,35 @@ export function getIdUsers(id) {
 export function updateUser(input, token){
     return async (dispatch) => {
         try {
+            
             let updateUser = await axios.put(
                 "http://localhost:3001/users/updateprofile",
                 input, 
                 {headers:{ "Authorization" : `Bearer ${token}` }}
                 
             );
+            
             return dispatch({ type: UPDATE_USER, payload: updateUser.data });
         } catch (error) {
             console.log(error);
         }
     };
 
+};
+
+export function loginUser(input) {
+    return async (dispatch) => {
+        try {
+            let userData = await axios.post(
+                "http://localhost:3001/users/login",
+                input
+            );
+            console.log(userData.data)
+            return dispatch({ type: LOGIN_USER, payload: userData.data });
+        } catch (error) {
+            console.log(error);
+        }
+    };
 };
 
 

@@ -22,12 +22,12 @@ export default function ActualizarData() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.usersReducers.user);
-    console.log(user);
-    const token = user.token;
-    console.log(token);
+    const token = useSelector((state) => state.usersReducers.token);
+    //console.log(user);
+    //console.log(token);
 
     const [userId, setUserId] = useState(user);
-    console.log(userId);
+    //console.log(userId);
 
     const namesDNI = [
         { value: "CC", label: "CC" },
@@ -46,7 +46,7 @@ export default function ActualizarData() {
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(updateUser(userId, token));
-        navigate("/");
+        navigate("/welcome");
     }
 
     return (

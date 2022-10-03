@@ -9,6 +9,7 @@ import CreateUsers from "./components/CreateUsers";
 import CreateForm from "./components/CreateForm";
 import ActualizarData from "./components/ActualizarData";
 import Welcome from "./components/Welcome";
+import Login from "./components/Login";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/creacion" element={<CreateForm />} />
                 <Route path="/updateprofile" element={<ActualizarData />} />
                 <Route path="/welcome" element={<Welcome />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
             <Footer />
         </div>

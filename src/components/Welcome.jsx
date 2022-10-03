@@ -36,7 +36,9 @@ export default function Welcome() {
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.usersReducers.user);
-    console.log(user);
+    const token = useSelector(state => state.usersReducers.token)
+
+    console.log(token);
 
     //const [input, setInput] = useState({});
 
