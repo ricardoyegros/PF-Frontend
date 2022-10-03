@@ -120,27 +120,27 @@ export default function Navbar() {
             ?
             <div>
             <Linkdom to={"/register"}>
-                <Link >
+                
                     <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-                </Link>
+                
             </Linkdom>
             <Linkdom to={"/login"}>
-            <Link >
+            
                 <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-            </Link>
+            
             </Linkdom>
             </div>
             :
             <div>
             <Linkdom to={"/welcome"}>
-            <Link >
+            
                 <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            </Link>
+            
             </Linkdom>
             <Linkdom to={"/logout"}>
-            <Link >
+            
                 <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
-            </Link>
+            
             </Linkdom>
 
             </div>
@@ -216,13 +216,13 @@ export default function Navbar() {
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="relative" color="primary">
                     <Toolbar>
-                        <Link href="/">
+                        <Linkdom to={"/"}>
                             <Box
                                 component={"img"}
                                 sx={{ maxHeight: 130, maxWidth: 130 }}
                                 src={logo}
                             />
-                        </Link>
+                        </Linkdom>
                         <Box sx={{ flexGrow: 1 }}  />
                         <Button
                             href="/creacion"
