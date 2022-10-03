@@ -33,81 +33,45 @@ export default function Categorys() {
 
   let pages = reduxState2 || 1;
 
+
   const handleReset = () => {
     setState({});
     dispatch(preFilter({}));
     dispatch(isInUse({}));
   };
 
-  const handleNull = () => {
-    if (Array.isArray(reduxState2.content) && !reduxState2.content[0]) {
-      setState({});
-      setTimeout(alert("no se encontro ningun producto!"), 1000);
-      setTimeout(handleReset(), 1000);
-    }
-  };
-
   const handleCategory = (e) => {
-    e.preventDefault();
-    setState({
-      ...state,
-      categoryId: e.target.value,
-      categoryName: e.target.name,
-    });
-    dispatch(
-      preFilter({
-        ...state,
-        categoryId: e.target.value,
-        categoryName: e.target.name,
-      })
-    );
-    dispatch(
-      isInUse({
-        ...state,
-        categoryId: e.target.value,
-        categoryName: e.target.name,
-      })
-    );
-    /* setTimeout(handleNull(), 1000);*/
     setPage(1);
+    setState({ ...state, categoryId: e.target.value, categoryName: e.target.name, page: '' });
+    dispatch(preFilter({ ...state, categoryId: e.target.value, categoryName: e.target.name, page: '' }));
+    dispatch(isInUse({ ...state, categoryId: e.target.value, categoryName: e.target.name }));
+    setTimeout(onclick(e));
   };
 
-  const handleBrand = (e) => {
-    e.preventDefault();
-    setState({ ...state, brandId: e.target.value, brandName: e.target.name });
-    dispatch(
-      preFilter({ ...state, brandId: e.target.value, brandName: e.target.name })
-    );
-    dispatch(
-      isInUse({ ...state, brandId: e.target.value, brandName: e.target.name })
-    );
-    /*setTimeout(handleNull(), 1000);*/
+  const handleBrand = async (e) => {
+    setState({ ...state, brandId: e.target.value, brandName: e.target.name, page: '' });
+    dispatch(preFilter({ ...state, brandId: e.target.value, brandName: e.target.name, page: '' }));
+    dispatch(isInUse({ ...state, brandId: e.target.value, brandName: e.target.name }))
     setPage(1);
   };
 
   const handleSort = (e) => {
-    e.preventDefault();
-    setState({ ...state, sort: e.target.value });
-    dispatch(preFilter({ ...state, sort: e.target.value }));
+    setState({ ...state, sort: e.target.value, page: '' });
+    dispatch(preFilter({ ...state, sort: e.target.value, page: '' }));
     dispatch(isInUse({ ...state, typeName: e.target.value }));
-    /*setTimeout(handleNull(), 1000);*/
     setPage(1);
   };
 
   const handlePage = (e, p) => {
-    e.preventDefault();
-    setState({ ...state, page: p - 1 });
-    dispatch(preFilter({ ...state, page: p - 1 }));
-    /*setTimeout(handleNull(), 1000);*/
+    setState({ ...state, page: (p) });
+    dispatch(preFilter({ ...state, page: (p) }));
     setPage(p);
   };
 
   const handleType = (e) => {
-    e.preventDefault();
     setState({ ...state, type: e.target.value });
     dispatch(preFilter({ ...state, type: e.target.value }));
     dispatch(isInUse({ ...state, typeName: e.target.name }));
-    /* setTimeout(handleNull(), 1000); */
     setPage(1);
   };
 
