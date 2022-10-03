@@ -89,66 +89,14 @@ export default function Navbar() {
         setSearch(event.target.value);
     };
 
-    const handleSubmitSearch = (event) => {
-        event.preventDefault();
-        dispatch(getItem(search));
-        setSearch("");
-    };
+  const handleSubmitSearch = (event) => {
+    event.preventDefault()
+    dispatch(preFilter({ name: search, search: true }));
+    dispatch(isInUse({ name: search, search: true }));
+    setSearch("")
+  }
 
 
-
-    const menuId = "primary-search-account-menu";
-    const renderMenu = (
-        
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-
-        >
-            {!token 
-            ?
-            <div>
-            <Linkdom to={"/register"}>
-                
-                    <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-                
-            </Linkdom>
-            <Linkdom to={"/login"}>
-            
-                <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-            
-            </Linkdom>
-            </div>
-            :
-            <div>
-            <Linkdom to={"/welcome"}>
-            
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            
-            </Linkdom>
-            <Linkdom to={"/logout"}>
-            
-                <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
-            
-            </Linkdom>
-
-            </div>
-            }
-            
-        </Menu>
-        
-    );
 
     const mobileMenuId = "primary-search-account-menu-mobile";
     const renderMobileMenu = (
@@ -211,72 +159,65 @@ export default function Navbar() {
         },
     });
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="relative" color="primary">
-                    <Toolbar>
-                        <Linkdom to={"/"}>
-                            <Box
-                                component={"img"}
-                                sx={{ maxHeight: 130, maxWidth: 130 }}
-                                src={logo}
-                            />
-                        </Linkdom>
-                        <Box sx={{ flexGrow: 1 }}  />
-                        <Button
-                            href="/creacion"
-                            color="secondary"
-                            variant="contained"
-                        >
-                            Cargar Producto
-                        </Button>
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            {/* aqui meti la funcion onsubmit para la busqueda, */}
-                            <form onSubmit={handleSubmitSearch}>
-                                <StyledInputBase
-                                    inputProps={{ "aria-label": "search" }}
-                                    onChange={handleSearchInput}
-                                    value={search}
-                                />
-                            </form>
-                        </Search>
-                        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                            <IconButton color="inherit">
-                                <ShoppingCartOutlinedIcon />
-                            </IconButton>
-                            <IconButton
-                                size="large"
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </Box>
-                        <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="show more"
-                                aria-controls={mobileMenuId}
-                                aria-haspopup="true"
-                                onClick={handleMobileMenuOpen}
-                                color="inherit"
-                            >
-                                <MoreIcon />
-                            </IconButton>
-                        </Box>
-                    </Toolbar>
-                </AppBar>
-                {renderMobileMenu}
-                {renderMenu}
-            </Box>
-        </ThemeProvider>
-    );
-}
+  return (
+    <ThemeProvider theme={theme}>
+    <Box sx={{ flexGrow: 1}}>
+      <AppBar position="relative" color="primary">
+        <Toolbar>
+          <Link href="/">
+          <Box
+          component={"img"}
+          sx={{maxHeight:130,maxWidth:130}}
+          src={logo}/>
+          </Link>
+          <Box sx={{ flexGrow: 1 }} />  
+          <Button href='/creacion' color='secondary' variant='outlined'>Cargar Producto</Button>
+          <Search >
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            {/* aqui meti la funcion onsubmit para la busqueda, */}
+            <form onSubmit={handleSubmitSearch}>
+            <StyledInputBase
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={handleSearchInput}
+              value={search}/>
+            </form>
+          </Search>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <IconButton
+              color="inherit">
+                <ShoppingCartOutlinedIcon />
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </Box>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
+    </ThemeProvider>
+  );
+  };
