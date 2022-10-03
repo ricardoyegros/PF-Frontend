@@ -87,7 +87,41 @@ export default function Categorys() {
                 </ButtonGroup>
             </Box>
 
-            <Box justifyContent={'center'} alignItems='center' display={'grid'}>
+      <Box justifyContent={"center"} alignItems="center" display={"grid"} marginBottom={8}>
+          <ButtonGroup variant="contained" aria-label="outlined primary button group">
+          <Button onClick={handleReset} value={{}} color="success">
+            Limpiar Filtros
+          </Button>
+          <Button onClick={handleType} value={"salePrice"} color="success">
+            Precio
+          </Button>
+          <Button onClick={handleType} value={"id"} color="success">
+            Creacion
+          </Button>
+          <Button onClick={handleSort} value={"ASC"} color="success">
+            Ascendente
+          </Button>
+          <Button onClick={handleSort} value={"DESC"} color="success">
+            Descendente
+          </Button>
+        </ButtonGroup>
+      </Box>
+      {Array.isArray(reduxState2?.content) && !reduxState2?.content[0] ? (
+        <Alert severity="error">No se encontraron Productos!</Alert>
+      ) : null}
+      <Grid container gridColumn={3} spacing={4} justifyContent="center" alignItems={"center"}>
+        {reduxState2 &&
+          reduxState2.content.map((e) => (
+            <Grid item mb={5}  sm={3.1}  key={e.id}>
+              <CardProduct2
+                id={e.id}
+                key={e.id}
+                nombre={e.name}
+                imagen={
+                  e.images[0]?.url ||
+                  "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
+
+           <Box justifyContent={"center"} alignItems="center" display={"grid"} marginBottom={8}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                     <Button onClick={handleReset} value={{}} color="success">Limpiar Filtros</Button>
                     <Button onClick={handleType}
@@ -120,6 +154,7 @@ export default function Categorys() {
                             />
                         </Grid>
                     )
+
                 }
             </Grid>
 

@@ -196,7 +196,7 @@ const theme = createTheme({
           src={logo}/>
           </Link>
           <Box sx={{ flexGrow: 1 }} />  
-          <Button href='/creacion' color='secondary' variant='contained'>Cargar Producto</Button>
+          <Button href='/creacion' color='secondary' variant='outlined'>Cargar Producto</Button>
           <Search >
             <SearchIconWrapper>
               <SearchIcon />
