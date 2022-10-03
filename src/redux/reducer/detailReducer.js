@@ -9,7 +9,6 @@ export default function detailProductReducer(state = initialState, action) {
 
     switch(action.type){
         case DETAIL_PRODUCT :
-            console.log(action.payload)
            return{
             ...state,
             detailProduct : action.payload

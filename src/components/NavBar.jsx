@@ -17,6 +17,7 @@ import { ThemeProvider } from '@emotion/react';
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 import { useDispatch } from 'react-redux';
 import { getItem } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -60,7 +61,7 @@ const Search = styled('div')(({ theme }) => ({
   }));
 
   export default function Navbar () {
-  
+    const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [ search, setSearch] = useState("")
@@ -94,6 +95,7 @@ const Search = styled('div')(({ theme }) => ({
       event.preventDefault()
       dispatch(getItem(search))
       setSearch("")
+      navigate('/search');
   }
 
 
@@ -194,7 +196,7 @@ const theme = createTheme({
           src={logo}/>
           </Link>
           <Box sx={{ flexGrow: 1 }} />  
-          <Button href='/creacion' color='secondary' variant='contained'>Cargar Producto</Button>
+          <Button href='/creacion' color='secondary' variant='outlined'>Cargar Producto</Button>
           <Search >
             <SearchIconWrapper>
               <SearchIcon />
