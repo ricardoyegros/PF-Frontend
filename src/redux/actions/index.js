@@ -230,14 +230,13 @@ export function getCategoryNames() {
 export function preFilter(filtros) {
   return async (dispatch) => {
     try {
-      let { categoryId, brandId, type, sort, page, size } = filtros;
-      console.log(filtros);
+      let { categoryId, brandId, type, sort, page, size, name, search } = filtros;
       let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
         }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page - 1 || "0"
-        }&size=${size || "9"}`
+        }&size=${size || "9"}&name=${name || ''}`
       await axios.get(url)
         .then(r => {
-          return dispatch({ type: PRE_FILTER, payload: r.data })
+          return dispatch({ type: PRE_FILTER, payload: [r.data, search, name] })
         })
     } catch (error) {
       console.log(error.message)
@@ -262,6 +261,7 @@ export function getBrands() {
 }
 
 export function isInUse(filtros) {
+  console.log(filtros)
   return async (dispatch) => {
     try {
       return dispatch({ type: IS_IN_USE, payload: filtros });
