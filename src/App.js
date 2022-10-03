@@ -10,6 +10,7 @@ import CreateForm from "./components/CreateForm";
 import ActualizarData from "./components/ActualizarData";
 import Welcome from "./components/Welcome";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/updateprofile" element={<ActualizarData />} />
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/logout" element={<Logout />} />
             </Routes>
             <Footer />
         </div>

@@ -9,6 +9,7 @@ export const FILTER_CATEGORIES = "FILTER_CATEGORIES";
 export const FILTER_BRANDS = "FILTER_BRANDS";
 export const GET_USER_ID = "GET_USER_ID";
 export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
 
 export function getAllProducts() {
     return async function (dispatch) {
@@ -121,6 +122,14 @@ export function loginUser(input) {
         } catch (error) {
             console.log(error);
         }
+    };
+};
+
+export function logoutUser() {
+    return async (dispatch) => {
+        
+        return dispatch({ type: LOGOUT_USER, payload:[] });
+        
     };
 };
 

@@ -1,6 +1,7 @@
 import { CREATE_USER } from "../actions";
 import { UPDATE_USER } from "../actions";
 import { LOGIN_USER } from "../actions";
+import { LOGOUT_USER } from "../actions";
 
 const initialState = {
     user: {},
@@ -25,6 +26,12 @@ export default function createUsers(state = initialState, action) {
                 ...state,
                 user: action.payload,
                 token: action.payload.token
+            };
+        case LOGOUT_USER:
+            return {
+                ...state,
+                user: {},
+                token: ""
             };
 
         default:

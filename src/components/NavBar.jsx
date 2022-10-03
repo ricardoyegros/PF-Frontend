@@ -15,8 +15,9 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Button, createTheme, Link } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "../redux/actions";
+import { Link as Linkdom } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -60,6 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+    const token = useSelector(state => state.usersReducers.token);
     const [search, setSearch] = useState("");
     let dispatch = useDispatch();
 
@@ -93,8 +95,11 @@ export default function Navbar() {
         setSearch("");
     };
 
+
+
     const menuId = "primary-search-account-menu";
     const renderMenu = (
+        
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{
@@ -109,14 +114,40 @@ export default function Navbar() {
             }}
             open={isMenuOpen}
             onClose={handleMenuClose}
+
         >
-            <Link href={"/register"}>
-                <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-            </Link>
-            <Link href={"/login"}>
+            {!token 
+            ?
+            <div>
+            <Linkdom to={"/register"}>
+                <Link >
+                    <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
+                </Link>
+            </Linkdom>
+            <Linkdom to={"/login"}>
+            <Link >
                 <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
             </Link>
+            </Linkdom>
+            </div>
+            :
+            <div>
+            <Linkdom to={"/welcome"}>
+            <Link >
+                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            </Link>
+            </Linkdom>
+            <Linkdom to={"/logout"}>
+            <Link >
+                <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+            </Link>
+            </Linkdom>
+
+            </div>
+            }
+            
         </Menu>
+        
     );
 
     const mobileMenuId = "primary-search-account-menu-mobile";
