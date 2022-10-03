@@ -115,35 +115,19 @@ export default function Navbar() {
             {!token ? (
                 <div>
                     <Linkdom to={"/register"}>
-                        <Link>
-                            <MenuItem onClick={handleMenuClose}>
-                                Sign In
-                            </MenuItem>
-                        </Link>
+                        <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
                     </Linkdom>
                     <Linkdom to={"/login"}>
-                        <Link>
-                            <MenuItem onClick={handleMenuClose}>
-                                Sign Up
-                            </MenuItem>
-                        </Link>
+                        <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
                     </Linkdom>
                 </div>
             ) : (
                 <div>
                     <Linkdom to={"/welcome"}>
-                        <Link>
-                            <MenuItem onClick={handleMenuClose}>
-                                Profile
-                            </MenuItem>
-                        </Link>
+                        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
                     </Linkdom>
                     <Linkdom to={"/logout"}>
-                        <Link>
-                            <MenuItem onClick={handleMenuClose}>
-                                Sign Out
-                            </MenuItem>
-                        </Link>
+                        <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
                     </Linkdom>
                 </div>
             )}
@@ -216,13 +200,13 @@ export default function Navbar() {
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="relative" color="primary">
                     <Toolbar>
-                        <Link href="/">
+                        <Linkdom to={"/"}>
                             <Box
                                 component={"img"}
                                 sx={{ maxHeight: 130, maxWidth: 130 }}
                                 src={logo}
                             />
-                        </Link>
+                        </Linkdom>
                         <Box sx={{ flexGrow: 1 }} />
                         <Button
                             href="/creacion"
