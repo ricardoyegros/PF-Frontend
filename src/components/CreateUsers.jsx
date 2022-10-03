@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUsers } from "../redux/actions/index.js";
 import MenuItem from "@mui/material/MenuItem";
+
 import {
     Typography,
     Card,
@@ -38,8 +39,8 @@ export default function CreateUsers() {
         e.preventDefault();
         dispatch(createUsers(input));
         setInput({});
-        navigate("/users/:id/updateprofile");
-    }
+        navigate("/welcome");
+    };
 
     return (
         <>
