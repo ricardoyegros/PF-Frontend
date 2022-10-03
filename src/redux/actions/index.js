@@ -71,22 +71,6 @@ export function createUsers(input) {
             console.log(error);
         }
     };
-
-    /*  console.log(input);
-    return async () => {
-        try {
-            let newUser = await axios.post(
-                "http://localhost:3001/users/register",
-                input
-            );
-            console.log(newUser.data);
-            alert("A new user is registred!");
-            return newUser;
-        } catch (error) {
-            alert("name already exist");
-            console.log(error);
-        }
-    }; */
 };
 
 export function getIdUsers(id) {

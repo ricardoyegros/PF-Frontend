@@ -40,7 +40,7 @@ export default function CreateUsers() {
         dispatch(createUsers(input));
         setInput({});
         navigate("/welcome");
-    }
+    };
 
     return (
         <>

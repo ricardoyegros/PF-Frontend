@@ -1,19 +1,17 @@
 import { React } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import Box from "@mui/material/Box";
 import {
     Typography,
-    Card,
     CardContent,
     Grid,
-    Avatar,
-    TextField,
     Button,
     createTheme,
 } from "@mui/material";
 
-export default function Welcom() {
+export default function Welcome() {
     const theme = createTheme({
         palette: {
             primary: {
@@ -35,9 +33,18 @@ export default function Welcom() {
         },
     });
 
-    const user = useSelector((state) => state.usersReducers.user);
+    const navigate = useNavigate();
 
+    const user = useSelector((state) => state.usersReducers.user);
     console.log(user);
+
+    //const [input, setInput] = useState({});
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        navigate("/updateprofile");
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Grid
@@ -61,10 +68,22 @@ export default function Welcom() {
                     >
                         Load a new Product
                     </Button>
+                    {/* 
+                                <Button
+                                    color="secundary"
+                                    variant="contained"
+                                    onClick={on}
+                                    
+                                >
+                                    Create !!
+                                </Button>
+                             */}
+
                     <Button
-                        href="/updateprofile"
+                        type="submit"
                         color="secondary"
                         variant="contained"
+                        onClick={handleSubmit}
                     >
                         update-Profile
                     </Button>

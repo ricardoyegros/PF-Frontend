@@ -1,8 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { usersReducers } from "../redux/reducer/usersReducers";
 import { updateUser } from "../redux/actions/index.js";
 
 import MenuItem from "@mui/material/MenuItem";
@@ -18,18 +18,16 @@ import {
 
 //import { useNavigate } from "react-router-dom";
 
-export default function CreateUsers() {
+export default function ActualizarData() {
     const dispatch = useDispatch();
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const user = useSelector((state) => state.usersReducers.user);
-    const [input, setInput] = useState({});
-
+    console.log(user);
     const token = user.token;
+    console.log(token);
 
-    useEffect(() => {
-        setInput(user);
-        console.log(input);
-    }, [user]);
+    const [userId, setUserId] = useState(user);
+    console.log(userId);
 
     const namesDNI = [
         { value: "CC", label: "CC" },
@@ -40,30 +38,28 @@ export default function CreateUsers() {
     ];
 
     function handleChange(e) {
-        e.preventDefault();
-        setInput({ ...input, [e.target.name]: e.target.value });
-    }
+        //setUserId(user)
 
-   
+        setUserId({ ...userId, [e.target.name]: e.target.value });
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
-
-        dispatch(updateUser(input, token));
-        
+        dispatch(updateUser(userId, token));
+        navigate("/");
     }
 
     return (
         <>
             <Typography gutterBottom variant="h3" align="center">
-                TechStore - Register
+                TechStore - Update Profile !!
             </Typography>
             <Card
                 style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }}
             >
                 <CardContent>
                     <Typography gutterBottom variant="h5">
-                        Update Profile!
+                        Create a New User!
                     </Typography>
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={1}>
@@ -75,7 +71,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="name"
-                                    value={input.name}
+                                    value={userId.name}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -87,7 +83,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="lastName"
-                                    value={input.lastName}
+                                    value={userId.lastName}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -100,7 +96,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="typeIdentification"
-                                    value={input.typeIdentification}
+                                    value={userId.typeIdentification}
                                     onChange={handleChange}
                                 >
                                     {namesDNI.map((option) => (
@@ -122,7 +118,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="identification"
-                                    value={input.identification}
+                                    value={userId.identification}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -135,7 +131,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="contact"
-                                    value={input.contact}
+                                    value={userId.contact}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -148,7 +144,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     required
                                     name="email"
-                                    value={input.email}
+                                    value={userId.email}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -158,45 +154,21 @@ export default function CreateUsers() {
                                     placeholder="Please enter you actual address..."
                                     variant="outlined"
                                     fullWidth
-                                    required
+                                    
                                     name="address"
-                                    value={input.address}
+                                    value={userId.address}
                                     onChange={handleChange}
                                 />
                             </Grid>
 
-                            <Grid xs={12} item>
-                                <TextField
-                                    label="Password"
-                                    placeholder="Please create a password..."
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                    type="password"
-                                    name="password"
-                                    value={input.password}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-
-                            <Grid xs={12} item>
-                                <TextField
-                                    label="Country"
-                                    placeholder="Please enter you actual country..."
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                    name="country"
-                                    value={input.country}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
+                           
                             <Grid xs={12} item>
                                 <Button
                                     color="primary"
                                     type="submit"
                                     variant="contained"
                                     fullWidth
+                                    // disable={!input.email || !input.password}
                                 >
                                     Update !!
                                 </Button>
