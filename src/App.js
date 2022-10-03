@@ -1,7 +1,7 @@
-import "./App.css";
-import Home from "./components/Home.jsx";
-import Contact from "./components/Contact.jsx";
-import Detail from "./components/Detail";
+import './App.css';
+import Home from './components/Home.jsx';
+import Contact from './components/Contact.jsx';
+import Detail from './components/Detail';
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -12,7 +12,7 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 
-function App() {
+export default function App() {
     return (
         <div className="App">
             <Navbar />
@@ -30,6 +30,4 @@ function App() {
             <Footer />
         </div>
     );
-}
-
-export default App;
+};

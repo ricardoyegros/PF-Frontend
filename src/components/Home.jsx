@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../redux/actions/index.js";
 import CardProduct from "./Card";
 import { Grid, Typography, Link } from "@mui/material";
-import FilterCategories from "./FilterCategories.jsx";
+// import FilterCategories from "./FilterCategories.jsx";
+// import {getCategories} from "../redux/actions/index.js"
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function Home() {
     alert("No hay coincidencias, seras redireccionado al Home");
     filterCategory = undefined;
   }
+
   if (typeof filterCategory === "object") {
     products = filterCategory;
   }
@@ -33,9 +35,6 @@ export default function Home() {
         Productos
       </Typography>
       <Grid container spacing={6} justifyContent="center">
-        <Grid item>
-          <FilterCategories />
-        </Grid>
         {!item.length
           ? products.map((el, i) => (
               <Grid item mb={5} key={el.id}>
