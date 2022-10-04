@@ -1,17 +1,18 @@
 import { Box, Typography, Grid, Button } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getDetailProduct } from "../redux/actions";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from '@emotion/react';
-
+import { addToCart } from "../redux/actions/cart-actions";
 
 
 
 export default function Detail() {
   const { i } = useParams();
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   useEffect(() => {
     dispatch(getDetailProduct(i));
   }, [dispatch, i])
@@ -40,8 +41,10 @@ export default function Detail() {
     }
   });
 
-
-
+  function handleClickButton(e){
+    dispatch(addToCart(i));
+    navigate("/shopping-cart")
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -71,6 +74,7 @@ export default function Detail() {
             <Button
               variant="contained"
               size="large"
+              onClick={handleClickButton}
             >Agregar al carrito</Button>
           </Box>
         </Box>
