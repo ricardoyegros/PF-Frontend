@@ -16,7 +16,7 @@ import { Button, createTheme, Link } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem } from "../redux/actions";
+import { getItem, isInUse, preFilter } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -59,6 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+    const reduxState = useSelector((state) => state.categorysNameReducer);
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
     const token = useSelector((state) => state.usersReducers.token);
@@ -91,7 +92,8 @@ export default function Navbar() {
 
     const handleSubmitSearch = (event) => {
         event.preventDefault();
-        dispatch(getItem(search));
+        dispatch(preFilter({ name: search }));
+        dispatch(isInUse({ name: search }));
         setSearch("");
     };
 
@@ -114,17 +116,27 @@ export default function Navbar() {
         >
             {!token ? (
                 <div>
-                    <Linkdom to={"/register"}>
+                    <Linkdom
+                        to={"/register"}
+                        style={{ textDecoration: "none", color: "black" }}
+                    >
                         <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
                     </Linkdom>
-                    <Linkdom to={"/login"}>
+                    <Linkdom
+                        to={"/login"}
+                        style={{ textDecoration: "none", color: "black" }}
+                    >
                         <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
                     </Linkdom>
                 </div>
             ) : (
                 <div>
                     <Linkdom to={"/welcome"}>
-                        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+                        <Link underline="none">
+                            <MenuItem onClick={handleMenuClose}>
+                                Profile
+                            </MenuItem>
+                        </Link>
                     </Linkdom>
                     <Linkdom to={"/logout"}>
                         <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
@@ -211,7 +223,7 @@ export default function Navbar() {
                         <Button
                             href="/creacion"
                             color="secondary"
-                            variant="contained"
+                            variant="outlined"
                         >
                             Cargar Producto
                         </Button>

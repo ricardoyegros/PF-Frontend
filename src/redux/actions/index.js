@@ -19,7 +19,7 @@ export function getAllProducts(page) {
     return async function (dispatch) {
         console.log(page);
         let allProducts = await fetch(
-            `https://techstore123.herokuapp.com/products?page=${page}`
+            `http://https://techstore123.herokuapp.com/products?page=${page}`
         )
             .then((res) => res.json())
             .then((products) => products);
@@ -178,6 +178,28 @@ export function getCategories(category) {
 //   };
 // }
 
+//==================================  fin julian
+
+// export function getCategories(category) {
+//   return async function (dispatch) {
+//     try {
+//       console.log(category, "soy category")
+//       let { categoryId, brandId, type, sort, page, size } = category;
+//       let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
+//         }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page || ""
+//         }&size=${size || ""}`;
+//       let detailProduct = await axios.get(url);
+//       console.log(url, "soy url");
+//       return dispatch({
+//         type: FILTER_CATEGORIES,
+//         payload: detailProduct.data.content
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
+
 export function getCategoryNames() {
     return async (dispatch) => {
         try {
@@ -198,15 +220,26 @@ export function getCategoryNames() {
 export function preFilter(filtros) {
     return async (dispatch) => {
         try {
-            let { categoryId, brandId, type, sort, page, size } = filtros;
-            console.log(filtros);
+            let {
+                categoryId,
+                brandId,
+                type,
+                sort,
+                page,
+                size,
+                name,
+                search,
+            } = filtros;
             let url = `https://techstore123.herokuapp.com/filter?type=${
                 type || ""
             }&sort=${sort || ""}&categoryId=${categoryId || ""}&brandId=${
                 brandId || ""
-            }&page=${page - 1 || "0"}&size=${size || "9"}`;
+            }&page=${page - 1 || "0"}&size=${size || "9"}&name=${name || ""}`;
             await axios.get(url).then((r) => {
-                return dispatch({ type: PRE_FILTER, payload: r.data });
+                return dispatch({
+                    type: PRE_FILTER,
+                    payload: [r.data, search, name],
+                });
             });
         } catch (error) {
             console.log(error.message);
@@ -232,6 +265,7 @@ export function getBrands() {
 }
 
 export function isInUse(filtros) {
+    console.log(filtros);
     return async (dispatch) => {
         try {
             return dispatch({ type: IS_IN_USE, payload: filtros });
