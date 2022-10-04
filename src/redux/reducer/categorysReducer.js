@@ -9,7 +9,7 @@ const initialState = {
     filtrado: undefined,
     categoryName: false,
     brandName: false,
-    sortName: undefined,
+    sortName: false,
     typeName: false
 };
 

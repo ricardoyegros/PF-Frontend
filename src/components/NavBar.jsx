@@ -92,8 +92,8 @@ export default function Navbar() {
 
   const handleSubmitSearch = (event) => {
     event.preventDefault();
-    dispatch(preFilter({ ...reduxState, name: search }));
-    dispatch(isInUse({ ...reduxState, name: search }));
+    dispatch(preFilter({ name: search }));
+    dispatch(isInUse({ name: search }));
     setSearch("");
   };
 
