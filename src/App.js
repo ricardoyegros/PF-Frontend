@@ -11,6 +11,7 @@ import ActualizarData from './components/ActualizarData';
 import Welcome from "./components/Welcome" 
 import Login from "./components/Login"
 import Logout from "./components/Logout"
+import ForgotPassword from "./components/ForgotPassword";
 
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/passwordReset" element={<ForgotPassword/>}/>
             </Routes>
             <Footer />
         </div>

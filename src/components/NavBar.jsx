@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
 
+
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -119,28 +120,28 @@ export default function Navbar() {
             {!token 
             ?
             <div>
-            <Linkdom to={"/register"}>
-                
-                    <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-                
+            <Linkdom to={"/register"} style={{"textDecoration":"none","color":"black"}}>
+                    
+                    <MenuItem onClick={handleMenuClose}>Registro</MenuItem>
+                  
             </Linkdom>
-            <Linkdom to={"/login"}>
-            
-                <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-            
+            <Linkdom to={"/login"}  style={{"textDecoration":"none","color":"black"}}>
+               
+                <MenuItem onClick={handleMenuClose}>Iniciar sesion</MenuItem>
+               
             </Linkdom>
             </div>
             :
             <div>
             <Linkdom to={"/welcome"}>
-            
+                <Link underline="none">
                 <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            
+                </Link>
             </Linkdom>
             <Linkdom to={"/logout"}>
-            
+                
                 <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
-            
+                
             </Linkdom>
 
             </div>
@@ -227,7 +228,7 @@ export default function Navbar() {
                         <Button
                             href="/creacion"
                             color="secondary"
-                            variant="contained"
+                            variant="outlined"
                         >
                             Cargar Producto
                         </Button>
