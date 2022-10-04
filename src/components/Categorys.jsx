@@ -3,7 +3,11 @@ import {
   Autocomplete,
   Button,
   ButtonGroup,
+  Collapse,
   Grid,
+  List,
+  ListItemButton,
+  ListItemText,
   Pagination,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +21,24 @@ import {
 import { useState } from "react";
 import { Box } from "@mui/system";
 import CardProduct2 from "./Card2";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+
+const secondaryBox = {
+  display: "flex",
+  flex: "1",
+};
+
+const sideBox = {
+  flexBasis: "230px",
+};
+
+const productBox = {
+  display: "flex",
+  flexDirection: "column",
+  gridGap: "2rem",
+  border: "2px rgb(241, 207, 9) solid",
+  flex: 1,
+};
 
 export default function Categorys() {
   const dispatch = useDispatch();
@@ -26,6 +48,8 @@ export default function Categorys() {
     dispatch(getCategoryNames());
     dispatch(getBrands());
   }, [dispatch, state]);
+
+  const [open, setOpen] = useState(false);
 
   const reduxState = useSelector(
     (state) => state.categorysNameReducer.categorys
@@ -40,6 +64,10 @@ export default function Categorys() {
 
   let pages = reduxState2 || 1;
 
+  const handleOpenMenu = () => {
+    setOpen(!open);
+  };
+
   const handleReset = () => {
     setPage(1);
     setState({ sort: "DESC", type: "id", page: "" });
@@ -48,6 +76,7 @@ export default function Categorys() {
   };
 
   const handleCategory = (e) => {
+    console.log(e.target.ondrop)
     setPage(1);
     if (state.categoryName === e.target.name) {
       setState({
@@ -253,67 +282,21 @@ export default function Categorys() {
   };
 
   return (
+    // DE ACA PARA ABAJO HAY QUE
     <>
-      <Box
-        mt={1}
-        justifyContent={"center"}
-        alignItems="center"
-        display={"grid"}
-      >
-        <ButtonGroup
-          variant="contained"
-          aria-label="outlined primary button group"
-        >
-          {reduxState &&
-            reduxState.map((e) => (
-              <Button
-                value={e.id}
-                name={e.name}
-                variant={
-                  reduxState4?.categoryName === e.name
-                    ? "outlined"
-                    : "contained"
-                }
-                style={{ marginTop: "5px" }}
-                onClick={handleCategory}
-              >
-                {e.name}
-              </Button>
-            ))}
-        </ButtonGroup>
-      </Box>
-      <Box justifyContent={"center"} alignItems="center" display={"grid"}>
-        <ButtonGroup
-          variant="contained"
-          aria-label="outlined primary button group"
-        >
-          {reduxState3 &&
-            reduxState3.map((e) => (
-              <Button
-                value={e.id}
-                name={e.name}
-                variant={
-                  reduxState4?.brandName === e.name ? "outlined" : "contained"
-                }
-                onClick={handleBrand}
-              >
-                {e.name}
-              </Button>
-            ))}
-        </ButtonGroup>
-      </Box>
-
       <Box
         justifyContent={"center"}
         alignItems="center"
         display={"grid"}
         marginBottom={8}
       >
-        <ButtonGroup
+        <ButtonGroup // estos son botones de ordenamiento, no llevan mapeado, estan escritos a mano cada uno segun que necesitemos
           variant="contained"
           aria-label="outlined primary button group"
         >
           <Button onClick={handleReset} value={{}} color="success">
+            {" "}
+            {/* Cada boton tiene su handle-ALGO que agreba funcionalidad, NO tocar el value o name */}
             Limpiar Filtros
           </Button>
           <Button
@@ -349,64 +332,169 @@ export default function Categorys() {
             Descendente
           </Button>
         </ButtonGroup>
-        <Box
+        <Box // esta box renderiza lo que se esta buscando en el searchbar,
           justifyContent={"center"}
           alignItems="center"
           display={"grid"}
           marginBottom={8}
           value={reduxState4.name}
-          onClick={handleName}
+          onClick={handleName} // el handle name borra el nombre del estado para limpiar el filtro
         >
-          {reduxState4 && reduxState4.name ? (
+          {reduxState4 && reduxState4.name ? ( //aqui realiza el render condicional
             <Button color="secondary">{reduxState4.name}</Button>
           ) : null}
         </Box>
       </Box>
-      {Array.isArray(reduxState2?.content) && !reduxState2?.content[0] ? (
-        <Alert severity="error">No se encontraron Productos!</Alert>
-      ) : null}
-      <Grid
-        container
-        gridColumn={3}
-        spacing={4}
-        justifyContent="center"
-        alignItems={"center"}
-      >
-        {reduxState2 &&
-          reduxState2.content.map((e) => (
-            <Grid item mb={5} sm={3.1} key={e.id}>
-              <CardProduct2
-                id={e.id}
-                key={e.id}
-                nombre={e.name}
-                imagen={
-                  e.images[0]?.url ||
-                  "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
-                }
-                categoria={e.category.name}
-                precio={e.salePrice}
-                marca={e.brand.name}
-              />
-            </Grid>
-          ))}
-      </Grid>
+      ;
+      <div style={secondaryBox}>
+        <div style={sideBox}>
+          <Box
+            mt={1}
+            justifyContent={"center"}
+            alignItems="center"
+            display={"grid"}
+          >
 
-      <Box
-        justifyContent={"center"}
-        alignItems="center"
-        display={"flex"}
-        sx={{
-          margin: "20px 0px",
-        }}
-      >
-        <Pagination
-          size="large"
-          color={"primary"}
-          count={pages !== 4 ? pages.totalPage : 4}
-          page={page}
-          onChange={(e, p) => handlePage(e, p)}
-        />
-      </Box>
+
+
+
+            <List
+              variant="contained"
+              aria-label="outlined primary button group"
+            >
+              <ListItemButton onClick={handleOpenMenu}>
+                <ListItemText primary="Categorias" />
+                {open ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {reduxState &&
+                    reduxState.map((e) => (
+                      <ListItemButton>
+                        <Button
+                          value={e.id}
+                          name={e.name}
+                          variant={
+                            reduxState4?.categoryName === e.name
+                              ? "outlined"
+                              : "contained"
+                          }
+                          style={{ marginTop: "5px" }}
+                          onClick={handleCategory}
+                        >
+                          {e.name}
+                        </Button>
+                      </ListItemButton>
+
+                    ))}
+                </List>
+              </Collapse>
+            </List>
+
+
+
+
+
+
+
+
+
+          </Box>
+          <Box justifyContent={"center"} alignItems="center" display={"grid"}>
+
+
+
+
+
+
+
+            <List>
+              <ListItemButton onClick={handleOpenMenu}>
+                <ListItemText primary="Marcas" />
+                {open ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {reduxState3 &&
+                    reduxState3.map((e) => (
+                      <ListItemButton>
+                        <Button
+                          value={e.id}
+                          name={e.name}
+                          variant={
+                            reduxState4?.brandName === e.name
+                              ? "outlined"
+                              : "contained"
+                          }
+                          onClick={handleBrand}
+                        >
+                          {e.name}
+                        </Button>
+                      </ListItemButton>
+                    ))}
+                </List>
+              </Collapse>
+            </List>
+
+
+
+
+          </Box>
+        </div>
+        <div style={productBox}>
+          {Array.isArray(reduxState2?.content) && !reduxState2?.content[0] ? (
+            <Alert severity="error">No se encontraron Productos!</Alert>
+          ) : null}
+          <Grid
+            container
+            gridColumn={3}
+            spacing={4}
+            justifyContent="center"
+            alignItems={"center"}
+          >
+            {reduxState2 &&
+              reduxState2.content.map((e) => (
+                <Grid item mb={5} sm={3.1} key={e.id}>
+                  <CardProduct2
+                    id={e.id}
+                    key={e.id}
+                    nombre={e.name}
+                    imagen={
+                      e.images[0]?.url ||
+                      "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
+                    }
+                    categoria={e.category.name}
+                    precio={e.salePrice}
+                    marca={e.brand.name}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+          <Box
+            justifyContent={"center"}
+            alignItems="center"
+            display={"flex"}
+            sx={{
+              margin: "20px 0px",
+            }}
+          ></Box>
+        </div>
+      </div>
+      <Pagination
+        size="large"
+        color={"primary"}
+        count={pages !== 4 ? pages.totalPage : 4}
+        page={page}
+        onChange={(e, p) => handlePage(e, p)}
+      />
     </>
   );
 }
+
+// .secondary-box, .sideBar-box, .products-box {
+//   overflow: auto;
+// }
+
+
+
+
