@@ -265,7 +265,6 @@ export function getBrands() {
 }
 
 export function isInUse(filtros) {
-    console.log(filtros);
     return async (dispatch) => {
         try {
             return dispatch({ type: IS_IN_USE, payload: filtros });
