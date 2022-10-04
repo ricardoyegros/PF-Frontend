@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../redux/actions/index.js";
-import MenuItem from "@mui/material/MenuItem";
 
 import {
     Typography,
@@ -18,7 +17,7 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [input, setInput] = useState({});
+    const [input, setInput] = useState("");
 
     //console.log(input);
 
@@ -31,7 +30,7 @@ export default function Login() {
         dispatch(loginUser(input));
         setInput({});
         navigate("/welcome");
-    };
+    }
 
     return (
         <>
