@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItem, isInUse, preFilter } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
 
+
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -114,35 +115,39 @@ export default function Navbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            {!token ? (
-                <div>
-                    <Linkdom
-                        to={"/register"}
-                        style={{ textDecoration: "none", color: "black" }}
-                    >
-                        <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-                    </Linkdom>
-                    <Linkdom
-                        to={"/login"}
-                        style={{ textDecoration: "none", color: "black" }}
-                    >
-                        <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-                    </Linkdom>
-                </div>
-            ) : (
-                <div>
-                    <Linkdom to={"/welcome"}>
-                        <Link underline="none">
-                            <MenuItem onClick={handleMenuClose}>
-                                Profile
-                            </MenuItem>
-                        </Link>
-                    </Linkdom>
-                    <Linkdom to={"/logout"}>
-                        <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
-                    </Linkdom>
-                </div>
-            )}
+
+            {!token 
+            ?
+            <div>
+            <Linkdom to={"/register"} style={{"textDecoration":"none","color":"black"}}>
+                    
+                    <MenuItem onClick={handleMenuClose}>Registro</MenuItem>
+                  
+            </Linkdom>
+            <Linkdom to={"/login"}  style={{"textDecoration":"none","color":"black"}}>
+               
+                <MenuItem onClick={handleMenuClose}>Iniciar sesion</MenuItem>
+               
+            </Linkdom>
+            </div>
+            :
+            <div>
+            <Linkdom to={"/welcome"}>
+                <Link underline="none">
+                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+                </Link>
+            </Linkdom>
+            <Linkdom to={"/logout"}>
+                
+                <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+                
+            </Linkdom>
+
+            </div>
+            }
+            
+
+
         </Menu>
     );
 
