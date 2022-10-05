@@ -13,6 +13,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import ShoppingCart from './components/ShoppingCart';
 import Dashboard from './components/dashboard/Dashboard';
+import ForgotPassword from './components/ForgotPassword';
 
 export default function App() {
     return (
@@ -30,6 +31,10 @@ export default function App() {
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/shopping-cart" element={<ShoppingCart />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+
+                <Route path="/passwordReset" element={<ForgotPassword />} />
+
+                <Route path="/shopping-cart" element={<ShoppingCart />} />
             </Routes>
             <Footer />
         </div>
