@@ -87,4 +87,4 @@ export default function Welcome() {
             </Grid>
         </ThemeProvider>
     );
-}
+};

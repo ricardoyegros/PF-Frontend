@@ -80,10 +80,12 @@ export function createUsers(input) {
     };
 }
 
-export function getIdUsers(id) {
+export function getIdUsers(id, token) {
     return async function (dispatch) {
         try {
-            let user = await axios.get(`http://localhost:3001/users/${id}`);
+            let user = await axios.get(`http://localhost:3001/users/${id}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             return dispatch({
                 type: GET_USER_ID,
                 payload: user.data,
