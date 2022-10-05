@@ -117,8 +117,8 @@ export default function Navbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-
-            {!token 
+ 
+            {/* !token || */ !window.localStorage.token
             ?
             <div>
             <Linkdom to={"/register"} style={{"textDecoration":"none","color":"black"}}>

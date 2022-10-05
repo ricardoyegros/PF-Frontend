@@ -103,8 +103,10 @@ export function updateUser(input, token, id) {
 export function loginUser(input) {
     return async (dispatch) => {
         try {
-            let userData = await axios.post('http://localhost:3001/users/login', input);
-            console.log(userData.data);
+            let userData = await axios.post(
+                "http://localhost:3001/users/login",
+                input
+            );
             return dispatch({ type: LOGIN_USER, payload: userData.data });
         } catch (error) {
             console.log(error);
