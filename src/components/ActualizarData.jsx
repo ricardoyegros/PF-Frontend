@@ -27,7 +27,7 @@ export default function ActualizarData() {
     //console.log(token);
 
     const [userId, setUserId] = useState(user);
-    //console.log(userId);
+    console.log(userId);
 
     const namesDNI = [
         { value: "CC", label: "CC" },

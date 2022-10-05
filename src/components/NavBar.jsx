@@ -16,7 +16,7 @@ import { Button, createTheme, Link } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem } from "../redux/actions";
+import { getItem, isInUse, preFilter } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
 
 
@@ -60,9 +60,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+    const reduxState = useSelector((state) => state.categorysNameReducer);
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const token = useSelector(state => state.usersReducers.token);
+    const token = useSelector((state) => state.usersReducers.token);
     const [search, setSearch] = useState("");
     let dispatch = useDispatch();
 
@@ -92,15 +93,13 @@ export default function Navbar() {
 
     const handleSubmitSearch = (event) => {
         event.preventDefault();
-        dispatch(getItem(search));
+        dispatch(preFilter({ name: search }));
+        dispatch(isInUse({ name: search }));
         setSearch("");
     };
 
-
-
     const menuId = "primary-search-account-menu";
     const renderMenu = (
-        
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{
@@ -115,8 +114,8 @@ export default function Navbar() {
             }}
             open={isMenuOpen}
             onClose={handleMenuClose}
-
         >
+
             {!token 
             ?
             <div>
@@ -147,8 +146,9 @@ export default function Navbar() {
             </div>
             }
             
+
+
         </Menu>
-        
     );
 
     const mobileMenuId = "primary-search-account-menu-mobile";
@@ -224,7 +224,7 @@ export default function Navbar() {
                                 src={logo}
                             />
                         </Linkdom>
-                        <Box sx={{ flexGrow: 1 }}  />
+                        <Box sx={{ flexGrow: 1 }} />
                         <Button
                             href="/creacion"
                             color="secondary"

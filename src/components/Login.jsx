@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../redux/actions/index.js";
+
 import { useNavigate } from "react-router-dom";
+
+
 import {
   Typography,
   Box,
@@ -28,7 +31,10 @@ export default function Login() {
 
   const [input, setInput] = useState({});
 
-  //console.log(input);
+
+
+    const [input, setInput] = useState("");
+
 
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -40,6 +46,7 @@ export default function Login() {
     setInput({});
     navigate("/welcome");
   }
+
 
   return (
     <>
@@ -70,6 +77,8 @@ export default function Login() {
             value={input.email}
             onChange={handleChange}
           />
+
+
 
           <TextField
             label="Password"
