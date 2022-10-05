@@ -63,13 +63,13 @@ export default function Welcome() {
                         </Typography>
                     </CardContent>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Button
+                    { user.aduser && <Button
                         href="/creacion"
                         color="secondary"
                         variant="contained"
                     >
-                        Load a new Product
-                    </Button>
+                        Dashboard Admin
+                    </Button>}
                     {/* 
                                 <Button
                                     color="secundary"
@@ -87,7 +87,7 @@ export default function Welcome() {
                         variant="contained"
                         onClick={handleSubmit}
                     >
-                        update-Profile
+                        Update-Profile
                     </Button>
                 </Grid>
             </Grid>
