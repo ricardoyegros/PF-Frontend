@@ -19,7 +19,7 @@ export function getAllProducts(page) {
     return async function (dispatch) {
         console.log(page);
         let allProducts = await fetch(
-            `http://https://techstore123.herokuapp.com/products?page=${page}`
+            `https://techstore123.herokuapp.com/products?page=${page}`
         )
             .then((res) => res.json())
             .then((products) => products);

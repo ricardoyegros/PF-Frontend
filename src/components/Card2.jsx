@@ -5,12 +5,12 @@ import {
   CardContent,
   Typography,
   Rating,
-  Link,
   createTheme,
 } from "@mui/material";
 import { styled} from '@mui/material/styles';
 import { ThemeProvider } from "@emotion/react";
 import { Box } from "@mui/system";
+import { Link as Linkdom } from "react-router-dom";
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width:"100%",
@@ -43,7 +43,7 @@ export default function CardProduct2({
 
   return (
     <ThemeProvider theme={theme}>
-      <Link href={`/detalle/${id}`} underline="none">
+      <Linkdom to={`/detalle/${id}`} >
         <StyledBox>
           <CardMedia
             component="img"
@@ -71,7 +71,7 @@ export default function CardProduct2({
             />
           </CardContent>
         </StyledBox>
-      </Link>
+      </Linkdom>
     </ThemeProvider>
   );
 }

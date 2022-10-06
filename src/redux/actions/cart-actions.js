@@ -12,7 +12,7 @@ export function addToCart (id) {
             let product = await axios.get(
                 `http://localhost:3001/products/${id}`
             );
-            console.log(id, product, "soy action")
+            
             return dispatch({
                 type: ACTIONS.ADD_TO_CART,
                 payload: product.data,
