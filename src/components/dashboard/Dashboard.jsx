@@ -14,6 +14,9 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 
+import People from '@mui/icons-material/People';
+
+
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { mainListItems, secondaryListItems } from './utils/ListItems';
@@ -66,7 +69,7 @@ function Dashboard() {
                     sx={{
                         backgroundColor: (theme) => (theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900]),
                         flexGrow: 1,
-                        height: '100vh',
+                        // height: '100vh',
                         overflow: 'auto'
                     }}
                 >
