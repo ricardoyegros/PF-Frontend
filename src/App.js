@@ -25,7 +25,7 @@ export default function App() {
     const email = useSelector(state => state.usersReducers.user.email);
     const isAdmin = useSelector(state => state.usersReducers.user.isAdmin);
     const name = useSelector(state => state.usersReducers.user.name);
-
+    // console.log('hola')
     if (token) {
         window.localStorage.setItem('token', token);
         window.localStorage.setItem('email', email);
