@@ -8,6 +8,8 @@ function Logout() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
         dispatch(logoutUser());
         navigate("/");
     }, [dispatch]);

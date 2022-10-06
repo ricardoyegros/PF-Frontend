@@ -392,7 +392,7 @@ export default function Categorys() {
 
             <Box justifyContent={'center'}>
 
-              <h3>Categoryas</h3>
+              <h3>CATEGORIAS</h3>
             </Box>
 
 
@@ -455,7 +455,7 @@ export default function Categorys() {
             </List> */}
 
 
-            <h3>Marcas</h3>
+            <h3>MARCAS</h3>
 
             {reduxState3 &&
               reduxState3.map((e) => (
