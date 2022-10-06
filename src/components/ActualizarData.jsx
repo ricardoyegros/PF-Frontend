@@ -135,19 +135,7 @@ export default function ActualizarData() {
                                     onChange={handleChange}
                                 />
                             </Grid>
-                            <Grid xs={12} item>
-                                <TextField
-                                    label="Email"
-                                    placeholder="Please enter a email..."
-                                    variant="outlined"
-                                    type="email"
-                                    fullWidth
-                                    required
-                                    name="email"
-                                    value={userId.email}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
+                            
                             <Grid xs={12} item>
                                 <TextField
                                     label="Address"

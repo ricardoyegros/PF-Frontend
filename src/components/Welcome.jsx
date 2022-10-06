@@ -1,6 +1,8 @@
 import { React } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+//import { updateUser } from "../redux/actions/index";
 import { ThemeProvider } from "@emotion/react";
 import Box from "@mui/material/Box";
 import {
@@ -34,16 +36,19 @@ export default function Welcome() {
     });
 
     const navigate = useNavigate();
+    //const dispatch = useDispatch();
 
     const user = useSelector((state) => state.usersReducers.user);
-    const token = useSelector(state => state.usersReducers.token);
-
+    const token = useSelector((state) => state.usersReducers.token);
+    console.log(user);
     console.log(token);
-
-    //const [input, setInput] = useState({});
+ 
+    //const [input, setInput] = useState(user);
 
     function handleSubmit(e) {
         e.preventDefault();
+        /* setInput(input);
+        dispatch(updateUser(input)); */
         navigate("/updateprofile");
     }
 
@@ -63,7 +68,7 @@ export default function Welcome() {
                         </Typography>
                     </CardContent>
                     <Box sx={{ flexGrow: 1 }} />
-                    { user.aduser && <Button
+                    {user.aduser && <Button
                         href="/creacion"
                         color="secondary"
                         variant="contained"

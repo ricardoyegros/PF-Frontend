@@ -16,15 +16,15 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 
 export function getAllProducts(page) {
-  return async function (dispatch) {
-    console.log(page)
-    let allProducts = await fetch(
-      `https://techstore123.herokuapp.com/products?page=${page}`
-    )
-      .then((res) => res.json())
-      .then((products) => products);
-    return dispatch({ type: GET_ALL_PRODUCTS, payload: allProducts });
-  };
+    return async function (dispatch) {
+        console.log(page);
+        let allProducts = await fetch(
+            `http://https://techstore123.herokuapp.com/products?page=${page}`
+        )
+            .then((res) => res.json())
+            .then((products) => products);
+        return dispatch({ type: GET_ALL_PRODUCTS, payload: allProducts });
+    };
 }
 
 export function getDetailProduct(i) {
@@ -78,7 +78,7 @@ export function createUsers(input) {
             console.log(error);
         }
     };
-};
+}
 
 export function getIdUsers(id) {
     return async function (dispatch) {
@@ -95,25 +95,22 @@ export function getIdUsers(id) {
     };
 }
 
-
-export function updateUser(input, token){
+export function updateUser(input, token) {
     return async (dispatch) => {
         try {
-            
+            console.log(input)
             let updateUser = await axios.put(
                 "http://localhost:3001/users/updateprofile",
-                input, 
-                {headers:{ "Authorization" : `Bearer ${token}` }}
-                
+                input,
+                { headers: { Authorization: `Bearer ${token}` } }
             );
-            
+            console.log(updateUser.data)
             return dispatch({ type: UPDATE_USER, payload: updateUser.data });
         } catch (error) {
             console.log(error);
         }
     };
-
-};
+}
 
 export function loginUser(input) {
     return async (dispatch) => {
@@ -122,24 +119,19 @@ export function loginUser(input) {
                 "http://localhost:3001/users/login",
                 input
             );
-            console.log(userData.data)
+            console.log(userData.data);
             return dispatch({ type: LOGIN_USER, payload: userData.data });
         } catch (error) {
             console.log(error);
         }
     };
-};
+}
 
 export function logoutUser() {
     return async (dispatch) => {
-        
-        return dispatch({ type: LOGOUT_USER, payload:[] });
-        
+        return dispatch({ type: LOGOUT_USER, payload: [] });
     };
-};
-
-
-
+}
 
 //==================================  fin julian
 
@@ -187,12 +179,6 @@ export function getCategories(category) {
 //   };
 // }
 
-
-
-
-
-
-
 //==================================  fin julian
 
 // export function getCategories(category) {
@@ -216,57 +202,75 @@ export function getCategories(category) {
 // }
 
 export function getCategoryNames() {
-  return async (dispatch) => {
-    try {
-      await axios.get("https://techstore123.herokuapp.com/categorys").then(r => {
-        return dispatch({ type: GET_CATEGORYS_NAMES, payload: r.data })
-      })
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+    return async (dispatch) => {
+        try {
+            await axios
+                .get("https://techstore123.herokuapp.com/categorys")
+                .then((r) => {
+                    return dispatch({
+                        type: GET_CATEGORYS_NAMES,
+                        payload: r.data,
+                    });
+                });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 }
 
 export function preFilter(filtros) {
-  return async (dispatch) => {
-    try {
-      let { categoryId, brandId, type, sort, page, size } = filtros;
-      console.log(filtros);
-      let url = `https://techstore123.herokuapp.com/filter?type=${type || ""}&sort=${sort || ""
-        }&categoryId=${categoryId || ""}&brandId=${brandId || ""}&page=${page - 1 || "0"
-        }&size=${size || "9"}`
-      await axios.get(url)
-        .then(r => {
-          return dispatch({ type: PRE_FILTER, payload: r.data })
-        })
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+    return async (dispatch) => {
+        try {
+            let {
+                categoryId,
+                brandId,
+                type,
+                sort,
+                page,
+                size,
+                name,
+                search,
+            } = filtros;
+            let url = `https://techstore123.herokuapp.com/filter?type=${
+                type || ""
+            }&sort=${sort || ""}&categoryId=${categoryId || ""}&brandId=${
+                brandId || ""
+            }&page=${page - 1 || "0"}&size=${size || "9"}&name=${name || ""}`;
+            await axios.get(url).then((r) => {
+                return dispatch({
+                    type: PRE_FILTER,
+                    payload: [r.data, search, name],
+                });
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 }
 
 export function getBrands() {
-  return async (dispatch) => {
-    try {
-      await axios.get('https://techstore123.herokuapp.com/brands')
-        .then(r => {
-          return dispatch({
-            type: FILTER_BRAND2,
-            payload: r.data
-          })
-        })
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+    return async (dispatch) => {
+        try {
+            await axios
+                .get("https://techstore123.herokuapp.com/brands")
+                .then((r) => {
+                    return dispatch({
+                        type: FILTER_BRAND2,
+                        payload: r.data,
+                    });
+                });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 }
 
 export function isInUse(filtros) {
-  return async (dispatch) => {
-    try {
-      return dispatch({ type: IS_IN_USE, payload: filtros });
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+    return async (dispatch) => {
+        try {
+            return dispatch({ type: IS_IN_USE, payload: filtros });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 }

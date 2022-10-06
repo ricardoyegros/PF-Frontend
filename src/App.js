@@ -12,6 +12,11 @@ import Welcome from "./components/Welcome"
 import Login from "./components/Login"
 import Logout from "./components/Logout"
 
+import ForgotPassword from "./components/ForgotPassword";
+
+import ShoppingCart from "./components/ShoppingCart";
+
+
 
 export default function App() {
 
@@ -29,6 +34,11 @@ export default function App() {
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
+
+                <Route path="/passwordReset" element={<ForgotPassword/>}/>
+
+                <Route path="/shopping-cart" element={<ShoppingCart />}/>
+
             </Routes>
             <Footer />
         </div>

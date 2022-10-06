@@ -6,6 +6,7 @@ import usersReducers from "./usersReducers";
 import filterCategoriesReducer from "./filterCategoryReducer";
 import categorysNameReducer from "./categorysReducer";
 import userIdReducer from "./userIdReducer";
+import shoppingCartReducer from "./shoppingCartReducer";
 
 export default combineReducers({
     allProductsReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     filterCategoriesReducer,
     usersReducers,
     categorysNameReducer,
-    userIdReducer
+    userIdReducer,
+    shoppingCartReducer
 });

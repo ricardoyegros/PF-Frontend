@@ -27,7 +27,7 @@ export default function CreateUsers() {
         { value: "OTRO", label: "OTRO" },
     ];
 
-    const [input, setInput] = useState({});
+    const [input, setInput] = useState("");
 
     console.log(input);
 
@@ -40,7 +40,7 @@ export default function CreateUsers() {
         dispatch(createUsers(input));
         setInput({});
         navigate("/welcome");
-    };
+    }
 
     return (
         <>

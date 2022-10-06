@@ -16,8 +16,9 @@ import { Button, createTheme, Link } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem } from "../redux/actions";
+import { getItem, isInUse, preFilter } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
+
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -59,9 +60,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+    const reduxState = useSelector((state) => state.categorysNameReducer);
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const token = useSelector(state => state.usersReducers.token);
+    const token = useSelector((state) => state.usersReducers.token);
     const [search, setSearch] = useState("");
     let dispatch = useDispatch();
 
@@ -91,15 +93,13 @@ export default function Navbar() {
 
     const handleSubmitSearch = (event) => {
         event.preventDefault();
-        dispatch(getItem(search));
+        dispatch(preFilter({ name: search }));
+        dispatch(isInUse({ name: search }));
         setSearch("");
     };
 
-
-
     const menuId = "primary-search-account-menu";
     const renderMenu = (
-        
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{
@@ -114,40 +114,41 @@ export default function Navbar() {
             }}
             open={isMenuOpen}
             onClose={handleMenuClose}
-
         >
+
             {!token 
             ?
             <div>
-            <Linkdom to={"/register"}>
-                
-                    <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-                
+            <Linkdom to={"/register"} style={{"textDecoration":"none","color":"black"}}>
+                    
+                    <MenuItem onClick={handleMenuClose}>Registro</MenuItem>
+                  
             </Linkdom>
-            <Linkdom to={"/login"}>
-            
-                <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-            
+            <Linkdom to={"/login"}  style={{"textDecoration":"none","color":"black"}}>
+               
+                <MenuItem onClick={handleMenuClose}>Iniciar sesión</MenuItem>
+               
             </Linkdom>
             </div>
             :
             <div>
-            <Linkdom to={"/welcome"}>
-            
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            
+            <Linkdom to={"/welcome"} style={{"textDecoration":"none","color":"black"}}>
+                
+                <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+                
             </Linkdom>
-            <Linkdom to={"/logout"}>
-            
-                <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
-            
+            <Linkdom to={"/logout"} style={{"textDecoration":"none","color":"black"}}>
+                
+                <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+                
             </Linkdom>
 
             </div>
             }
             
+
+
         </Menu>
-        
     );
 
     const mobileMenuId = "primary-search-account-menu-mobile";
@@ -223,11 +224,11 @@ export default function Navbar() {
                                 src={logo}
                             />
                         </Linkdom>
-                        <Box sx={{ flexGrow: 1 }}  />
+                        <Box sx={{ flexGrow: 1 }} />
                         <Button
                             href="/creacion"
                             color="secondary"
-                            variant="contained"
+                            variant="outlined"
                         >
                             Cargar Producto
                         </Button>

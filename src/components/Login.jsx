@@ -1,92 +1,170 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch,useSelector } from "react-redux";
 import { loginUser } from "../redux/actions/index.js";
-import MenuItem from "@mui/material/MenuItem";
+import GoogleLogin from 'react-google-login';
+import { gapi } from 'gapi-script'
+import { createUsers } from "../redux/actions/index.js";
+
+import { redirect, useNavigate } from "react-router-dom";
+
 
 import {
-    Typography,
-    Card,
-    CardContent,
-    Grid,
-    TextField,
-    Button,
+  Typography,
+  Box,
+  TextField,
+  Button,
+  Grid,
 } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import GoogleIcon from '@mui/icons-material/Google';
 
-import { useNavigate } from "react-router-dom";
+const StyledBox = styled(Box)(({ }) => ({
+  width: 500,
+  height: 250,
+  padding: 40,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"
+}));
+
 
 export default function Login() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.usersReducers.token);
 
-    const [input, setInput] = useState({});
+  const [input, setInput] = useState({});
 
-    //console.log(input);
+  function handleChange(e) {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  }
 
-    function handleChange(e) {
-        setInput({ ...input, [e.target.name]: e.target.value });
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(loginUser(input));
+    setInput({});
+    if(token.length>0){
+      navigate("/welcome");
+    } else{
+      alert("Usuario o Contraseña incorrecta")
+      navigate("/login");
     }
+  }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        dispatch(loginUser(input));
-        setInput({});
-        navigate("/welcome");
-    };
+  const clientId = "701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com"
+  function handleLoginGoogle(res) {
+    const user = {
+      name: res.profileObj.givenName,
+      lastName: res.profileObj.familyName,
+      email: res.profileObj.email,
+      password: res.profileObj.googleId
+    }
+    console.log(user)
+    dispatch(createUsers(user))
+    navigate("/welcome")
+  }
+  function handleFailure(err) {
+    console.log('failed:', err)
+  }
+  
+  useEffect(() => {
+    gapi.load("client:auth2",()=>{
+      gapi.auth2.init({clientId:clientId})
+    })
+  }, [])
 
-    return (
-        <>
-            <Typography gutterBottom variant="h3" align="center">
-                TechStore - Login
-            </Typography>
-            <Card
-                style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }}
+
+  return (
+    <>
+      <Typography
+
+        variant="h3"
+        align="center"
+        sx={{ paddingTop: 5 }}
+      >
+        TechStore - Login
+      </Typography>
+      <Grid container columnSpacing={4} pb={8} pt={5} justifyContent={"center"}>
+        <Grid item sm={"auto"}>
+          <form onSubmit={handleSubmit}>
+            <StyledBox
+              justifyContent={"space-evenly"}
             >
-                <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        Ingrese sus datos
-                    </Typography>
-                    <form onSubmit={handleSubmit}>
-                        <Grid container spacing={1}>
-                            <Grid xs={12} item>
-                                <TextField
-                                    label="Email"
-                                    placeholder="Please enter you Email..."
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                    name="email"
-                                    value={input.email}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                            <Grid xs={12} item>
-                                <TextField
-                                    label="Password"
-                                    placeholder="Password"
-                                    variant="outlined"
-                                    fullWidth
-                                    required
-                                    type="password"
-                                    name="password"
-                                    value={input.password}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                            <Grid xs={12} item>
-                                <Button
-                                    color="primary"
-                                    type="submit"
-                                    variant="contained"
-                                    fullWidth
-                                    disable={!input.email || !input.password}
-                                >
-                                    Login
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </CardContent>
-            </Card>
-        </>
-    );
+              <Typography gutterBottom variant="h5">
+                Ingrese sus datos
+              </Typography>
+              <TextField
+                label="Email"
+                placeholder="Please enter you Email..."
+                variant="outlined"
+                fullWidth
+                required
+                name="email"
+                value={input.email}
+                onChange={handleChange}
+              />
+
+
+
+              <TextField
+                label="Password"
+                placeholder="Password"
+                variant="outlined"
+                fullWidth
+                required
+                type="password"
+                name="password"
+                value={input.password}
+                onChange={handleChange}
+              />
+              <Box display={"flex"}
+                alignItems={"center"}
+              >
+                <Button
+                  color="primary"
+                  type="submit"
+                  variant="contained"
+                  sx={{ width: "50%", }}
+                  disable={!input.email || !input.password}
+                >
+                  Login
+                </Button>
+                <Button href="/passwordReset">
+                  Olvidaste tu contraseña?
+                </Button>
+              </Box>
+              <GoogleLogin
+                clientId= "701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com"
+                buttonText="Log in with Google"
+                onSuccess={handleLoginGoogle}
+                onFailure={handleFailure}
+                cookiePolicy={'single_host_origin'}
+                
+              ></GoogleLogin>
+            </StyledBox>
+          </form>
+        </Grid>
+        <Grid item sm={"auto"}>
+          <StyledBox>
+            <Typography variant="h5">
+              Nuevo cliente
+            </Typography>
+            <Typography variant="subtitle1" pt={3}>
+              Create una cuenta!
+            </Typography>
+            <Typography variant="subtitle1" pb={4}>
+              Asi podras comprar en nuestra tienda
+            </Typography>
+            <Button
+              href="/register"
+              variant="contained"
+            >
+              Registrarse
+            </Button>
+          </StyledBox>
+        </Grid>
+      </Grid>
+    </>
+  );
 }
