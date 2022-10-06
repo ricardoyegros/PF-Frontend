@@ -35,7 +35,7 @@ export default function Welcome() {
     const user = useSelector((state) => state.usersReducers.user);
     const token = useSelector((state) => state.usersReducers.token);
     // console.log(user);
-    // console.log(token);
+    // console.log(token);\
 
     //const [input, setInput] = useState(user);
 
@@ -55,12 +55,12 @@ export default function Welcome() {
                 <Grid>
                     <CardContent>
                         <Typography gutterBottom variant="h3">
-                            Welcome {user.name && user.name}!
+                            Welcome {localStorage.name && localStorage.name}!
                         </Typography>
                     </CardContent>
 
                     <Box sx={{ flexGrow: 1 }} />
-                    {user.aduser ? (
+                    {localStorage.isAdmin === "true" ? (
                         <Button color="secondary" variant="contained" onClick={handleSubmitEnsayo}>
                             Go to Dashboard
                         </Button>
