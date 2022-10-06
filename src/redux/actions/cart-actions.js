@@ -10,7 +10,7 @@ export function addToCart (id) {
     return async function (dispatch){
         try {
             let product = await axios.get(
-                `http://localhost:3001/products/${id}`
+                `https://techstore123.herokuapp.com/products/${id}`
             );
             
             return dispatch({
@@ -27,12 +27,34 @@ export function handleReduce1 (id) {
     return async function (dispatch){
         try {
             let product = await axios.get(
-                `http://localhost:3001/products/${id}`
+                `https://techstore123.herokuapp.com/products/${id}`
             );
             return dispatch({
                 type: ACTIONS.REMOVE_ONE_FROM_CART,
                 payload: product.data,
             });  
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+export function deleteFromCart (id) {
+    return async function (dispatch){
+        try {
+            console.log(id, "soy ID")
+            return dispatch({
+                type: ACTIONS.REMOVE_ONE_ALL_FROM_CART,
+                payload: id,
+            });  
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+export function cartPost (cart) {
+    return function (){
+        try {
+            axios.post("https://techstore123.herokuapp.com", cart)
         } catch (error) {
             console.log(error);
         }
