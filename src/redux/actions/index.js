@@ -86,10 +86,10 @@ export function getIdUsers(id, token) {
     };
 }
 
-export function updateUser(input, token, id) {
+export function updateUser(input, token) {
     return async (dispatch) => {
         try {
-            let updateUser = await axios.put(`http://localhost:3001/users/updateprofile`, input, {
+            let updateUser = await axios.put('http://localhost:3001/users/updateprofile', input, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

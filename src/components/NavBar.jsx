@@ -128,20 +128,20 @@ export default function Navbar() {
             </Linkdom>
             <Linkdom to={"/login"}  style={{"textDecoration":"none","color":"black"}}>
                
-                <MenuItem onClick={handleMenuClose}>Iniciar sesion</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Iniciar sesión</MenuItem>
                
             </Linkdom>
             </div>
             :
             <div>
-            <Linkdom to={"/welcome"}>
-                <Link underline="none">
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                </Link>
-            </Linkdom>
-            <Linkdom to={"/logout"}>
+            <Linkdom to={"/welcome"} style={{"textDecoration":"none","color":"black"}}>
                 
-                <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+                
+            </Linkdom>
+            <Linkdom to={"/logout"} style={{"textDecoration":"none","color":"black"}}>
+                
+                <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
                 
             </Linkdom>
 

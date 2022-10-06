@@ -34,12 +34,9 @@ export default function Welcome() {
 
     const user = useSelector((state) => state.usersReducers.user);
     const token = useSelector((state) => state.usersReducers.token);
-    // console.log(user);
-<<<<<<< HEAD
-    // console.log(token);
-=======
-    // console.log(token);\
->>>>>>> miqueas
+
+    console.log(user);
+    console.log(token);
 
     //const [input, setInput] = useState(user);
 
@@ -64,7 +61,7 @@ export default function Welcome() {
                     </CardContent>
 
                     <Box sx={{ flexGrow: 1 }} />
-                    {localStorage.isAdmin === "true" ? (
+                    {localStorage.isAdmin === 'true' ? (
                         <Button color="secondary" variant="contained" onClick={handleSubmitEnsayo}>
                             Go to Dashboard
                         </Button>
