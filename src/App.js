@@ -9,22 +9,26 @@ import CreateForm from './components/CreateForm';
 import Categorys from './components/Categorys';
 import ActualizarData from './components/ActualizarData';
 import Welcome from './components/Welcome';
+import ShoppingCart from './components/ShoppingCart';
+import Dashboard from './components/dashboard/Dashboard';
+import ForgotPassword from './components/ForgotPassword';
+import Ensayo from './components/Ensayo';
+import Customers from './components/Customers';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Ensayo from './components/Ensayo';
-import Customers from './components/Ensayo';
-
-import ForgotPassword from './components/ForgotPassword';
-
-import ShoppingCart from './components/ShoppingCart';
 import { useSelector } from 'react-redux';
 
 export default function App() {
     const token = useSelector((state) => state.usersReducers.token);
     const email = useSelector((state) => state.usersReducers.user.email);
+    const isAdmin = useSelector((state) => state.usersReducers.user.isAdmin);
+    const name = useSelector((state) => state.usersReducers.user.name);
+    // console.log('hola')
     if (token) {
         window.localStorage.setItem('token', token);
         window.localStorage.setItem('email', email);
+        window.localStorage.setItem('isAdmin', isAdmin);
+        window.localStorage.setItem('name', name);
     }
 
     console.log(localStorage.email);
@@ -44,8 +48,9 @@ export default function App() {
                     <Route path="/logout" element={<Login />} />
                     <Route path="/passwordReset" element={<Login />} />
                     <Route path="/shopping-cart" element={<Login />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
                     <Route path="/admin/customers" element={<Customers />} />
+                    <Route path="/ensayo" element={<Ensayo />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
                 <Footer />
             </div>
@@ -66,8 +71,9 @@ export default function App() {
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
                     <Route path="/admin/customers" element={<Customers />} />
+                    <Route path="/ensayo" element={<Ensayo />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
                 <Footer />
             </div>
