@@ -356,9 +356,7 @@ export default function Categorys() {
           >
 
 
-
-
-            <List
+            {/* <List
               variant="contained"
               aria-label="outlined primary button group"
             >
@@ -389,13 +387,33 @@ export default function Categorys() {
                     ))}
                 </List>
               </Collapse>
-            </List>
+            </List> */}
 
 
+            <Box justifyContent={'center'}>
+
+              <h3>CATEGORIAS</h3>
+            </Box>
 
 
+            {reduxState &&
+              reduxState.map((e) => (
 
+                <Button
+                  value={e.id}
+                  name={e.name}
+                  variant={
+                    reduxState4?.categoryName === e.name
+                      ? "outlined"
+                      : "contained"
+                  }
+                  style={{ marginTop: "5px" }}
+                  onClick={handleCategory}
+                >
+                  {e.name}
+                </Button>
 
+              ))}
 
 
 
@@ -408,7 +426,7 @@ export default function Categorys() {
 
 
 
-            <List>
+            {/* <List>
               <ListItemButton onClick={handleOpenMenu}>
                 <ListItemText primary="Marcas" />
                 {open ? <ExpandLess /> : <ExpandMore />}
@@ -434,7 +452,29 @@ export default function Categorys() {
                     ))}
                 </List>
               </Collapse>
-            </List>
+            </List> */}
+
+
+            <h3>MARCAS</h3>
+
+            {reduxState3 &&
+              reduxState3.map((e) => (
+
+                <Button
+                  value={e.id}
+                  name={e.name}
+                  variant={
+                    reduxState4?.brandName === e.name
+                      ? "outlined"
+                      : "contained"
+                  }
+                  onClick={handleBrand}
+                >
+                  {e.name}
+                </Button>
+
+              ))}
+
 
 
 
@@ -480,13 +520,17 @@ export default function Categorys() {
           ></Box>
         </div>
       </div>
-      <Pagination
-        size="large"
-        color={"primary"}
-        count={pages !== 4 ? pages.totalPage : 4}
-        page={page}
-        onChange={(e, p) => handlePage(e, p)}
-      />
+      <Box
+        justifyContent={"center"} alignItems="center" display={"grid"}
+      >
+        <Pagination
+          size="large"
+          color={"primary"}
+          count={pages !== 4 ? pages.totalPage : 4}
+          page={page}
+          onChange={(e, p) => handlePage(e, p)}
+        />
+      </Box>
     </>
   );
 }

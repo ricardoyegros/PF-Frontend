@@ -118,7 +118,6 @@ export function loginUser(input) {
                 "http://localhost:3001/users/login",
                 input
             );
-            console.log(userData.data);
             return dispatch({ type: LOGIN_USER, payload: userData.data });
         } catch (error) {
             console.log(error);
