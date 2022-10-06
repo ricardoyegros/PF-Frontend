@@ -19,7 +19,7 @@ export function getAllProducts(page) {
     return async function (dispatch) {
         console.log(page);
         let allProducts = await fetch(
-            `http://https://techstore123.herokuapp.com/products?page=${page}`
+            `http://localhost:3001/products?page=${page}`
         )
             .then((res) => res.json())
             .then((products) => products);
@@ -31,7 +31,7 @@ export function getDetailProduct(i) {
     return async function (dispatch) {
         try {
             let detailProduct = await axios.get(
-                `https://techstore123.herokuapp.com/products/${i}`
+                `http://localhost:3001/products/${i}`
             );
             return dispatch({
                 type: DETAIL_PRODUCT,
@@ -46,7 +46,7 @@ export function getDetailProduct(i) {
 export function getItem(product) {
     return async function (dispatch) {
         let item = await fetch(
-            `https://techstore123.herokuapp.com/products?name=${product}`
+            `http://localhost:3001/products?name=${product}`
         )
             .then((res) => res.json())
             .then((item) => item)
@@ -139,7 +139,7 @@ export function getCategories(category) {
         try {
             console.log(category, "soy category");
             let { categoryId, brandId, type, sort, page, size } = category;
-            let url = `https://techstore123.herokuapp.com/filter?type=${
+            let url = `http://localhost:3001/filter?type=${
                 type || ""
             }&sort=${sort || ""}&categoryId=${categoryId || ""}&brandId=${
                 brandId || ""
@@ -204,7 +204,7 @@ export function getCategoryNames() {
     return async (dispatch) => {
         try {
             await axios
-                .get("https://techstore123.herokuapp.com/categorys")
+                .get("http://localhost:3001/categorys")
                 .then((r) => {
                     return dispatch({
                         type: GET_CATEGORYS_NAMES,
@@ -230,7 +230,7 @@ export function preFilter(filtros) {
                 name,
                 search,
             } = filtros;
-            let url = `https://techstore123.herokuapp.com/filter?type=${
+            let url = `http://localhost:3001/filter?type=${
                 type || ""
             }&sort=${sort || ""}&categoryId=${categoryId || ""}&brandId=${
                 brandId || ""
@@ -251,7 +251,7 @@ export function getBrands() {
     return async (dispatch) => {
         try {
             await axios
-                .get("https://techstore123.herokuapp.com/brands")
+                .get("http://localhost:3001/brands")
                 .then((r) => {
                     return dispatch({
                         type: FILTER_BRAND2,
