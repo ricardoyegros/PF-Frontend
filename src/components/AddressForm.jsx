@@ -20,8 +20,8 @@ export default function AddressForm ({nextStep}) {
                     nextStep()
                 })}>
                     <Grid mt={1} container spacing={3}>
-                        <AddressInput required name="firstName" label="Nombre"/>
-                        <AddressInput required name="lastName" label="Apellido"/>
+                        <AddressInput required name="fullName" label="Nombre Completo"/>
+                        <AddressInput required name="store" label="Sucursal"/>
                         <AddressInput required name="phone" label="Numero de contacto"/>
                         <AddressInput required name="email" label="Correo Electrónico"/>
                         <AddressInput required name="Cp" label="Código Postal"/>
