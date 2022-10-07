@@ -10,6 +10,8 @@ function Logout() {
     useEffect(() => {
         localStorage.removeItem('token');
         localStorage.removeItem('email');
+        localStorage.removeItem('name');
+        localStorage.removeItem('isAdmin');
         dispatch(logoutUser());
         navigate("/");
     }, [dispatch]);

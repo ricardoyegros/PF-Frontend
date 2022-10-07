@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/actions/index.js";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/actions/index.js';
 
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
+import { Typography, Box, TextField, Button, Grid } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import {
   Typography,
@@ -12,7 +13,6 @@ import {
   Button,
   Grid
 } from "@mui/material";
-import { styled } from '@mui/material/styles';
 
 const StyledBox = styled(Box)(({ }) => ({
   width: 500,
@@ -24,14 +24,15 @@ const StyledBox = styled(Box)(({ }) => ({
   boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"
 }));
 
-
 export default function Login() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  const [input, setInput] = useState({});
+    const [input, setInput] = useState('');
 
-
+    function handleChange(e) {
+        setInput({ ...input, [e.target.name]: e.target.value });
+    }
 
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });

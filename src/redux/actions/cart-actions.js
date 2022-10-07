@@ -13,7 +13,7 @@ export function addToCart (id) {
             let product = await axios.get(
                 `https://techstore123.herokuapp.com/products/${id}`
             );
-            
+            console.log(id, product, "soy action")
             return dispatch({
                 type: ACTIONS.ADD_TO_CART,
                 payload: product.data,

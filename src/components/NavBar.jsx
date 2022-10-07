@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,11 +12,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Button, createTheme, Link } from "@mui/material";
+import { Button, createTheme, Link, Typography } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem, isInUse, preFilter } from "../redux/actions";
+import { getItem, isInUse, preFilter, getIdUsers } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
 
 
@@ -64,6 +64,8 @@ export default function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
     const token = useSelector((state) => state.usersReducers.token);
+    const user = useSelector((state) => state.usersReducers.user);
+    console.log(user);
     const [search, setSearch] = useState("");
     let dispatch = useDispatch();
 
@@ -225,6 +227,11 @@ export default function Navbar() {
                             />
                         </Linkdom>
                         <Box sx={{ flexGrow: 1 }} />
+                        {user.name ? (
+                            <Typography>Bienvenido/a {user.name}</Typography>
+                        ) : (
+                            <Typography>Bienvenido/a Invitado</Typography>
+                        )}
                         <Button
                             href="/creacion"
                             color="secondary"

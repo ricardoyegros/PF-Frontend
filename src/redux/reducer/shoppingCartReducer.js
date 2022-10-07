@@ -10,13 +10,11 @@ export default function shoppingCartReducer (state = initialState, action) {
             let newProduct = state.cart.find(p => p.id === action.payload.id) 
             if(newProduct){
                 return {
-                    ...state, 
-                    cart : state.cart.map((item) => item.id === action.payload.id ? {...item , quantity: item.quantity + 1}: item) 
+                    ...state, cart : state.cart.map((item) => item.id === action.payload.id ? {...item , quantity: item.quantity + 1}: item) 
                 }
             } else {
                 return {
-                    ...state, 
-                    cart : [...state.cart , {...action.payload, quantity : 1}]
+                    ...state, cart : [...state.cart , {...action.payload, quantity : 1}]
                 }
             }
         case ACTIONS.REMOVE_ONE_FROM_CART :

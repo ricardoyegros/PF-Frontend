@@ -1,20 +1,13 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { updateUser } from "../redux/actions/index.js";
+import { updateUser } from '../redux/actions/index.js';
 
-import MenuItem from "@mui/material/MenuItem";
+import MenuItem from '@mui/material/MenuItem';
 
-import {
-    Typography,
-    Card,
-    CardContent,
-    Grid,
-    TextField,
-    Button,
-} from "@mui/material";
+import { Typography, Card, CardContent, Grid, TextField, Button } from '@mui/material';
 
 //import { useNavigate } from "react-router-dom";
 
@@ -27,14 +20,14 @@ export default function ActualizarData() {
     //console.log(token);
 
     const [userId, setUserId] = useState(user);
-    console.log(userId);
+    console.log(userId, 'USER ID CARGADO');
 
     const namesDNI = [
-        { value: "CC", label: "CC" },
-        { value: "DNI", label: "DNI" },
-        { value: "PASSPORT", label: "PASSPORT" },
-        { value: "GREENCARD", label: "GREENCARD" },
-        { value: "OTRO", label: "OTRO" },
+        { value: 'CC', label: 'CC' },
+        { value: 'DNI', label: 'DNI' },
+        { value: 'PASSPORT', label: 'PASSPORT' },
+        { value: 'GREENCARD', label: 'GREENCARD' },
+        { value: 'OTRO', label: 'OTRO' }
     ];
 
     function handleChange(e) {
@@ -44,9 +37,10 @@ export default function ActualizarData() {
     }
 
     function handleSubmit(e) {
+        console.log(userId);
         e.preventDefault();
-        dispatch(updateUser(userId, token));
-        navigate("/welcome");
+        dispatch(updateUser(userId, token, userId.id));
+        navigate('/welcome');
     }
 
     return (
@@ -54,9 +48,7 @@ export default function ActualizarData() {
             <Typography gutterBottom variant="h3" align="center">
                 TechStore - Update Profile !!
             </Typography>
-            <Card
-                style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }}
-            >
+            <Card style={{ maxWidth: 450, margin: '0 auto', padding: '20px 5px' }}>
                 <CardContent>
                     <Typography gutterBottom variant="h5">
                         Create a New User!
@@ -100,10 +92,7 @@ export default function ActualizarData() {
                                     onChange={handleChange}
                                 >
                                     {namesDNI.map((option) => (
-                                        <MenuItem
-                                            key={option.value}
-                                            value={option.value}
-                                        >
+                                        <MenuItem key={option.value} value={option.value}>
                                             {option.label}
                                         </MenuItem>
                                     ))}
@@ -154,14 +143,12 @@ export default function ActualizarData() {
                                     placeholder="Please enter you actual address..."
                                     variant="outlined"
                                     fullWidth
-                                    
                                     name="address"
                                     value={userId.address}
                                     onChange={handleChange}
                                 />
                             </Grid>
 
-                           
                             <Grid xs={12} item>
                                 <Button
                                     color="primary"

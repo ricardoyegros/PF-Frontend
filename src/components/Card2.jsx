@@ -5,6 +5,7 @@ import {
   CardContent,
   Typography,
   Rating,
+  Link,
   createTheme,
 } from "@mui/material";
 import { styled} from '@mui/material/styles';
@@ -43,7 +44,7 @@ export default function CardProduct2({
 
   return (
     <ThemeProvider theme={theme}>
-      <Linkdom to={`/detalle/${id}`} >
+      <Linkdom to={`/detalle/${id}`} underline="none">
         <StyledBox>
           <CardMedia
             component="img"

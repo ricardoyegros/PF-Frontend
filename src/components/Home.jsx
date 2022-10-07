@@ -5,6 +5,7 @@ import CardProduct from "./Card";
 import { Grid, Typography, Link } from "@mui/material";
 // import FilterCategories from "./FilterCategories.jsx";
 // import {getCategories} from "../redux/actions/index.js"
+import { Link as Linkdom } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export default function Home() {
         {!item.length
           ? products.map((el, i) => (
               <Grid item mb={5} key={el.id}>
-                <Link href={`/detalle/${el.id}`}>
+                <Linkdom to={`/detalle/${el.id}`}>
                   <CardProduct
                     nombre={el.name}
                     imagen={
@@ -50,7 +51,7 @@ export default function Home() {
                     precio={el.salePrice}
                     marca={el.brand.name}
                   />
-                </Link>
+                </Linkdom>
               </Grid>
             ))
           : item.map((el, i) => (
