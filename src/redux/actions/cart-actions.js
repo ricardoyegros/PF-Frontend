@@ -3,7 +3,8 @@ export const ACTIONS = {
     ADD_TO_CART : "ADD_TO_CART",
     REMOVE_ONE_FROM_CART : "REMOVE_ONE_FROM_CART",
     REMOVE_ONE_ALL_FROM_CART : "REMOVE_ONE_ALL_FROM_CART",
-    CLEAR_CART : "CLEAR_CART"
+    CLEAR_CART : "CLEAR_CART",
+    SHIPPING_DATA : "SHIPPING_DATA"
 };
 
 export function addToCart (id) {
@@ -45,6 +46,19 @@ export function deleteFromCart (id) {
             return dispatch({
                 type: ACTIONS.REMOVE_ONE_ALL_FROM_CART,
                 payload: id,
+            });  
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+export function shippingData (data) {
+    return async function (dispatch){
+        try {
+            console.log(data, "soy data")
+            return dispatch({
+                type: ACTIONS.SHIPPING_DATA,
+                payload: data
             });  
         } catch (error) {
             console.log(error);
