@@ -8,9 +8,10 @@ import CreateUsers from './components/CreateUsers'
 import CreateForm from './components/CreateForm';
 import Categorys from './components/Categorys';
 import ActualizarData from './components/ActualizarData';
-import Welcome from "./components/Welcome" 
-import Login from "./components/Login"
-import Logout from "./components/Logout"
+import Welcome from "./components/Welcome";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import FinalShop from "./components/FinalShop";
 
 import ForgotPassword from "./components/ForgotPassword";
 
@@ -21,26 +22,50 @@ import ShoppingCart from "./components/ShoppingCart";
 export default function App() {
 
 
-    return (
-        <div className="App">
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<Categorys/>} />
-                <Route path="/contacto" element={<Contact />} />
-                <Route path="/detalle/:i" element={<Detail />} />
-                <Route path="/register" element={<CreateUsers />} />
-                <Route path="/creacion" element={<CreateForm />} />
-                <Route path="/updateprofile" element={<ActualizarData />} />
-                <Route path="/welcome" element={<Welcome />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/logout" element={<Logout />} />
+    console.log(localStorage.email);
+    if (!window.localStorage.token) {
+        return (
+            <div className="App">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Categorys />} />
+                    <Route path="/contacto" element={<Contact />} />
+                    <Route path="/detalle/:i" element={<Detail />} />
+                    <Route path="/register" element={<CreateUsers />} />
+                    <Route path="/creacion" element={<Login />} />
+                    <Route path="/updateprofile" element={<Login />} />
+                    <Route path="/welcome" element={<Login />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Login />} />
+                    <Route path="/passwordReset" element={<Login />} />
+                    <Route path="/shopping-cart" element={<ShoppingCart />} />
+                    <Route path="/final-shopping" element={<FinalShop />} />
+                </Routes>
+                <Footer />
+            </div>
+        )
+    } else {
+        return (
+            <div className="App">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Categorys />} />
+                    <Route path="/contacto" element={<Contact />} />
+                    <Route path="/detalle/:i" element={<Detail />} />
+                    <Route path="/register" element={<CreateUsers />} />
+                    <Route path="/creacion" element={<CreateForm />} />
+                    <Route path="/updateprofile" element={<ActualizarData />} />
+                    <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/passwordReset" element={<ForgotPassword />} />
+                    <Route path="/shopping-cart" element={<ShoppingCart />} />
+                    <Route path="/final-shopping" element={<FinalShop />} />
+                </Routes>
+                <Footer />
+            </div>
+        );
+    }
 
-                <Route path="/passwordReset" element={<ForgotPassword/>}/>
 
-                <Route path="/shopping-cart" element={<ShoppingCart />}/>
-
-            </Routes>
-            <Footer />
-        </div>
-    );
 }
