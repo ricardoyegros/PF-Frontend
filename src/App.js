@@ -8,9 +8,10 @@ import CreateUsers from './components/CreateUsers'
 import CreateForm from './components/CreateForm';
 import Categorys from './components/Categorys';
 import ActualizarData from './components/ActualizarData';
-import Welcome from "./components/Welcome"
-import Login from "./components/Login"
-import Logout from "./components/Logout"
+import Welcome from "./components/Welcome";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import FinalShop from "./components/FinalShop";
 
 import ForgotPassword from "./components/ForgotPassword";
 
@@ -43,7 +44,8 @@ export default function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Login />} />
                     <Route path="/passwordReset" element={<Login />} />
-                    <Route path="/shopping-cart" element={<Login />} />
+                    <Route path="/shopping-cart" element={<ShoppingCart />} />
+                    <Route path="/final-shopping" element={<FinalShop />} />
                 </Routes>
                 <Footer />
             </div>
@@ -64,6 +66,7 @@ export default function App() {
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
+                    <Route path="/final-shopping" element={<FinalShop />} />
                 </Routes>
                 <Footer />
             </div>
