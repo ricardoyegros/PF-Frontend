@@ -1,7 +1,8 @@
 import { ACTIONS } from "../actions/cart-actions";
 
 const initialState = {
-    cart : []
+    cart : [],
+    shipping: {}
 } 
 export default function shoppingCartReducer (state = initialState, action) {
     switch(action.type){
@@ -34,7 +35,11 @@ export default function shoppingCartReducer (state = initialState, action) {
             return {
                 ...state.cart, cart : []
             }
-        
+        case ACTIONS.SHIPPING_DATA :
+            return {
+                ...state,
+                shipping: action.payload
+            } 
         default: return state
     }
 }

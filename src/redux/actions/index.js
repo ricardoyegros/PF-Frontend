@@ -70,7 +70,7 @@ export function createUsers(input) {
     return async (dispatch) => {
         try {
             let newUser = await axios.post(
-                "http://localhost:3001/users/register",
+                "https://techstore123.herokuapp.com/users/register",
                 input
             );
             return dispatch({ type: CREATE_USER, payload: newUser.data });
@@ -83,7 +83,7 @@ export function createUsers(input) {
 export function getIdUsers(id) {
     return async function (dispatch) {
         try {
-            let user = await axios.get(`http://localhost:3001/users/${id}`);
+            let user = await axios.get(`https://techstore123.herokuapp.com/users/${id}`);
             return dispatch({
                 type: GET_USER_ID,
                 payload: user.data,
@@ -99,7 +99,7 @@ export function updateUser(input, token) {
     return async (dispatch) => {
         try {
             let updateUser = await axios.put(
-                "http://localhost:3001/users/updateprofile",
+                "https://techstore123.herokuapp.com/users/updateprofile",
                 input,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -115,7 +115,7 @@ export function loginUser(input) {
     return async (dispatch) => {
         try {
             let userData = await axios.post(
-                "http://localhost:3001/users/login",
+                "https://techstore123.herokuapp.com/users/login",
                 input
             );
             return dispatch({ type: LOGIN_USER, payload: userData.data });
