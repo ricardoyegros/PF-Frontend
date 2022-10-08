@@ -1,7 +1,8 @@
 import { ACTIONS } from "../actions/cart-actions";
 
 const initialState = {
-    cart : []
+    cart : [],
+    shipping: {}
 } 
 export default function shoppingCartReducer (state = initialState, action) {
     switch(action.type){
@@ -23,11 +24,20 @@ export default function shoppingCartReducer (state = initialState, action) {
                     ...state, cart : state.cart.map((item) => item.id === action.payload.id ? {...item , quantity: item.quantity - 1}: item) 
                 }
             }
+        case ACTIONS.REMOVE_ONE_ALL_FROM_CART : 
+            console.log(action.payload)
+            return {
+                ...state, cart: state.cart.filter(item => item.id !== action.payload)
+            }
         case ACTIONS.CLEAR_CART : 
             return {
                 ...state.cart, cart : []
             }
-        
+        case ACTIONS.SHIPPING_DATA :
+            return {
+                ...state,
+                shipping: action.payload
+            } 
         default: return state
     }
 }

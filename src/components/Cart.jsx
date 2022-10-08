@@ -1,9 +1,24 @@
 import React from "react";
+import { Box, IconButton } from "@mui/material"
+import { Delete   } from "@mui/icons-material";
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import {useDispatch} from "react-redux";
-import { handleReduce1, addToCart, clearCart } from "../redux/actions/cart-actions";
+import { handleReduce1, addToCart, deleteFromCart } from "../redux/actions/cart-actions";
+import Typography from '@mui/material/Typography'
+import { styled} from '@mui/material/styles';
 
+const StyledBox = styled(Box)(({ }) => ({
+    display: "flex",
+    flexDirection: "row",
+    alignItems:"center",
+    justifyContent:"flex-start",
+    border:"2px solid rgba(8,8,8,0.10)",
+   
+}));
 export default function Cart ({name, salePrice, image, stock, id, quantity}) {
-    let dispatch = useDispatch();    
+    let dispatch = useDispatch();
+    
     function handleButton (e){
         if(quantity > 1)
         dispatch(handleReduce1(id))
@@ -11,21 +26,36 @@ export default function Cart ({name, salePrice, image, stock, id, quantity}) {
     function handleButton2 (e){
         dispatch(addToCart(id))
     }
-    function handleButton3 (e){
-        dispatch(clearCart())
+
+    function handleButton4 (e){
+        dispatch(deleteFromCart(id))
     }
+
 
     return (
         <>
-            <h1>{name}</h1>
-            <h3>${salePrice}.00</h3>
-            <img src={image} />
-            <h4>Stock:{stock}</h4>
-            <h4>Quantity: {quantity}</h4>
-            <h4>Sub-Total: ${salePrice * quantity}.00</h4>
-            <button onClick={handleButton}>Quitar uno</button>
-            <button onClick={handleButton2}>Sumar uno</button>
-            <button onClick={handleButton3}>Limpiar todo</button>
-        </>
+        <StyledBox >
+        <Box component={"img"}
+        src={image}
+        width={80}
+        height={80}/>
+        <Box  width="50%" display={"flex"} alignItems={"center"}>
+        <Typography variant="h6" color="initial" m={5} fontWeight={700}>{name}</Typography>
+        </Box>
+        
+        <Box m={3} flexGrow={1} display={"flex"} justifyContent={"space-evenly"}>
+        <Typography>${salePrice}</Typography>
+        <Typography>{quantity}</Typography>
+        <Typography fontWeight={700}>${salePrice * quantity}</Typography>
+        </Box>
+
+        <Box >
+        <IconButton onClick={handleButton2}> <AddCircleOutlineIcon/> </IconButton>
+        <IconButton onClick={handleButton}> <RemoveCircleOutlineIcon /> </IconButton>
+        <IconButton onClick={handleButton4}><Delete/></IconButton>
+        </Box>
+        
+        </StyledBox>
+    </>
     )
 };

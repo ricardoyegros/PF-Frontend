@@ -61,7 +61,7 @@ export function createProduct(form) {
 export function createUsers(input) {
     return async (dispatch) => {
         try {
-            let newUser = await axios.post('http://localhost:3001/users/register', input);
+            let newUser = await axios.post('https://techstore123.herokuapp.com/users/register', input);
             return dispatch({ type: CREATE_USER, payload: newUser.data });
         } catch (error) {
             console.log(error);
@@ -72,7 +72,7 @@ export function createUsers(input) {
 export function getIdUsers(id, token) {
     return async function (dispatch) {
         try {
-            let user = await axios.get(`http://localhost:3001/users/${id}`, {
+            let user = await axios.get(`https://techstore123.herokuapp.com/users/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return dispatch({

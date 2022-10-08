@@ -14,60 +14,35 @@ import Dashboard from './components/dashboard/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
 import Ensayo from './components/Ensayo';
 import Customers from './components/Customers';
-import Login from './components/Login';
-import Logout from './components/Logout';
-import { useSelector } from 'react-redux';
+import Login from "./components/Login"
+import Logout from "./components/Logout"
+import { useSelector } from "react-redux";
+
 
 export default function App() {
+
+    const idUser = useSelector(state => state.usersReducers.user.id);
     const token = useSelector((state) => state.usersReducers.token);
-    const email = useSelector((state) => state.usersReducers.user.email);
-    const isAdmin = useSelector((state) => state.usersReducers.user.isAdmin);
-    const name = useSelector((state) => state.usersReducers.user.name);
-    // console.log('hola')
+    const email = useSelector(state => state.usersReducers.user.email);
+    const isAdmin = useSelector(state => state.usersReducers.user.isAdmin);
+    const name = useSelector(state => state.usersReducers.user.name);
+
     if (token) {
         window.localStorage.setItem('token', token);
         window.localStorage.setItem('email', email);
         window.localStorage.setItem('isAdmin', isAdmin);
         window.localStorage.setItem('name', name);
-    }
+        window.localStorage.setItem('id', idUser + '');
+    };
 
-    console.log(localStorage.email);
     if (!window.localStorage.token) {
         return (
             <div className="App">
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Categorys />} />
-                    <Route path="/contacto" element={<Contact />} />
-                    <Route path="/detalle/:i" element={<Detail />} />
-                    <Route path="/register" element={<CreateUsers />} />
-                    <Route path="/creacion" element={<Login />} />
-                    <Route path="/updateprofile" element={<Login />} />
-                    <Route path="/welcome" element={<Login />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/logout" element={<Login />} />
-                    <Route path="/passwordReset" element={<Login />} />
-                    <Route path="/shopping-cart" element={<Login />} />
-                    <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                </Routes>
-                <Footer />
-            </div>
-        );
-    } else {
-        return (
-            <div className="App">
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={<Categorys />} />
-                    <Route path="/contacto" element={<Contact />} />
-                    <Route path="/detalle/:i" element={<Detail />} />
-                    <Route path="/register" element={<CreateUsers />} />
-                    <Route path="/creacion" element={<CreateForm />} />
                     <Route path="/updateprofile" element={<ActualizarData />} />
                     <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
