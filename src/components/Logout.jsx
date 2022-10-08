@@ -12,6 +12,7 @@ function Logout() {
         localStorage.removeItem('email');
         localStorage.removeItem('name');
         localStorage.removeItem('isAdmin');
+        localStorage.removeItem('id');
         dispatch(logoutUser());
         navigate("/");
     }, [dispatch]);
