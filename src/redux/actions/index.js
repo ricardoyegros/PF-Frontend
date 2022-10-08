@@ -104,7 +104,7 @@ export function loginUser(input) {
     return async (dispatch) => {
         try {
             let userData = await axios.post(
-                "http://localhost:3001/users/login",
+                "https://techstore123.herokuapp.com/users/login",
                 input
             );
             return dispatch({ type: LOGIN_USER, payload: userData.data });

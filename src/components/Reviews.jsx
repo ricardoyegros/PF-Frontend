@@ -9,22 +9,30 @@ import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReviews } from '../redux/actions/reviewsActions';
 import { Button, Pagination, Rating } from '@mui/material';
+import { ReviewForm } from './ReviewForm';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Reviews({ id }) {
+
+    const navigate = useNavigate()
 
     const [state, setState] = React.useState(false);
 
     const dispatch = useDispatch();
 
+    React.useEffect(() => {
+        dispatch(getReviews(id));
+    }, [])
+
     const reduxState = useSelector(state => state.reviewsReducer.reviews);
 
     const handleClick = (e) => {
+        if (!localStorage.token) return navigate('/login');
         if (state) return setState(false)
         return setState(true)
     }
 
-    if (typeof reduxState === "boolean") dispatch(getReviews(id));
 
     if (reduxState?.content && reduxState.content.length === 0) {
         return (
@@ -35,7 +43,7 @@ export default function Reviews({ id }) {
                     >Crear Review</Button></h4>
                 </Box>
                 <Box justifyContent={'center'} alignItems="center" display={"grid"}>
-                    {state ? <h3>Aca va a ir el componente formulario</h3> : null}
+                    {state ? <ReviewForm productId={id} /> : null}
                 </Box>
             </>
         )
@@ -55,6 +63,7 @@ export default function Reviews({ id }) {
                                         secondary={
                                             <React.Fragment>
                                                 <Rating name="half-rating-read" defaultValue={e.stars} precision={0.5} readOnly />
+                                                {}
                                             </React.Fragment>
                                         }
                                     />
@@ -62,10 +71,11 @@ export default function Reviews({ id }) {
                             )
                         }
                     </List>
-                    <Button onClick={handleClick}
-                    >Crear Review</Button>
-                    {state ? <h3>Aca va a ir el componente formulario</h3> : null}
-                    <Pagination count={10} size="small" />
+                    <Button onClick={handleClick}>Crear Review</Button>
+                    <Box justifyContent={'center'} alignItems="center" display={"grid"}>
+                        {state ? <ReviewForm productId={id} /> : null}
+                    </Box>
+                    <Pagination count={1} size="small" />
                 </Box>
             </>
         );

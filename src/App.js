@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 
 export default function App() {
 
+    const idUser = useSelector(state => state.usersReducers.user.id);
     const token = useSelector((state) => state.usersReducers.token);
     const email = useSelector(state => state.usersReducers.user.email);
     const isAdmin = useSelector(state => state.usersReducers.user.isAdmin);
@@ -31,9 +32,9 @@ export default function App() {
         window.localStorage.setItem('email', email);
         window.localStorage.setItem('isAdmin', isAdmin);
         window.localStorage.setItem('name', name);
+        window.localStorage.setItem('id', idUser + '');
     };
 
-    console.log(localStorage.email);
     if (!window.localStorage.token) {
         return (
             <div className="App">
