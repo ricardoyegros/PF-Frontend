@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getReviews, postReview } from '../redux/actions/reviewsActions';
 
-export const ReviewForm = ({ productId }) => {
+export const ReviewForm = ({ productId, setState2 }) => {
     const dispatch = useDispatch();
 
     const arr = [1, 2, 3, 4, 5];
@@ -11,7 +11,7 @@ export const ReviewForm = ({ productId }) => {
     const [state, setState] = useState({ userId: localStorage.id, productId });
 
     const reduxState = useSelector(state => state.reviewsReducer.reviews);
-
+    console.log(reduxState.content)
     const handleSelect = (e) => {
         setState({
             ...state,
@@ -31,14 +31,24 @@ export const ReviewForm = ({ productId }) => {
         dispatch(postReview({ ...state }));
         dispatch(getReviews({ ...productId }));
         setState({ ...state, userId: localStorage.id, productId, detail: null, stars: null });
+        setState2({ ...state, close: true });
     };
 
+    const aux = (arr, id) => {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].user.id == id) return true
+        }
+        return false;
+    };
 
-    if (state.detail === null) dispatch(getReviews(productId));
-
-
-    // if ()
-
+    if (aux(reduxState.content, localStorage.id)) {
+        return (
+            <>
+                <h4>Ya hiciste un comentario!</h4>
+                <h4>Desea editarlo? <Button>Editar comentario</Button></h4>
+            </>
+        )
+    } else {
         return (
             <>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -52,7 +62,7 @@ export const ReviewForm = ({ productId }) => {
                                 select
                                 label="RATING"
                                 placeholder="Selecciona un Rating..."
-                                variant="outlined"
+                                variant="outlined" u
                                 fullWidth
                                 required
                                 name="rating"
@@ -73,6 +83,8 @@ export const ReviewForm = ({ productId }) => {
                 </List>
             </>
         )
+    }
+
 }
 
 
