@@ -2,16 +2,20 @@ import { Button, List, ListItem, MenuItem, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getReviews, postReview } from '../redux/actions/reviewsActions';
+import { EditReviewForm } from './EditReviewForm';
 
 export const ReviewForm = ({ productId, setState2 }) => {
+
     const dispatch = useDispatch();
 
     const arr = [1, 2, 3, 4, 5];
 
     const [state, setState] = useState({ userId: localStorage.id, productId });
 
+    const [open, setOpen] = useState(false);
+
     const reduxState = useSelector(state => state.reviewsReducer.reviews);
-    console.log(reduxState.content)
+
     const handleSelect = (e) => {
         setState({
             ...state,
@@ -34,6 +38,11 @@ export const ReviewForm = ({ productId, setState2 }) => {
         setState2({ ...state, close: true });
     };
 
+    const handleOpen = (e) => {
+        if (!open) return setOpen(true);
+        return setOpen(false);
+    }
+
     const aux = (arr, id) => {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].user.id == id) return true
@@ -45,7 +54,8 @@ export const ReviewForm = ({ productId, setState2 }) => {
         return (
             <>
                 <h4>Ya hiciste un comentario!</h4>
-                <h4>Desea editarlo? <Button>Editar comentario</Button></h4>
+                <h4>Desea editarlo? <Button onClick={handleOpen}>Editar comentario</Button></h4>
+                {open ? <EditReviewForm productId={productId} setOpen={setOpen} /> : null}
             </>
         )
     } else {

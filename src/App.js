@@ -17,6 +17,7 @@ import Customers from './components/Customers';
 import Login from "./components/Login"
 import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
+import FinalShop from './components/FinalShop';
 
 
 export default function App() {
@@ -53,7 +54,8 @@ export default function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/ensayo" element={<Ensayo />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path='/final-shopping' element={<FinalShop />} />
                 </Routes>
                 <Footer />
             </div>
@@ -76,7 +78,8 @@ export default function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/ensayo" element={<Ensayo />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path='/final-shopping' element={<FinalShop />} />
                 </Routes>
                 <Footer />
             </div>
