@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateReview } from '../redux/actions/reviewsActions';
 
-export const EditReviewForm = ({ setOpen }) => {
+export const EditReviewForm = ({ setState2 }) => {
 
     const dispatch = useDispatch()
 
@@ -34,11 +34,10 @@ export const EditReviewForm = ({ setOpen }) => {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         dispatch(updateReview(state));
         setState({ id: aux(reduxState, localStorage.id), detail: null, stars: null })
-        setOpen(false);
+        setState2({ open: false, close: true });
     };
 
     return (
