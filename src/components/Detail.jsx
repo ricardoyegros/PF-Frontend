@@ -8,8 +8,6 @@ import { ThemeProvider } from '@emotion/react';
 import { addToCart } from "../redux/actions/cart-actions";
 import Reviews from "./Reviews";
 
-
-
 export default function Detail() {
   const { i } = useParams();
   let dispatch = useDispatch();
@@ -112,6 +110,5 @@ export default function Detail() {
       </ThemeProvider>
       <Reviews id={i} />
     </>
-
   )
 };

@@ -12,7 +12,7 @@ export const ReviewForm = ({ productId, setState2 }) => {
 
     const [state, setState] = useState({ userId: localStorage.id, productId });
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState({ open: false, close: false });
 
     const reduxState = useSelector(state => state.reviewsReducer.reviews);
 
@@ -35,12 +35,12 @@ export const ReviewForm = ({ productId, setState2 }) => {
         dispatch(postReview({ ...state }));
         dispatch(getReviews({ ...productId }));
         setState({ ...state, userId: localStorage.id, productId, detail: null, stars: null });
-        setState2({ ...state, close: true });
+        setState2({open:false, close: true});
     };
 
     const handleOpen = (e) => {
-        if (!open) return setOpen(true);
-        return setOpen(false);
+        if (!open.open) return setOpen({ ...open, open: true });
+        return setOpen({ ...open, open: false });
     }
 
     const aux = (arr, id) => {
@@ -55,7 +55,7 @@ export const ReviewForm = ({ productId, setState2 }) => {
             <>
                 <h4>Ya hiciste un comentario!</h4>
                 <h4>Desea editarlo? <Button onClick={handleOpen}>Editar comentario</Button></h4>
-                {open ? <EditReviewForm productId={productId} setOpen={setOpen} /> : null}
+                {open.open ? <EditReviewForm setState2={setState2} /> : null}
             </>
         )
     } else {
