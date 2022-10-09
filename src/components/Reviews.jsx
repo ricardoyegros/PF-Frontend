@@ -72,11 +72,14 @@ export default function Reviews({ id }) {
                             )
                         }
                     </List>
+                    <Box justifyContent={'center'} alignItems="center" display={"grid"} >
+                        <Pagination count={1} size="small" />
+                        <br />
+                    </Box>
                     <Button onClick={handleClick}>Crear Review</Button>
                     <Box justifyContent={'center'} alignItems="center" display={"grid"}>
                         {state.open ? <ReviewForm setState2={setState} productId={id} /> : null}
                     </Box>
-                    <Pagination count={1} size="small" />
                 </Box>
             </>
         );
