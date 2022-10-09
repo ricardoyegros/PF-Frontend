@@ -10,31 +10,6 @@ import { clearDetail } from "../redux/actions/detail-actions";
 import Loading from "./Loading";
 import Reviews from "./Reviews";
 
-
-
-
-const StyledBox = styled(Box)(({ }) => ({
-  margin:"40px",
-  padding:"40px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent:"center",
-  flexDirection:"row",
-  boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"
-}));
-
-const StyledBoxPrice = styled(Box)(({ }) => ({
-  marginTop:"10px",
-  paddingBottom:"5px",
-  display:"flex",
-  justifyContent:"flex-end",
-  alignItems:"center",
-  boxShadow: "0px 1px 2px 0px rgba(151, 154, 141, 1)",
-  
-}));
-
-
-
 export default function Detail() {
   const { i } = useParams();
   let dispatch = useDispatch();
