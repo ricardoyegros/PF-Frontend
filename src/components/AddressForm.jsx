@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import AddressInput from "./AddressInput";
 import { shippingData } from "../redux/actions/cart-actions";
+import { paymentMethod } from "../redux/actions/payment";
 
 export default function AddressForm ({nextStep}) {
     const dispatch = useDispatch();
@@ -16,8 +17,9 @@ export default function AddressForm ({nextStep}) {
             </Typography>
             <FormProvider  {...methods}>
                 <form onSubmit={methods.handleSubmit(data => {
-                    dispatch(shippingData(data))
-                    nextStep()
+                    // dispatch(shippingData(data))
+                    dispatch(paymentMethod(data))
+                    // nextStep()
                 })}>
                     <Grid mt={1} container spacing={3}>
                         <AddressInput required name="fullName" label="Nombre Completo"/>
