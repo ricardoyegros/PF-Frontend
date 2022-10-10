@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import userIcon from '../assets/images/userIcon.png'
 import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { getReviews } from '../redux/actions/reviewsActions';
+import { deleteReview, getReviews } from '../redux/actions/reviewsActions';
 import { Button, Pagination, Rating } from '@mui/material';
 import { ReviewForm } from './ReviewForm';
 import { useNavigate } from 'react-router-dom';
@@ -16,24 +16,30 @@ export default function Reviews({ id }) {
 
     const navigate = useNavigate()
 
-    const [state, setState] = React.useState({ open: false });
+    const [state, setState] = React.useState({ open: false, close: false });
 
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         dispatch(getReviews(id));
-    }, [])
+    }, [dispatch]);
 
     const reduxState = useSelector(state => state.reviewsReducer.reviews);
 
+    const handleDelete = (e) => {
+        dispatch(deleteReview(e.target.value));
+        setState({ open: false, close: true });
+    };
+
     const handleClick = (e) => {
         if (!localStorage.token) return navigate('/login');
-        if (state.open) return setState({ ...state, open: false })
-        return setState({ ...state, open: true })
-    }
+        if (state.open) return setState({ open: false, close: false })
+        return setState({ open: true, close: false });
+    };
 
-    if (state.close) dispatch(getReviews(id));
-
+    if (state.close) {
+        dispatch(getReviews(id));
+    };
 
     if (reduxState?.content && reduxState.content.length === 0) {
         return (
@@ -58,13 +64,13 @@ export default function Reviews({ id }) {
                                 <ListItem alignItems="flex-start">
                                     <ListItemAvatar>
                                         <Avatar alt="Remy Sharp" src={userIcon} />
+                                        {e.userId == localStorage.id ? <Button value={e.id} onClick={handleDelete} size="small">x</Button> : null}
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={`${e.user.fullName}: ${e.detail}`}
                                         secondary={
                                             <React.Fragment>
                                                 <Rating name="half-rating-read" defaultValue={e.stars} precision={0.5} readOnly />
-                                                { }
                                             </React.Fragment>
                                         }
                                     />
