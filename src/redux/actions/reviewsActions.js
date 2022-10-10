@@ -15,14 +15,24 @@ export const getReviews = (id) => async (dispatch) => {
     };
 };
 
-export const postReview = (form) => async (dipsatch) => {
+export const postReview = (form) => async () => {
     const { stars, userId, productId, detail } = form;
     console.log(form);
     if (!stars || !userId || !productId || !detail) return alert('Faltan Datos en el Formulario!');
     try {
-        axios.post('https://techstore123.herokuapp.com/reviews', form).then(r => alert(r.data));
+        await axios.post('https://techstore123.herokuapp.com/reviews', form).then(r => alert(r.data));
     } catch (error) {
         console.log(error.message);
         alert(error.message);
     }
 };
+
+export const updateReview = (form) => async () => {
+    const { stars, id, detail } = form;
+    if(!stars || !id || !detail) return alert('Faltan Datos en el formulario!');
+    try {
+        await axios.put(`https://techstore123.herokuapp.com/reviews/update`, form).then(r => alert(r.data));
+    } catch (error) {
+        console.log(error.message);
+    }
+}

@@ -12,12 +12,11 @@ import { Button, Pagination, Rating } from '@mui/material';
 import { ReviewForm } from './ReviewForm';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function Reviews({ id }) {
 
     const navigate = useNavigate()
 
-    const [state, setState] = React.useState(false);
+    const [state, setState] = React.useState({ open: false });
 
     const dispatch = useDispatch();
 
@@ -29,9 +28,11 @@ export default function Reviews({ id }) {
 
     const handleClick = (e) => {
         if (!localStorage.token) return navigate('/login');
-        if (state) return setState(false)
-        return setState(true)
+        if (state.open) return setState({ ...state, open: false })
+        return setState({ ...state, open: true })
     }
+
+    if (state.close) dispatch(getReviews(id));
 
 
     if (reduxState?.content && reduxState.content.length === 0) {
@@ -43,7 +44,7 @@ export default function Reviews({ id }) {
                     >Crear Review</Button></h4>
                 </Box>
                 <Box justifyContent={'center'} alignItems="center" display={"grid"}>
-                    {state ? <ReviewForm productId={id} /> : null}
+                    {state.open ? <ReviewForm setState2={setState} productId={id} /> : null}
                 </Box>
             </>
         )
@@ -63,7 +64,7 @@ export default function Reviews({ id }) {
                                         secondary={
                                             <React.Fragment>
                                                 <Rating name="half-rating-read" defaultValue={e.stars} precision={0.5} readOnly />
-                                                {}
+                                                { }
                                             </React.Fragment>
                                         }
                                     />
@@ -71,11 +72,14 @@ export default function Reviews({ id }) {
                             )
                         }
                     </List>
+                    <Box justifyContent={'center'} alignItems="center" display={"grid"} >
+                        <Pagination count={1} size="small" />
+                        <br />
+                    </Box>
                     <Button onClick={handleClick}>Crear Review</Button>
                     <Box justifyContent={'center'} alignItems="center" display={"grid"}>
-                        {state ? <ReviewForm productId={id} /> : null}
+                        {state.open ? <ReviewForm setState2={setState} productId={id} /> : null}
                     </Box>
-                    <Pagination count={1} size="small" />
                 </Box>
             </>
         );

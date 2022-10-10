@@ -17,6 +17,7 @@ import Customers from './components/Customers';
 import Login from "./components/Login"
 import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
+import FinalShop from './components/FinalShop';
 
 
 export default function App() {
@@ -41,6 +42,34 @@ export default function App() {
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Categorys />} />
+                    <Route path="/contacto" element={<Contact />} />
+                    <Route path="/detalle/:i" element={<Detail />} />
+                    <Route path="/register" element={<CreateUsers />} />
+                    <Route path="/creacion" element={<Login />} />
+                    <Route path="/updateprofile" element={<Login />} />
+                    <Route path="/welcome" element={<Login />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Login />} />
+                    <Route path="/passwordReset" element={<Login />} />
+                    <Route path="/shopping-cart" element={<ShoppingCart />} />
+                    <Route path="/admin/customers" element={<Customers />} />
+                    <Route path="/ensayo" element={<Ensayo />} />
+                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path='/final-shopping' element={<FinalShop />} />
+                </Routes>
+                <Footer />
+            </div>
+        )
+    } else {
+        return (
+            <div className="App">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Categorys />} />
+                    <Route path="/contacto" element={<Contact />} />
+                    <Route path="/detalle/:i" element={<Detail />} />
+                    <Route path="/register" element={<CreateUsers />} />
+                    <Route path="/creacion" element={<CreateForm />} />
                     <Route path="/updateprofile" element={<ActualizarData />} />
                     <Route path="/welcome" element={<Welcome />} />
                     <Route path="/logout" element={<Logout />} />
@@ -48,7 +77,8 @@ export default function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/ensayo" element={<Ensayo />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path='/final-shopping' element={<FinalShop />} />
                 </Routes>
                 <Footer />
             </div>

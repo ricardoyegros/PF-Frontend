@@ -1,18 +1,20 @@
 import { Button, List, ListItem, MenuItem, TextField } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { getReviews, postReview } from '../redux/actions/reviewsActions';
+import { EditReviewForm } from './EditReviewForm';
 
-export const ReviewForm = ({ productId }) => {
+export const ReviewForm = ({ productId, setState2 }) => {
+
     const dispatch = useDispatch();
 
     const arr = [1, 2, 3, 4, 5];
 
     const [state, setState] = useState({ userId: localStorage.id, productId });
 
-    useEffect(() => {
-        setState({ userId: localStorage.id, productId })
-    }, [dispatch])
+    const [open, setOpen] = useState(false);
+
+    const reduxState = useSelector(state => state.reviewsReducer.reviews);
 
     const handleSelect = (e) => {
         setState({
@@ -28,47 +30,71 @@ export const ReviewForm = ({ productId }) => {
         });
     };
 
-    const handleSubmit = () => {
-        dispatch(postReview(state));
-        dispatch(getReviews(productId));
-        setState({ userId: localStorage.id, productId });
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(postReview({ ...state }));
+        dispatch(getReviews({ ...productId }));
+        setState({ ...state, userId: localStorage.id, productId, detail: null, stars: null });
+        setState2({ ...state, close: true });
+    };
 
+    const handleOpen = (e) => {
+        if (!open) return setOpen(true);
+        return setOpen(false);
     }
 
-    return (
-        <>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                <ListItem>
+    const aux = (arr, id) => {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].user.id == id) return true
+        }
+        return false;
+    };
 
-                    <form noValidate autoComplete="off" style={{
-                        justifyContent: "center", alignItems:
-                            "center", display: "grid"
-                    }}>
-                        <TextField
-                            select
-                            label="RATING"
-                            placeholder="Selecciona un Rating..."
-                            variant="outlined"
-                            fullWidth
-                            required
-                            name="rating"
-                            value={state.rating}
-                            onChange={handleSelect}
-                        >
-                            {arr.map((e) => (
-                                <MenuItem key={e} value={e}>
-                                    {e}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField onChange={handleTextInput} id="standard-basic" label="Detalles" multiline rows={4} />
+    if (aux(reduxState.content, localStorage.id)) {
+        return (
+            <>
+                <h4>Ya hiciste un comentario!</h4>
+                <h4>Desea editarlo? <Button onClick={handleOpen}>Editar comentario</Button></h4>
+                {open ? <EditReviewForm productId={productId} setOpen={setOpen} /> : null}
+            </>
+        )
+    } else {
+        return (
+            <>
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    <ListItem>
 
-                        <Button onClick={handleSubmit} >Submit</Button>
-                    </form>
-                </ListItem>
-            </List>
-        </>
-    )
+                        <form onSubmit={handleSubmit} noValidate autoComplete="off" style={{
+                            justifyContent: "center", alignItems:
+                                "center", display: "grid"
+                        }}>
+                            <TextField
+                                select
+                                label="RATING"
+                                placeholder="Selecciona un Rating..."
+                                variant="outlined" u
+                                fullWidth
+                                required
+                                name="rating"
+                                value={state.rating}
+                                onChange={handleSelect}
+                            >
+                                {arr.map((e) => (
+                                    <MenuItem key={e} value={e}>
+                                        {e}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField onChange={handleTextInput} id="standard-basic" label="Detalles" multiline rows={4} />
+
+                            <Button type='submit' >Submit</Button>
+                        </form>
+                    </ListItem>
+                </List>
+            </>
+        )
+    }
+
 }
 
 
