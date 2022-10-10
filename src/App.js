@@ -36,6 +36,8 @@ export default function App() {
         window.localStorage.setItem('id', idUser + '');
     };
 
+    console.log(token);
+
     if (!window.localStorage.token) {
         return (
             <div className="App">
