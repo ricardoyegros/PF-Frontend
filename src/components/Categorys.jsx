@@ -461,7 +461,3 @@ export default function Categorys() {
 // .secondary-box, .sideBar-box, .products-box {
 //   overflow: auto;
 // }
-
-
-
-
