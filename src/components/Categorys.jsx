@@ -1,13 +1,8 @@
 import {
   Alert,
-  Autocomplete,
   Button,
   ButtonGroup,
-  Collapse,
   Grid,
-  List,
-  ListItemButton,
-  ListItemText,
   Pagination,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +16,8 @@ import {
 import { useState } from "react";
 import { Box } from "@mui/system";
 import CardProduct2 from "./Card2";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Carrousel } from "./Carrousel";
+import Card3 from "./Card3";
 
 const secondaryBox = {
   display: "flex",
@@ -36,7 +32,7 @@ const productBox = {
   display: "flex",
   flexDirection: "column",
   gridGap: "2rem",
-  border: "2px rgb(241, 207, 9) solid",
+  // border: "2px rgb(241, 207, 9) solid",
   flex: 1,
 };
 
@@ -63,10 +59,6 @@ export default function Categorys() {
   if (!reduxState2) dispatch(preFilter({}));
 
   let pages = reduxState2 || 1;
-
-  const handleOpenMenu = () => {
-    setOpen(!open);
-  };
 
   const handleReset = () => {
     setPage(1);
@@ -282,28 +274,25 @@ export default function Categorys() {
   };
 
   return (
-    // DE ACA PARA ABAJO HAY QUE
+
     <>
+      <Carrousel />
       <Box
         justifyContent={"center"}
         alignItems="center"
         display={"grid"}
-        marginBottom={8}
       >
         <ButtonGroup // estos son botones de ordenamiento, no llevan mapeado, estan escritos a mano cada uno segun que necesitemos
           variant="contained"
           aria-label="outlined primary button group"
         >
-          <Button onClick={handleReset} value={{}} color="success">
-            {" "}
-            {/* Cada boton tiene su handle-ALGO que agreba funcionalidad, NO tocar el value o name */}
+          <Button onClick={handleReset} value={{}} >
             Limpiar Filtros
           </Button>
           <Button
             variant={state.type === "salePrice" ? "outlined" : "contained"}
             onClick={handleType}
             value={"salePrice"}
-            color="success"
           >
             Precio
           </Button>
@@ -311,7 +300,6 @@ export default function Categorys() {
             variant={state.type === "id" ? "outlined" : "contained"}
             onClick={handleType}
             value={"id"}
-            color="success"
           >
             Mas Reciente
           </Button>
@@ -319,7 +307,6 @@ export default function Categorys() {
             variant={state.sort === "ASC" ? "outlined" : "contained"}
             onClick={handleSort}
             value={"ASC"}
-            color="success"
           >
             Ascendente
           </Button>
@@ -327,25 +314,23 @@ export default function Categorys() {
             variant={state.sort === "DESC" ? "outlined" : "contained"}
             onClick={handleSort}
             value={"DESC"}
-            color="success"
           >
             Descendente
           </Button>
         </ButtonGroup>
-        <Box // esta box renderiza lo que se esta buscando en el searchbar,
+        <Box
           justifyContent={"center"}
           alignItems="center"
           display={"grid"}
           marginBottom={8}
           value={reduxState4.name}
-          onClick={handleName} // el handle name borra el nombre del estado para limpiar el filtro
+          onClick={handleName}
         >
-          {reduxState4 && reduxState4.name ? ( //aqui realiza el render condicional
+          {reduxState4 && reduxState4.name ?
             <Button color="secondary">{reduxState4.name}</Button>
-          ) : null}
+            : null}
         </Box>
       </Box>
-      ;
       <div style={secondaryBox}>
         <div style={sideBox}>
           <Box
@@ -355,65 +340,31 @@ export default function Categorys() {
             display={"grid"}
           >
 
-
-            {/* <List
-              variant="contained"
-              aria-label="outlined primary button group"
-            >
-              <ListItemButton onClick={handleOpenMenu}>
-                <ListItemText primary="Categorias" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  {reduxState &&
-                    reduxState.map((e) => (
-                      <ListItemButton>
-                        <Button
-                          value={e.id}
-                          name={e.name}
-                          variant={
-                            reduxState4?.categoryName === e.name
-                              ? "outlined"
-                              : "contained"
-                          }
-                          style={{ marginTop: "5px" }}
-                          onClick={handleCategory}
-                        >
-                          {e.name}
-                        </Button>
-                      </ListItemButton>
-
-                    ))}
-                </List>
-              </Collapse>
-            </List> */}
-
-
             <Box justifyContent={'center'}>
 
               <h3>CATEGORIAS</h3>
+
             </Box>
 
+            <Box>
+              {reduxState &&
+                reduxState.map((e) => (
 
-            {reduxState &&
-              reduxState.map((e) => (
+                  <Button
+                    value={e.id}
+                    name={e.name}
+                    variant={
+                      reduxState4?.categoryName === e.name
+                        ? "contained"
+                        : "outlined"
+                    }
+                    onClick={handleCategory}
+                  >
+                    {e.name}
+                  </Button>
+                ))}
+            </Box>
 
-                <Button
-                  value={e.id}
-                  name={e.name}
-                  variant={
-                    reduxState4?.categoryName === e.name
-                      ? "outlined"
-                      : "contained"
-                  }
-                  style={{ marginTop: "5px" }}
-                  onClick={handleCategory}
-                >
-                  {e.name}
-                </Button>
-
-              ))}
 
 
 
@@ -422,60 +373,26 @@ export default function Categorys() {
 
 
 
-
-
-
-
-            {/* <List>
-              <ListItemButton onClick={handleOpenMenu}>
-                <ListItemText primary="Marcas" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  {reduxState3 &&
-                    reduxState3.map((e) => (
-                      <ListItemButton>
-                        <Button
-                          value={e.id}
-                          name={e.name}
-                          variant={
-                            reduxState4?.brandName === e.name
-                              ? "outlined"
-                              : "contained"
-                          }
-                          onClick={handleBrand}
-                        >
-                          {e.name}
-                        </Button>
-                      </ListItemButton>
-                    ))}
-                </List>
-              </Collapse>
-            </List> */}
-
-
             <h3>MARCAS</h3>
+            <Box>
+              {reduxState3 &&
+                reduxState3.map((e) => (
 
-            {reduxState3 &&
-              reduxState3.map((e) => (
+                  <Button
+                    value={e.id}
+                    name={e.name}
+                    variant={
+                      reduxState4?.brandName === e.name
+                        ? "contained"
+                        : "outlined"
+                    }
+                    onClick={handleBrand}
+                  >
+                    {e.name}
+                  </Button>
 
-                <Button
-                  value={e.id}
-                  name={e.name}
-                  variant={
-                    reduxState4?.brandName === e.name
-                      ? "outlined"
-                      : "contained"
-                  }
-                  onClick={handleBrand}
-                >
-                  {e.name}
-                </Button>
-
-              ))}
-
-
+                ))}
+            </Box>
 
 
 
@@ -486,16 +403,12 @@ export default function Categorys() {
             <Alert severity="error">No se encontraron Productos!</Alert>
           ) : null}
           <Grid
-            container
-            gridColumn={3}
-            spacing={4}
-            justifyContent="center"
-            alignItems={"center"}
+            Grid container spacing={{ xs: 4, md: 4 }} columns={{ xs: 3, sm: 8, md: 12 }} padding="20px"
           >
             {reduxState2 &&
               reduxState2.content.map((e) => (
-                <Grid item mb={5} sm={3.1} key={e.id}>
-                  <CardProduct2
+                <Grid item xs={12} sm={6} md={3} key={e.id}>
+                  {/* <CardProduct2
                     id={e.id}
                     key={e.id}
                     nombre={e.name}
@@ -506,6 +419,16 @@ export default function Categorys() {
                     categoria={e.category.name}
                     precio={e.salePrice}
                     marca={e.brand.name}
+                  /> */}
+                  <Card3
+                    id={e.id}
+                    nombre={e.name}
+                    key={e.id}
+                    imagen={
+                      e.images[0]?.url ||
+                      "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
+                    }
+                    precioVenta={e.salePrice}
                   />
                 </Grid>
               ))}
