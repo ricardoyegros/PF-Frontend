@@ -27,17 +27,17 @@ export default function Footer() {
                                     Ayuda
                                 </Box>
                                 <Box>
-                                    <Link href="/contacto" color="secondary">
+                                    <Link href="/contacto" color="secondary" underline="none">
                                         Contacto
                                     </Link>
                                 </Box>
                                 <Box>
-                                    <Link href="/nosotros" color="secondary">
+                                    <Link href="/nosotros" color="secondary" underline="none">
                                         Sobre Nosotros
                                     </Link>
                                 </Box>
                                 <Box>
-                                    <Link href="/preguntas" color="secondary">
+                                    <Link href="/preguntas" color="secondary" underline="none">
                                         Preguntas Frecuentes
                                     </Link>
                                 </Box>
@@ -50,12 +50,13 @@ export default function Footer() {
                                     <Link
                                         href="/users/register"
                                         color="secondary"
+                                        underline="none"
                                     >
                                         Registro
                                     </Link>
                                 </Box>
                                 <Box>
-                                    <Link href="/ingresar" color="secondary">
+                                    <Link href="/ingresar" color="secondary" underline="none">
                                         Ingresar
                                     </Link>
                                 </Box>
@@ -65,22 +66,22 @@ export default function Footer() {
                                     Productos
                                 </Box>
                                 <Box>
-                                    <Link href="/notebooks" color="secondary">
+                                    <Link href="/notebooks" color="secondary" underline="none">
                                         Notebooks
                                     </Link>
                                 </Box>
                                 <Box>
-                                    <Link href="/hardware" color="secondary">
+                                    <Link href="/hardware" color="secondary" underline="none">
                                         Hardware
                                     </Link>
                                 </Box>
                                 <Box>
-                                    <Link href="/perifericos" color="secondary">
+                                    <Link href="/perifericos" color="secondary" underline="none">
                                         Perifericos
                                     </Link>
                                 </Box>
                                 <Box>
-                                    <Link href="/celulares" color="secondary">
+                                    <Link href="/celulares" color="secondary"underline="none">
                                         Celulares
                                     </Link>
                                 </Box>

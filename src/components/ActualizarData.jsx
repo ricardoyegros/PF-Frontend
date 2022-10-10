@@ -1,190 +1,163 @@
-import { React, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { createUsers, getIdUsers } from "../redux/actions";
+import React from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import MenuItem from "@mui/material/MenuItem";
-import {
-    Typography,
-    Card,
-    CardContent,
-    Grid,
-    TextField,
-    Button,
-} from "@mui/material";
+import { updateUser } from '../redux/actions/index.js';
+
+import MenuItem from '@mui/material/MenuItem';
+
+import { Typography, Card, CardContent, Grid, TextField, Button } from '@mui/material';
+
+//import { useNavigate } from "react-router-dom";
 
 export default function ActualizarData() {
-    const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector((state) => state.usersReducers.user);
+    const token = useSelector((state) => state.usersReducers.token);
+    //console.log(user);
+    //console.log(token);
 
-    useEffect(
-        (e) => {
-            dispatch(getIdUsers(id));
-        },
-        [dispatch, id]
-    );
+    const [userId, setUserId] = useState(user);
+    console.log(userId, 'USER ID CARGADO');
 
-    let detailUser = useSelector((state) => state.userIdReducer.userId);
-
-    /* const namesDNI = [
-        { value: "CC", label: "CC" },
-        { value: "DNI", label: "DNI" },
-        { value: "PASSPORT", label: "PASSPORT" },
-        { value: "GREENCARD", label: "GREENCARD" },
-        { value: "OTRO", label: "OTRO" },
-    ]; */
-
-    const [input, setInput] = useState({});
-
-    console.log(input);
+    const namesDNI = [
+        { value: 'CC', label: 'CC' },
+        { value: 'DNI', label: 'DNI' },
+        { value: 'PASSPORT', label: 'PASSPORT' },
+        { value: 'GREENCARD', label: 'GREENCARD' },
+        { value: 'OTRO', label: 'OTRO' }
+    ];
 
     function handleChange(e) {
-        setInput({ ...input, [e.target.name]: e.target.value });
+        //setUserId(user)
+
+        setUserId({ ...userId, [e.target.name]: e.target.value });
     }
 
     function handleSubmit(e) {
+        console.log(userId);
         e.preventDefault();
-        dispatch(createUsers(input));
-        setInput({});
-        navigate("/");
+        dispatch(updateUser(userId, token, userId.id));
+        navigate('/welcome');
     }
 
     return (
         <>
             <Typography gutterBottom variant="h3" align="center">
-                TechStore - Update-Info
+                TechStore - Update Profile !!
             </Typography>
-            <Card
-                style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }}
-            >
+            <Card style={{ maxWidth: 450, margin: '0 auto', padding: '20px 5px' }}>
                 <CardContent>
                     <Typography gutterBottom variant="h5">
-                        Please read all the fields !
+                        Create a New User!
                     </Typography>
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={1}>
                             <Grid xs={12} item>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 3 }}
-                                >
-                                    You Name
-                                </Typography>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 5 }}
-                                >
-                                    {`${detailUser?.name}`}
-                                </Typography>
-                            </Grid>
-                            <Grid xs={12} item>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 3 }}
-                                >
-                                    You lastName
-                                </Typography>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 5 }}
-                                >
-                                    {`${detailUser?.lastName}`}
-                                </Typography>
-                            </Grid>
-                            <Grid xs={12} item>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 3 }}
-                                >
-                                    You Type Identification
-                                </Typography>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 5 }}
-                                >
-                                    {`${detailUser?.typeIdentification}`}
-                                </Typography>
-                            </Grid>
-                            <Grid xs={12} item>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 3 }}
-                                >
-                                    You Number of Identification
-                                </Typography>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 5 }}
-                                >
-                                    {`${detailUser?.identification}`}
-                                </Typography>
-                            </Grid>
-                            <Grid xs={12} item>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 3 }}
-                                >
-                                    You Number of Contact
-                                </Typography>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 5 }}
-                                >
-                                    {`${detailUser?.contact}`}
-                                </Typography>
-                            </Grid>
-                            <Grid xs={12} item>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 3 }}
-                                >
-                                    You Email
-                                </Typography>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 5 }}
-                                >
-                                    {`${detailUser?.email}`}
-                                </Typography>
-                            </Grid>
-                            <Grid xs={12} item>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 3 }}
-                                >
-                                    You Address
-                                </Typography>
-                                <Typography
-                                    variant={"h5"}
-                                    sx={{ marginRight: 5 }}
-                                >
-                                    {`${detailUser?.address}`}
-                                </Typography>
-                            </Grid>
-                            {/* 
-                            <Grid xs={12} item>
                                 <TextField
-                                    label="Password"
-                                    placeholder="Please create a password..."
+                                    label="Name..."
+                                    placeholder="Please enter you name..."
                                     variant="outlined"
                                     fullWidth
                                     required
-                                    type="password"
-                                    name="password"
-                                    value={input.password}
+                                    name="name"
+                                    value={userId.name}
                                     onChange={handleChange}
                                 />
-                            </Grid> */}
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField
+                                    label="last name..."
+                                    placeholder="Please enter you last name..."
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    name="lastName"
+                                    value={userId.lastName}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField
+                                    select
+                                    label="Type Identification"
+                                    placeholder="Please enter a type identification..."
+                                    variant="outlined"
+                                    fullWidth
+                                    required
+                                    name="typeIdentification"
+                                    value={userId.typeIdentification}
+                                    onChange={handleChange}
+                                >
+                                    {namesDNI.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField
+                                    label="identification"
+                                    placeholder="Please enter you number of identification..."
+                                    variant="outlined"
+                                    type="number"
+                                    fullWidth
+                                    required
+                                    name="identification"
+                                    value={userId.identification}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField
+                                    label="Contact"
+                                    placeholder="Please enter you number of phone..."
+                                    variant="outlined"
+                                    type="number"
+                                    fullWidth
+                                    required
+                                    name="contact"
+                                    value={userId.contact}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField
+                                    label="Email"
+                                    placeholder="Please enter a email..."
+                                    variant="outlined"
+                                    type="email"
+                                    fullWidth
+                                    required
+                                    name="email"
+                                    value={userId.email}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField
+                                    label="Address"
+                                    placeholder="Please enter you actual address..."
+                                    variant="outlined"
+                                    fullWidth
+                                    name="address"
+                                    value={userId.address}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+
                             <Grid xs={12} item>
                                 <Button
                                     color="primary"
                                     type="submit"
                                     variant="contained"
                                     fullWidth
-                                    disable={!input.email || !input.password}
+                                    // disable={!input.email || !input.password}
                                 >
-                                    Create !!
+                                    Update !!
                                 </Button>
                             </Grid>
                         </Grid>
