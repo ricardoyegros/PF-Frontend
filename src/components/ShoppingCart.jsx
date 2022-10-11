@@ -21,14 +21,11 @@ export default function ShoppingCart() {
   }
   function handleButtonShop(e) {
     dispatch(cartPost(data.storage.cart))
-  navigate("/final-shopping");
+    if(!localStorage.token) return navigate('/login');
+    return navigate('/final-shopping');
 }
-
-if(cartUser.length > 0)
-{ cart = data.dataBaseStorage.cartItems
-} else {
-  cart = data.storage.cart
-}
+console.log(cartUser, "dsc")
+if(cartUser.length > 0) cart = [...cartUser]
 let totalCarrito = 0;
 for (let i = 0; i < cart.length; i++) {
   let subtotal = cart[i].quantity * cart[i].salePrice;

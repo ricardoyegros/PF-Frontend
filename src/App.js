@@ -50,7 +50,7 @@ export default function App() {
     if (!window.localStorage.token) {
         return (
             <div className="App">
-                <Navbar />
+                <Navbar/>
                 <Routes>
                     <Route path="/" element={<Categorys />} />
                     <Route path="/contacto" element={<Contact />} />
