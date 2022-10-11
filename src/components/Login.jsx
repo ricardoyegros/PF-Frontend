@@ -32,6 +32,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.usersReducers.token);
+  
 
   const [input, setInput] = useState({});
 
@@ -39,16 +40,14 @@ export default function Login() {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
 
+
+  
+
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(loginUser(input));
-    setInput({});
-    if(token.length>0){
-      navigate("/welcome");
-    } else{
-      alert("Usuario o Contraseña incorrecta")
-      navigate("/login");
-    }
+    navigate("/welcome");
+    
   }
 
   const clientId = "701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com"
