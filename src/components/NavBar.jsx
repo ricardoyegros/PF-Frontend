@@ -225,19 +225,22 @@ export default function Navbar() {
                                 src={logo}
                             />
                         </Linkdom>
-                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ flexGrow: 1}}/>
                         {user.name ? (
                             <Typography>Bienvenido/a {user.name}</Typography>
                         ) : (
                             <Typography>Bienvenido/a Invitado</Typography>
                         )}
+                        <Box ml={5}>
                         <Button
                             href="/creacion"
                             color="secondary"
                             variant="outlined"
-                        >
+                        
+                         >
                             Cargar Producto
                         </Button>
+                        </Box>
                         <Search>
                             <SearchIconWrapper>
                                 <SearchIcon />
@@ -252,9 +255,18 @@ export default function Navbar() {
                             </form>
                         </Search>
                         <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                            <IconButton color="inherit">
+                            
+                            <Linkdom to={"/shopping-cart"}>
+                            <Box 
+                            display={"flex"}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                            >
+                            <IconButton>
                                 <ShoppingCartOutlinedIcon />
                             </IconButton>
+                            </Box>
+                            </Linkdom>
                             <IconButton
                                 size="large"
                                 edge="end"
