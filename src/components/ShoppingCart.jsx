@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography , Alert } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,13 +6,14 @@ import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
 import { paymentMethod } from "../redux/actions/payment";
+import Loading from "./Loading";
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let cart = useSelector((state) => state.shoppingCartReducer.cart);
   const data = loadState();
-  // console.log(data.storage);
+
   function handleButton3(e) {
     dispatch(clearCart());
   }
@@ -21,9 +22,8 @@ export default function ShoppingCart() {
   }
   function handleButtonShop(e) {
     dispatch(cartPost(data.storage.cart))
-    
-    dispatch(paymentMethod({ cart: data.storage.cart}))
-  navigate("/final-shopping");
+    if(!localStorage.token) return navigate('/login');
+    return navigate('/final-shopping');
 }
 // console.log(data.storage.cart, "dsc")
 let totalCarrito = 0;
@@ -70,7 +70,8 @@ return (
         />
       ))
     ) : (
-      <p> Cargando Carrito...</p>
+      
+      <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={25}> <Alert severity="error">No se encontraron Productos!</Alert></Box>
     )}
     <Box m={5}>
       <Box display={"flex"} justifyContent={"flex-end"} width="87%" borderBottom="2px solid rgba(8,8,8,0.10)" >
