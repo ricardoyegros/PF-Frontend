@@ -23,8 +23,12 @@ export default function ShoppingCart() {
   }
   function handleButtonShop(e) {
     dispatch(cartPost(data.storage.cart))
+<<<<<<< HEAD
     if(!localStorage.token) return navigate('/login');
     return navigate('/final-shopping');
+=======
+  navigate("/final-shopping");
+>>>>>>> b416a50 (fix mercadopago)
 }
 console.log(cartUser, "dsc")
 if(cartUser.length > 0) cart = [...cartUser]
