@@ -22,8 +22,6 @@ export default function ShoppingCart() {
   }
   function handleButtonShop(e) {
     dispatch(cartPost(data.storage.cart))
-    
-    dispatch(paymentMethod({ cart: data.storage.cart}))
   navigate("/final-shopping");
 }
 console.log(cartUser, "dsc")
