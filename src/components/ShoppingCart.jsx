@@ -35,7 +35,7 @@ for (let i = 0; i < cart.length; i++) {
   totalCarrito = totalCarrito + subtotal;
 }
 
-
+console.log(cart, "soyCart")
 return (
   <>
     <Typography variant={"h3"} m={2}>Carrito de Compras</Typography>
