@@ -28,10 +28,11 @@ export default function Login() {
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
-  let email = input.email;
+  let emailLogin ;
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(loginUser(input));
+    emailLogin = input.email;
     setInput({});
     dispatch(getAllCartItems(email));
     navigate("/welcome");
@@ -45,14 +46,15 @@ export default function Login() {
       email: res.profileObj.email,
       password: res.profileObj.googleId,
     };
-    console.log(user);
+     emailLogin = res.profileObj.email;
+    console.log(emailLogin);
     dispatch(createUsers(user));
     navigate("/welcome");
   }
   function handleFailure(err) {
     console.log("failed:", err);
   }
-
+console.log(emailLogin);
   useEffect(() => {
     gapi.load("client:auth2", () => {
       gapi.auth2.init({ clientId: clientId });
