@@ -8,6 +8,7 @@ import categorysNameReducer from "./categorysReducer";
 import userIdReducer from "./userIdReducer";
 import shoppingCartReducer from "./shoppingCartReducer";
 import reviewsReducer from "./reviewsReducer";
+import allItemsCartReducer from "./allItemsCartReducer";
 
 export default combineReducers({
     allProductsReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
     categorysNameReducer,
     userIdReducer,
     shoppingCartReducer,
-    reviewsReducer
+    reviewsReducer,
+    allItemsCartReducer
 });
