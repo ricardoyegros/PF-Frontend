@@ -38,7 +38,7 @@ export default function Login() {
     dispatch(loginUser(input));
     emailLogin = input.email;
     setInput({});
-    dispatch(getAllCartItems(email));
+    dispatch(getAllCartItems(emailLogin));
     navigate("/welcome");
   }
   const clientId =
