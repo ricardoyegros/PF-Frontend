@@ -28,13 +28,38 @@ export default function Login() {
 
   
 
+  let emailLogin ;
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(loginUser(input));
+    emailLogin = input.email;
     setInput({});
     dispatch(getAllCartItems(email));
     navigate("/welcome");
   }
+  const clientId =
+    "701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com";
+  function handleLoginGoogle(res) {
+    const user = {
+      name: res.profileObj.givenName,
+      lastName: res.profileObj.familyName,
+      email: res.profileObj.email,
+      password: res.profileObj.googleId,
+    };
+     emailLogin = res.profileObj.email;
+    console.log(emailLogin);
+    dispatch(createUsers(user));
+    navigate("/welcome");
+  }
+  function handleFailure(err) {
+    console.log("failed:", err);
+  }
+console.log(emailLogin);
+  useEffect(() => {
+    gapi.load("client:auth2", () => {
+      gapi.auth2.init({ clientId: clientId });
+    });
+  }, []);
 
   return (
     <>
