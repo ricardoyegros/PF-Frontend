@@ -12,7 +12,7 @@ export default function ShoppingCart() {
   let navigate = useNavigate();
   let cart = useSelector((state) => state.shoppingCartReducer.cart);
   const data = loadState();
-  // console.log(data.storage);
+
   function handleButton3(e) {
     dispatch(clearCart());
   }
@@ -21,9 +21,8 @@ export default function ShoppingCart() {
   }
   function handleButtonShop(e) {
     dispatch(cartPost(data.storage.cart))
-    
-    dispatch(paymentMethod({ cart: data.storage.cart}))
-  navigate("/final-shopping");
+    if(!localStorage.token) return navigate('/login');
+    return navigate('/final-shopping');
 }
 // console.log(data.storage.cart, "dsc")
 let totalCarrito = 0;
