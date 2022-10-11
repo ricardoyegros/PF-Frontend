@@ -4,7 +4,6 @@ export const DETAIL_PRODUCT = 'DETAIL_PRODUCT';
 export const SEARCH_PRODUCT = 'SEARCH_PRODUCT';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
-//export const CLEAR  = "CLEAR";
 export const FILTER_CATEGORIES = 'FILTER_CATEGORIES';
 export const FILTER_BRANDS = 'FILTER_BRANDS';
 export const GET_CATEGORYS_NAMES = 'GET_CATEGORYS_NAMES';

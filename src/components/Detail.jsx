@@ -6,6 +6,8 @@ import { getDetailProduct } from "../redux/actions";
 import { createTheme } from "@mui/material";
 import { addToCart } from "../redux/actions/cart-actions";
 import { styled } from '@mui/material/styles';
+import { clearDetail } from "../redux/actions/detail-actions";
+import Loading from "./Loading";
 import Reviews from "./Reviews";
 
 
@@ -38,12 +40,20 @@ export default function Detail() {
   const { i } = useParams();
   let dispatch = useDispatch();
   let navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(getDetailProduct(i));
-  }, [dispatch, i])
+    dispatch(clearDetail())
+  },[])
+
+
+  useEffect(() => {
+    dispatch(getDetailProduct(i))
+  }, [])
+
+
+
   let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
-  // console.log(detailProduct)
-  // console.log(i)
+  console.log(clearDetail())
 
   const theme = createTheme({
     palette: {
@@ -71,6 +81,8 @@ export default function Detail() {
     navigate("/shopping-cart")
   }
 
+
+
   return (
     <>
       <StyledBoxPrice>
@@ -88,39 +100,40 @@ export default function Detail() {
             >Agregar al carrito</Button>
             </Box>
       </StyledBoxPrice>
+          {(detailProduct.name && detailProduct.images && detailProduct.description) ? 
           
-        <StyledBox >
+<StyledBox >
 
-          <Box width={"30%"}
-              sx={{display:{
-                xs:"none",
-                md:"flex"
-              }}}
-            justifyContent={"center"}
-            m={5}   >
-            <Box
-              component="img"
-              src={detailProduct.images && detailProduct.images[0]?.url || 'https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg'}
-              />
-            
-          </Box>
-          <Box width={"60%"}
-           height={450} 
-           display={"flex"}
-           flexDirection={"column"}
-           alignItems={"flex-start"}
+<Box width={"30%"}
+    sx={{display:{
+      xs:"none",
+      md:"flex"
+    }}}
+  justifyContent={"center"}
+  m={5}   >
+  <Box
+    component="img"
+    src={detailProduct.images && detailProduct.images[0]?.url}
+    />
+  
+</Box>
+<Box width={"60%"}
+ height={450} 
+ display={"flex"}
+ flexDirection={"column"}
+ alignItems={"flex-start"}
 >
-              <Typography variant="h6" component="p" >
-                {`categoria > ${detailProduct.name && detailProduct.category.name}`}
-              </Typography>
-              <Typography variant="h4" component="p" marginTop={15}>
-                {detailProduct?.name}
-              </Typography>
-              <Typography variant="h6" component="p" marginTop={4}>
-                {`${detailProduct?.description}`}
-              </Typography>  
-          </Box>
-        </StyledBox>
+    <Typography variant="h6" component="p" >
+      {`categoria > ${detailProduct.name && detailProduct.category.name}`}
+    </Typography>
+    <Typography variant="h4" component="p" marginTop={15}>
+      {detailProduct?.name}
+    </Typography>
+    <Typography variant="h6" component="p" marginTop={4}>
+      {`${detailProduct?.description}`}
+    </Typography>  
+</Box>
+</StyledBox> : <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}><Loading/></Box> }
       <Reviews id={i} />
     </>
   )
