@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography , Alert } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,14 +6,14 @@ import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
 import { paymentMethod } from "../redux/actions/payment";
-import Loading from "./Loading";
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let cart = useSelector((state) => state.shoppingCartReducer.cart);
+  let cartUser = useSelector((state) => state.allItemsCartReducer.cartItems);
   const data = loadState();
-
+  // console.log(data.storage);
   function handleButton3(e) {
     dispatch(clearCart());
   }
@@ -22,15 +22,19 @@ export default function ShoppingCart() {
   }
   function handleButtonShop(e) {
     dispatch(cartPost(data.storage.cart))
-    if(!localStorage.token) return navigate('/login');
-    return navigate('/final-shopping');
+    
+    dispatch(paymentMethod({ cart: data.storage.cart}))
+  navigate("/final-shopping");
 }
-// console.log(data.storage.cart, "dsc")
+console.log(cartUser, "dsc")
+if(cartUser.length > 0) cart = [...cartUser]
 let totalCarrito = 0;
-for (let i = 0; i < data.storage.cart.length; i++) {
-  let subtotal = data.storage.cart[i].quantity * data.storage.cart[i].salePrice;
+for (let i = 0; i < cart.length; i++) {
+  let subtotal = cart[i].quantity * cart[i].salePrice;
   totalCarrito = totalCarrito + subtotal;
 }
+
+console.log(cart, "soyCart")
 return (
   <>
     <Typography variant={"h3"} m={2}>Carrito de Compras</Typography>
@@ -54,8 +58,8 @@ return (
         <Typography variant={"h6"}>Sub-Total</Typography>
       </Grid>
     </Grid>
-    {data.storage.cart.length ? (
-      data.storage.cart?.map((products, i) => (
+    {cart.length ? (
+      cart?.map((products, i) => (
         <Cart
           key={i}
           id={products.id}
@@ -64,15 +68,13 @@ return (
           stock={products.stock}
           quantity={products.quantity}
           image={
-            products.images[0]?.url ||
-            "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
+            products.image ||
+            products.images[0]?.url
           }
         />
       ))
-    ) : (
-      
-      <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={25}> <Alert severity="error">No se encontraron Productos!</Alert></Box>
-    )}
+    ) : <p>"Carrito Vacio"</p>
+    }
     <Box m={5}>
       <Box display={"flex"} justifyContent={"flex-end"} width="87%" borderBottom="2px solid rgba(8,8,8,0.10)" >
         <Box mr={15}>
