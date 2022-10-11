@@ -50,6 +50,12 @@ export default function Welcome() {
         navigate('/ensayo');
     }
 
+    function handleSubmitCart(e){
+        e.preventDefault()
+        navigate("/shopping-cart")
+    }
+    
+
     return (
         <ThemeProvider theme={theme}>
             <Grid container spacing={0} minHeight={400} justifyContent="center" alignItems="center">
@@ -67,7 +73,10 @@ export default function Welcome() {
                         </Button>
                     ) : null}
                     <Button type="submit" color="secondary" variant="contained" onClick={handleSubmit}>
-                        update-Profile
+                        Actualizar Perfil
+                    </Button>
+                    <Button variant="contained" color="secondary" onClick={handleSubmitCart}>
+                        Ir al carro
                     </Button>
                 </Grid>
             </Grid>
