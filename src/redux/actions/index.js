@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const DETAIL_PRODUCT = 'DETAIL_PRODUCT';
 export const SEARCH_PRODUCT = 'SEARCH_PRODUCT';
@@ -79,7 +80,7 @@ export function getIdUsers(id, token) {
                 payload: user.data
             });
         } catch (error) {
-            alert('User not Found');
+            
             console.log(error);
         }
     };
@@ -94,6 +95,7 @@ export function updateUser(input, token) {
 
             return dispatch({ type: UPDATE_USER, payload: updateUser.data });
         } catch (error) {
+
             console.log(error);
         }
     };
@@ -105,6 +107,7 @@ export function loginUser(input) {
             let userData = await axios.post('http://localhost:3001/users/login', input);
             return dispatch({ type: LOGIN_USER, payload: userData.data });
         } catch (error) {
+            swal("Error", "Usuario o contraseña incorrecta", "error");
             console.log(error);
         }
     };
