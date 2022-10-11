@@ -59,6 +59,7 @@ export function createProduct(form) {
 
 //=====================>>>>>>  JULIAN
 export function createUsers(input) {
+    console.log(input)
     return async (dispatch) => {
         try {
             let newUser = await axios.post('https://techstore123.herokuapp.com/users/register', input);
