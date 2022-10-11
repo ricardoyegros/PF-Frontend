@@ -2,12 +2,14 @@ import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import {useForm, FormProvider} from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import AddressInput from "./AddressInput";
 import { shippingData } from "../redux/actions/cart-actions";
 import { paymentMethod } from "../redux/actions/payment";
 
+
 export default function AddressForm ({nextStep}) {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const methods = useForm();
     return (
@@ -17,9 +19,8 @@ export default function AddressForm ({nextStep}) {
             </Typography>
             <FormProvider  {...methods}>
                 <form onSubmit={methods.handleSubmit(data => {
-                    // dispatch(shippingData(data))
-                    dispatch(paymentMethod(data))
-                    // nextStep()
+                    // if(!localStorage.token) return navigate('/login')
+                    return dispatch(paymentMethod(JSON.parse(localStorage.state).storage));
                 })}>
                     <Grid mt={1} container spacing={3}>
                         <AddressInput required name="fullName" label="Nombre Completo"/>
