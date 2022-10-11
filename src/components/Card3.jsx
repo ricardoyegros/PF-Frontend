@@ -118,7 +118,7 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
                                 <Typography gutterBottom variant="h5">
                                     ${precioVenta}
                                 </Typography>
-                                <Typography sx={cardName}>
+                                <Typography noWrap sx={cardName}>
                                     {nombre}
                                 </Typography>
                             </CardContent>

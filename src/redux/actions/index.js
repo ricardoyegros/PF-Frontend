@@ -1,10 +1,10 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const DETAIL_PRODUCT = 'DETAIL_PRODUCT';
 export const SEARCH_PRODUCT = 'SEARCH_PRODUCT';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
-//export const CLEAR  = "CLEAR";
 export const FILTER_CATEGORIES = 'FILTER_CATEGORIES';
 export const FILTER_BRANDS = 'FILTER_BRANDS';
 export const GET_CATEGORYS_NAMES = 'GET_CATEGORYS_NAMES';
@@ -59,6 +59,7 @@ export function createProduct(form) {
 
 //=====================>>>>>>  JULIAN
 export function createUsers(input) {
+    console.log(input)
     return async (dispatch) => {
         try {
             let newUser = await axios.post('https://techstore123.herokuapp.com/users/register', input);
@@ -80,7 +81,7 @@ export function getIdUsers(id, token) {
                 payload: user.data
             });
         } catch (error) {
-            alert('User not Found');
+            
             console.log(error);
         }
     };
@@ -95,6 +96,7 @@ export function updateUser(input, token, id) {
 
             return dispatch({ type: UPDATE_USER, payload: updateUser.data });
         } catch (error) {
+
             console.log(error);
         }
     };
@@ -109,6 +111,7 @@ export function loginUser(input) {
             );
             return dispatch({ type: LOGIN_USER, payload: userData.data });
         } catch (error) {
+            swal("Error", "Usuario o contraseña incorrecta", "error");
             console.log(error);
         }
     };

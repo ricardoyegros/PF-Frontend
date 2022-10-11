@@ -20,7 +20,7 @@ export default function ActualizarData() {
     //console.log(token);
 
     const [userId, setUserId] = useState(user);
-    console.log(userId, 'USER ID CARGADO');
+    //console.log(userId);
 
     const namesDNI = [
         { value: 'CC', label: 'CC' },
@@ -124,19 +124,7 @@ export default function ActualizarData() {
                                     onChange={handleChange}
                                 />
                             </Grid>
-                            <Grid xs={12} item>
-                                <TextField
-                                    label="Email"
-                                    placeholder="Please enter a email..."
-                                    variant="outlined"
-                                    type="email"
-                                    fullWidth
-                                    required
-                                    name="email"
-                                    value={userId.email}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
+                            
                             <Grid xs={12} item>
                                 <TextField
                                     label="Address"
