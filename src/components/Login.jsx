@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/actions/index.js";
-import { getAllCartItems } from "../redux/actions/getCart.js";
-import { useNavigate } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
+import { createUsers } from "../redux/actions/index.js";
+import { redirect, useNavigate } from "react-router-dom";
 import { Typography, Box, TextField, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import GoogleIcon from "@mui/icons-material/Google";
+import { getAllCartItems } from "../redux/actions/getCart.js";
 
 const StyledBox = styled(Box)(({}) => ({
   width: 500,
@@ -19,8 +23,8 @@ const StyledBox = styled(Box)(({}) => ({
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [input, setInput] = useState("");
+  const token = useSelector((state) => state.usersReducers.token);
+  const [input, setInput] = useState({});
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
@@ -32,6 +36,28 @@ export default function Login() {
     dispatch(getAllCartItems(email));
     navigate("/welcome");
   }
+  const clientId =
+    "701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com";
+  function handleLoginGoogle(res) {
+    const user = {
+      name: res.profileObj.givenName,
+      lastName: res.profileObj.familyName,
+      email: res.profileObj.email,
+      password: res.profileObj.googleId,
+    };
+    console.log(user);
+    dispatch(createUsers(user));
+    navigate("/welcome");
+  }
+  function handleFailure(err) {
+    console.log("failed:", err);
+  }
+
+  useEffect(() => {
+    gapi.load("client:auth2", () => {
+      gapi.auth2.init({ clientId: clientId });
+    });
+  }, []);
 
   return (
     <>
@@ -55,6 +81,7 @@ export default function Login() {
                 value={input.email}
                 onChange={handleChange}
               />
+
               <TextField
                 label="Password"
                 placeholder="Password"
@@ -78,6 +105,13 @@ export default function Login() {
                 </Button>
                 <Button href="/passwordReset">Olvidaste tu contraseña?</Button>
               </Box>
+              <GoogleLogin
+                clientId="701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com"
+                buttonText="Log in with Google"
+                onSuccess={handleLoginGoogle}
+                onFailure={handleFailure}
+                cookiePolicy={"single_host_origin"}
+              ></GoogleLogin>
             </StyledBox>
           </form>
         </Grid>
