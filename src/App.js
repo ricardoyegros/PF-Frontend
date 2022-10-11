@@ -1,4 +1,4 @@
-import './App.css';
+
 import Contact from './components/Contact.jsx';
 import Detail from './components/Detail';
 import { Route, Routes } from 'react-router-dom';
@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
 import { Home2 } from './components/Home2';
+
 
 
 export default function App() {
@@ -58,6 +59,7 @@ export default function App() {
                     <Route path="/ensayo" element={<Ensayo />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     <Route path='/final-shopping' element={<FinalShop />} />
+         
                 </Routes>
                 <Footer />
             </div>
@@ -81,6 +83,7 @@ export default function App() {
                     <Route path="/ensayo" element={<Ensayo />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     <Route path='/final-shopping' element={<FinalShop />} />
+                  
                 </Routes>
                 <Footer />
             </div>
