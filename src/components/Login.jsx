@@ -46,9 +46,9 @@ export default function Login() {
       email: res.profileObj.email,
       password: res.profileObj.googleId,
     };
-     emailLogin = user.email;
-    console.log(emailLogin, "estoy dentro");
     dispatch(createUsers(user));
+    emailLogin = user.email;
+    console.log(emailLogin, "estoy dentro");
     navigate("/welcome");
   }
   function handleFailure(err) {
