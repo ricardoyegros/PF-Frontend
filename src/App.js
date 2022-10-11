@@ -1,57 +1,52 @@
+import Contact from "./components/Contact.jsx";
+import Detail from "./components/Detail";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/NavBar";
+import Footer from "./components/Footer";
+import CreateUsers from "./components/CreateUsers";
+import CreateForm from "./components/CreateForm";
+import Categorys from "./components/Categorys";
+import ActualizarData from "./components/ActualizarData";
+import Welcome from "./components/Welcome";
+import ShoppingCart from "./components/ShoppingCart";
+import Dashboard from "./components/dashboard/Dashboard";
+import ForgotPassword from "./components/ForgotPassword";
 
-import Contact from './components/Contact.jsx';
-import Detail from './components/Detail';
-import { Route, Routes } from 'react-router-dom';
-import Navbar from './components/NavBar';
-import Footer from './components/Footer';
-import CreateUsers from './components/CreateUsers';
-import CreateForm from './components/CreateForm';
-import Categorys from './components/Categorys';
-import ActualizarData from './components/ActualizarData';
-import Welcome from './components/Welcome';
-import ShoppingCart from './components/ShoppingCart';
-import Dashboard from './components/dashboard/Dashboard';
-import ForgotPassword from './components/ForgotPassword';
-
-import Customers from './components/Customers';
-import Login from "./components/Login"
-import Logout from "./components/Logout"
+import Customers from "./components/Customers";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
 import { useSelector } from "react-redux";
-import FinalShop from './components/FinalShop';
-import { Navbar2 } from './components/Navbar2';
-import { Home2 } from './components/Home2';
-import { UserProfile } from './components/UserProfile.jsx';
-import { UserConfig } from './components/UserConfig.jsx';
-import  Geo  from "./components/Geo"
-
-
+import FinalShop from "./components/FinalShop";
+import { Navbar2 } from "./components/Navbar2";
+import { Home2 } from "./components/Home2";
+import { UserProfile } from "./components/UserProfile.jsx";
+import { UserConfig } from "./components/UserConfig.jsx";
 
 export default function App() {
-
-    const idUser = useSelector(state => state.usersReducers.user.id);
+    const idUser = useSelector((state) => state.usersReducers.user.id);
     const token = useSelector((state) => state.usersReducers.token);
-    const email = useSelector(state => state.usersReducers.user.email);
-    const isAdmin = useSelector(state => state.usersReducers.user.isAdmin);
-    const name = useSelector(state => state.usersReducers.user.name);
-    const address = useSelector(state => state.usersReducers.user.address);
-    //const identification = useSelector(state => state.usersReducers.identification);
+    const email = useSelector((state) => state.usersReducers.user.email);
+    const isAdmin = useSelector((state) => state.usersReducers.user.isAdmin);
+    const name = useSelector((state) => state.usersReducers.user.name);
+    const address = useSelector((state) => state.usersReducers.user.address);
+    const identification = useSelector(
+        (state) => state.usersReducers.identification
+    );
 
     if (token) {
-        window.localStorage.setItem('token', token);
-        window.localStorage.setItem('email', email);
-        window.localStorage.setItem('isAdmin', isAdmin);
-        window.localStorage.setItem('name', name);
-        window.localStorage.setItem('id', idUser + '');
-        window.localStorage.setItem('adress', address);
+        window.localStorage.setItem("token", token);
+        window.localStorage.setItem("email", email);
+        window.localStorage.setItem("isAdmin", isAdmin);
+        window.localStorage.setItem("name", name);
+        window.localStorage.setItem("id", idUser + "");
+        window.localStorage.setItem("adress", address);
         //window.localStorage.setitem('identification', identification);
-    };
-
-
+    }
 
     if (!window.localStorage.token) {
         return (
             <div className="App">
-                <Navbar2 />
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<Categorys />} />
                     <Route path="/contacto" element={<Contact />} />
@@ -66,15 +61,14 @@ export default function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path='/final-shopping' element={<FinalShop />} />
+                    <Route path="/final-shopping" element={<FinalShop />} />
+                    <Route path="/userprofile" element={<UserConfig />} />
 
-
-                    <Route path='/userprofile' element={<UserConfig />} />
-
+                    <Route path="/userprofile" element={<UserConfig />} />
                 </Routes>
                 <Footer />g
             </div>
-        )
+        );
     } else {
         return (
             <div className="App">
@@ -92,11 +86,10 @@ export default function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path='/final-shopping' element={<FinalShop />} />
-                    <Route path='/geo' element={<Geo />} />
+                    <Route path="/final-shopping" element={<FinalShop />} />
+                    <Route path="/userprofile" element={<UserConfig />} />
 
-                    <Route path='/userprofile' element={<UserConfig />} />
-
+                    <Route path="/userprofile" element={<UserConfig />} />
                 </Routes>
                 <Footer />
             </div>
