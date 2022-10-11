@@ -51,14 +51,14 @@ export default function Login() {
       password: res.profileObj.googleId,
     };
      emailLogin = res.profileObj.email;
-    console.log(emailLogin);
+    console.log(emailLogin, "estoy dentro");
     dispatch(createUsers(user));
     navigate("/welcome");
   }
   function handleFailure(err) {
     console.log("failed:", err);
   }
-console.log(emailLogin);
+console.log(emailLogin, "estoy afuera");
   useEffect(() => {
     gapi.load("client:auth2", () => {
       gapi.auth2.init({ clientId: clientId });
