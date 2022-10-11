@@ -21,7 +21,7 @@ import Card3 from "./Card3";
 
 const secondaryBox = {
   display: "flex",
-  flex: "1",
+  flex: 1,
 };
 
 const sideBox = {
@@ -340,13 +340,13 @@ export default function Categorys() {
             display={"grid"}
           >
 
-            <Box justifyContent={'center'}>
+            <Box display={"flex"} justifyContent={'center'}>
 
               <h3>CATEGORIAS</h3>
 
             </Box>
 
-            <Box>
+            <Box display={"flex"} flexDirection={"column"}>
               {reduxState &&
                 reduxState.map((e) => (
 
@@ -371,10 +371,12 @@ export default function Categorys() {
           </Box>
           <Box justifyContent={"center"} alignItems="center" display={"grid"}>
 
-
+          <Box display={"flex"} justifyContent={'center'}>
 
             <h3>MARCAS</h3>
-            <Box>
+
+            </Box>
+            <Box display={"flex"} flexDirection={"column"}>
               {reduxState3 &&
                 reduxState3.map((e) => (
 

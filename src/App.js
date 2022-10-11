@@ -1,4 +1,4 @@
-import './App.css';
+
 import Contact from './components/Contact.jsx';
 import Detail from './components/Detail';
 import { Route, Routes } from 'react-router-dom';
@@ -18,6 +18,7 @@ import Login from "./components/Login"
 import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
+
 
 
 export default function App() {
@@ -58,6 +59,7 @@ export default function App() {
                     <Route path="/ensayo" element={<Ensayo />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     <Route path='/final-shopping' element={<FinalShop />} />
+         
                 </Routes>
                 <Footer />
             </div>
@@ -82,6 +84,7 @@ export default function App() {
                     <Route path="/ensayo" element={<Ensayo />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     <Route path='/final-shopping' element={<FinalShop />} />
+                  
                 </Routes>
                 <Footer />
             </div>
