@@ -61,7 +61,7 @@ export default function Welcome() {
                 <Grid>
                     <CardContent>
                         <Typography gutterBottom variant="h3">
-                            Welcome {localStorage.name && localStorage.name}!
+                            Welcome {localStorage.name && localStorage.name}
                         </Typography>
                     </CardContent>
 

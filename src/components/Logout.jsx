@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/actions";
+import { clearCart } from "../redux/actions/cart-actions";
 import sendCart from "../redux/actions/sendCart";
 
 function Logout() {
@@ -16,10 +17,11 @@ function Logout() {
         localStorage.removeItem('name');
         localStorage.removeItem('isAdmin');
         localStorage.removeItem('id');
+        dispatch(clearCart())
         dispatch(logoutUser());
         navigate("/");
     }, [dispatch]);
-
+    
     return <div>Logout</div>;
 }
 
