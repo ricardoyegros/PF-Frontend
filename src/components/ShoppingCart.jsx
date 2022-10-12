@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography, Alert } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -71,7 +71,7 @@ return (
           }
         />
       ))
-    ) : <p>"Carrito Vacio"</p>
+    ) : <Box display={"flex"} justifyContent={"center"} alignItems={"center"}><Alert severity="error">No se encontraron Productos!</Alert></Box>
     }
     <Box m={5}>
       <Box display={"flex"} justifyContent={"flex-end"} width="87%" borderBottom="2px solid rgba(8,8,8,0.10)" >
