@@ -11,13 +11,13 @@ function Logout() {
     const navigate = useNavigate();
     let email = localStorage.email;
     useEffect(() => {
+        dispatch(clearCart(email))
         JSON.parse(localStorage.state).storage.cart.map(e => dispatch(sendCart(email, e.name, e.salePrice, e.images[0].url, e.quantity)));
         localStorage.removeItem('token');
         localStorage.removeItem('email');
         localStorage.removeItem('name');
         localStorage.removeItem('isAdmin');
         localStorage.removeItem('id');
-        dispatch(clearCart())
         dispatch(logoutUser());
         navigate("/");
     }, [dispatch]);
