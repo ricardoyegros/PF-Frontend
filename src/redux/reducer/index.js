@@ -9,6 +9,7 @@ import userIdReducer from "./userIdReducer";
 import shoppingCartReducer from "./shoppingCartReducer";
 import reviewsReducer from "./reviewsReducer";
 import allItemsCartReducer from "./allItemsCartReducer";
+import geoReducer from "./geoReducer"
 
 export default combineReducers({
     allProductsReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
     userIdReducer,
     shoppingCartReducer,
     reviewsReducer,
-    allItemsCartReducer
+    allItemsCartReducer,
+    geoReducer
 });
