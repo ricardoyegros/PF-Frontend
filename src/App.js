@@ -42,7 +42,7 @@ export default function App() {
         window.localStorage.setItem('name', name);
         window.localStorage.setItem('id', idUser + '');
         window.localStorage.setItem('adress', address);
-        window.localStorage.setitem('identification', identification);
+        //window.localStorage.setitem('identification', identification);
     };
 
 

@@ -10,7 +10,8 @@ import {loadState, saveData} from "./localStorage/localStorage"
 
 store.subscribe(()=>{
   saveData({
-    storage: store.getState().shoppingCartReducer
+    storage: store.getState().shoppingCartReducer,
+    dataBaseStorage : store.getState().allItemsCartReducer
   })
 })
 
