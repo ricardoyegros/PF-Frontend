@@ -18,6 +18,7 @@ import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, isInUse, preFilter, getIdUsers } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
+import { UserConfig } from "./UserConfig";
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -137,7 +138,7 @@ export default function Navbar() {
                 <div>
                     <Linkdom to={"/welcome"} style={{ "textDecoration": "none", "color": "black" }}>
 
-                        <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+                        <MenuItem onClick={handleMenuClose}><UserConfig/></MenuItem>
 
                     </Linkdom>
                     <Linkdom to={"/logout"} style={{ "textDecoration": "none", "color": "black" }}>
