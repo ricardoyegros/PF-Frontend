@@ -21,6 +21,7 @@ import { Navbar2 } from "./components/Navbar2";
 import { Home2 } from "./components/Home2";
 import { UserProfile } from "./components/UserProfile.jsx";
 import { UserConfig } from "./components/UserConfig.jsx";
+import Sidebar from "./components/dashboard/Sidebar.jsx";
 
 export default function App() {
     const idUser = useSelector((state) => state.usersReducers.user.id);
