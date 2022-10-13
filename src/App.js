@@ -69,7 +69,7 @@ export default function App() {
                     <Route path='/userprofile' element={<UserConfig />} />
 
                 </Routes>
-                <Footer />
+                <Footer />g
             </div>
         )
     } else {
