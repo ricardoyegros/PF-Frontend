@@ -15,7 +15,6 @@ export default function detailProductReducer(state = initialState, action) {
             detailProduct : action.payload
            } 
         case CLEAR:
-            console.log(action.payload,"reducer")
             return{
             ...state,
             detailProduct: action.payload

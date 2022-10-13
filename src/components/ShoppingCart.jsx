@@ -1,11 +1,10 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography , Alert } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
-import { paymentMethod } from "../redux/actions/payment";
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();
@@ -13,7 +12,7 @@ export default function ShoppingCart() {
   let cart = useSelector((state) => state.shoppingCartReducer.cart);
   let cartUser = useSelector((state) => state.allItemsCartReducer.cartItems);
   const data = loadState();
-  // console.log(data.storage);
+
   function handleButton3(e) {
     dispatch(clearCart());
   }
@@ -24,15 +23,19 @@ export default function ShoppingCart() {
     dispatch(cartPost(data.storage.cart))
   navigate("/final-shopping");
 }
-console.log(cartUser, "dsc")
-if(cartUser.length > 0) cart = [...cartUser]
+
+if(cartUser.length > 0)
+{ cart = data.dataBaseStorage.cartItems
+} else {
+  cart = data.storage.cart
+}
 let totalCarrito = 0;
 for (let i = 0; i < cart.length; i++) {
   let subtotal = cart[i].quantity * cart[i].salePrice;
   totalCarrito = totalCarrito + subtotal;
 }
 
-console.log(cart, "soyCart")
+
 return (
   <>
     <Typography variant={"h3"} m={2}>Carrito de Compras</Typography>
@@ -57,7 +60,7 @@ return (
       </Grid>
     </Grid>
     {cart.length ? (
-      cart?.map((products, i) => (
+     cart?.map((products, i) => (
         <Cart
           key={i}
           id={products.id}
@@ -71,7 +74,7 @@ return (
           }
         />
       ))
-    ) : <p>"Carrito Vacio"</p>
+    ) : <Box display={"flex"} justifyContent={"center"} alignItems={"center"}><Alert severity="error">No se encontraron Productos!</Alert></Box>
     }
     <Box m={5}>
       <Box display={"flex"} justifyContent={"flex-end"} width="87%" borderBottom="2px solid rgba(8,8,8,0.10)" >

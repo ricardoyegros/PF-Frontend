@@ -12,7 +12,7 @@ import Welcome from './components/Welcome';
 import ShoppingCart from './components/ShoppingCart';
 import Dashboard from './components/dashboard/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
-import Ensayo from './components/Ensayo';
+
 import Customers from './components/Customers';
 import Login from "./components/Login"
 import Logout from "./components/Logout"
@@ -20,7 +20,9 @@ import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
 import { Home2 } from './components/Home2';
-import Geo from './components/Geo.jsx';
+import { UserProfile } from './components/UserProfile.jsx';
+import { UserConfig } from './components/UserConfig.jsx';
+import  Geo  from "./components/Geo"
 
 
 
@@ -31,6 +33,8 @@ export default function App() {
     const email = useSelector(state => state.usersReducers.user.email);
     const isAdmin = useSelector(state => state.usersReducers.user.isAdmin);
     const name = useSelector(state => state.usersReducers.user.name);
+    const address = useSelector(state => state.usersReducers.user.address);
+    const identification = useSelector(state => state.usersReducers.identification);
 
     if (token) {
         window.localStorage.setItem('token', token);
@@ -38,14 +42,16 @@ export default function App() {
         window.localStorage.setItem('isAdmin', isAdmin);
         window.localStorage.setItem('name', name);
         window.localStorage.setItem('id', idUser + '');
+        window.localStorage.setItem('adress', address);
+        //window.localStorage.setitem('identification', identification);
     };
 
-    console.log(token);
+
 
     if (!window.localStorage.token) {
         return (
             <div className="App">
-                <Navbar/>
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<Categorys />} />
                     <Route path="/contacto" element={<Contact />} />
@@ -59,11 +65,12 @@ export default function App() {
                     <Route path="/passwordReset" element={<Login />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
-                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
-                    
-         
+
+
+                    <Route path='/userprofile' element={<UserConfig />} />
+
                 </Routes>
                 <Footer />
             </div>
@@ -80,16 +87,16 @@ export default function App() {
                     <Route path="/creacion" element={<CreateForm />} />
                     <Route path="/updateprofile" element={<ActualizarData />} />
                     <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
-                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
                     <Route path='/geo' element={<Geo />} />
-                  
+
+                    <Route path='/userprofile' element={<UserConfig />} />
+
                 </Routes>
                 <Footer />
             </div>

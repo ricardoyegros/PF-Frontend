@@ -5,7 +5,6 @@
 /.pnp
 .pnp.js
 package-lock.json
-package.json
 
 # testing
 /coverage
@@ -127,7 +126,6 @@ dist
 
 # package-lock.json
 package-lock.json
-package.json
 
 # prettierrc.json
 prettierrc.json
