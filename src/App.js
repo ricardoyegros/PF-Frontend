@@ -33,7 +33,7 @@ export default function App() {
     const isAdmin = useSelector(state => state.usersReducers.user.isAdmin);
     const name = useSelector(state => state.usersReducers.user.name);
     const address = useSelector(state => state.usersReducers.user.address);
-    const identification = useSelector(state => state.usersReducers.identification);
+    //const identification = useSelector(state => state.usersReducers.identification);
 
     if (token) {
         window.localStorage.setItem('token', token);
