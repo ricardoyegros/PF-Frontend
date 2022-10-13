@@ -12,7 +12,7 @@ import Welcome from './components/Welcome';
 import ShoppingCart from './components/ShoppingCart';
 import Dashboard from './components/dashboard/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
-import Ensayo from './components/Ensayo';
+
 import Customers from './components/Customers';
 import Login from "./components/Login"
 import Logout from "./components/Logout"
@@ -64,8 +64,7 @@ export default function App() {
                     <Route path="/passwordReset" element={<Login />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
-                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path="/dashboard" element={<Dashboard />} /> 
                     <Route path='/final-shopping' element={<FinalShop />} />
                     <Route path='/userprofile' element={<UserConfig />} />
 
@@ -85,13 +84,11 @@ export default function App() {
                     <Route path="/creacion" element={<CreateForm />} />
                     <Route path="/updateprofile" element={<ActualizarData />} />
                     <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
-                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
                     <Route path='/userprofile' element={<UserConfig />} />
 
