@@ -47,7 +47,7 @@ export default function Welcome() {
 
     function handleSubmitEnsayo(e) {
         e.preventDefault();
-        navigate('/ensayo');
+        navigate('/dashboard');
     }
 
     function handleSubmitCart(e){

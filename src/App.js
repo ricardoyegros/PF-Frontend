@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
 import { Home2 } from './components/Home2';
+import Sidebar from './components/dashboard/Sidebar.jsx';
 
 
 
@@ -56,8 +57,7 @@ export default function App() {
                     <Route path="/passwordReset" element={<Login />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
-                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path="/dashboard" element={<Dashboard />} /> 
                     <Route path='/final-shopping' element={<FinalShop />} />
          
                 </Routes>
@@ -80,8 +80,7 @@ export default function App() {
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/ensayo" element={<Ensayo />} />
-                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
                   
                 </Routes>
