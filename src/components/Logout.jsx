@@ -17,7 +17,7 @@ function Logout() {
         localStorage.removeItem('isAdmin');
         localStorage.removeItem('id');
         dispatch(logoutUser());
-        navigate("/");
+        navigate('/');
     }, [dispatch]);
 
     return <div>Logout</div>;

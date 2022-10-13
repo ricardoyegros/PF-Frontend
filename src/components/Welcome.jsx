@@ -46,7 +46,7 @@ export default function Welcome() {
 
     function handleSubmitEnsayo(e) {
         e.preventDefault();
-        navigate('/ensayo');
+        navigate('/dashboard');
     }
 
     function handleSubmitCart(e){
@@ -66,7 +66,7 @@ export default function Welcome() {
                     </CardContent>
 
                     <Box sx={{ flexGrow: 1 }} />
-                    {localStorage.isAdmin === "true" ? (
+                    {localStorage.isAdmin === 'true' ? (
                         <Button color="secondary" variant="contained" onClick={handleSubmitEnsayo}>
                             Go to Dashboard
                         </Button>
