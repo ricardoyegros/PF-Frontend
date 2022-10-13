@@ -20,8 +20,7 @@ import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
 import { Home2 } from './components/Home2';
-import { UserProfile } from './components/UserProfile.jsx';
-import { UserConfig } from './components/UserConfig.jsx';
+import Sidebar from './components/dashboard/Sidebar.jsx';
 
 
 
