@@ -1,27 +1,28 @@
 import { GET_ORDERS_FINISH, GET_ORDERS_ONWAY, GET_ORDERS_PENDING } from "../actions/userProfileActions";
 
 const initialState = {
-    onWay: false,
+    onway: false,
     pendings: false,
     finish: false
 };
 
 export default function userProfileReducer(state = initialState, action) {
-    switch (action.payload) {
+    // console.log(action.payload);
+    switch (action.type) {
         case GET_ORDERS_ONWAY:
             return {
                 ...state,
-                onWay: action.payload
+                onway: action.payload.content
             };
         case GET_ORDERS_PENDING:
             return {
                 ...state,
-                pendings: action.payload
+                pendings: action.payload.content
             };
         case GET_ORDERS_FINISH:
             return {
                 ...state,
-                finish: action.payload
+                finish: action.payload.content
             };
         default :
         return state;

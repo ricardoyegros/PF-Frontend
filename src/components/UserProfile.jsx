@@ -4,28 +4,18 @@ import { getOrdersFinish, getOrdersOnPending, getOrdersOnWay } from '../redux/ac
 import { OrderCard } from './OrderCard';
 
 
-const falseInfo1 = (num, content) => {
-    let arr = [];
-    for (let i = 0; i < num; i++) {
-        arr.push(
-            <OrderCard content={content} />
-        );
-    }
-    return arr;
-};
-
 export const UserProfile = () => {
 
     const dispatch = useDispatch();
 
     const reduxState = useSelector(state => state.userProfileReducer);
 
-    const arr = ['Procesando Pago', 'Preparando Envio', 'Enviado', 'Completado', 'Anulado'];
+    const arr = ['Procesando Pago', 'Preparando', 'Enviado', 'Completado', 'Anulado'];
 
     useEffect(() => {
-        dispatch(getOrdersOnWay(localStorage.id , 'Preparando Envio'));
-        dispatch(getOrdersFinish(localStorage.id, 'Enviado'));
-        dispatch(getOrdersOnPending(localStorage.id, 'Completado'));
+        dispatch(getOrdersOnPending(localStorage.id, 'Preparando'));
+        dispatch(getOrdersOnWay(localStorage.id, 'Enviado'));
+        dispatch(getOrdersFinish(localStorage.id, 'Completado'));
     }, [dispatch]);
 
     const [state, setState] = useState({});
@@ -37,7 +27,10 @@ export const UserProfile = () => {
 
     const handleClick = (e) => {
         handleStyle(e);
+
     };
+
+    console.log(reduxState);
 
     return (
         <>
@@ -50,7 +43,7 @@ export const UserProfile = () => {
                         <div className="collapse" id="collapseExample0">
                             <div className="card card-body">
                                 {
-                                    falseInfo1(3, "En camino")
+                                    reduxState.onway[0] && reduxState.onway.map(e => <OrderCard orderDate={e.id} status={e.status} />)
                                 }
                             </div>
                         </div>
@@ -66,13 +59,12 @@ export const UserProfile = () => {
                             <div className="collapse" id="collapseExample1">
                                 <div className="card card-body" >
                                     {
-                                        falseInfo1(3, "Pendiente")
+                                        reduxState.pendings[0] && reduxState.pendings.map(e => <OrderCard orderDate={e.id} status={e.status} />)
                                     }
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
 
                     <div className="row">
@@ -85,7 +77,7 @@ export const UserProfile = () => {
                             <div className="collapse" id="collapseExample2">
                                 <div className="card card-body">
                                     {
-                                        falseInfo1(3, "Finalizado")
+                                        reduxState.finish[0] && reduxState.finish.map(e => <OrderCard orderDate={e.id} status={e.status} />)
                                     }
                                 </div>
                             </div>

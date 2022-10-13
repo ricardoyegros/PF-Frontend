@@ -12,7 +12,7 @@ export const getOrdersOnWay = (id, state) => async (dispatch) => {
             .then(r => dispatch({
                 type: GET_ORDERS_ONWAY,
                 payload: r.data
-            }));
+            }))
     } catch (error) {
         console.log(error.message);
         return swal('Fallo', error.message, 'error');
