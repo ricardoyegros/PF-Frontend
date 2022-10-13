@@ -5,6 +5,7 @@ function Customers() {
   return (
     <>
     <Sidebar/>
+    <p>Customers</p>
     </>
     
   )

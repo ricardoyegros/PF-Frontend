@@ -12,7 +12,7 @@ import Welcome from './components/Welcome';
 import ShoppingCart from './components/ShoppingCart';
 import Dashboard from './components/dashboard/Dashboard';
 import ForgotPassword from './components/ForgotPassword';
-import Ensayo from './components/Ensayo';
+
 import Customers from './components/Customers';
 import Login from "./components/Login"
 import Logout from "./components/Logout"
