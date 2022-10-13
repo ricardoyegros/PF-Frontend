@@ -1,5 +1,5 @@
 import {DETAIL_PRODUCT } from "../actions";
-import { CLEAR } from "../actions/detail-actions";
+import { CLEAR } from "../actions/detail-actions/detail-actions";
 
 const initialState = {
     detailProduct : []
@@ -14,6 +14,7 @@ export default function detailProductReducer(state = initialState, action) {
             ...state,
             detailProduct : action.payload
            } 
+       
         case CLEAR:
             return{
             ...state,
