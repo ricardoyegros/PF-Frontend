@@ -18,7 +18,10 @@ import Login from "./components/Login"
 import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
-
+import { Navbar2 } from './components/Navbar2';
+import { Home2 } from './components/Home2';
+import { UserProfile } from './components/UserProfile.jsx';
+import { UserConfig } from './components/UserConfig.jsx';
 
 
 
@@ -29,6 +32,8 @@ export default function App() {
     const email = useSelector(state => state.usersReducers.user.email);
     const isAdmin = useSelector(state => state.usersReducers.user.isAdmin);
     const name = useSelector(state => state.usersReducers.user.name);
+    const address = useSelector(state => state.usersReducers.user.address);
+    const identification = useSelector(state => state.usersReducers.identification);
 
     if (token) {
         window.localStorage.setItem('token', token);
@@ -36,14 +41,16 @@ export default function App() {
         window.localStorage.setItem('isAdmin', isAdmin);
         window.localStorage.setItem('name', name);
         window.localStorage.setItem('id', idUser + '');
+        window.localStorage.setItem('adress', address);
+        //window.localStorage.setitem('identification', identification);
     };
 
-    console.log(token);
+
 
     if (!window.localStorage.token) {
         return (
             <div className="App">
-                <Navbar/>
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<Categorys />} />
                     <Route path="/contacto" element={<Contact />} />
@@ -59,7 +66,8 @@ export default function App() {
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} /> 
                     <Route path='/final-shopping' element={<FinalShop />} />
-         
+                    <Route path='/userprofile' element={<UserConfig />} />
+
                 </Routes>
                 <Footer />
             </div>
@@ -82,7 +90,8 @@ export default function App() {
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
-                  
+                    <Route path='/userprofile' element={<UserConfig />} />
+
                 </Routes>
                 <Footer />
             </div>

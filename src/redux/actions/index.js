@@ -105,7 +105,7 @@ export function updateUser(input, token) {
 export function loginUser(input) {
     return async (dispatch) => {
         try {
-            let userData = await axios.post('http://localhost:3001/users/login', input);
+            let userData = await axios.post('https://techstore123.herokuapp.com/users/login', input);
             return dispatch({ type: LOGIN_USER, payload: userData.data });
         } catch (error) {
             swal("Error", "Usuario o contraseña incorrecta", "error");

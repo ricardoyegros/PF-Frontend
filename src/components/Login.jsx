@@ -28,7 +28,6 @@ export default function Login() {
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
-  
   let emailLogin ;
   function handleSubmit(e) {
     e.preventDefault();
@@ -50,6 +49,7 @@ export default function Login() {
     dispatch(createUsers(user));
     emailLogin = user.email;
     console.log(emailLogin, "estoy dentro");
+    dispatch(getAllCartItems(emailLogin));
     navigate("/welcome");
   }
   function handleFailure(err) {
