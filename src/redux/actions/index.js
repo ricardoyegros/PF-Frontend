@@ -87,7 +87,7 @@ export function getIdUsers(id, token) {
     };
 }
 
-export function updateUser(input, token, id) {
+export function updateUser(input, token) {
     return async (dispatch) => {
         try {
             let updateUser = await axios.put(`https://techstore123.herokuapp.com/users/updateprofile`, input, {
@@ -105,10 +105,7 @@ export function updateUser(input, token, id) {
 export function loginUser(input) {
     return async (dispatch) => {
         try {
-            let userData = await axios.post(
-                "https://techstore123.herokuapp.com/users/login",
-                input
-            );
+            let userData = await axios.post('https://techstore123.herokuapp.com/users/login', input);
             return dispatch({ type: LOGIN_USER, payload: userData.data });
         } catch (error) {
             swal("Error", "Usuario o contraseña incorrecta", "error");

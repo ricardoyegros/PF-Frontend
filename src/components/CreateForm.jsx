@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllProducts, createProduct } from "../redux/actions/index.js";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/dashboard/Sidebar"
 import {
   Typography,
   Card,
@@ -80,11 +81,13 @@ export default function CreateForm() {
       <Typography gutterBottom variant="h3" align="center">
         TechStore - Create Product
       </Typography>
+      <Sidebar/>
       <Card style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }}>
         <CardContent>
           <Typography gutterBottom variant="h5">
             Upload a New Product!
           </Typography>
+          
           <form onSubmit={handleSubmit}>
             <Grid container spacing={1}>
               <Grid xs={12} item>

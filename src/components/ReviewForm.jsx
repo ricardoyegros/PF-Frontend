@@ -2,7 +2,7 @@ import { Button, List, ListItem, MenuItem, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getReviews, postReview } from '../redux/actions/reviewsActions';
-import { EditReviewForm } from './EditReviewForm';
+import  { EditReviewForm } from './EditReviewForm'
 
 export const ReviewForm = ({ productId, setState2 }) => {
 
