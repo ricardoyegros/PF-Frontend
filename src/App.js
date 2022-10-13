@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
 import { Home2 } from './components/Home2';
+import Geo from './components/Geo.jsx';
 
 
 
@@ -61,6 +62,7 @@ export default function App() {
                     <Route path="/ensayo" element={<Ensayo />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     <Route path='/final-shopping' element={<FinalShop />} />
+                    
          
                 </Routes>
                 <Footer />
@@ -86,6 +88,7 @@ export default function App() {
                     <Route path="/ensayo" element={<Ensayo />} />
                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                     <Route path='/final-shopping' element={<FinalShop />} />
+                    <Route path='/geo' element={<Geo />} />
                   
                 </Routes>
                 <Footer />
