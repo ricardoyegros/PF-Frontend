@@ -1,4 +1,3 @@
-
 import Contact from './components/Contact.jsx';
 import Detail from './components/Detail';
 import { Route, Routes } from 'react-router-dom';
@@ -20,7 +19,8 @@ import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
 import { Home2 } from './components/Home2';
-import Sidebar from './components/dashboard/Sidebar.jsx';
+import { UserProfile } from './components/UserProfile.jsx';
+import { UserConfig } from './components/UserConfig.jsx';
 
 
 
@@ -49,7 +49,7 @@ export default function App() {
     if (!window.localStorage.token) {
         return (
             <div className="App">
-                <Navbar/>
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<Categorys />} />
                     <Route path="/contacto" element={<Contact />} />
@@ -96,4 +96,4 @@ export default function App() {
             </div>
         );
     }
-}
+};

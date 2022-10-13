@@ -1,15 +1,11 @@
-import { Box, Button, Grid, Typography , Alert } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
-<<<<<<< HEAD
-=======
 import { paymentMethod } from "../redux/actions/payment";
-import Loading from "./Loading";
->>>>>>> c27df44 (arregle estilos y agregue loader)
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();
@@ -17,7 +13,7 @@ export default function ShoppingCart() {
   let cart = useSelector((state) => state.shoppingCartReducer.cart);
   let cartUser = useSelector((state) => state.allItemsCartReducer.cartItems);
   const data = loadState();
-
+  // console.log(data.storage);
   function handleButton3(e) {
     dispatch(clearCart());
   }
@@ -26,8 +22,7 @@ export default function ShoppingCart() {
   }
   function handleButtonShop(e) {
     dispatch(cartPost(data.storage.cart))
-    if(!localStorage.token) return navigate('/login');
-    return navigate('/final-shopping');
+  navigate("/final-shopping");
 }
 console.log(cartUser, "dsc")
 if(cartUser.length > 0) cart = [...cartUser]
@@ -62,7 +57,7 @@ return (
       </Grid>
     </Grid>
     {cart.length ? (
-     cart?.map((products, i) => (
+      cart?.map((products, i) => (
         <Cart
           key={i}
           id={products.id}
@@ -76,10 +71,8 @@ return (
           }
         />
       ))
-    ) : (
-      
-      <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={25}> <Alert severity="error">No se encontraron Productos!</Alert></Box>
-    )}
+    ) : <p>"Carrito Vacio"</p>
+    }
     <Box m={5}>
       <Box display={"flex"} justifyContent={"flex-end"} width="87%" borderBottom="2px solid rgba(8,8,8,0.10)" >
         <Box mr={15}>
