@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
+<<<<<<< HEAD
+=======
+import { paymentMethod } from "../redux/actions/payment";
+import Loading from "./Loading";
+>>>>>>> c27df44 (arregle estilos y agregue loader)
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();
@@ -71,8 +76,10 @@ return (
           }
         />
       ))
-    ) : <Box display={"flex"} justifyContent={"center"} alignItems={"center"}><Alert severity="error">No se encontraron Productos!</Alert></Box>
-    }
+    ) : (
+      
+      <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={25}> <Alert severity="error">No se encontraron Productos!</Alert></Box>
+    )}
     <Box m={5}>
       <Box display={"flex"} justifyContent={"flex-end"} width="87%" borderBottom="2px solid rgba(8,8,8,0.10)" >
         <Box mr={15}>

@@ -155,27 +155,28 @@ export default function Detail() {
             >Agregar al carrito</Button>
             </Box>
       </StyledBoxPrice>
+          {(detailProduct.name && detailProduct.images && detailProduct.description) ? 
           
-        <StyledBox >
+<StyledBox >
 
-          <Box width={"30%"}
-              sx={{display:{
-                xs:"none",
-                md:"flex"
-              }}}
-            justifyContent={"center"}
-            m={5}   >
-            <Box
-              component="img"
-              src={detailProduct.images && detailProduct.images[0]?.url || 'https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg'}
-              />
-            
-          </Box>
-          <Box width={"60%"}
-           height={450} 
-           display={"flex"}
-           flexDirection={"column"}
-           alignItems={"flex-start"}
+<Box width={"30%"}
+    sx={{display:{
+      xs:"none",
+      md:"flex"
+    }}}
+  justifyContent={"center"}
+  m={5}   >
+  <Box
+    component="img"
+    src={detailProduct.images && detailProduct.images[0]?.url}
+    />
+  
+</Box>
+<Box width={"60%"}
+ height={450} 
+ display={"flex"}
+ flexDirection={"column"}
+ alignItems={"flex-start"}
 >
               <Typography variant="h6" component="p" >
                 {`categoria > ${detailProduct.name && detailProduct.category.name}`}
