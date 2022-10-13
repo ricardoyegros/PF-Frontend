@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUsers } from "../redux/actions/index.js";
 import MenuItem from "@mui/material/MenuItem";
-
+import { styled } from '@mui/material/styles';
 import {
     Typography,
     Card,
@@ -11,9 +11,22 @@ import {
     Grid,
     TextField,
     Button,
+    Box
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
+
+
+const StyledBox = styled(Box)(({ }) => ({
+    margin:"40px",
+    padding:"40px",
+    display: "flex",
+    width: "600px",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent:"center",
+    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"
+  }));
 
 export default function CreateUsers() {
     const dispatch = useDispatch();
@@ -44,21 +57,22 @@ export default function CreateUsers() {
 
     return (
         <>
+        <Box
+        display={"flex"}
+        justifyContent={"center"}>
+        <StyledBox>
             <Typography gutterBottom variant="h3" align="center">
-                TechStore - Register
+                Registro
             </Typography>
             <Card
                 style={{ maxWidth: 450, margin: "0 auto", padding: "20px 5px" }}
             >
                 <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        Create a New User!
-                    </Typography>
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={1}>
                             <Grid xs={12} item>
                                 <TextField
-                                    label="Name..."
+                                    label="Nombre..."
                                     placeholder="Please enter you name..."
                                     variant="outlined"
                                     fullWidth
@@ -70,7 +84,7 @@ export default function CreateUsers() {
                             </Grid>
                             <Grid xs={12} item>
                                 <TextField
-                                    label="last name..."
+                                    label="Apellido..."
                                     placeholder="Please enter you last name..."
                                     variant="outlined"
                                     fullWidth
@@ -83,7 +97,7 @@ export default function CreateUsers() {
                             <Grid xs={12} item>
                                 <TextField
                                     select
-                                    label="Type Identification"
+                                    label="Tipo de identificacion"
                                     placeholder="Please enter a type identification..."
                                     variant="outlined"
                                     fullWidth
@@ -104,7 +118,7 @@ export default function CreateUsers() {
                             </Grid>
                             <Grid xs={12} item>
                                 <TextField
-                                    label="identification"
+                                    label="Nmero de identificacion"
                                     placeholder="Please enter you number of identification..."
                                     variant="outlined"
                                     type="number"
@@ -117,7 +131,7 @@ export default function CreateUsers() {
                             </Grid>
                             <Grid xs={12} item>
                                 <TextField
-                                    label="Contact"
+                                    label="Numero de contacto"
                                     placeholder="Please enter you number of phone..."
                                     variant="outlined"
                                     type="number"
@@ -143,7 +157,7 @@ export default function CreateUsers() {
                             </Grid>
                             <Grid xs={12} item>
                                 <TextField
-                                    label="Address"
+                                    label="Direccion (calle y numero)"
                                     placeholder="Please enter you actual address..."
                                     variant="outlined"
                                     fullWidth
@@ -156,7 +170,7 @@ export default function CreateUsers() {
 
                             <Grid xs={12} item>
                                 <TextField
-                                    label="Password"
+                                    label="Constraseña"
                                     placeholder="Please create a password..."
                                     variant="outlined"
                                     fullWidth
@@ -175,13 +189,15 @@ export default function CreateUsers() {
                                     fullWidth
                                     disable={!input.email || !input.password}
                                 >
-                                    Create !!
+                                    Crear Usuario
                                 </Button>
                             </Grid>
                         </Grid>
                     </form>
                 </CardContent>
             </Card>
+     </StyledBox> 
+     </Box>  
         </>
     );
 }
