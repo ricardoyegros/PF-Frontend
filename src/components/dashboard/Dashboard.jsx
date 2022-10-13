@@ -37,7 +37,8 @@ export default function Dashboard() {
     const dispatch = useDispatch();
 
     const user = useSelector((state) => state.usersReducers.user);
-    const token = useSelector((state) => state.usersReducers.token);
+    //const token = useSelector((state) => state.usersReducers.token);
+    let token = localStorage.token;
     
         return(
             <>

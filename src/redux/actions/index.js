@@ -14,6 +14,7 @@ export const IS_IN_USE = 'IS_IN_USE';
 export const GET_USER_ID = 'GET_USER_ID';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const GET_ALL_USER = 'GET_ALL_USER';
 
 export function getAllProducts(page) {
     return async function (dispatch) {
@@ -119,6 +120,27 @@ export function logoutUser() {
         return dispatch({ type: LOGOUT_USER, payload: [] });
     };
 }
+
+export function getUsers(token){
+    return async (dispatch)=>{
+        try {
+            let allUser = await axios.get('https://techstore123.herokuapp.com/users/', {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            return dispatch({
+                type: GET_ALL_USER,
+                payload: allUser.data
+            });
+                        
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+};
+
+
+
 
 //==================================  fin julian
 

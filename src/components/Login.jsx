@@ -23,7 +23,7 @@ const StyledBox = styled(Box)(({}) => ({
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector((state) => state.usersReducers.token);
+  //const token = useSelector((state) => state.usersReducers.token);
   const [input, setInput] = useState({});
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
