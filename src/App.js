@@ -24,6 +24,7 @@ import { UserProfile } from './components/UserProfile.jsx';
 import { UserConfig } from './components/UserConfig.jsx';
 import  Geo  from "./components/Geo"
 import { Sucursales } from "./components/dashboard/Sucursales"
+import { Review } from './components/dashboard/Reviews.jsx';
 
 
 
@@ -94,6 +95,7 @@ export default function App() {
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/admin/sucursales" element={<Sucursales/>}/>
+                    <Route path="/admin/comentarios" element={<Review/>}/>
                     <Route path='/final-shopping' element={<FinalShop />} />
                     <Route path='/geo' element={<Geo />} />
 

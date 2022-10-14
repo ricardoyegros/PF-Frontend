@@ -2,7 +2,7 @@ import { TextField, Typography , Button , Box } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import { styled } from '@mui/material/styles';
-import { GoogleMap } from "./Map"
+import { Map } from "./Map"
 
 
 const StyledBox = styled(Box)(({ }) => ({
@@ -66,7 +66,7 @@ export function Sucursales(){
                      Crear
                     </Button>
             </form>
-       {/*   <GoogleMap/> */}
+          <Map/> 
        </StyledBox>
         </>
     )
