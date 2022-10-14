@@ -15,24 +15,21 @@ function Customers() {
     let token = localStorage.token;
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     //const [users, setUsers] = useState(allUser);
 
     useEffect(() => {
         dispatch(getUsers(token));
-    }, [dispatch, token]);
+    }, [dispatch]);
 
-    console.log(allUser);
-    console.log(token);
 
     return (
         <>
             <Sidebar />
-
             <Grid container spacing={6} justifyContent="center">
-                {allUser &&
-                    allUser.rows.map((c) => (
+                {allUser.length > 0 ?
+                    allUser.map((c) => (
                         <Grid item mb={5} key={c.id}>
                             <Linkdom to={`/admin/customers/customer/${c.id}`}>
                                 <CarCustomer
@@ -43,7 +40,13 @@ function Customers() {
                                 />
                             </Linkdom>
                         </Grid>
-                    ))}
+                    )) : <h1>Cargando</h1> }
+                    {/* setTimeout(() => {
+                        
+                    // }, timeout)
+                    // <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}>
+                    //     <Loading />
+                    // </Box>} */}
             </Grid>
         </>
     );

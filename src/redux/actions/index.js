@@ -129,7 +129,7 @@ export function getUsers(token){
             });
             return dispatch({
                 type: GET_ALL_USER,
-                payload: allUser.data
+                payload: allUser.data.rows
             });
                         
         } catch (error) {
