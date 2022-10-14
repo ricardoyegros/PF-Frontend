@@ -30,8 +30,6 @@ export const UserProfile = () => {
 
     };
 
-    console.log(reduxState);
-
     return (
         <>
             <div className="container text-center">
@@ -43,7 +41,7 @@ export const UserProfile = () => {
                         <div className="collapse" id="collapseExample0">
                             <div className="card card-body">
                                 {
-                                    reduxState.onway[0] && reduxState.onway.map(e => <OrderCard orderDate={e.id} status={e.status} />)
+                                    reduxState.onway[0] && reduxState.onway.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} />)
                                 }
                             </div>
                         </div>
@@ -59,7 +57,7 @@ export const UserProfile = () => {
                             <div className="collapse" id="collapseExample1">
                                 <div className="card card-body" >
                                     {
-                                        reduxState.pendings[0] && reduxState.pendings.map(e => <OrderCard orderDate={e.id} status={e.status} />)
+                                        reduxState.pendings[0] && reduxState.pendings.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} />)
                                     }
                                 </div>
                             </div>
@@ -77,7 +75,7 @@ export const UserProfile = () => {
                             <div className="collapse" id="collapseExample2">
                                 <div className="card card-body">
                                     {
-                                        reduxState.finish[0] && reduxState.finish.map(e => <OrderCard orderDate={e.id} status={e.status} />)
+                                        reduxState.finish[0] && reduxState.finish.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} />)
                                     }
                                 </div>
                             </div>
