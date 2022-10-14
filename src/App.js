@@ -90,12 +90,10 @@ export default function App() {
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    {(window.localStorage.isAdmin === "true")?(<Route path="/dashboard" element={<Dashboard />} />) :(<Route path="/dashboard" element={<UserConfig/>}/>)}
                     <Route path='/final-shopping' element={<FinalShop />} />
                     <Route path='/geo' element={<Geo />} />
-
                     <Route path='/userprofile' element={<UserConfig />} />
-
                 </Routes>
                 <Footer />
             </div>
