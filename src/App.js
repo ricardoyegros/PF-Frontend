@@ -21,7 +21,7 @@ import { Navbar2 } from "./components/Navbar2";
 import { Home2 } from "./components/Home2";
 import { UserProfile } from "./components/UserProfile.jsx";
 import { UserConfig } from "./components/UserConfig.jsx";
-import Sidebar from "./components/dashboard/Sidebar.jsx";
+import CustomerDetail from "../src/components/dashboard/CustomerDetail";
 
 export default function App() {
     const idUser = useSelector((state) => state.usersReducers.user.id);
@@ -30,6 +30,7 @@ export default function App() {
     const isAdmin = useSelector((state) => state.usersReducers.user.isAdmin);
     const name = useSelector((state) => state.usersReducers.user.name);
     const address = useSelector((state) => state.usersReducers.user.address);
+
     const identification = useSelector(
         (state) => state.usersReducers.identification
     );
@@ -64,10 +65,13 @@ export default function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/final-shopping" element={<FinalShop />} />
                     <Route path="/userprofile" element={<UserConfig />} />
-
+                    <Route
+                        path="/admin/customers/customer/:id"
+                        element={<CustomerDetail />}
+                    />
                     <Route path="/userprofile" element={<UserConfig />} />
                 </Routes>
-                <Footer />g
+                <Footer />
             </div>
         );
     } else {
@@ -89,6 +93,10 @@ export default function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/final-shopping" element={<FinalShop />} />
                     <Route path="/userprofile" element={<UserConfig />} />
+                    <Route
+                        path="/admin/customers/customer/:id"
+                        element={<CustomerDetail />}
+                    />
 
                     <Route path="/userprofile" element={<UserConfig />} />
                 </Routes>

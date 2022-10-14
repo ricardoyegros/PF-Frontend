@@ -32,7 +32,7 @@ function Customers() {
 
             <Grid container spacing={6} justifyContent="center">
                 {allUser &&
-                    allUser.rows.map((c) => (
+                    allUser.map((c) => (
                         <Grid item mb={5} key={c.id}>
                             <Linkdom to={`/admin/customers/customer/${c.id}`}>
                                 <CarCustomer
