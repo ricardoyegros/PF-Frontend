@@ -1,0 +1,65 @@
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getGeolocation } from "../redux/actions/geoActions"
+
+
+function Geo() {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getGeolocation());
+  }, [dispatch]);
+
+  const geo = useSelector((state) => state.geoReducer.geo);
+  console.log(geo)
+
+  const defaultPosition = {
+    lat: -16.495576292607318,
+    lng: -68.1334731733453
+  };
+
+  const pos = [
+    {
+      lat: -16.495576292607318,
+      lng: -68.1334731733453,
+      title: "titulo 1"
+    },
+    {
+      lat: -16.49856239536191,
+      lng: -68.12415571869423,
+      title: "titulo 2"
+    }
+  ]
+
+  const containerStyle = {
+    width: '600px',
+    height: '400px'
+  };
+  const title = "Plazon"
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyAOI1Z-IoNqr0_-o0XnWapHbivPg0Hhnj4"
+  })
+  if (!isLoaded) return <div>Loading...</div>;
+
+  return (
+    <div>
+      { geo &&
+        <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={defaultPosition}
+        zoom={13}
+
+      >
+        {/* <Marker position={defaultPosition} title={title} /> */}
+        {geo.map((p) => (
+          
+          <Marker position={{ lat: p.latitude, lng: p.longitude }} title={p.name} />
+        ))}
+      </GoogleMap>}
+
+    </div>
+  )
+}
+
+export default Geo
