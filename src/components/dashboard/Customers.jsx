@@ -31,8 +31,8 @@ function Customers() {
             <Sidebar />
 
             <Grid container spacing={6} justifyContent="center">
-                {allUser[0] &&
-                    allUser.rows[0].map((c) => (
+                {allUser &&
+                    allUser.rows.map((c) => (
                         <Grid item mb={5} key={c.id}>
                             <Linkdom to={`/admin/customers/customer/${c.id}`}>
                                 <CarCustomer

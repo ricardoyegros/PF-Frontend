@@ -16,8 +16,9 @@ import {
     Button,
     createTheme,
 } from "@mui/material";
-
+import { styled, alpha } from "@mui/material/styles";
 import Sidebar from "./Sidebar";
+import SearchAppBar from "./SearchAppBar";
 
 export default function Dashboard() {
     const theme = createTheme({
@@ -51,8 +52,11 @@ export default function Dashboard() {
         <>
             <Typography gutterBottom variant="h3" align="center">
                 TechStore - Admin Dashboard !!
+                <SearchAppBar />
             </Typography>
+
             <Sidebar />
+
             <ThemeProvider theme={theme}>
                 <Box sx={{ display: "flex" }}>
                     <CssBaseline />
