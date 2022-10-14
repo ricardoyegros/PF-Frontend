@@ -12,12 +12,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { Button, createTheme, Link, Typography } from "@mui/material";
+import { Button, createTheme, Link, ListItem, Typography } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem, isInUse, preFilter, getIdUsers } from "../redux/actions";
 import { Link as Linkdom } from "react-router-dom";
+import { UserConfig } from "./UserConfig";
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -135,11 +136,11 @@ export default function Navbar() {
                 </div>
                 :
                 <div>
-                    <Linkdom to={"/welcome"} style={{ "textDecoration": "none", "color": "black" }}>
+                    <ListItem style={{ "textDecoration": "none", "color": "black" }}>
 
-                        <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+                        <MenuItem onClick={handleMenuClose}><UserConfig/></MenuItem>
 
-                    </Linkdom>
+                    </ListItem>
                     <Linkdom to={"/logout"} style={{ "textDecoration": "none", "color": "black" }}>
 
                         <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>

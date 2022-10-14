@@ -22,6 +22,7 @@ import { Navbar2 } from './components/Navbar2';
 import { Home2 } from './components/Home2';
 import { UserProfile } from './components/UserProfile.jsx';
 import { UserConfig } from './components/UserConfig.jsx';
+import  Geo  from "./components/Geo"
 import { Sucursales } from "./components/dashboard/Sucursales"
 
 
@@ -65,12 +66,14 @@ export default function App() {
                     <Route path="/passwordReset" element={<Login />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/dashboard" element={<Dashboard />} /> 
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
+
+
                     <Route path='/userprofile' element={<UserConfig />} />
 
                 </Routes>
-                <Footer />
+                <Footer />g
             </div>
         )
     } else {
@@ -92,6 +95,8 @@ export default function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/admin/sucursales" element={<Sucursales/>}/>
                     <Route path='/final-shopping' element={<FinalShop />} />
+                    <Route path='/geo' element={<Geo />} />
+
                     <Route path='/userprofile' element={<UserConfig />} />
 
                 </Routes>
