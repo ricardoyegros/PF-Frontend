@@ -446,7 +446,7 @@ export default function Categorys() {
         </div>
       </div>
       <Box
-        justifyContent={"center"} alignItems="center" display={"grid"}
+       display={"flex"} justifyContent={"center"} alignItems={"center"}
       >
         <Pagination
           size="large"
