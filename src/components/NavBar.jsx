@@ -185,7 +185,6 @@ export default function Navbar() {
                     <IconButton size="small" color="inherit">
 
                         <ShoppingCartOutlinedIcon />
-                        <Button>COSA</Button>
                         <p>Shop Cart</p>
                     </IconButton>
                 </Box>
