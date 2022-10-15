@@ -1,15 +1,10 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography, Alert } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
-<<<<<<< HEAD
-=======
-import { paymentMethod } from "../redux/actions/payment";
-import Loading from "./Loading";
->>>>>>> c27df44 (arregle estilos y agregue loader)
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();

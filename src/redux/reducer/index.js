@@ -12,6 +12,7 @@ import allItemsCartReducer from "./allItemsCartReducer";
 import userProfileReducer from "./userProfileReducer";
 import geoReducer from "./geoReducer";
 import allUserReducer from "./allUserReducer";
+import reviewsDashReducer from "./reviewDashreducer";
 
 export default combineReducers({
     allProductsReducer,
@@ -27,4 +28,5 @@ export default combineReducers({
     userProfileReducer,
     geoReducer,
     allUserReducer,
+    reviewsDashReducer
 });
