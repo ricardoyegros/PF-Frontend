@@ -70,6 +70,7 @@ export default function App() {
 
 
                     <Route path='/userprofile' element={<UserConfig />} />
+                    <Route path='/geo' element={<Geo />} />
 
                 </Routes>
                 <Footer />
