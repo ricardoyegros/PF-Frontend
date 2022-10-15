@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../redux/actions/index.js";
 import { getAllCartItems } from "../redux/actions/getCart.js";
 import { useNavigate } from "react-router-dom";
 import { Typography, Box, TextField, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import GoogleLogin from 'react-google-login';
+import { gapi } from 'gapi-script'
+import { createUsers } from "../redux/actions/index.js";
 
-const StyledBox = styled(Box)(({}) => ({
+const StyledBox = styled(Box)(({ }) => ({
     width: 500,
     height: 250,
     padding: 40,
@@ -112,6 +115,14 @@ export default function Login() {
                                     Olvidaste tu contraseña?
                                 </Button>
                             </Box>
+                            <GoogleLogin
+                                clientId="701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com"
+                                buttonText="Log in with Google"
+                                onSuccess={handleLoginGoogle}
+                                onFailure={handleFailure}
+                                cookiePolicy={'single_host_origin'}
+
+                            ></GoogleLogin>
                         </StyledBox>
                     </form>
                 </Grid>
