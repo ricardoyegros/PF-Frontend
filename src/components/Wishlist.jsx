@@ -20,7 +20,7 @@ function Wishlist() {
     return (
         <>
         {products &&
-            products.map((product) => (<p>{product.name}</p>))
+            products.map((product) => (<p>{product}</p>))
         }
         </>
     )

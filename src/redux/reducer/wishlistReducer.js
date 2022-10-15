@@ -19,9 +19,16 @@ export default function reviewsDashReducer (state = initialState, action) {
                 message: action.payload
             };
         case GET_FAVORITE:
+            let fav
+            console.log(action.payload.products)
+            if(action.payload.products.length > 0){
+                console.log("testeando")
+                fav = action.payload.products.map(prod => prod.id )
+            } else {fav = []}
+            //console.log(fav)
             return {
                 ...state,
-                favorite: action.payload
+                favorite: fav
             };
 
         default:

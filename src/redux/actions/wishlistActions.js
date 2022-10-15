@@ -40,8 +40,8 @@ export function getFavorite() {
         try {
             const id = localStorage.id
             const favorites = await axios.get(`http://localhost:3001/favorite?id=${id}`)
-            console.log(favorites.data.products)
-            return dispatch({ type: GET_FAVORITE, payload: favorites.data.products });
+            //console.log(favorites.data.products)
+            return dispatch({ type: GET_FAVORITE, payload: favorites.data });
         } catch (error) {
             console.log(error);
         }

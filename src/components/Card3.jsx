@@ -104,18 +104,20 @@ const cartIcon = {
 
 
 
-export default function Card3({ nombre, imagen, precioVenta, id }) {
+export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    
+    useEffect(() => {
+        setChecked(favorite)
+    }, [favorite])
+    
 
-    const [checked, setChecked] = useState(false);
-    const [product, setProduct] = useState("");
+    const [checked, setChecked] = useState(favorite);
     const dispatch = useDispatch()
-    const productos = useSelector((state) => state.wishlistReducer.favorite);
-    if(id === productos.id){
-        console.log("estado", id)
-        setChecked(true)
-    }
-    console.log(productos)
+    /* const [product, setProduct] = useState("");
+    const productos = useSelector((state) => state.wishlistReducer.favorite); */
+    
+    //console.log(productos)
     const handleChange = (event) => { //dispatch favorites
         setChecked(event.target.checked);
         // console.log(event)
@@ -129,12 +131,12 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
             console.log(localStorage.id)
             dispatch(removeFavorite(localStorage.id,event.target.id))
         }
-        setProduct(event.target.id)
+        //setProduct(event.target.id)
     };
 
-    useEffect(() => {
+    /* useEffect(() => {
         console.log(product)
-    }, [product])
+    }, [product]) */
 
     const handleOnChange = (e) => {
         e.preventDefault();
@@ -146,19 +148,7 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
         console.log(e.target.id)
     }
 
-    useEffect(() => {
-        dispatch(getFavorite())
-        //const test = useSelector((state) => state);
-
-        //setProducts(useSelector((state) => state.whishlistReducer.favorite))
-        //console.log(test)
-        //setProducts(useS)
-        console.log("test")
-        if(id === productos.id){
-            console.log("estado", id)
-            setChecked(true)
-        }
-    }, [dispatch])
+    
 
     return (
         <>
