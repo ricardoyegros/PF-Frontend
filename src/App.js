@@ -68,13 +68,10 @@ export default function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path='/final-shopping' element={<FinalShop />} />
-
-
-                    <Route path='/userprofile' element={<UserConfig />} />
-
+                    <Route path='/final-shopping' element={<FinalShop />}/>
+                    <Route path='/userprofile' element={<UserConfig />}/>
                 </Routes>
-                <Footer />g
+                <Footer/>
             </div>
         )
     } else {
@@ -82,12 +79,12 @@ export default function App() {
             <div className="App">
                 <Navbar2 />
                 <Routes>
-                    <Route path="/" element={<Categorys />} />
-                    <Route path="/contacto" element={<Contact />} />
-                    <Route path="/detalle/:i" element={<Detail />} />
-                    <Route path="/register" element={<CreateUsers />} />
+                    <Route path="/" element={<Categorys/>}/>
+                    <Route path="/contacto" element={<Contact />}/>
+                    <Route path="/detalle/:i" element={<Detail />}/>
+                    <Route path="/register" element={<CreateUsers/>}/>
                     <Route path="/creacion" element={<CreateForm />} />
-                    <Route path="/updateprofile" element={<ActualizarData />} />
+                    <Route path="/updateprofile" element={<ActualizarData/>} />
                     <Route path="/welcome" element={<Welcome />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/passwordReset" element={<ForgotPassword />} />
@@ -97,10 +94,8 @@ export default function App() {
                     <Route path="/admin/sucursales" element={<Sucursales/>}/>
                     <Route path="/admin/comentarios" element={<Review/>}/>
                     <Route path='/final-shopping' element={<FinalShop />} />
-                    <Route path='/geo' element={<Geo />} />
-
-                    <Route path='/userprofile' element={<UserConfig />} />
-
+                    <Route path='/geo' element={<Geo />}/>
+                    <Route path='/userprofile' element={<UserConfig />}/>
                 </Routes>
                 <Footer />
             </div>

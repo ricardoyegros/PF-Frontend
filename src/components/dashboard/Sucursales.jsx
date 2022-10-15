@@ -36,6 +36,7 @@ export function Sucursales(){
 //nombre , direcion, longitud , latitud 
     return(
         <>
+        <Box display={"flex"} justifyContent={"center"}>
         <StyledBox>
             <Typography variant="h3" align="center">
                 Crear una sucursal
@@ -68,6 +69,7 @@ export function Sucursales(){
             </form>
           <Map/> 
        </StyledBox>
+       </Box>
         </>
     )
 }

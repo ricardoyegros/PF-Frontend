@@ -52,9 +52,9 @@ import { getGeolocation } from "../../redux/actions/geoActions"
 
       >
         {/* <Marker position={defaultPosition} title={title} /> */}
-        {geo.map((p) => (
+        {pos.map((p) => (
           
-          <Marker position={{ lat: p.latitude, lng: p.longitude }} title={p.name} />
+          <Marker position={{ lat: p.lat, lng: p.lng }} title={p.title} />
         ))}
       </GoogleMap>}
 
