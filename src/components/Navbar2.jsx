@@ -33,6 +33,18 @@ export const Navbar2 = () => {
                             }}
                         />
                     </Link>
+
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
                     <div
                         className="collapse navbar-collapse"
                         id="navbarSupportedContent"
@@ -54,18 +66,14 @@ export const Navbar2 = () => {
                                     </span>
                                 </Link>
                                 <ul className="dropdown-menu">
-                                    {!window.localStorage.token ? (
-                                        <li>
-                                            <Link
-                                                to={"/register"}
-                                                className="dropdown-item"
-                                            >
-                                                Registrarse
-                                            </Link>
-                                        </li>
-                                    ) : (
-                                        ""
-                                    )}
+                                    <li>
+                                        <Link
+                                            to={"/register"}
+                                            className="dropdown-item"
+                                        >
+                                            Registrarse
+                                        </Link>
+                                    </li>
                                     {!window.localStorage.token ? (
                                         <li>
                                             <Link
@@ -84,18 +92,6 @@ export const Navbar2 = () => {
                                                 Cerrar Sesion
                                             </Link>
                                         </li>
-                                    )}
-                                    {window.localStorage.token ? (
-                                        <li>
-                                            <Link
-                                                to={"/dashboard"}
-                                                className="dropdown-item"
-                                            >
-                                                Dashboard
-                                            </Link>
-                                        </li>
-                                    ) : (
-                                        ""
                                     )}
                                 </ul>
                             </li>
