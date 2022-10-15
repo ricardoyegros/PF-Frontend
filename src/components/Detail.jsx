@@ -17,67 +17,64 @@ const StyledBox = styled(Box)(({ }) => ({
   margin:"40px",
   padding:"40px",
   display: "flex",
+  flexDirection: "column",
   alignItems: "center",
   justifyContent:"center",
   flexDirection:"row",
   boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"
 }));
 
-const StyledBoxPrice = styled(Box)(({ }) => ({
-  marginTop:"10px",
-  paddingBottom:"5px",
-  display:"flex",
-  justifyContent:"flex-end",
-  alignItems:"center",
-  boxShadow: "0px 1px 2px 0px rgba(151, 154, 141, 1)",
-  
+const StyledBoxPrice = styled(Box)(({}) => ({
+    marginTop: "10px",
+    paddingBottom: "5px",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    boxShadow: "0px 1px 2px 0px rgba(151, 154, 141, 1)",
 }));
 
-
-
 export default function Detail() {
-  const { i } = useParams();
-  let dispatch = useDispatch();
-  let navigate = useNavigate();
+    const { i } = useParams();
+    let dispatch = useDispatch();
+    let navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(clearDetail())
-  },[])
+    useEffect(() => {
+        dispatch(clearDetail());
+    }, []);
 
-
-  useEffect(() => {
-    dispatch(getDetailProduct(i))
-  }, [])
+    useEffect(() => {
+        dispatch(getDetailProduct(i));
+    }, []);
 
 
 
   let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        // aqui el color primario un gris suave para que el logo se pueda ver.
-        main: "#cfcfcf",
-        light: "#cfcfcf",
-        dark: "#707070"
-      },
-      secondary: {
-        // de secundario un azul suave para evitar que sea muy chocante 
-        main: '#4f83cc',
-        light: "#4f83cc",
-        dark: "#002f6c"
-      },
-    },
-    //aqui aumente un poco el tamaño de todo
-    typography: {
-      fontSize: 12
-    }
-  });
+    const theme = createTheme({
+        palette: {
+            primary: {
+                // aqui el color primario un gris suave para que el logo se pueda ver.
+                main: "#cfcfcf",
+                light: "#cfcfcf",
+                dark: "#707070",
+            },
+            secondary: {
+                // de secundario un azul suave para evitar que sea muy chocante
+                main: "#4f83cc",
+                light: "#4f83cc",
+                dark: "#002f6c",
+            },
+        },
+        //aqui aumente un poco el tamaño de todo
+        typography: {
+            fontSize: 12,
+        },
+    });
 
-  function handleClickButton(e) {
-    dispatch(addToCart(i));
-    navigate("/shopping-cart")
-  }
+    function handleClickButton(e) {
+        dispatch(addToCart(i));
+        navigate("/shopping-cart");
+    }
 
 
 

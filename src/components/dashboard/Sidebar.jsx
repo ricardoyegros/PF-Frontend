@@ -24,7 +24,10 @@ import { useNavigate, Link as Linkdom } from 'react-router-dom';
 export default function Sidebar() {
     let navigate = useNavigate();
     let dispatch = useDispatch();
-    let token = useSelector((state) => state.usersReducers.token);
+
+    //let token = useSelector((state) => state.usersReducers.token);
+
+    let token = localStorage.token
 
     const [state, setState] = React.useState({
         /* top: false, */

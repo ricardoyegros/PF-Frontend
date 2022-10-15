@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
     Card,
     CardContent,
@@ -38,11 +38,11 @@ const card = {
 }
 
 
-export default function CarCustomer({fullName, contact, email, isAdmin }) {
+export default function CustomerDetail({fullName, contact, email, isAdmin }) {
     
 
     return (
-        <Container>
+         <Container>
                 <Grid container spacing={4} sx={cardGrid}>
                     <Grid item>
                     
@@ -70,6 +70,8 @@ export default function CarCustomer({fullName, contact, email, isAdmin }) {
                     </Grid>
                 </Grid>
             </Container>
-        
-    );
+            
+    ); 
 }
+
+
