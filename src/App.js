@@ -52,7 +52,7 @@ export default function App() {
     if (!window.localStorage.token) {
         return (
             <div className="App">
-                <Navbar />
+                <Navbar2 />
                 <Routes>
                     <Route path="/" element={<Categorys />} />
                     <Route path="/contacto" element={<Contact />} />
@@ -74,6 +74,7 @@ export default function App() {
                         element={<CustomerDetail />}
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
+                    <Route path='/geo' element={<Geo />} />
                 </Routes>
                 <Footer />
             </div>

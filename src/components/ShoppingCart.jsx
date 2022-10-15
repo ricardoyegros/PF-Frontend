@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
+import { paymentMethod } from "../redux/actions/payment";
+import Loading from "./Loading";
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();

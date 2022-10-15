@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { Typography, Box, TextField, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { gapi } from "gapi-script";
+import GoogleLogin from 'react-google-login';
 
-const StyledBox = styled(Box)(({}) => ({
+const StyledBox = styled(Box)(({ }) => ({
     width: 500,
     height: 250,
     padding: 40,
@@ -113,6 +114,14 @@ export default function Login() {
                                     Olvidaste tu contraseña?
                                 </Button>
                             </Box>
+                            <GoogleLogin
+                                clientId="701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com"
+                                buttonText="Log in with Google"
+                                onSuccess={handleLoginGoogle}
+                                onFailure={handleFailure}
+                                cookiePolicy={'single_host_origin'}
+
+                            ></GoogleLogin>
                         </StyledBox>
                     </form>
                 </Grid>
