@@ -24,7 +24,10 @@ import { useNavigate, Link as Linkdom } from 'react-router-dom';
 export default function Sidebar() {
     let navigate = useNavigate();
     let dispatch = useDispatch();
-    let token = useSelector((state) => state.usersReducers.token);
+
+    //let token = useSelector((state) => state.usersReducers.token);
+
+    let token = localStorage.token
 
     const [state, setState] = React.useState({
         /* top: false, */
@@ -87,6 +90,7 @@ export default function Sidebar() {
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
+            
         >
             <List>
                 {['Customers', 'Dashboard'].map((text, index) => (
@@ -101,6 +105,7 @@ export default function Sidebar() {
                     </ListItem>
                 ))}
             </List>
+            
             <Divider />
             <List>
                 {['Create Product', 'Create Admin'].map((text, index) => (
