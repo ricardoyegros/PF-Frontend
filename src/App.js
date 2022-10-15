@@ -23,6 +23,8 @@ import { Home2 } from './components/Home2';
 import { UserProfile } from './components/UserProfile.jsx';
 import { UserConfig } from './components/UserConfig.jsx';
 import  Geo  from "./components/Geo"
+import { Review } from './components/dashboard/Review.jsx';
+import { Sucursales } from './components/dashboard/Sucursales.jsx';
 
 
 
@@ -94,9 +96,9 @@ export default function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
                     <Route path='/geo' element={<Geo />} />
-
+                    <Route path="/admin/sucursales" element={<Sucursales/>}/>
+                    <Route path="/admin/comentarios" element={<Review/>}/>
                     <Route path='/userprofile' element={<UserConfig />} />
-
                 </Routes>
                 <Footer />
             </div>
