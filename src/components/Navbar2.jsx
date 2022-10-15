@@ -113,6 +113,14 @@ export const Navbar2 = () => {
                                 <h5>Bienvenido/a Invitado</h5>
                             )}
                         </span>
+                        {window.localStorage.token?                         <div>
+                            <Link to={"/wishlist"}
+                                className="navbar-brand">
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </Link>
+                        </div> : "" }
                         <div>
                             <Link
                                 to={"/shopping-cart"}
