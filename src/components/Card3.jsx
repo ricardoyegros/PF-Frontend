@@ -23,7 +23,9 @@ import {
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { addToCart } from "../redux/actions/cart-actions";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavorite, removeFavorite } from '../redux/actions/wishlistActions'
+import { getFavorite } from "../redux/actions/wishlistActions"
 
 
 const cardGrid = {
@@ -104,15 +106,29 @@ const cartIcon = {
 
 export default function Card3({ nombre, imagen, precioVenta, id }) {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-    
+
     const [checked, setChecked] = useState(false);
     const [product, setProduct] = useState("");
     const dispatch = useDispatch()
-    
+    const productos = useSelector((state) => state.wishlistReducer.favorite);
+    if(id === productos.id){
+        console.log("estado", id)
+        setChecked(true)
+    }
+    console.log(productos)
     const handleChange = (event) => { //dispatch favorites
         setChecked(event.target.checked);
         // console.log(event)
-        if(checked === true) console.log(event.target.id)
+        if (!checked) {
+            //console.log(event.target.id)
+            //console.log(localStorage.id)
+            dispatch(addFavorite(localStorage.id,event.target.id))
+        }
+        if (checked) {
+            console.log(event.target.id)
+            console.log(localStorage.id)
+            dispatch(removeFavorite(localStorage.id,event.target.id))
+        }
         setProduct(event.target.id)
     };
 
@@ -122,13 +138,27 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
 
     const handleOnChange = (e) => {
         e.preventDefault();
-        console.log(e.target.id)
+        //console.log(e.target.id)
     }
-      
-    const handleClickButton = (e)  => { //dispatch cart
+
+    const handleClickButton = (e) => { //dispatch cart
         dispatch(addToCart(e.target.id));
         console.log(e.target.id)
     }
+
+    useEffect(() => {
+        dispatch(getFavorite())
+        //const test = useSelector((state) => state);
+
+        //setProducts(useSelector((state) => state.whishlistReducer.favorite))
+        //console.log(test)
+        //setProducts(useS)
+        console.log("test")
+        if(id === productos.id){
+            console.log("estado", id)
+            setChecked(true)
+        }
+    }, [dispatch])
 
     return (
         <>
@@ -165,22 +195,22 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
                                     /> */}
 
 
-                                     <Checkbox
+                                    {localStorage.token && <Checkbox
                                         checked={checked}
                                         onChange={handleChange}
                                         icon={<FavoriteBorder />}
-                                        checkedIcon={<Favorite />}  
+                                        checkedIcon={<Favorite />}
                                         sx={heartIcon}
                                         color="error"
                                         inputProps={{ 'aria-label': 'controlled' }}
                                         id={id}
-                                    />
+                                    />}
 
-                                     <Checkbox
+                                    <Checkbox
                                         checked={checked}
                                         onChange={handleClickButton}
                                         icon={<ShoppingCart />}
-                                        checkedIcon={<ShoppingCart />}  
+                                        checkedIcon={<ShoppingCart />}
                                         sx={cartIcon}
                                         color="success"
                                         inputProps={{ 'aria-label': 'controlled' }}
@@ -206,7 +236,7 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
                             </CardContent>
                             <CardContent sx={cardInfo}>
                                 <Typography gutterBottom variant="h5">
-                                    ${precioVenta}
+                                    $ {precioVenta}
                                 </Typography>
                                 <Typography noWrap sx={cardName}>
                                     {nombre}

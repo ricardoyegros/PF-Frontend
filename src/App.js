@@ -25,6 +25,7 @@ import  Geo  from "./components/Geo"
 import { Sucursales } from "./components/dashboard/Sucursales"
 import { Review } from './components/dashboard/Reviews.jsx';
 import CustomerDetail  from "./components/dashboard/CustomerDetail"
+import Wishlist from "./components/Wishlist.jsx";
 
 
 
@@ -75,6 +76,7 @@ export default function App() {
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route path='/geo' element={<Geo />} />
+                    
                 </Routes>
                 <Footer />
             </div>
@@ -107,6 +109,7 @@ export default function App() {
                     />
 
                     <Route path="/userprofile" element={<UserConfig />} />
+                    <Route path="/wishlist" element={<Wishlist />} />
                 </Routes>
                 <Footer />
             </div>
