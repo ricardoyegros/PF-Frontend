@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState , useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/actions/index.js";
+import { createUsers, loginUser } from "../redux/actions/index.js";
 import { getAllCartItems } from "../redux/actions/getCart.js";
 import { useNavigate } from "react-router-dom";
 import { Typography, Box, TextField, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { gapi } from "gapi-script";
 import GoogleLogin from 'react-google-login';
-import { gapi } from 'gapi-script'
-import { createUsers } from "../redux/actions/index.js";
 
 const StyledBox = styled(Box)(({ }) => ({
     width: 500,
@@ -58,7 +57,7 @@ export default function Login() {
     console.log(emailLogin);
     useEffect(() => {
         gapi.load("client:auth2", () => {
-            gapi.auth2.init({ clientId: clientId });
+        gapi.auth2.init({ clientId: clientId });
         });
     }, []);
 
