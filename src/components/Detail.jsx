@@ -17,6 +17,7 @@ const StyledBox = styled(Box)(({ }) => ({
   margin:"40px",
   padding:"40px",
   display: "flex",
+  flexDirection: "column",
   alignItems: "center",
   justifyContent:"center",
   flexDirection:"row",
@@ -52,6 +53,7 @@ export default function Detail() {
 
 
   let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
+  console.log(clearDetail())
 
   const theme = createTheme({
     palette: {
@@ -83,25 +85,23 @@ export default function Detail() {
 
   return (
     <>
-    {detailProduct.salePrice ?
-    <StyledBoxPrice>
-    <Box  display={"flex"} alignItems={"center"} justifyContent={"flex-end"} mr={4} >
-    <Typography variant={"h5"}  sx={{ marginRight: 3 }}>
-      Precio
-    </Typography>
-    <Typography variant={"h5"} sx={{ marginRight: 5 }}>
-      {` $ ${detailProduct?.salePrice}`}
-    </Typography>
-    <Button
-      variant="contained"
-      size="large"
-      onClick={handleClickButton}
-    >Agregar al carrito</Button>
-    </Box>
-</StyledBoxPrice> : <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}><Loading/></Box>  }
-      
-         
-{(detailProduct.name && detailProduct.images && detailProduct.description) ?  
+      <StyledBoxPrice>
+            <Box  display={"flex"} alignItems={"center"} justifyContent={"flex-end"} mr={4} >
+            <Typography variant={"h5"}  sx={{ marginRight: 3 }}>
+              Precio
+            </Typography>
+            <Typography variant={"h5"} sx={{ marginRight: 5 }}>
+              {` $ ${detailProduct?.salePrice}`}
+            </Typography>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={handleClickButton}
+            >Agregar al carrito</Button>
+            </Box>
+      </StyledBoxPrice>
+          {(detailProduct.name && detailProduct.images && detailProduct.description) ? 
+          
 <StyledBox >
 
 <Box width={"30%"}

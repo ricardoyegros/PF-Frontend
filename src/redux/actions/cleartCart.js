@@ -1,10 +1,8 @@
 import axios from "axios";
 import React from "react";
 
-
-export function removeCartDb (email) {
+export default function cleartCart (email) {
     return function () {
-        axios.delete(`https://techstore123.herokuapp.com/carts?email=${email}`)
+        axios.post(`https://techstore123.herokuapp.com/carts/destroy?email${email}`)
     }
 }
-

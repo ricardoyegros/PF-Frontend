@@ -1,35 +1,152 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Login from "./Login";
+import { UserConfig } from "./UserConfig";
+import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall2.png";
+import { useDispatch, useSelector } from "react-redux";
+import { isInUse, preFilter } from "../redux/actions";
 
 export const Navbar2 = () => {
-
+    let dispatch = useDispatch();
+    const [search, setSearch] = useState("");
+    const user = useSelector((state) => state.usersReducers.user);
+    const handleSubmitSearch = (event) => {
+        event.preventDefault();
+        dispatch(preFilter({ name: search }));
+        dispatch(isInUse({ name: search }));
+        setSearch("");
+    };
+    const handleSearchInput = (event) => {
+        setSearch(event.target.value);
+    };
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-light" >
+            <nav className="navbar navbar-expand-lg bg-light">
                 <div className="container-fluid">
-                    <Link to={'/'} className="navbar-brand" ><span class="material-symbols-outlined">Home</span></Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <Link to={"/"} className="navbar-brand">
+                        <img
+                            src={logo}
+                            style={{
+                                width: "95px",
+                                height: "50px",
+                                borderRadius: "50%",
+                            }}
+                        />
+                    </Link>
+                    <div
+                        className="collapse navbar-collapse"
+                        id="navbarSupportedContent"
+                    >
+                        <ul
+                            className="navbar-nav me-auto mb-2 mb-lg-0"
+                            style={{ flexGrow: "1" }}
+                        >
                             <li className="nav-item dropdown">
-                                <Link to={'/'} className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="material-symbols-outlined">person</span>
+                                <Link
+                                    to={"/"}
+                                    className="nav-link dropdown-toggle"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    <span class="material-symbols-outlined">
+                                        person
+                                    </span>
                                 </Link>
                                 <ul className="dropdown-menu">
-                                    <li><Link to={'/'} className="dropdown-item" >Registrarse</Link></li>
-                                    <li><Link to={'/'} className="dropdown-item" >Login</Link></li>
+                                    {!window.localStorage.token ? (
+                                        <li>
+                                            <Link
+                                                to={"/register"}
+                                                className="dropdown-item"
+                                            >
+                                                Registrarse
+                                            </Link>
+                                        </li>
+                                    ) : (
+                                        ""
+                                    )}
+                                    {!window.localStorage.token ? (
+                                        <li>
+                                            <Link
+                                                to={"/login"}
+                                                className="dropdown-item"
+                                            >
+                                                Iniciar Sesion
+                                            </Link>
+                                        </li>
+                                    ) : (
+                                        <li>
+                                            <Link
+                                                to={"/logout"}
+                                                className="dropdown-item"
+                                            >
+                                                Cerrar Sesion
+                                            </Link>
+                                        </li>
+                                    )}
+                                    {window.localStorage.token ? (
+                                        <li>
+                                            <Link
+                                                to={"/dashboard"}
+                                                className="dropdown-item"
+                                            >
+                                                Dashboard
+                                            </Link>
+                                        </li>
+                                    ) : (
+                                        ""
+                                    )}
                                 </ul>
                             </li>
                         </ul>
-                        <form className="d-flex" role="search">
-                            <button className="btn btn-outline-success" type="submit"><span class="material-symbols-outlined">search</span></button>
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <span
+                            style={{
+                                flexGrow: "1",
+                                display: "flex",
+                                alignItems: "center",
+                            }}
+                        >
+                            {user.name ? (
+                                <h5>Bienvenido/a {user.name}</h5>
+                            ) : (
+                                <h5>Bienvenido/a Invitado</h5>
+                            )}
+                        </span>
+                        <div>
+                            <Link
+                                to={"/shopping-cart"}
+                                className="navbar-brand"
+                            >
+                                <span class="material-symbols-outlined">
+                                    shopping_cart
+                                </span>
+                            </Link>
+                        </div>
+                        <form
+                            className="d-flex"
+                            role="search"
+                            onSubmit={handleSubmitSearch}
+                        >
+                            <input
+                                className="form-control me-2"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                                onChange={handleSearchInput}
+                            />
+                            <button
+                                className="btn btn-outline-success"
+                                type="submit"
+                            >
+                                <span class="material-symbols-outlined">
+                                    search
+                                </span>
+                            </button>
                         </form>
                     </div>
                 </div>
             </nav>
         </>
-    )
-}
+    );
+};

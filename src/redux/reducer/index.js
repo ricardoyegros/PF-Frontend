@@ -9,7 +9,10 @@ import userIdReducer from "./userIdReducer";
 import shoppingCartReducer from "./shoppingCartReducer";
 import reviewsReducer from "./reviewsReducer";
 import allItemsCartReducer from "./allItemsCartReducer";
-import geoReducer from "./geoReducer"
+import userProfileReducer from "./userProfileReducer";
+import geoReducer from "./geoReducer";
+import allUserReducer from "./allUserReducer";
+import wishlistReducer from "./wishlistReducer"
 
 export default combineReducers({
     allProductsReducer,
@@ -22,5 +25,8 @@ export default combineReducers({
     shoppingCartReducer,
     reviewsReducer,
     allItemsCartReducer,
-    geoReducer
+    userProfileReducer,
+    geoReducer,
+    allUserReducer,
+    wishlistReducer,
 });
