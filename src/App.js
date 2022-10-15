@@ -12,7 +12,7 @@ import ShoppingCart from "./components/ShoppingCart";
 import Dashboard from "./components/dashboard/Dashboard";
 import ForgotPassword from "./components/ForgotPassword";
 
-import Customers from "./components/dashboard/Customers";
+import Customers from "./components/Customers";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import { useSelector } from "react-redux";
@@ -30,7 +30,6 @@ export default function App() {
     const isAdmin = useSelector((state) => state.usersReducers.user.isAdmin);
     const name = useSelector((state) => state.usersReducers.user.name);
     const address = useSelector((state) => state.usersReducers.user.address);
-
     const identification = useSelector(
         (state) => state.usersReducers.identification
     );
