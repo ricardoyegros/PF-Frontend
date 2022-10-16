@@ -15,10 +15,16 @@ import {
     Grid,
     Button,
     createTheme,
+    Divider,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import Sidebar from "./Sidebar";
 import SearchAppBar from "./SearchAppBar";
+import {Sucursales} from "./Sucursales";
+import { Map } from './Map';
+import SpanningTable from './SpanningTable'
+
+
 
 export default function Dashboard() {
     const theme = createTheme({
@@ -50,13 +56,9 @@ export default function Dashboard() {
 
     return (
         <>
-            <Typography gutterBottom variant="h3" align="center">
-                TechStore - Admin Dashboard !!
+            
                 <SearchAppBar />
-            </Typography>
-
-            <Sidebar />
-
+                       
             <ThemeProvider theme={theme}>
                 <Box sx={{ display: "flex" }}>
                     <CssBaseline />
@@ -81,12 +83,15 @@ export default function Dashboard() {
                                             p: 2,
                                             display: "flex",
                                             flexDirection: "column",
-                                            height: 240,
+                                            width: '100%',
+                                            height: '380px'
                                         }}
                                     >
-                                        mapa
+                                        Nuestras tiendas!!
+                                        <Map/>
                                     </Paper>
                                 </Grid>
+                                <Divider/>
                                 {/* Recent Deposits */}
                                 <Grid item xs={12} md={4} lg={3}>
                                     <Paper
@@ -94,11 +99,12 @@ export default function Dashboard() {
                                             p: 2,
                                             display: "flex",
                                             flexDirection: "column",
-                                            height: 240,
+                                            height: '380px'
                                         }}
-                                    >
+                                    > 
                                         Ventas
-                                    </Paper>
+                                        
+                                    </Paper> 
                                 </Grid>
                                 {/* Recent Orders */}
                                 <Grid item xs={12}>

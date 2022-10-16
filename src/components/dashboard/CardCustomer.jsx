@@ -1,25 +1,9 @@
-import React from 'react';
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    Grid,
-    Typography,
-    IconButton,
-    Container,
-    Rating,
-    
-} from '@mui/material';
-import { ShoppingCart, FavoriteBorderOutlined } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import { ThemeProvider } from '@emotion/react';
-
-import { lightGreen } from '@mui/material/colors';
+import React from "react";
+import { Card, CardContent, Grid, Typography, Container } from "@mui/material";
 
 const cardGrid = {
-    height: "100%"
-}
+    height: "100%",
+};
 
 const card = {
     height: "390px",
@@ -34,42 +18,53 @@ const card = {
         cursor: "pointer",
         border: "#58D68D 2px solid",
         boxShadow: "8px 8px 5px 3px rgba(88, 214, 141, 0.5)",
-    }
-}
+    },
+};
 
-
-export default function CarCustomer({fullName, contact, email, isAdmin }) {
-    
-
+export default function CardCustomer({ fullName, contact, email, isAdmin }) {
     return (
         <Container>
-                <Grid container spacing={4} sx={cardGrid}>
-                    <Grid item>
-                    
-                        <Card sx={card}>
-
-
-                            <CardContent>
-                                
-                                
-                                <Typography component="p" variant="h3" color={'black'}>
-                                    {fullName}
-                                </Typography>
-                                <Typography component="p" variant="h6" color={'black'}>
-                                    PHONE: {contact}
-                                </Typography>
-                                <Typography component="p" variant="h6" color={'black'}>EMAIL: {email}</Typography>
-                                <Typography component="p" variant="h6" color={'black'}>ROL:  {isAdmin? (<p>Administrador</p>):(<p>Cliente</p>)} </Typography>    
-                                                                 
-                                
-                                
-                            </CardContent>
-                            
-                        </Card>
-                    
-                    </Grid>
+            <Grid container spacing={4} sx={cardGrid}>
+                <Grid item>
+                    <Card sx={card}>
+                        <CardContent>
+                            <Typography
+                                component="p"
+                                variant="h3"
+                                color={"black"}
+                            >
+                                {fullName}
+                            </Typography>
+                            <Typography
+                                component="p"
+                                variant="h6"
+                                color={"black"}
+                            >
+                                PHONE: {contact}
+                            </Typography>
+                            <Typography
+                                component="p"
+                                variant="h6"
+                                color={"black"}
+                            >
+                                EMAIL: {email}
+                            </Typography>
+                            <Typography
+                                component="p"
+                                variant="h6"
+                                color={"black"}
+                            >
+                                ROL:{" "}
+                                {isAdmin ? (
+                                    <p>Administrador</p>
+                                ) : (
+                                    <p>Cliente</p>
+                                )}{" "}
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 </Grid>
-            </Container>
-        
+            </Grid>
+        </Container>
     );
 }

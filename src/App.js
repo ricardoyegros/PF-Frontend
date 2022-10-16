@@ -11,10 +11,9 @@ import Welcome from "./components/Welcome";
 import ShoppingCart from "./components/ShoppingCart";
 import Dashboard from "./components/dashboard/Dashboard";
 import ForgotPassword from "./components/ForgotPassword";
-
-import Customers from "./components/Customers";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
+import Customers from './components/Customers';
+import Login from "./components/Login"
+import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
@@ -26,6 +25,8 @@ import { Sucursales } from "./components/dashboard/Sucursales"
 import { Review } from './components/dashboard/Reviews.jsx';
 import CustomerDetail  from "./components/dashboard/CustomerDetail"
 import Wishlist from "./components/Wishlist.jsx";
+import SpanningTable from "./components/dashboard/SpanningTable.jsx";
+import DataTable from "./components/dashboard/DataTable"
 
 
 
@@ -36,9 +37,9 @@ export default function App() {
     const isAdmin = useSelector((state) => state.usersReducers.user.isAdmin);
     const name = useSelector((state) => state.usersReducers.user.name);
     const address = useSelector((state) => state.usersReducers.user.address);
-    const identification = useSelector(
-        (state) => state.usersReducers.identification
-    );
+    // const identification = useSelector(
+    //     (state) => state.usersReducers.identification
+    // );
 
     if (token) {
         window.localStorage.setItem("token", token);
@@ -77,6 +78,9 @@ export default function App() {
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route path='/geo' element={<Geo />} />
                     
+                    <Route path="/admin/sucursal" element={<Sucursales/>}/>
+                    <Route path="/admin/sales" element={<SpanningTable/>}/>
+                    <Route path="/admin/stock" element={<DataTable/>}/>
                 </Routes>
                 <Footer />
             </div>
@@ -110,6 +114,9 @@ export default function App() {
 
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route path="/wishlist" element={<Wishlist />} />
+                    <Route path="/admin/sucursal" element={<Sucursales/>}/>
+                    <Route path="/admin/sales" element={<SpanningTable/>}/>
+                    <Route path="/admin/stock" element={<DataTable/>}/>
                 </Routes>
                 <Footer />
             </div>

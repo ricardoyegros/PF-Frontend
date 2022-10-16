@@ -90,6 +90,7 @@ export default function Sidebar() {
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
+            
         >
             <List>
                 {['Customers', 'Dashboard'].map((text, index) => (
@@ -104,6 +105,7 @@ export default function Sidebar() {
                     </ListItem>
                 ))}
             </List>
+            
             <Divider />
             <List>
                 {['Create Product', 'Create Admin'].map((text, index) => (
