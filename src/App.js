@@ -11,7 +11,7 @@ import Welcome from "./components/Welcome";
 import ShoppingCart from "./components/ShoppingCart";
 import Dashboard from "./components/dashboard/Dashboard";
 import ForgotPassword from "./components/ForgotPassword";
-import Customers from './components/Customers';
+import Customers from './components/dashboard/Customers';
 import Login from "./components/Login"
 import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
