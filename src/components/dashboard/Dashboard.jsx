@@ -88,7 +88,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Nuestras tiendas!!
-                                        <Map/>
+                                         <Map/> 
                                     </Paper>
                                 </Grid>
                                 <Divider/>
