@@ -24,6 +24,7 @@ import  Geo  from "./components/Geo"
 import { Sucursales } from "./components/dashboard/Sucursales"
 import { Review } from './components/dashboard/Reviews.jsx';
 import CustomerDetail  from "./components/dashboard/CustomerDetail"
+import Wishlist from "./components/Wishlist.jsx";
 import SpanningTable from "./components/dashboard/SpanningTable.jsx";
 import DataTable from "./components/dashboard/DataTable"
 
@@ -75,11 +76,13 @@ export default function App() {
                         element={<CustomerDetail />}
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
+                    <Route path='/geo' element={<Geo />} />
+                    
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
                 </Routes>
-                <Footer />g
+                <Footer />
             </div>
         );
     } else {
@@ -110,6 +113,7 @@ export default function App() {
                     />
 
                     <Route path="/userprofile" element={<UserConfig />} />
+                    <Route path="/wishlist" element={<Wishlist />} />
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>

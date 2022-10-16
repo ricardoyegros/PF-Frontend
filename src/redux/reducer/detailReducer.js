@@ -13,11 +13,12 @@ export default function detailProductReducer(state = initialState, action) {
                 detailProduct: action.payload,
             };
         case CLEAR:
-            return{
-            ...state,
-            detailProduct: action.payload
-            }
-        
-        default: return state;
+            return {
+                ...state,
+                detailProduct: action.payload,
+            };
+
+        default:
+            return state;
     }
 }

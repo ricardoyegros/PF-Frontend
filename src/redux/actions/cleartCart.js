@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 
 
 export function removeCartDb (email) {
@@ -7,4 +6,3 @@ export function removeCartDb (email) {
         axios.delete(`https://techstore123.herokuapp.com/carts?email=${email}`)
     }
 }
-
