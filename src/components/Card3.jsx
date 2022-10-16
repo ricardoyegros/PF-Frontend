@@ -7,10 +7,26 @@ import {
     IconButton,
     Container,
     Rating,
-    Box
+    Box,
+    Checkbox,
 } from '@mui/material';
-import { ShoppingCart, FavoriteBorderOutlined } from '@mui/icons-material';
+
+import {
+    ShoppingCart,
+    FavoriteBorderOutlined,
+    BookmarkBorder,
+    Bookmark,
+    FavoriteBorder,
+    Favorite,
+} from '@mui/icons-material';
+
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { addToCart } from "../redux/actions/cart-actions";
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavorite, removeFavorite } from '../redux/actions/wishlistActions'
+import { getFavorite } from "../redux/actions/wishlistActions"
+
 
 const cardGrid = {
     height: "100%"
@@ -64,27 +80,87 @@ const cardName = {
 }
 
 const heartIcon = {
-    margin: "15px 5px 0px 0px",
+    // margin: "15px 5px 0px 0px",
     color: "red",
     "&:hover": {
         cursor: "pointer",
         border: "#F1948A  2px solid",
-        background: "#F5B7B1"
+        background: "#F5B7B1",
+        // borderRadius: "50%",
+        padding: "7px"
     }
 }
 
 const cartIcon = {
-    margin: "15px 0px 0px 5px",
+    // margin: "15px 0px 0px 5px",
     color: "green",
     "&:hover": {
         cursor: "pointer",
         border: "#82E0AA 2px solid",
-        background: "#ABEBC6"
+        background: "#ABEBC6",
+        padding: "7px"
     }
 }
 
-export default function Card3({ nombre, imagen, precioVenta, id }) {
+
+
+export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    
+    useEffect(() => {
+        setChecked(favorite)
+    }, [favorite])
+    
+
+    const [checked, setChecked] = useState(favorite);
+    const dispatch = useDispatch()
+    /* const [product, setProduct] = useState("");
+    const productos = useSelector((state) => state.wishlistReducer.favorite); */
+    
+    //console.log(productos)
+    const handleChange = (event) => { //dispatch favorites
+        setChecked(event.target.checked);
+        // console.log(event)
+        if (!checked) {
+            //console.log(event.target.id)
+            //console.log(localStorage.id)
+            dispatch(addFavorite(localStorage.id,event.target.id))
+        }
+        if (checked) {
+            console.log(event.target.id)
+            console.log(localStorage.id)
+            dispatch(removeFavorite(localStorage.id,event.target.id))
+        }
+        //setProduct(event.target.id)
+    };
+
+    /* useEffect(() => {
+        console.log(product)
+    }, [product]) */
+
+    const handleOnChange = (e) => {
+        e.preventDefault();
+        //console.log(e.target.id)
+    }
+
+    const handleClickButton = (e) => { //dispatch cart
+        dispatch(addToCart(e.target.id));
+        console.log(e.target.id)
+    }
+
+    
+
     return (
+        <>
+            {/* <div>
+                <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+                <Checkbox
+                    {...label}
+                    icon={<BookmarkBorder />}
+                    checkedIcon={<Bookmark />}
+                />
+            </div> */}
+
 
             <Container>
                 <Grid container spacing={4} sx={cardGrid}>
@@ -92,31 +168,65 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
                         <Card sx={card}>
                             <CardContent sx={cardContentImage}>
                                 <Box>
-                                    <IconButton
+                                    {/* <IconButton
                                         size="medium"
                                         sx={heartIcon}
                                     >
                                         <FavoriteBorderOutlined />
-                                    </IconButton>
-                                    <IconButton
+                                    </IconButton> */}
+
+                                    {/* <Checkbox 
+                                        {...label} 
+                                        // onChange={handleOnChange}
+                                        icon={<FavoriteBorder />} 
+                                        checkedIcon={<Favorite />} 
+                                        id={id}
+                                        // sx={heartIcon}
+                                    /> */}
+
+
+                                    {localStorage.token && <Checkbox
+                                        checked={checked}
+                                        onChange={handleChange}
+                                        icon={<FavoriteBorder />}
+                                        checkedIcon={<Favorite />}
+                                        sx={heartIcon}
+                                        color="error"
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        id={id}
+                                    />}
+
+                                    <Checkbox
+                                        checked={checked}
+                                        onChange={handleClickButton}
+                                        icon={<ShoppingCart />}
+                                        checkedIcon={<ShoppingCart />}
+                                        sx={cartIcon}
+                                        color="success"
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        id={id}
+                                    />
+
+
+                                    {/* <IconButton
                                         sx={cartIcon}
                                         size='medium'
                                     >
                                         <ShoppingCart />
-                                    </IconButton>
+                                    </IconButton> */}
                                 </Box>
                                 <Link to={`/detalle/${id}`} underline="none">
-                                <CardMedia
-                                    component="img"
-                                    image={imagen}
-                                    sx={cardMedia}
-                                />
+                                    <CardMedia
+                                        component="img"
+                                        image={imagen}
+                                        sx={cardMedia}
+                                    />
                                 </Link>
                                 <Rating sx={{ "padding": "5px" }} Controlled />
                             </CardContent>
                             <CardContent sx={cardInfo}>
                                 <Typography gutterBottom variant="h5">
-                                    ${precioVenta}
+                                    $ {precioVenta}
                                 </Typography>
                                 <Typography noWrap sx={cardName}>
                                     {nombre}
@@ -126,5 +236,8 @@ export default function Card3({ nombre, imagen, precioVenta, id }) {
                     </Grid>
                 </Grid>
             </Container>
+
+
+        </>
     )
 };

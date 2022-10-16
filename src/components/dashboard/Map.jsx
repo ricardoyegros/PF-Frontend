@@ -33,8 +33,9 @@ import { getGeolocation } from "../../redux/actions/geoActions"
   ]
 
   const containerStyle = {
-    width: '600px',
-    height: '400px'
+    width: '830px',
+    height: '300px',
+    margin: "0 0 0 0",
   };
   const title = "Plazon"
   const { isLoaded } = useLoadScript({
@@ -57,7 +58,6 @@ import { getGeolocation } from "../../redux/actions/geoActions"
           <Marker position={{ lat: p.lat, lng: p.lng }} title={p.title} />
         ))}
       </GoogleMap>}
-
     </div>
   )
 }

@@ -1,25 +1,14 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Card, CardContent, Grid, Typography, Container } from "@mui/material";
 
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    Grid,
-    Typography,
-    IconButton,
-    Container,
-    Rating,
-    
-} from '@mui/material';
-import { ShoppingCart, FavoriteBorderOutlined } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import { ThemeProvider } from '@emotion/react';
-
-import { lightGreen } from '@mui/material/colors';
+import Sidebar from "./Sidebar";
+import { getIdUsers } from "../../redux/actions";
+import { useParams } from "react-router-dom";
 
 const cardGrid = {
-    height: "100%"
-}
+    height: "100%",
+};
 
 const card = {
     height: "390px",
@@ -34,44 +23,69 @@ const card = {
         cursor: "pointer",
         border: "#58D68D 2px solid",
         boxShadow: "8px 8px 5px 3px rgba(88, 214, 141, 0.5)",
-    }
-}
-
-
-export default function CustomerDetail({fullName, contact, email, isAdmin }) {
+    },
+};
+//{ fullName, contact, email, isAdmin }
+export default function CustomerDetail() {
     
+    const dispatch = useDispatch();
+    let token = localStorage.token;
+    const {id} = useParams()   ;
+    let user = useSelector((state) => state.userIdReducer.userId);
+    //let user = useSelector((state) => state.allUserReducer.users);
+
+    useEffect(() => {
+        dispatch(getIdUsers(id, token));
+    }, [dispatch, token, id]);
+
+    console.log(user);
+    console.log(token);
+    console.log(id);
 
     return (
-         <Container>
-                <Grid container spacing={4} sx={cardGrid}>
-                    <Grid item>
-                    
-                        <Card sx={card}>
-
-
-                            <CardContent>
-                                
-                                
-                                <Typography component="p" variant="h3" color={'black'}>
-                                    {fullName}
-                                </Typography>
-                                <Typography component="p" variant="h6" color={'black'}>
-                                    PHONE: {contact}
-                                </Typography>
-                                <Typography component="p" variant="h6" color={'black'}>EMAIL: {email}</Typography>
-                                <Typography component="p" variant="h6" color={'black'}>ROL:  {isAdmin? (<p>Administrador</p>):(<p>Cliente</p>)} </Typography>    
-                                                                 
-                                
-                                
-                            </CardContent>
-                            
-                        </Card>
-                    
-                    </Grid>
+        <Container>
+            <Sidebar />
+            <Grid container spacing={4} sx={cardGrid}>
+                <Grid item>
+                    <Card sx={card}>
+                        <CardContent>
+                            <Typography
+                                component="p"
+                                variant="h3"
+                                color={"black"}
+                            >
+                                {user.fullName}
+                            </Typography>
+                            <Typography
+                                component="p"
+                                variant="h6"
+                                color={"black"}
+                            >
+                                PHONE: {user.contact}
+                            </Typography>
+                            <Typography
+                                component="p"
+                                variant="h6"
+                                color={"black"}
+                            >
+                                EMAIL: {user.email}
+                            </Typography>
+                            <Typography
+                                component="p"
+                                variant="h6"
+                                color={"black"}
+                            >
+                                ROL:{" "}
+                                {user.isAdmin ? (
+                                    <p>Administrador</p>
+                                ) : (
+                                    <p>Cliente</p>
+                                )}{" "}
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 </Grid>
-            </Container>
-            
-    ); 
+            </Grid>
+        </Container>
+    );
 }
-
-

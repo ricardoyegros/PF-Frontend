@@ -1,4 +1,5 @@
-import { Box, Button, Grid, Typography, Alert } from "@mui/material";
+
+import { Box, Button, Grid, Typography , Alert } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +17,7 @@ export default function ShoppingCart() {
   const data = loadState();
 
   function handleButton3(e) {
-    dispatch(clearCart());
+    dispatch(clearCart()); 
   }
   function handleButton5(e) {
     navigate("/");

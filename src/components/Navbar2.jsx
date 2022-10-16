@@ -5,6 +5,7 @@ import { UserConfig } from "./UserConfig";
 import logo from "../assets/images/geometric tech logo - Hecho con PosterMyWall2.png";
 import { useDispatch, useSelector } from "react-redux";
 import { isInUse, preFilter } from "../redux/actions";
+import { Badge } from "@mui/material";
 
 export const Navbar2 = () => {
     let dispatch = useDispatch();
@@ -126,9 +127,12 @@ export const Navbar2 = () => {
                                 to={"/shopping-cart"}
                                 className="navbar-brand"
                             >
+                            <Badge badgeContent={100} color="success">
                                 <span class="material-symbols-outlined">
                                     shopping_cart
                                 </span>
+
+                            </Badge>
                             </Link>
                         </div>
                         <form

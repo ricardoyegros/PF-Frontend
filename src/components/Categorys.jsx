@@ -18,6 +18,8 @@ import { Box } from "@mui/system";
 import CardProduct2 from "./Card2";
 import { Carrousel } from "./Carrousel";
 import Card3 from "./Card3";
+import { getFavorite } from "../redux/actions/wishlistActions"
+
 
 const secondaryBox = {
   display: "flex",
@@ -43,7 +45,12 @@ export default function Categorys() {
   useEffect(() => {
     dispatch(getCategoryNames());
     dispatch(getBrands());
+    if(localStorage.id) {dispatch(getFavorite())}
   }, [dispatch, state]);
+
+  
+  const arrayFavorites = useSelector((state) => state.wishlistReducer.favorite);
+  
 
   const [open, setOpen] = useState(false);
 
@@ -55,6 +62,9 @@ export default function Categorys() {
   );
   const reduxState3 = useSelector((state) => state.categorysNameReducer.brands);
   const reduxState4 = useSelector((state) => state.categorysNameReducer);
+
+
+  console.log(arrayFavorites)
 
   if (!reduxState2) dispatch(preFilter({}));
 
@@ -431,6 +441,7 @@ export default function Categorys() {
                       "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
                     }
                     precioVenta={e.salePrice}
+                    favorite={arrayFavorites.includes(e.id) ? true : false}
                   />
                 </Grid>
               ))}
