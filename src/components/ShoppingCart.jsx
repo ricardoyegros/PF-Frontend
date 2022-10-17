@@ -1,4 +1,3 @@
-
 import { Box, Button, Grid, Typography , Alert } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,36 +5,36 @@ import { useNavigate } from "react-router-dom";
 import Cart from "../components/Cart";
 import { loadState } from "../localStorage/localStorage";
 import { clearCart, cartPost } from "../redux/actions/cart-actions";
-import { paymentMethod } from "../redux/actions/payment";
-import Loading from "./Loading";
 
 export default function ShoppingCart() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let cart = useSelector((state) => state.shoppingCartReducer.cart);
-  let cartUser = useSelector((state) => state.allItemsCartReducer.cartItems);
-  const data = loadState();
+  // const data = loadState();
 
   function handleButton3(e) {
-    dispatch(clearCart()); 
+    dispatch(clearCart());
   }
   function handleButton5(e) {
     navigate("/");
   }
   function handleButtonShop(e) {
-    dispatch(cartPost(data.storage.cart))
-    if(!localStorage.token) return navigate('/login');
-    return navigate('/final-shopping');
+    dispatch(cartPost(cart))
+  navigate("/final-shopping");
 }
-console.log(cartUser, "dsc")
-if(cartUser.length > 0) cart = [...cartUser]
+
+// if(cartUser.length > 0)
+// { cart = data.dataBaseStorage.cartItems
+// } else {
+//   cart = data.storage.cart
+// }
 let totalCarrito = 0;
 for (let i = 0; i < cart.length; i++) {
   let subtotal = cart[i].quantity * cart[i].salePrice;
   totalCarrito = totalCarrito + subtotal;
 }
 
-console.log(cart, "soyCart")
+
 return (
   <>
     <Typography variant={"h3"} m={2}>Carrito de Compras</Typography>
@@ -74,10 +73,8 @@ return (
           }
         />
       ))
-    ) : (
-      
-      <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={25}> <Alert severity="error">No se encontraron Productos!</Alert></Box>
-    )}
+    ) : <Box display={"flex"} justifyContent={"center"} alignItems={"center"}><Alert severity="error">No se encontraron Productos!</Alert></Box>
+    }
     <Box m={5}>
       <Box display={"flex"} justifyContent={"flex-end"} width="87%" borderBottom="2px solid rgba(8,8,8,0.10)" >
         <Box mr={15}>

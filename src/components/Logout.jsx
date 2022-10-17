@@ -10,13 +10,23 @@ import sendCart from "../redux/actions/sendCart";
 
 
 
+
 function Logout() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let email = localStorage.email;
-    useEffect(() => {
+    function cargaCarro(arr) {
+        let newArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            newArr.push(dispatch(sendCart(arr[i].email || email, arr[i].name, arr[i].salePrice, arr[i].image || arr[i].images[0].url, arr[i].quantity)));
+        }
+        return newArr;
+    };
+    useEffect(async () => {
+        cargaCarro(JSON.parse(localStorage.state).dataBaseStorage.cartItems);
+
         dispatch(removeCartDb(email))
-        JSON.parse(localStorage.state).dataBaseStorage.cartItems.map(e => dispatch(sendCart(e.email || email , e.name, e.salePrice, e.image || e.images[0].url, e.quantity)));
+        await Promise.all(cargaCarro(JSON.parse(localStorage.state).dataBaseStorage.cartItems))
         dispatch(clearCart())
         localStorage.removeItem('token');
         localStorage.removeItem('email');
@@ -25,8 +35,8 @@ function Logout() {
         localStorage.removeItem('id');
         dispatch(logoutUser());
         navigate('/');
-    }, [dispatch]);
-    
+    }, []);
+
     return <div>Logout</div>;
 }
 
