@@ -14,7 +14,7 @@ export function addToCart (id) {
                 `https://techstore123.herokuapp.com/products/${id}`
             );
             let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
-            let duplicate = cart.filter(p => p.id === product.data.id)
+            let duplicate = cart.filter(p => p.name === product.data.name)
             if(duplicate.length === 0) {
                 let productToAdd = {
                     ...product.data,
@@ -35,16 +35,14 @@ export function addToCart (id) {
     }
 };
 
+
 export function handleReduce1 (id) {
     return async function (dispatch){
         try {
-            let product = await axios.get(
-                `https://techstore123.herokuapp.com/products/${id}`
-            );
             let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
-            let duplicate = cart.filter(p => p.id === product.data.id)
+            let duplicate = cart.filter(p => p.id === id)
             if(duplicate.length > 0) {
-                cart = cart.map((item) => item.id === product.data.id ? {...item , quantity: item.quantity - 1}: item)
+                cart = cart.map((item) => item.id === id ? {...item , quantity: item.quantity - 1}: item)
             }
             localStorage.setItem("cart", JSON.stringify(cart))
             dispatch({
@@ -56,16 +54,34 @@ export function handleReduce1 (id) {
         }
     }
 };
+// export function handleReduce1 (id) {
+//     return async function (dispatch){
+//         try {
+//             let product = await axios.get(
+//                 `https://techstore123.herokuapp.com/products/${id}`
+//             );
+//             let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+//             let duplicate = cart.filter(p => p.id === product.data.id)
+//             if(duplicate.length > 0) {
+//                 cart = cart.map((item) => item.id === product.data.id ? {...item , quantity: item.quantity - 1}: item)
+//             }
+//             localStorage.setItem("cart", JSON.stringify(cart))
+//             dispatch({
+//                 type: ACTIONS.REMOVE_ONE_FROM_CART,
+//                 payload: cart,
+//             });  
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// };
 export function deleteFromCart (id) {
     return async function (dispatch){
         try {
-            let product = await axios.get(
-                `https://techstore123.herokuapp.com/products/${id}`
-            );
             let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
-            let duplicate = cart.filter(p => p.id === product.data.id)
+            let duplicate = cart.filter(p => p.id === id)
             if(duplicate.length > 0) {
-                cart = cart.filter(item => item.id !== product.data.id)
+                cart = cart.filter(item => item.id !== id)
             }
             localStorage.setItem("cart", JSON.stringify(cart))
             dispatch({
@@ -77,6 +93,27 @@ export function deleteFromCart (id) {
         }
     }
 };
+// export function deleteFromCart (id) {
+//     return async function (dispatch){
+//         try {
+//             let product = await axios.get(
+//                 `https://techstore123.herokuapp.com/products/${id}`
+//             );
+//             let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+//             let duplicate = cart.filter(p => p.id === product.data.id)
+//             if(duplicate.length > 0) {
+//                 cart = cart.filter(item => item.id !== product.data.id)
+//             }
+//             localStorage.setItem("cart", JSON.stringify(cart))
+//             dispatch({
+//                 type: ACTIONS.REMOVE_ONE_ALL_FROM_CART,
+//                 payload: cart
+//             });  
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// };
 export function shippingData (data) {
     return async function (dispatch){
         try {

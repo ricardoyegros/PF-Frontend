@@ -1,4 +1,5 @@
 import { ACTIONS } from "../actions/cart-actions";
+import { GET_CART_ITEMS } from "../actions/getCart";
 
 const initialState = {
     cart : [],
@@ -33,6 +34,10 @@ export default function shoppingCartReducer (state = initialState, action) {
             return {
                 ...state,
                 shipping: action.payload
+            }
+        case GET_CART_ITEMS :
+            return {
+                cart: [...action.payload.data]
             } 
         default: return state
     }
