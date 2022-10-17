@@ -83,7 +83,7 @@ export default function CustomerDetail() {
                                     <p>Cliente</p>
                                 )}{" "}
                             </Typography>
-                             <OnOff/> 
+                             {/* <OnOff/>  */}
                         </CardContent>
                     </Card>
                 </Grid>

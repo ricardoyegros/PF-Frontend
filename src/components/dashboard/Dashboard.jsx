@@ -55,7 +55,7 @@ export default function Dashboard() {
     const user = useSelector((state) => state.usersReducers.user);
     //const token = useSelector((state) => state.usersReducers.token);
     let token = localStorage.token;
-
+    //console.log(token)
     return (
         <>
             

@@ -11,7 +11,9 @@ import {
     Grid,
     TextField,
     Button,
-    Box
+    Box,
+    alertClasses,
+    Alert
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -46,7 +48,7 @@ export default function CreateUsers() {
         {value: false, label: "FALSE"}
     ];
 
-    const [input, setInput] = useState("");
+    const [input, setInput] = useState('');
     
     let token = localStorage.token;
     
@@ -59,7 +61,7 @@ export default function CreateUsers() {
         e.preventDefault();
         dispatch(updateUser(input, token));
         setInput({});
-        //navigate("/welcome");
+        alert('Admin creado')        
     }
     
     return (
@@ -222,7 +224,7 @@ export default function CreateUsers() {
                                     fullWidth
                                     disable={!input.email || !input.password}
                                 >
-                                    Crear Usuario
+                                    Crear Admin
                                 </Button>
                             </Grid>
                         </Grid>
