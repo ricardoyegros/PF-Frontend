@@ -17,6 +17,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import BuildIcon from '@mui/icons-material/Build';
 import PersonIcon from '@mui/icons-material/Person';
+import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import StoreIcon from '@mui/icons-material/Store';
+
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link as Linkdom } from 'react-router-dom';
@@ -48,12 +52,12 @@ export default function Sidebar() {
 
     const handleShoppingCar = (e) => {
         e.preventDefault();
-        dispatch(navigate('/admin/orders'));
+        dispatch(navigate('/admin/ordenes'));
     };
 
     const handleCurrents = (e) => {
         e.preventDefault();
-        dispatch(navigate('/admin/orders'));
+        dispatch(navigate('/admin/sucursal'));
     };
 
     const handleCreateProduct = (e) => {
@@ -66,14 +70,14 @@ export default function Sidebar() {
         dispatch(navigate('/admin/newadmin'));
     };
 
-    const handleMail = (e) => {
+    const handleStock = (e) => {
         e.preventDefault();
-        dispatch(navigate('/admin/mail'));
+        dispatch(navigate('/admin/stock'));
     };
 
-    const handleReports = (e) => {
+    const handleSales = (e) => {
         e.preventDefault();
-        dispatch(navigate('/admin/reports'));
+        dispatch(navigate('/admin/sales'));
     };
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -93,12 +97,12 @@ export default function Sidebar() {
             
         >
             <List>
-                {['Customers', 'Dashboard'].map((text, index) => (
+                {['Dashboard', 'Ventas'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 {' '}
-                                {index % 2 === 0 ? <People onClick={handleCustomer} /> : <DashboardIcon onClick={handleDashboard} />}
+                                {index % 2 === 0 ? <DashboardIcon onClick={handleDashboard} /> : <PointOfSaleIcon onClick={handleSales} />  }   
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -108,12 +112,11 @@ export default function Sidebar() {
             
             <Divider />
             <List>
-                {['Create Product', 'Create Admin'].map((text, index) => (
+                {[ 'Productos','Customers' ].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                {' '}
-                                {index % 2 === 0 ? <BuildIcon onClick={handleCreateProduct} /> : <PersonIcon onClick={handleCreateAdmin} />}
+                                {index % 2 === 0 ? <LaptopChromebookIcon onClick={handleStock} /> : <People onClick={handleCustomer} /> }{' '} 
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -122,14 +125,14 @@ export default function Sidebar() {
             </List>
             <Divider />
             <List>
-                {['Orders', 'Currents'].map((text, index) => (
+                {['Orders', 'Sucursales'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 {index % 2 === 0 ? (
                                     <ShoppingCartIcon onClick={handleShoppingCar} />
                                 ) : (
-                                    <AssignmentIcon onClick={handleCurrents} />
+                                    <StoreIcon onClick={handleCurrents} />
                                 )}{' '}
                             </ListItemIcon>
                             <ListItemText primary={text} />
@@ -139,11 +142,12 @@ export default function Sidebar() {
             </List>
             <Divider />
             <List>
-                {['Reports', 'Mails'].map((text, index) => (
+                {['Create Product', 'Create Admin'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <BarChartIcon onClick={handleReports} /> : <MailIcon onClick={handleMail} />}{' '}
+                                {' '}
+                                {index % 2 === 0 ? <BuildIcon onClick={handleCreateProduct} /> : <PersonIcon onClick={handleCreateAdmin} />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>

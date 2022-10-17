@@ -4,6 +4,13 @@ import Sidebar from './Sidebar'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/adminProductAction';
 import { Category, Summarize } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import FreeSolo from "./FreeSolo"
+
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -51,7 +58,9 @@ const columns = [
 export default function DataTable() {
   let rows = [];
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const products = useSelector((state) => state.adminProductsReducer.products);
   //console.log(products);
   useEffect(() => {
@@ -69,14 +78,32 @@ export default function DataTable() {
     purchasePrice: prod.purchasePrice,
     salePrice: prod.salePrice,
 
-  }))
+  }));
   
   rows = [...showProducts]
+  
 
-  console.log(rows)
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(navigate('/creacion'));
+  };
+
   return (
     <>
-    <Sidebar/>
+    
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" color='transparent'>
+        <Toolbar>
+        <Button color="inherit"><Sidebar color="inherit"/></Button>
+        <Button onClick={handleClick} color="inherit" >Crear Producto</Button>
+        <FreeSolo/>                   
+        </Toolbar>
+      </AppBar>
+    </Box>
+          
+   
+   
     <div style={{ height: 400, width: '100%' }}>
     <DataGrid
       rows={rows}
