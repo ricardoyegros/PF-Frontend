@@ -105,7 +105,7 @@ export function updateUser(input, token) {
     return async (dispatch) => {
         try {
             let updateUser = await axios.put(
-                `https://techstore123.herokuapp.com/users/updateprofile`,
+                `http://localhost:3001/users/updateprofile`,
                 input,
                 {
                     headers: { Authorization: `Bearer ${token}` },

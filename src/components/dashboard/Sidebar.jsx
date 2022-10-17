@@ -157,7 +157,7 @@ export default function Sidebar() {
         <div>
             {token ? (
                 <div>
-                    {['View'].map((anchor) => (
+                    {['Menu'].map((anchor) => (
                         <React.Fragment key={anchor}>
                             <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
                             <SwipeableDrawer
@@ -165,6 +165,7 @@ export default function Sidebar() {
                                 open={state[anchor]}
                                 onClose={toggleDrawer(anchor, false)}
                                 onOpen={toggleDrawer(anchor, true)}
+                                color="inherit"
                             >
                                 {list(anchor)}
                             </SwipeableDrawer>

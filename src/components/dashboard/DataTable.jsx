@@ -49,7 +49,8 @@ const columns = [
 ];
 
 export default function DataTable() {
-  let rows = []
+  let rows = [];
+
   const dispatch = useDispatch()
   const products = useSelector((state) => state.adminProductsReducer.products);
   //console.log(products);
@@ -57,6 +58,8 @@ export default function DataTable() {
     dispatch(getProducts())
   }, [dispatch])
 
+  console.log(rows)
+  
   const showProducts = products.map(prod => ({
     id: prod.id,
     brand: prod.brand.name,

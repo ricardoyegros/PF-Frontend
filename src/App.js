@@ -26,7 +26,8 @@ import { Review } from './components/dashboard/Reviews.jsx';
 import CustomerDetail  from "./components/dashboard/CustomerDetail"
 import Wishlist from "./components/Wishlist.jsx";
 import SpanningTable from "./components/dashboard/SpanningTable.jsx";
-import DataTable from "./components/dashboard/DataTable"
+import DataTable from "./components/dashboard/DataTable";
+import CreateAdmin from './components/dashboard/CreateAdmin';
 
 
 
@@ -81,6 +82,8 @@ export default function App() {
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
+                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
+
                 </Routes>
                 <Footer />
             </div>
@@ -117,6 +120,7 @@ export default function App() {
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
+                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
                 </Routes>
                 <Footer />
             </div>

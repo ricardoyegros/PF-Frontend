@@ -26,9 +26,11 @@ export default function Login() {
     function handleChange(e) {
         setInput({ ...input, [e.target.name]: e.target.value });
     }
+    
     let email = input.email;
 
     let emailLogin;
+
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(loginUser(input));
@@ -37,8 +39,10 @@ export default function Login() {
         dispatch(getAllCartItems(email));
         navigate("/welcome");
     }
+    
     const clientId =
         "701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com";
+    
     function handleLoginGoogle(res) {
         const user = {
             name: res.profileObj.givenName,
@@ -46,6 +50,7 @@ export default function Login() {
             email: res.profileObj.email,
             password: res.profileObj.googleId,
         };
+
         emailLogin = res.profileObj.email;
         console.log(emailLogin);
         dispatch(createUsers(user));
