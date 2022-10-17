@@ -35,6 +35,11 @@ export default function SearchAppBar() {
     navigate('/admin/customers')
   }
 
+  function handleClickOrdenes(e){
+    e.preventDefault();
+    navigate('/admin/ordenes')
+  }
+
 
 
   return (
@@ -46,6 +51,7 @@ export default function SearchAppBar() {
         <Button onClick={handleClickSales} color="inherit">Sales</Button>
         <Button onClick={handleClickStock} color="inherit">Stock</Button>
         <Button onClick={handleClickUsers} color="inherit">Users</Button>
+        <Button onClick={handleClickOrdenes} color="inherit">ordenes</Button>
                    
         </Toolbar>
       </AppBar>

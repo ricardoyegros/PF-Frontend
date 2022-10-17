@@ -72,7 +72,7 @@ export function createUsers(input) {
     return async (dispatch) => {
         try {
             let newUser = await axios.post(
-                "https://techstore123.herokuapp.com/users/register",
+                "http://localhost:3001/users/register",
                 input
             );
             return dispatch({ type: CREATE_USER, payload: newUser.data });
@@ -117,7 +117,7 @@ export function updateUser(input, token) {
             console.log(error);
         }
     };
-}
+};
 
 export function loginUser(input) {
     return async (dispatch) => {
