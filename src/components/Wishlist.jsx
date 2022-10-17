@@ -6,7 +6,7 @@ function Wishlist() {
     //const [products, setProducts] = useState([])
     const dispatch = useDispatch()
     const products = useSelector((state) => state.wishlistReducer.favorite);
-    console.log(products)
+    // console.log(products)
 
     useEffect(() => {
         dispatch(getFavorite())

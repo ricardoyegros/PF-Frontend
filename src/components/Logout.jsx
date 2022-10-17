@@ -23,12 +23,23 @@ function Logout() {
     //     return newArr;
 
     // };
+    let testArr = []
+
     useEffect(() => {
-        //cargaCarro(JSON.parse(localStorage.getItem("cart")));
-        //await Promise.all(cargaCarro(JSON.parse(localStorage.getItem("cart"))))
-        axios.delete(`https://techstore123.herokuapp.com/carts?email=${email}`).then((r)=>{console.log("terminado")}).catch(error => console.log(error))
-        if(localStorage.getItem("cart")) JSON.parse(localStorage.getItem("cart"))?.map(p => dispatch(sendCart(p.email || email, p.name, p.salePrice, p.image || p.images[0].url, p.quantity)));
-        dispatch(clearCart())
+
+        axios.delete(`https://techstore123.herokuapp.com/carts?email=${email}`)
+            .then(r => {
+                if (r.data === 'success') {
+                    JSON.parse(localStorage.getItem("cart"))?.map(p => dispatch(sendCart(p.email || email, p.name, p.salePrice, p.image || p.images[0].url, p.quantity)))
+                    console.log('1', r.data);
+                }
+            })
+            .then(r => {
+                console.log(2);
+                dispatch(clearCart())
+            })
+            .catch(error => console.log(error));
+
         localStorage.removeItem('token');
         localStorage.removeItem('email');
         localStorage.removeItem('name');
@@ -38,7 +49,12 @@ function Logout() {
         // navigate('/');
     }, []);
 
-    return <div>Logout</div>;
+
+    const handleClick = (e) => {
+        e.preventDefault();
+    }
+
+    return <div onClick={handleClick} >Logout</div>;
 }
 
 export default Logout;

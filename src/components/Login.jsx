@@ -55,7 +55,7 @@ export default function Login() {
   function handleFailure(err) {
     console.log("failed:", err);
   }
-console.log(emailLogin, "estoy afuera");
+// console.log(emailLogin, "estoy afuera");
   useEffect(() => {
     gapi.load("client:auth2", () => {
       gapi.auth2.init({ clientId: clientId });
