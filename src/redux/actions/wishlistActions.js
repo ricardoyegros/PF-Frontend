@@ -2,6 +2,8 @@ import axios from "axios";
 export const ADD_FAVORITE = "ADD_FAVORITE"
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE"
 export const GET_FAVORITE = "GET_FAVORITE"
+export const GET_PRODUCTS_FAVORITE = "GET_PRODUCTS_FAVORITE"
+
 
 export function addFavorite(idUser, idProduct) {
     return async function (dispatch) {
@@ -10,6 +12,7 @@ export function addFavorite(idUser, idProduct) {
                 idUser,
                 idProduct
             }
+            console.log(body)
             const addFav = await axios.post("http://localhost:3001/favorite", body)
             
             return dispatch({ type: ADD_FAVORITE, payload: addFav.data });
@@ -35,6 +38,20 @@ export function removeFavorite(idUser, idProduct) {
     }
 };
 
+export function getFavoriteProducts() {
+    return async function (dispatch) {
+        try {
+            const id = localStorage.id
+            console.log(id)
+            const favorites = await axios.get(`http://localhost:3001/favorite?id=${id}`)
+            console.log(favorites.data.products)
+            return dispatch({ type: GET_PRODUCTS_FAVORITE, payload: favorites.data.products });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
 export function getFavorite() {
     return async function (dispatch) {
         try {
@@ -47,3 +64,5 @@ export function getFavorite() {
         }
     }
 };
+
+
