@@ -81,8 +81,6 @@ export default function App() {
                         element={<CustomerDetail />}
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
-                    <Route path='/geo' element={<Geo />} />
-                    
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
