@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import swal from 'sweetalert';
 import { styled} from '@mui/material/styles';
 import { Typography , Box, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const StyledBox = styled(Box)(({ }) => ({
     width:500,
@@ -16,17 +18,28 @@ const StyledBox = styled(Box)(({ }) => ({
 
 
 function ForgotPassword() {
+    
     const [input, setInput] = useState("")
+
+
     const navigate = useNavigate()
 
     function handleChange(e){
         setInput(e.target.value)
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
+        try {
+            const user = await axios.post("https://techstore123.herokuapp.com/users/forgot",{email:input})
+            console.log(user.data)
+            swal("Formulario enviado", "Revisa tu correo por favor", "success");
+        } catch (error) {
+            swal("Error", "No existe ningún usuario con ese correo", "error");
+            console.log(error)
+        }
         setInput("")
-        navigate("/")
+        //navigate("/")
     }
 //falta validacion de email
 
@@ -46,7 +59,7 @@ function ForgotPassword() {
         <TextField
         label={"Email"}
         required
-        placeholder="Please enter you Email..."
+        placeholder="Ingrese su Email..."
         fullWidth
         value={input}
         onChange={handleChange}>
