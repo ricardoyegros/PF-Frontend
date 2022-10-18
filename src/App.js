@@ -28,7 +28,8 @@ import Wishlist from "./components/Wishlist.jsx";
 import SpanningTable from "./components/dashboard/SpanningTable.jsx";
 import DataTable from "./components/dashboard/DataTable";
 import CreateAdmin from './components/dashboard/CreateAdmin';
-import Ordenes from './components/dashboard/Ordenes'
+import Ordenes from './components/dashboard/Ordenes';
+import UpdateItem from './components/dashboard/UpdateItem.jsx'
 
 
 
@@ -85,6 +86,7 @@ export default function App() {
                     <Route path="/admin/stock" element={<DataTable/>}/>
                     <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
                     <Route path="/admin/ordenes" element={<Ordenes/>}/>
+                    <Route path="/updateitem" element={<UpdateItem/>}/>
 
                 </Routes>
                 <Footer />
@@ -124,6 +126,7 @@ export default function App() {
                     <Route path="/admin/stock" element={<DataTable/>}/>
                     <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
                     <Route path="/admin/ordenes" element={<Ordenes/>}/>
+                    <Route path="/updateitem" element={<UpdateItem/>}/>
                 </Routes>
                 <Footer />
             </div>

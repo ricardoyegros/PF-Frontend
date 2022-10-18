@@ -32,20 +32,13 @@ export default function FreeSolo() {
 
     <>
     <Stack spacing={2} sx={{ width: 300 }}>        
-    <Autocomplete
+    
+      <Autocomplete
+        id="free-solo-demo"
         freeSolo
-        id="free-solo-2-demo"
-        disableClearable
         options={rows.map((option) => option.products)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Buscar por nombre"
-            InputProps={{
-              ...params.InputProps,
-              type: 'search',
-            }}
-          />
+        renderInput={(params) => <TextField {...params} label="Buscar por nombre" />}
+      />
     </Stack>
             
     </>

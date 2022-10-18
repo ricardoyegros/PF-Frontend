@@ -47,11 +47,11 @@ export default function SearchAppBar() {
       <AppBar position="static" color='transparent'>
         <Toolbar>
         <Button color="inherit"><Sidebar color="inherit"/></Button>
-        <Button onClick={handleClickShop} color="inherit">New Shop</Button>
+        {/* <Button onClick={handleClickShop} color="inherit">New Shop</Button>
         <Button onClick={handleClickSales} color="inherit">Sales</Button>
         <Button onClick={handleClickStock} color="inherit">Stock</Button>
         <Button onClick={handleClickUsers} color="inherit">Users</Button>
-        <Button onClick={handleClickOrdenes} color="inherit">ordenes</Button>
+        <Button onClick={handleClickOrdenes} color="inherit">ordenes</Button> */}
                    
         </Toolbar>
       </AppBar>
