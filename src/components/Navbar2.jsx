@@ -147,7 +147,7 @@ export const Navbar2 = () => {
                                 className="btn btn-outline-success"
                                 type="submit"
                             >
-                                <span class="material-symbols-outlined">
+                                <span className="material-symbols-outlined">
                                     search
                                 </span>
                             </button>

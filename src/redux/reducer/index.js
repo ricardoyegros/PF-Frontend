@@ -29,6 +29,6 @@ export default combineReducers({
     userProfileReducer,
     geoReducer,
     allUserReducer,
-    wishlistReducer,
+    //wishlistReducer,
     reviewsDashReducer
 });

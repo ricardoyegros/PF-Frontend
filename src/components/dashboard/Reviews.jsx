@@ -23,12 +23,12 @@ useEffect(()=> {
     dispatch(getAllReviews())
 },[dispatch]);
 
-console.log(state)
+console.log(allReviews[0],"datos comentarios")
 
     return (
       <>
 <Typography variant={"h3"} m={5} align={"center"} >Comentarios</Typography>
-<table class="table">
+<table class="table" style={{"marginBottom":"5rem"}}>
   <thead>
     <tr>
       <th scope="col">Usuario</th>
@@ -56,4 +56,6 @@ console.log(state)
         </>
     )
 }
+
+
 

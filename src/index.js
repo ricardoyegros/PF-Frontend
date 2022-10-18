@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import {saveData} from "./localStorage/localStorage"
 
+
 store.subscribe(()=>{
   saveData({
     storage: store.getState().shoppingCartReducer,

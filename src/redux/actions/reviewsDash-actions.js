@@ -21,7 +21,6 @@ export function getAllReviews() {
 
 export const deleteReviewId =  (id) => async (dispatch) => {
     try {
-        console.log(id,"reducer")
            await axios.put(`https://techstore123.herokuapp.com/reviews/delete?id=${id}`)
             .then(r => dispatch({
                 type:DELETE_REVIEW,

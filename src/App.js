@@ -82,7 +82,7 @@ export default function App() {
     } else {
         return (
             <div className="App">
-                <Navbar2 />
+                <Navbar2/>
                 <Routes>
                     <Route path="/" element={<Categorys/>}/>
                     <Route path="/contacto" element={<Contact />}/>

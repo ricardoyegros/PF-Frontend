@@ -1,73 +1,82 @@
-import { TextField, Typography , Button , Box } from "@mui/material";
-import React from "react";
-import { useState } from "react";
+import {  Typography , Button , Box, Input  , Alert} from "@mui/material";
 import { styled } from '@mui/material/styles';
-import { Map } from "./Map"
+import { Map } from "./Map";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { deleteBranch } from "../../redux/actions/dashboard-actions/deleteBranch";
+
 
 
 const StyledBox = styled(Box)(({ }) => ({
     margin:"40px",
-    padding:"40px",
-    display: "flex",
+    padding:"4rem 1rem 0 1rem",
     width: "600px",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent:"center",
+    display:"flex",
+    flexDirection:"column",
+
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"
   }));
 
 
 export function Sucursales(){
 
-    const [input, setInput]= useState({})
+    const [data , setData] = useState({})
+    let dispatch = useDispatch()
 
-    function handleChange(e){
-        setInput({...input, [e.target.name] : e.target.value})
-    }
+  useEffect(()=> {
+         axios.get("https://techstore123.herokuapp.com/geo")
+         .then(branches => setData(branches.data))
+         .catch(error => console.log(error))
+    },[data])
 
 
-    function handleSubmit (e){
+
+    function handleDelete(e){
         e.preventDefault()
-        console.log(input)
-        setInput({});
-    }
+        dispatch(deleteBranch(e.target.value))
 
+    }
 
 //nombre , direcion, longitud , latitud 
     return(
         <>
-        <Box display={"flex"} justifyContent={"center"}>
+        <Box display={"flex"} justifyContent={"center"} >
         <StyledBox>
+            <Box mb={5}>
             <Typography variant="h3" align="center">
                 Crear una sucursal
             </Typography>
-            <form onSubmit={handleSubmit}>
-                <Typography>Nombe de Sucursal</Typography>
-                <TextField
-                  label={"Nombre"}
-                  required
-                  placeholder="Nombre de sucursal"
-                  name={"name"}
-                  value={input.name}
-                  onChange={handleChange}>
-                </TextField>
-                <Typography>Direccion</Typography>
-                <TextField
-                    label={"Direccion"}
-                    required
-                    placeholder="Direccion (calle y numero)"
-                    name={"address"}
-                    value={input.address}
-                    onChange={handleChange}>
-                 </TextField>
-                 <Button 
-                 variant={"contained"}
-                  type={"submit"}
-                disabled={!input}>
-                     Crear
-                    </Button>
-            </form>
-          <Map/> 
+            </Box>
+            <Map/>
+       </StyledBox>
+       <StyledBox>
+            <Box mb={5}>
+            <Typography variant="h3" align="center">
+                Sucursales Registradas
+            </Typography>
+            </Box>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Direccion</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {data.length ? (
+        data.map((branch) => (
+            <tr >
+            <th scope="row">{branch.name}</th>
+            <td>{branch.address}</td>
+            <td><button type="button" value={branch.id} onClick={handleDelete} class="btn btn-danger">Borrar</button></td>
+            </tr>
+              
+        ))
+    ) :  <Box display={"flex"} justifyContent={"center"} alignItems={"center"}><Alert severity="error">No se encontraron sucursales!</Alert></Box> }
+  </tbody>
+</table>
        </StyledBox>
        </Box>
         </>
