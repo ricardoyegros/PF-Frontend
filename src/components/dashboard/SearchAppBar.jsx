@@ -30,6 +30,15 @@ export default function SearchAppBar() {
           navigate('/admin/sales');          
   }
   
+  function handleClickUsers(e){
+    e.preventDefault();
+    navigate('/admin/customers')
+  }
+
+  function handleClickOrdenes(e){
+    e.preventDefault();
+    navigate('/admin/ordenes')
+  }
 
 
 
@@ -37,10 +46,12 @@ export default function SearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color='transparent'>
         <Toolbar>
-        <Button color="inherit"><Sidebar/></Button>
-        <Button onClick={handleClickShop} color="inherit">New Shop</Button>
+        <Button color="inherit"><Sidebar color="inherit"/></Button>
+        {/* <Button onClick={handleClickShop} color="inherit">New Shop</Button>
         <Button onClick={handleClickSales} color="inherit">Sales</Button>
         <Button onClick={handleClickStock} color="inherit">Stock</Button>
+        <Button onClick={handleClickUsers} color="inherit">Users</Button>
+        <Button onClick={handleClickOrdenes} color="inherit">ordenes</Button> */}
                    
         </Toolbar>
       </AppBar>

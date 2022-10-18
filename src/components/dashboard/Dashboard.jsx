@@ -23,8 +23,10 @@ import SearchAppBar from "./SearchAppBar";
 import {Sucursales} from "./Sucursales";
 import { Map } from './Map';
 import SpanningTable from './SpanningTable'
-
-
+import StoreIcon from '@mui/icons-material/Store';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 export default function Dashboard() {
     const theme = createTheme({
@@ -53,7 +55,7 @@ export default function Dashboard() {
     const user = useSelector((state) => state.usersReducers.user);
     //const token = useSelector((state) => state.usersReducers.token);
     let token = localStorage.token;
-
+    //console.log(token)
     return (
         <>
             
@@ -88,7 +90,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Nuestras tiendas!!
-                                        <Map/>
+                                         <Map/> 
                                     </Paper>
                                 </Grid>
                                 <Divider/>
@@ -103,7 +105,7 @@ export default function Dashboard() {
                                         }}
                                     > 
                                         Ventas
-                                        
+                                        <PointOfSaleIcon/>
                                     </Paper> 
                                 </Grid>
                                 {/* Recent Orders */}
@@ -150,6 +152,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Social-Media
+                                        <Diversity1Icon/>
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12} md={4} lg={3}>
@@ -162,6 +165,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Stock
+                                        <StoreIcon/>
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12} md={4} lg={3}>
@@ -174,6 +178,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Compras
+                                        <PointOfSaleIcon/>
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12} md={4} lg={3}>
@@ -186,6 +191,8 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Ganancias
+
+                                        <MonetizationOnIcon/>
                                     </Paper>
                                 </Grid>
                             </Grid>

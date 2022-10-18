@@ -26,9 +26,11 @@ import { Review } from './components/dashboard/Reviews.jsx';
 import CustomerDetail  from "./components/dashboard/CustomerDetail"
 import Wishlist from "./components/Wishlist.jsx";
 import SpanningTable from "./components/dashboard/SpanningTable.jsx";
-import DataTable from "./components/dashboard/DataTable"
-import OrdenCustomer from "./components/dashboard/OrdenCustomer.jsx";
-
+import DataTable from "./components/dashboard/DataTable";
+import CreateAdmin from './components/dashboard/CreateAdmin';
+import Ordenes from './components/dashboard/Ordenes';
+import UpdateItem from './components/dashboard/UpdateItem.jsx'
+import OrdenCostumer from './components/dashboard/OrdenCustomer';
 
 
 export default function App() {
@@ -82,6 +84,10 @@ export default function App() {
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
+                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
+                    <Route path="/admin/ordenes" element={<Ordenes/>}/>
+                    <Route path="/updateitem" element={<UpdateItem/>}/>
+
                 </Routes>
                 <Footer />
             </div>
@@ -118,8 +124,10 @@ export default function App() {
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
-                    <Route path="/admin/userorden" element={<OrdenCustomer/>}/>
-
+                    <Route path="/admin/userorden" element={<OrdenCostumer/>}/>
+                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
+                    <Route path="/admin/ordenes" element={<Ordenes/>}/>
+                    <Route path="/updateitem" element={<UpdateItem/>}/>
                 </Routes>
                 <Footer />
             </div>

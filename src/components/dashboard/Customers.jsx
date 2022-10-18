@@ -89,7 +89,10 @@ function Customers() {
 
     useEffect(() => {
         dispatch(getUsers(token));
-    }, [dispatch]);
+    }, [dispatch, token]);
+
+    console.log(allUser);
+    console.log(token);
 
     const users = allUser.map(user => ({
         id: user.id,

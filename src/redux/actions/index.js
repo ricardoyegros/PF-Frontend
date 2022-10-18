@@ -117,7 +117,7 @@ export function updateUser(input, token) {
             console.log(error);
         }
     };
-}
+};
 
 export function loginUser(input) {
     return async (dispatch) => {

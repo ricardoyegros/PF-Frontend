@@ -14,4 +14,4 @@ export default function adminProductsReducer(state = initialState, action) {
         default:
             return state;
     }
-}
+};
