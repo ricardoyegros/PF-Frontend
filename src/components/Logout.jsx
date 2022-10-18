@@ -7,9 +7,6 @@ import { clearCart } from "../redux/actions/cart-actions";
 import { removeCartDb } from "../redux/actions/cleartCart"
 import sendCart from "../redux/actions/sendCart";
 
-
-
-
 function Logout() {
     const dispatch = useDispatch();
     const navigate = useNavigate();

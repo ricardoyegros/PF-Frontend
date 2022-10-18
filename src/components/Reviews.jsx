@@ -26,10 +26,7 @@ export default function Reviews({ id }) {
 
     const reduxState = useSelector(state => state.reviewsReducer.reviews);
 
-    const handleDelete = (e) => {
-        dispatch(deleteReview(e.target.value));
-        setState({ open: false, close: true });
-    };
+
 
     const handleClick = (e) => {
         if (!localStorage.token) return navigate('/login');
@@ -58,13 +55,13 @@ export default function Reviews({ id }) {
         return (
             <>
                 <Box justifyContent={'center'} alignItems="center" display={"grid"}><h3>REVIEWS</h3>
-                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' ,border:"solid black"}}>
                         {
                             reduxState && reduxState.content.map(e =>
                                 <ListItem alignItems="flex-start">
                                     <ListItemAvatar>
                                         <Avatar alt="Remy Sharp" src={userIcon} />
-                                        {e.userId == localStorage.id ? <Button value={e.id} onClick={handleDelete} size="small">x</Button> : null}
+                                
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={`${e.user.fullName}: ${e.detail}`}
