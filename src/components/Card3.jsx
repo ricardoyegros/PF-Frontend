@@ -26,6 +26,8 @@ import { addToCart } from "../redux/actions/cart-actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '../redux/actions/wishlistActions'
 import { getFavorite } from "../redux/actions/wishlistActions"
+import Swal from 'sweetalert2'
+
 
 
 const cardGrid = {
@@ -106,30 +108,36 @@ const cartIcon = {
 
 export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-    
+
     useEffect(() => {
         setChecked(favorite)
     }, [favorite])
-    
+
 
     const [checked, setChecked] = useState(favorite);
     const dispatch = useDispatch()
-    /* const [product, setProduct] = useState("");
-    const productos = useSelector((state) => state.wishlistReducer.favorite); */
-    
-    //console.log(productos)
-    const handleChange = (event) => { //dispatch favorites
+
+    const handleChange = (event) => {
         setChecked(event.target.checked);
-        // console.log(event)
         if (!checked) {
-            //console.log(event.target.id)
-            //console.log(localStorage.id)
-            dispatch(addFavorite(localStorage.id,event.target.id))
+
+            dispatch(addFavorite(localStorage.id, event.target.id))
+            Swal.fire({
+                position: 'top-end',
+                title: 'Agregado a favoritos!',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                backdrop: false,
+                width: '250px',
+                heightAuto: true
+
+            })
         }
         if (checked) {
             console.log(event.target.id)
             console.log(localStorage.id)
-            dispatch(removeFavorite(localStorage.id,event.target.id))
+            dispatch(removeFavorite(localStorage.id, event.target.id))
         }
         //setProduct(event.target.id)
     };
@@ -145,10 +153,19 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
 
     const handleClickButton = (e) => { //dispatch cart
         dispatch(addToCart(e.target.id));
-        console.log(e.target.id)
+        Swal.fire({
+            position: 'top-end',
+            title: 'Agregado al carrito!',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            backdrop: false,
+            width: '250px',
+            heightAuto: true
+        })
     }
 
-    
+
 
     return (
         <>

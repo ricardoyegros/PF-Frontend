@@ -1,7 +1,6 @@
 import Contact from "./components/Contact.jsx";
 import Detail from "./components/Detail";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CreateUsers from "./components/CreateUsers";
 import CreateForm from "./components/CreateForm";
@@ -17,8 +16,6 @@ import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
-import { Home2 } from './components/Home2';
-import { UserProfile } from './components/UserProfile.jsx';
 import { UserConfig } from './components/UserConfig.jsx';
 import  Geo  from "./components/Geo"
 import { Sucursales } from "./components/dashboard/Sucursales"

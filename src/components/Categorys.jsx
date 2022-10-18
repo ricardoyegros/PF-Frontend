@@ -15,7 +15,6 @@ import {
 } from "../redux/actions";
 import { useState } from "react";
 import { Box } from "@mui/system";
-import CardProduct2 from "./Card2";
 import { Carrousel } from "./Carrousel";
 import Card3 from "./Card3";
 import { getFavorite } from "../redux/actions/wishlistActions"
@@ -34,7 +33,6 @@ const productBox = {
   display: "flex",
   flexDirection: "column",
   gridGap: "2rem",
-  // border: "2px rgb(241, 207, 9) solid",
   flex: 1,
 };
 
@@ -50,9 +48,6 @@ export default function Categorys() {
 
   
   const arrayFavorites = useSelector((state) => state.wishlistReducer.favorite);
-  
-
-  const [open, setOpen] = useState(false);
 
   const reduxState = useSelector(
     (state) => state.categorysNameReducer.categorys

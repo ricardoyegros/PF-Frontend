@@ -28,7 +28,7 @@ export function addToCart (id) {
             dispatch({
                 type: ACTIONS.ADD_TO_CART,
                 payload: cart,
-            });  
+            });
         } catch (error) {
             console.log(error);
         }

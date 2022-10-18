@@ -108,8 +108,8 @@ export const Navbar2 = () => {
                                 alignItems: "center",
                             }}
                         >
-                            {user.name ? (
-                                <h5>Bienvenido/a {user.name}</h5>
+                            {localStorage.token ? (
+                                <h5>Bienvenido/a {localStorage.name}</h5>
                             ) : (
                                 <h5>Bienvenido/a Invitado</h5>
                             )}
