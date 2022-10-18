@@ -27,6 +27,7 @@ import CustomerDetail  from "./components/dashboard/CustomerDetail"
 import Wishlist from "./components/Wishlist.jsx";
 import SpanningTable from "./components/dashboard/SpanningTable.jsx";
 import DataTable from "./components/dashboard/DataTable"
+import OrdenCustomer from "./components/dashboard/OrdenCustomer.jsx";
 
 
 
@@ -117,6 +118,8 @@ export default function App() {
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
+                    <Route path="/admin/userorden" element={<OrdenCustomer/>}/>
+
                 </Routes>
                 <Footer />
             </div>

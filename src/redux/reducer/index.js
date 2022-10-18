@@ -15,6 +15,7 @@ import allUserReducer from "./allUserReducer";
 import wishlistReducer from "./wishlistReducer"
 import reviewsDashReducer from "./reviewDashreducer";
 import adminProductReducer from "./adminProductsReducer"
+import adminUsersReducer from "./adminUsersReducer";
 
 export default combineReducers({
     allProductsReducer,
@@ -32,5 +33,6 @@ export default combineReducers({
     allUserReducer,
     wishlistReducer,
     reviewsDashReducer,
-    adminProductReducer
+    adminProductReducer,
+    adminUsersReducer
 });
