@@ -98,6 +98,7 @@ export default function App() {
                 <Navbar2/>
                 <Routes>
                     <Route path="/" element={<Categorys/>}/>
+                    <Route path="/login" element={<Login />} />
                     <Route path="/contacto" element={<Contact />}/>
                     <Route path="/detalle/:i" element={<Detail />}/>
                     <Route path="/register" element={<CreateUsers/>}/>
@@ -118,7 +119,6 @@ export default function App() {
                         path="/admin/customers/customer/:id"
                         element={<CustomerDetail />}
                     />
-
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route path="/wishlist" element={<Wishlist />} />
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>

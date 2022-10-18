@@ -16,6 +16,7 @@ import wishlistReducer from "./wishlistReducer"
 import reviewsDashReducer from "./reviewDashreducer";
 import adminProductsReducer from "./adminProductsReducer";
 import adminUpdateItemReducer from "./adminUpdateItemReducer";
+import adminUsersReducer from "./adminUsersReducer";
 
 
 
@@ -37,4 +38,5 @@ export default combineReducers({
     reviewsDashReducer,
     adminProductsReducer,
     adminUpdateItemReducer,
+    adminUsersReducer
 });

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 export default function sendCart (email, name, salePrice, images, quantity) {
-        return function (){
+        return async function (){
             let obj = {
                 email,
                 name,
@@ -11,8 +11,8 @@ export default function sendCart (email, name, salePrice, images, quantity) {
                 quantity
             }
             try {
-                console.log(email, name, salePrice, images, quantity)
-                axios.post("https://techstore123.herokuapp.com/carts", obj)
+                let post = await axios.post("https://techstore123.herokuapp.com/carts", obj)
+                console.log(post , "a postear")
             } catch (error) {
                 console.log(error);
             }

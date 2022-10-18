@@ -60,7 +60,7 @@ export function getFavorite() {
             //console.log(favorites.data.products)
             return dispatch({ type: GET_FAVORITE, payload: favorites.data });
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     }
 };

@@ -64,8 +64,6 @@ export default function Categorys() {
   const reduxState4 = useSelector((state) => state.categorysNameReducer);
 
 
-  console.log(arrayFavorites)
-
   if (!reduxState2) dispatch(preFilter({}));
 
   let pages = reduxState2 || 1;

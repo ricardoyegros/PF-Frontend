@@ -1,8 +1,12 @@
-import axios from "axios";
+// import axios from "axios";
 
 
-export function removeCartDb (email) {
-    return function () {
-        axios.delete(`https://techstore123.herokuapp.com/carts?email=${email}`)
-    }
-}
+// export function removeCartDb (email) {
+//     try {
+//         return async function () {
+           
+//         }
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }

@@ -48,9 +48,9 @@ export default function Wishlist() {
         dispatch(getFavoriteProducts())
     }, [dispatch])
     useEffect(() => {
-      setproducts(prod)
+        setproducts(prod)
     }, [prod])
-    
+
 
     const handleCart = (id) => {
         console.log(id)
@@ -89,9 +89,9 @@ export default function Wishlist() {
                             {products.length ? (products.map((e) => (
 
                                 <tr  >
-                                    <th scope="row"><img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2Fperritosbonitosss%2F&psig=AOvVaw024w9YqlkkxERTXp236as0&ust=1666142549057000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCNDb-efO6PoCFQAAAAAdAAAAABAI" alt="" width="150px" /></th>
+                                    <th scope="row"><img src={e.images[0].url} alt="" width="150px" /></th>
                                     <td style={{ "textAlign": "center" }}>{e.name}</td>
-                                    <td style={{ "textAlign": "center", "minWidth":"250px" }} className="overflow-hidden">{e.description}</td>
+                                    <td style={{ "textAlign": "center", "minWidth": "250px" }} className="overflow-hidden">{e.description}</td>
                                     <td style={{ "textAlign": "center" }}>${e.salePrice}</td>
                                     <td >
                                         <Checkbox

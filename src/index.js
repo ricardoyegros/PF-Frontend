@@ -6,16 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import {saveData} from "./localStorage/localStorage"
-
-
-store.subscribe(()=>{
-  saveData({
-    storage: store.getState().shoppingCartReducer,
-    dataBaseStorage : store.getState().allItemsCartReducer
-  })
-})
-
 
 ReactDOM.render(
   <Provider store={store}>

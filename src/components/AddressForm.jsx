@@ -20,7 +20,7 @@ export default function AddressForm ({nextStep}) {
             <FormProvider  {...methods}>
                 <form onSubmit={methods.handleSubmit(data => {
                     // if(!localStorage.token) return navigate('/login')
-                    return dispatch(paymentMethod(JSON.parse(localStorage.state).storage));
+                    return dispatch(paymentMethod(JSON.parse(localStorage.state).dataBaseStorage.cartItems));
                 })}>
                     <Grid mt={1} container spacing={3}>
                         <AddressInput required name="fullName" label="Nombre Completo"/>
