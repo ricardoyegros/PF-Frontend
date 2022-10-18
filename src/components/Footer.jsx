@@ -56,7 +56,7 @@ export default function Footer() {
                                     </Link>
                                 </Box>
                                 <Box>
-                                    <Link href="/ingresar" color="secondary" underline="none">
+                                    <Link href="/login" color="secondary" underline="none">
                                         Ingresar
                                     </Link>
                                 </Box>

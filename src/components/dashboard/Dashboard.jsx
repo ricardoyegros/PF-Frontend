@@ -1,167 +1,205 @@
-import Header from './Header/index';
-import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
+import { React, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link as Linkdom } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import People from '@mui/icons-material/People';
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
 
+import { ThemeProvider } from "@emotion/react";
+import Box from "@mui/material/Box";
+import {
+    Typography,
+    CardContent,
+    Grid,
+    Button,
+    createTheme,
+    Divider,
+} from "@mui/material";
+import { styled, alpha } from "@mui/material/styles";
+import Sidebar from "./Sidebar";
+import SearchAppBar from "./SearchAppBar";
+import {Sucursales} from "./Sucursales";
+import { Map } from './Map';
+import SpanningTable from './SpanningTable'
+import StoreIcon from '@mui/icons-material/Store';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+export default function Dashboard() {
+    const theme = createTheme({
+        palette: {
+            primary: {
+                // aqui el color primario un gris suave para que el logo se pueda ver.
+                main: "#cfcfcf",
+                light: "#cfcfcf",
+                dark: "#707070",
+            },
+            secondary: {
+                // de secundario un azul suave para evitar que sea muy chocante
+                main: "#4f83cc",
+                light: "#4f83cc",
+                dark: "#002f6c",
+            },
+        },
+        //aqui aumente un poco el tamaño de todo
+        typography: {
+            fontSize: 18,
+        },
+    });
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-import { mainListItems, secondaryListItems } from './utils/ListItems';
-import Chart from './utils/Chart';
-import Deposits from './utils/Deposits';
-import Orders from './utils/Orders';
-
-const drawerWidth = 240;
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-        position: 'relative',
-        whiteSpace: 'nowrap',
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen
-        }),
-        boxSizing: 'border-box',
-        ...(!open && {
-            overflowX: 'hidden',
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen
-            }),
-            width: theme.spacing(7),
-            [theme.breakpoints.up('sm')]: {
-                width: theme.spacing(9)
-            }
-        })
-    }
-}));
-
-const mdTheme = createTheme();
-
-function Dashboard() {
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-        setOpen(!open);
-    };
-
+    const user = useSelector((state) => state.usersReducers.user);
+    //const token = useSelector((state) => state.usersReducers.token);
+    let token = localStorage.token;
+    //console.log(token)
     return (
-        <ThemeProvider theme={mdTheme}>
-            <Header />
-            <Box sx={{ display: 'flex' }}>
-                <CssBaseline />
+        <>
+            
+                <SearchAppBar />
+                       
+            <ThemeProvider theme={theme}>
+                <Box sx={{ display: "flex" }}>
+                    <CssBaseline />
 
-                <Box
-                    component="main"
-                    sx={{
-                        backgroundColor: (theme) => (theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900]),
-                        flexGrow: 1,
-                        // height: '100vh',
-                        overflow: 'auto'
-                    }}
-                >
-                    <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                        <Grid container spacing={3}>
-                            <Chart />
-                            <Grid item xs={12} md={8} lg={9}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240
-                                    }}
-                                >
-                                    <Chart />
-                                </Paper>
+                    <Box
+                        component="main"
+                        sx={{
+                            backgroundColor: (theme) =>
+                                theme.palette.mode === "light"
+                                    ? theme.palette.grey[100]
+                                    : theme.palette.grey[900],
+                            flexGrow: 1,
+                            overflow: "auto",
+                        }}
+                    >
+                        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                            <Grid container spacing={3}>
+                                {/* Chart */}
+                                <Grid item xs={12} md={8} lg={9}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            width: '100%',
+                                            height: '380px'
+                                        }}
+                                    >
+                                        Nuestras tiendas!!
+                                         <Map/> 
+                                    </Paper>
+                                </Grid>
+                                <Divider/>
+                                {/* Recent Deposits */}
+                                <Grid item xs={12} md={4} lg={3}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            height: '380px'
+                                        }}
+                                    > 
+                                        Ventas
+                                        <PointOfSaleIcon/>
+                                    </Paper> 
+                                </Grid>
+                                {/* Recent Orders */}
+                                <Grid item xs={12}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                        }}
+                                    >
+                                        'Orden 1'
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                        }}
+                                    >
+                                        'Orden 2'
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                        }}
+                                    >
+                                        'Orden 3'
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4} lg={3}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            height: 240,
+                                        }}
+                                    >
+                                        Social-Media
+                                        <Diversity1Icon/>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4} lg={3}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            height: 240,
+                                        }}
+                                    >
+                                        Stock
+                                        <StoreIcon/>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4} lg={3}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            height: 240,
+                                        }}
+                                    >
+                                        Compras
+                                        <PointOfSaleIcon/>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4} lg={3}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            height: 240,
+                                        }}
+                                    >
+                                        Ganancias
+
+                                        <MonetizationOnIcon/>
+                                    </Paper>
+                                </Grid>
                             </Grid>
-                            {/* Recent Deposits */}
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240
-                                    }}
-                                >
-                                    <Deposits />
-                                </Paper>
-                            </Grid>
-                            {/* Recent Orders */}
-                            <Grid item xs={12}>
-                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                    <Orders />
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240
-                                    }}
-                                >
-                                    <Deposits />
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240
-                                    }}
-                                >
-                                    <Deposits />
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240
-                                    }}
-                                >
-                                    <Deposits />
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240
-                                    }}
-                                >
-                                    <Deposits />
-                                </Paper>
-                            </Grid>
-                        </Grid>
-                    </Container>
+                        </Container>
+                    </Box>
                 </Box>
-            </Box>
-        </ThemeProvider>
+            </ThemeProvider>
+        </>
     );
 }
-
-export default Dashboard;

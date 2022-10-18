@@ -1,19 +1,17 @@
-import {GET_USER_ID} from "../actions";
+import { GET_USER_ID } from "../actions";
 
 const initialState = {
-    userId : {}
+    userId: {},
 };
 
-export default function userIdReducer(state = initialState, action){
-
+export default function userIdReducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER_ID:
-            return{
+            return {
                 ...state,
-                userId: action.payload
-            }         
-        default: return state;
-   
+                userId: action.payload,
+            };
+        default:
+            return state;
     }
-
-};
+}

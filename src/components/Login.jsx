@@ -49,12 +49,13 @@ export default function Login() {
     dispatch(createUsers(user));
     emailLogin = user.email;
     console.log(emailLogin, "estoy dentro");
+    dispatch(getAllCartItems(emailLogin));
     navigate("/welcome");
   }
   function handleFailure(err) {
     console.log("failed:", err);
   }
-console.log(emailLogin, "estoy afuera");
+// console.log(emailLogin, "estoy afuera");
   useEffect(() => {
     gapi.load("client:auth2", () => {
       gapi.auth2.init({ clientId: clientId });

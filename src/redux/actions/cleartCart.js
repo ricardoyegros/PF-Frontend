@@ -1,8 +1,12 @@
-import axios from "axios";
-import React from "react";
+// import axios from "axios";
 
-export default function cleartCart (email) {
-    return function () {
-        axios.post(`https://techstore123.herokuapp.com/carts?email=${email}`)
-    }
-}
+
+// export function removeCartDb (email) {
+//     try {
+//         return async function () {
+           
+//         }
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
