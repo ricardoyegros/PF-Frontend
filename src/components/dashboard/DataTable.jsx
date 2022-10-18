@@ -86,11 +86,11 @@ const columns = [
   const navigate = useNavigate();
   const products = useSelector((state) => state.adminProductsReducer.products);
   //console.log(products);
-  useEffect(() => {
+   useEffect(() => {
     dispatch(getProducts())
-  }, [dispatch])
+  }, [dispatch]) 
 
-  console.log(rows)
+  //console.log(rows)
   
   const showProducts = products.map(prod => ({
     id: prod.id,
@@ -105,7 +105,7 @@ const columns = [
   
   rows = [...showProducts]
   
-  const [value, setValue] = useState({});
+  //const [value, setValue] = useState({});
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -114,11 +114,17 @@ const columns = [
 
 
 const handleclickCell = (e,value) => {
-  
+  /* 
   console.log(value.row.id)
+  console.log(value.row.products)
+  console.log(value.row.brand)
+  console.log(value.row.stock)
+  console.log(value.row.category)
+  console.log(value.row.purchasePrice)
+  console.log(value.row.salePrice) */
  // navigate('/admin/userorden', { state: { id: value.row.id, name: value.row.name, lastname: value.row.lastname }})
   //dispatch(updateItem())  
-  navigate("/updateitem",{ idItem: { id: value.row.id }} )
+  navigate("/updateitem",{ state: { id: value.row.id, name:value.row.products, brand: value.row.brand, category: value.row.category,  stock: value.row.stock, purchasePrice: value.row.purchasePrice, salePrice: value.row.salePrice }} )
 }
 
   return (
@@ -141,7 +147,7 @@ const handleclickCell = (e,value) => {
       columns={columns}
       pageSize={5}
       rowsPerPageOptions={[5]}
-      checkboxSelection={value}
+      /* checkboxSelection={value} */
     />
   </div></>
     

@@ -29,7 +29,7 @@ import SpanningTable from "./components/dashboard/SpanningTable.jsx";
 import DataTable from "./components/dashboard/DataTable";
 import CreateAdmin from './components/dashboard/CreateAdmin';
 import Ordenes from './components/dashboard/Ordenes';
-import UpdateItem from './components/dashboard/UpdateItem.jsx'
+import  UpdateItem  from './components/dashboard/UpdateItem'
 import OrdenCostumer from './components/dashboard/OrdenCustomer';
 
 
