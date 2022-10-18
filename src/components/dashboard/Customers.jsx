@@ -1,19 +1,88 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Typography, Link } from "@mui/material";
+import { Button } from "@mui/material";
 import { Link as Linkdom } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getUsers } from "../../redux/actions";
+import { getUsers, changeAdmin } from "../../redux/actions/adminUserAction";
 import Sidebar from "./Sidebar";
-import CardCustomer from "./CardCustomer";
+import { DataGrid } from '@mui/x-data-grid';
+
 
 function Customers() {
-    let allUser = useSelector((state) => state.allUserReducer.users);
-
-    let token = localStorage.token;
-
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const token = localStorage.token;
+
+    const allUser = useSelector((state) => state.adminUsersReducer.users);
+    //console.log(allUser)
+    const handleclick = (e, value) => {
+        console.log(value.row.id)
+        navigate('/admin/userorden', { state: { id: value.row.id, name: value.row.name, lastname: value.row.lastname }})
+        //dispatch(changeAdmin(value.row.id))
+    }
+    const handleAdmin = (e, value) => {
+        console.log(value.row.id)
+        dispatch(changeAdmin(value.row.id))
+    }
+    
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'name', headerName: 'Nombre', width: 130 },
+        { field: 'lastname', headerName: 'Apellido', width: 130 },
+        {
+            field: 'email',
+            headerName: 'Email',
+            width: 250,
+        },
+        {
+            field: 'isAdmin',
+            headerName: 'IsAdmin',
+            width: 90,
+        },
+        {
+            field: 'ordenes',
+            headerName: 'Ordenes',
+            sortable: false,
+            width: 160,
+            renderCell: (cellValues) => {
+                return (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={(e) => {
+                            handleclick(e, cellValues)
+                        }}
+                    >
+                        Órdenes
+                    </Button>
+                )
+            }
+        },
+        {
+            field: 'admin',
+            headerName: 'Admin',
+            sortable: false,
+            width: 160,
+            renderCell: (cellValues) => {
+                return (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={(e) => {
+                            handleAdmin(e, cellValues)
+                        }}
+                    >
+                        Admin
+                    </Button>
+                )
+            }
+        },
+    
+    ];
+
+
+    let rows = []
+
     // const navigate = useNavigate();
 
     //const [users, setUsers] = useState(allUser);
@@ -22,34 +91,34 @@ function Customers() {
         dispatch(getUsers(token));
     }, [dispatch]);
 
+    const users = allUser.map(user => ({
+        id: user.id,
+        name: user.name,
+        lastname: user.lastName,
+        email: user.email,
+        isAdmin: user.isAdmin,
+    }))
+    rows = [...users]
+
+
+
     return (
         <>
             <Sidebar />
-            <Grid container spacing={6} justifyContent="center">
-                {allUser.length > 0 ? (
-                    allUser.map((c) => (
-                        <Grid item mb={5} key={c.id}>
-                            <Linkdom to={`/admin/customers/customer/${c.id}`}>
-                                <CardCustomer
-                                    fullName={c.fullName}
-                                    contact={c.contact}
-                                    email={c.email}
-                                    isAdmin={c.isAdmin}
-                                    id={c.id}
-                                />
-                            </Linkdom>
-                        </Grid>
-                    ))
-                ) : (
-                    <h1>Cargando</h1>
-                )}
-                {/* setTimeout(() => {
-                        
-                    // }, timeout)
-                    // <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}>
-                    //     <Loading />
-                    // </Box>} */}
-            </Grid>
+            <div className="container">
+                <div className="row">
+
+                    <div style={{ height: 400, width: '100%' }}>
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            pageSize={5}
+                            rowsPerPageOptions={[5]}
+
+                        />
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

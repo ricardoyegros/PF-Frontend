@@ -1,9 +1,10 @@
-import { ADD_FAVORITE, REMOVE_FAVORITE, GET_FAVORITE } from "../actions/wishlistActions";
+import { ADD_FAVORITE, REMOVE_FAVORITE, GET_FAVORITE, GET_PRODUCTS_FAVORITE } from "../actions/wishlistActions";
 
 
 const initialState = {
     favorite: [],
-    message: {}
+    message: {},
+    products: [],
 };
 
 export default function reviewsDashReducer (state = initialState, action) {
@@ -14,21 +15,25 @@ export default function reviewsDashReducer (state = initialState, action) {
                 message: action.payload
             };
         case REMOVE_FAVORITE:
+            let prod = state.products.filter(e => e.id !==action.payload.id)
             return {
                 ...state,
-                message: action.payload
+                products: prod
             };
         case GET_FAVORITE:
             let fav
-            console.log(action.payload.products)
             if(action.payload.products.length > 0){
-                console.log("testeando")
                 fav = action.payload.products.map(prod => prod.id )
             } else {fav = []}
             //console.log(fav)
             return {
                 ...state,
                 favorite: fav
+            };
+        case GET_PRODUCTS_FAVORITE:
+            return {
+                ...state,
+                products: action.payload
             };
 
         default:
