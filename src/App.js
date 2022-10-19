@@ -32,6 +32,7 @@ import Ordenes from './components/dashboard/Ordenes';
 import UpdateItem from './components/dashboard/UpdateItem.jsx'
 import OrdenCostumer from './components/dashboard/OrdenCustomer';
 import ChangePassword from "./components/ChangePassword.jsx";
+import Nosotros from "./components/Nosotros.jsx";
 
 
 export default function App() {
@@ -82,7 +83,7 @@ export default function App() {
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route path='/geo' element={<Geo />} />
-                    
+                    <Route path='/nosotros' element={<Nosotros />} />
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>
@@ -130,6 +131,7 @@ export default function App() {
                     <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
                     <Route path="/admin/ordenes" element={<Ordenes/>}/>
                     <Route path="/updateitem" element={<UpdateItem/>}/>
+                    <Route path='/nosotros' element={<Nosotros />} />
                 </Routes>
                 <Footer />
             </div>
