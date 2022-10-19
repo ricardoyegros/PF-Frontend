@@ -2,10 +2,11 @@ import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AddressInput from "./AddressInput";
-import { shippingData } from "../redux/actions/cart-actions";
 import { paymentMethod } from "../redux/actions/payment";
+import axios from "axios";
+import swal from "sweetalert";
 
 
 export default function AddressForm({ nextStep }) {
@@ -18,8 +19,27 @@ export default function AddressForm({ nextStep }) {
             </Typography>
             <FormProvider  {...methods}>
                 <form onSubmit={methods.handleSubmit(data => {
-                    console.log(JSON.parse(localStorage.state).dataBaseStorage.cartItems);
-                    return dispatch(paymentMethod({ cart: JSON.parse(localStorage.cart) }));
+                    let info = {
+                        total: 1,
+                        discount: 1,
+                        subTotal: 1,
+                        status: 'Preparando',
+                        userId: localStorage.id,
+                        sucursalId: 1,
+                        quantity: 1,
+                        productsId: {
+                            cart: JSON.parse(localStorage.cart),
+                            email: localStorage.email
+                        }
+                    };
+                    console.log(info);
+
+                    axios.post(`https://techstore123.herokuapp.com/orders`, info)
+                        .then(r => {
+                            swal('Exito', r.data, 'success');
+                            if (r.data === 'Orden Creada!') return dispatch(paymentMethod({ cart: JSON.parse(localStorage.cart), userId: localStorage.id }))
+                        })
+                        .catch(e => swal('Error!', e.message, 'error'));
                 })}>
                     <Grid mt={1} container spacing={3}>
                         <AddressInput required name="fullName" label="Nombre Completo" />

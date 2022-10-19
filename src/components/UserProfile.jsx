@@ -10,6 +10,8 @@ export const UserProfile = () => {
 
     const reduxState = useSelector(state => state.userProfileReducer);
 
+    console.log(reduxState);
+
     const arr = ['Procesando Pago', 'Preparando', 'Enviado', 'Completado', 'Anulado'];
 
     useEffect(() => {

@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const OrderDetails = ({ id }) => {
-    console.log(id)
     return (
         <>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#staticBackdrop${id}`}>

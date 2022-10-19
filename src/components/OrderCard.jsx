@@ -1,10 +1,6 @@
 import React from 'react'
 import { OrderDetails } from './OrderDetails';
 
-const maxWidth = {
-    width: "100%"
-};
-
 export const OrderCard = ({ orderDate, status, id }) => {
     return (
         <>
