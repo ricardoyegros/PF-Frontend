@@ -2,10 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Divider } from "@mui/material";
-import List from "@mui/material/List";
-import { styled } from "@mui/material/styles";
-import MenuItem from "@mui/material/MenuItem";
 import Sidebar from "./Sidebar";
 import {
   Typography,
@@ -25,16 +21,16 @@ export default function UpdateItem() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log(state.id);
+  //console.log(state.id);
 
   useEffect(() => {
     dispatch(getIdProduct(state.id));
-  }, []);
+  });
 
   let detailProduct = useSelector(
     (state) => state.detailIdProductReducer.detailProduct
   );
-  console.log(detailProduct);
+  //console.log(detailProduct);
 
   const [input, setInput] = useState({
     name: state.name,
@@ -44,18 +40,17 @@ export default function UpdateItem() {
     salePrice: state.salePrice,
   });
 
-  console.log(input);
+  //console.log(input);
   function handleSubmit(e) {
-    console.log(input);
+    //console.log(input);
     e.preventDefault();
     dispatch(updateItem(input));
-    //setInput({});
     navigate("/admin/stock");
   }
 
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(e.target.value);
+   // console.log(e.target.value);
   }
 
   return (
