@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDetailProduct } from "../redux/actions";
@@ -11,6 +11,9 @@ import Loading from "./Loading";
 import Reviews from "./Reviews";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+import axios from "axios";
 
 
 
@@ -26,16 +29,26 @@ const StyledBoxPrice = styled(Box)(({}) => ({
 }));
 
 export default function Detail() {
-
-
     const { i } = useParams();
-
 
     let dispatch = useDispatch();
     let navigate = useNavigate();
 
-
+    
     let allReviews = useSelector((state)=> state.reviewsDashReducer.reviews)
+    
+    const  [data, setData] = useState({})
+    useEffect( async ()=>{
+      try {
+      let product = await axios.get( `https://techstore123.herokuapp.com/products/${i}`)
+        setData(product.data)
+      } catch (error) {
+        console.log(error)
+      }
+      
+    },[])
+
+
 
 
     useEffect(() => {
@@ -49,27 +62,6 @@ export default function Detail() {
 
 
   let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
-console.log(detailProduct,"mauricio")
-    const theme = createTheme({
-        palette: {
-            primary: {
-                // aqui el color primario un gris suave para que el logo se pueda ver.
-                main: "#cfcfcf",
-                light: "#cfcfcf",
-                dark: "#707070",
-            },
-            secondary: {
-                // de secundario un azul suave para evitar que sea muy chocante
-                main: "#4f83cc",
-                light: "#4f83cc",
-                dark: "#002f6c",
-            },
-        },
-        //aqui aumente un poco el tamaño de todo
-        typography: {
-            fontSize: 12,
-        },
-    });
 
     function handleClickButton(e) {
         dispatch(addToCart(detailProduct.name));
@@ -106,8 +98,10 @@ console.log(detailProduct,"mauricio")
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
 							</div>
-							<span class="review-no" style={{"margin":"2rem 0 2rem 1rem"}}>41 reviews</span>
 						</div>
+            <div style={{"margin": "3rem 1rem 3rem 1rem"}}>
+              {detailProduct.stock > 0 ? <Button variant="outlined" color={"success"}><CheckCircleIcon/>Disponible</Button> : <Button variant="outlined"  color={"error"}><CancelIcon/>No disponible</Button>}
+            </div>
 						<p class="product-description" style={{"margin":"2rem 0 2rem 1rem"}}>{detailProduct.description && detailProduct.description}</p>
 						<h4 class="price" style={{"margin":"4rem 0 2rem 1rem"}}>Precio actual <span>${detailProduct.salePrice && detailProduct.salePrice}</span></h4>
 							<div class="action-buttons" 
@@ -117,15 +111,15 @@ console.log(detailProduct,"mauricio")
                "flexDirection": "row",
                "justifyContent":"center",
                "margin":"4rem 0 2rem 0"}}>
-						<Button color="success"  onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button>
+					   {detailProduct.stock > 0 ? <Button color="success"  onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button> : <Button color="success" disabled onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button>}	
 						<Button color="error"><FavoriteBorderIcon fontSize={"large"}/></Button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div> 
   <Reviews id={i} /> 
+	</div> 
   </Box>
     
   )

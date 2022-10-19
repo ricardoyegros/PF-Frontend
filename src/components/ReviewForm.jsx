@@ -65,8 +65,11 @@ export const ReviewForm = ({ productId, setState2 }) => {
                     <ListItem>
 
                         <form onSubmit={handleSubmit} noValidate autoComplete="off" style={{
-                            justifyContent: "center", alignItems:
-                                "center", display: "grid"
+                            "justifyContent": "center",
+                             "alignItems": "center",
+                             "display": "flex",
+                             "flexDirection":"column",
+                             "gap":"1rem"
                         }}>
                             <TextField
                                 select

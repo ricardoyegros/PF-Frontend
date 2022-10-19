@@ -3,7 +3,6 @@ import { Box , ButtonGroup , Input , Button } from "@mui/material";
 import { createBranch } from "../../redux/actions/dashboard-actions/createBranch";
 import { useDispatch } from "react-redux";
 import Loading from "../Loading";
-
 import {
   useJsApiLoader,
   GoogleMap,
@@ -11,13 +10,12 @@ import {
   Autocomplete,
   DirectionsRenderer,
 } from '@react-google-maps/api'
-
 import { useRef, useState } from 'react'
 
+const {API_KEY_GOOGLEMAP} = process.env;
 const center = { lat: -34.603683, lng: -58.381557 }
 const libraries =  ['places']
 
-//const API_KEY_GOOGLEMAP = "AIzaSyC7ynS3forMsoceMlUSKgUZcbk1F3NoZOU";
 
 
  export function Map() {
@@ -102,6 +100,9 @@ const libraries =  ['places']
 
   return (
     <>
+  
+     
+      
       <Box 
       display={"flex"}
       alignItems={"center"}

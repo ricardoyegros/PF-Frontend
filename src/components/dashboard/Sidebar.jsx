@@ -9,7 +9,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 /* import InboxIcon from '@mui/icons-material/MoveToInbox';*/
-import MailIcon from '@mui/icons-material/Mail';
 import People from '@mui/icons-material/People';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -80,6 +79,13 @@ export default function Sidebar() {
         dispatch(navigate('/admin/sales'));
     };
 
+    const handleReviews = (e) => {
+        e.preventDefault();
+        dispatch(navigate('/admin/comentarios'));
+    };
+
+
+
     const toggleDrawer = (anchor, open) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -112,7 +118,7 @@ export default function Sidebar() {
             
             <Divider />
             <List>
-                {[ 'Productos','Customers' ].map((text, index) => (
+                {[ 'Productos','Clientes' ].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
@@ -125,7 +131,7 @@ export default function Sidebar() {
             </List>
             <Divider />
             <List>
-                {['Orders', 'Sucursales'].map((text, index) => (
+                {['Ordenes', 'Sucursales'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
@@ -142,12 +148,26 @@ export default function Sidebar() {
             </List>
             <Divider />
             <List>
-                {['Create Product', 'Create Admin'].map((text, index) => (
+                {['Crear producto', 'Crear Admin'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 {' '}
                                 {index % 2 === 0 ? <BuildIcon onClick={handleCreateProduct} /> : <PersonIcon onClick={handleCreateAdmin} />}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['Comentarios', 'Crear Admin'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {' '}
+                                {index % 2 === 0 ? <AssignmentIcon onClick={handleReviews} /> : <PersonIcon onClick={handleCreateAdmin} />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>

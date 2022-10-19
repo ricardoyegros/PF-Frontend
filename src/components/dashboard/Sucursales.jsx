@@ -1,10 +1,11 @@
-import {  Typography , Button , Box, Input  , Alert} from "@mui/material";
+import {  Typography , Box, Alert} from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { Map } from "./Map";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { deleteBranch } from "../../redux/actions/dashboard-actions/deleteBranch";
+import Sidebar from "./Sidebar";
 
 
 
@@ -42,6 +43,7 @@ export function Sucursales(){
 //nombre , direcion, longitud , latitud 
     return(
         <>
+        <Sidebar />
         <Box display={"flex"} justifyContent={"center"} >
         <StyledBox>
             <Box mb={5}>
