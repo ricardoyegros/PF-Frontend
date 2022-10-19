@@ -4,13 +4,14 @@ import { loginUser } from "../redux/actions/index.js";
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
 import { createUsers } from "../redux/actions/index.js";
-import { redirect, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { Typography, Box, TextField, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import GoogleIcon from "@mui/icons-material/Google";
 import { getAllCartItems } from "../redux/actions/getCart.js";
 
-const StyledBox = styled(Box)(({}) => ({
+
+const StyledBox = styled(Box)(({ }) => ({
   width: 500,
   height: 250,
   padding: 40,
@@ -28,7 +29,7 @@ export default function Login() {
   function handleChange(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
-  let emailLogin ;
+  let emailLogin;
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(loginUser(input));
@@ -55,7 +56,7 @@ export default function Login() {
   function handleFailure(err) {
     console.log("failed:", err);
   }
-// console.log(emailLogin, "estoy afuera");
+  // console.log(emailLogin, "estoy afuera");
   useEffect(() => {
     gapi.load("client:auth2", () => {
       gapi.auth2.init({ clientId: clientId });
@@ -106,7 +107,11 @@ export default function Login() {
                 >
                   Login
                 </Button>
-                <Button href="/passwordReset">Olvidaste tu contraseña?</Button>
+                <Link to={"/passwordReset"}>
+                  <Button >
+                    Olvidaste tu contraseña?
+                  </Button>
+                </Link>
               </Box>
               <GoogleLogin
                 clientId="701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com"

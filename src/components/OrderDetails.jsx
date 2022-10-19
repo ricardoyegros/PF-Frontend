@@ -1,6 +1,7 @@
 import React from 'react'
 
-export const OrderDetails = ({ id }) => {
+export const OrderDetails = ({ id, toRender }) => {
+    console.log(toRender);
     return (
         <>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#staticBackdrop${id}`}>
@@ -16,7 +17,13 @@ export const OrderDetails = ({ id }) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            
+                            {
+                                toRender && toRender.map(e => {
+                                    <>
+
+                                    </>
+                                })
+                            }
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

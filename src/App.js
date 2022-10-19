@@ -28,6 +28,7 @@ import CreateAdmin from './components/dashboard/CreateAdmin';
 import Ordenes from './components/dashboard/Ordenes';
 import UpdateItem from './components/dashboard/UpdateItem.jsx'
 import OrdenCostumer from './components/dashboard/OrdenCustomer';
+import ChangePassword from "./components/ChangePassword.jsx";
 
 
 export default function App() {
@@ -65,7 +66,8 @@ export default function App() {
                     <Route path="/welcome" element={<Login />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Login />} />
-                    <Route path="/passwordReset" element={<Login />} />
+                    <Route path="/passwordReset" element={<ForgotPassword />} />
+                    <Route path="/changepassword" element={<ChangePassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
@@ -76,8 +78,6 @@ export default function App() {
                         element={<CustomerDetail />}
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
-                    <Route path='/geo' element={<Geo />} />
-                    
                     <Route path="/admin/sucursal" element={<Sucursales/>}/>
                     <Route path="/admin/sales" element={<SpanningTable/>}/>
                     <Route path="/admin/stock" element={<DataTable/>}/>

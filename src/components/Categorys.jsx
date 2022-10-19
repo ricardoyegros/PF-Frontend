@@ -15,6 +15,7 @@ import {
 } from "../redux/actions";
 import { useState } from "react";
 import { Box } from "@mui/system";
+import  Geo  from "./Geo"
 import { Carrousel } from "./Carrousel";
 import Card3 from "./Card3";
 import { getFavorite } from "../redux/actions/wishlistActions"
@@ -460,6 +461,7 @@ export default function Categorys() {
           onChange={(e, p) => handlePage(e, p)}
         />
       </Box>
+        <Geo/>
     </>
   );
 }
