@@ -26,6 +26,7 @@ import { addToCart } from "../redux/actions/cart-actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '../redux/actions/wishlistActions'
 import { getFavorite } from "../redux/actions/wishlistActions"
+import swal from 'sweetalert';
 
 
 const cardGrid = {
@@ -111,20 +112,15 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
         setChecked(favorite)
     }, [favorite])
     
-    // console.log("card3 ===>", imagen)
+
 
     const [checked, setChecked] = useState(favorite);
     const dispatch = useDispatch()
-    /* const [product, setProduct] = useState("");
-    const productos = useSelector((state) => state.wishlistReducer.favorite); */
-    
-    //console.log(productos)
+
     const handleChange = (event) => { //dispatch favorites
         setChecked(event.target.checked);
-        // console.log(event)
         if (!checked) {
-            //console.log(event.target.id)
-            //console.log(localStorage.id)
+
             dispatch(addFavorite(localStorage.id,event.target.id))
         }
         if (checked) {
@@ -132,24 +128,15 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
             console.log(localStorage.id)
             dispatch(removeFavorite(localStorage.id,event.target.id))
         }
-        //setProduct(event.target.id)
     };
 
-    /* useEffect(() => {
-        console.log(product)
-    }, [product]) */
-
-    const handleOnChange = (e) => {
-        e.preventDefault();
-        //console.log(e.target.id)
-    }
 
     const handleClickButton = (e) => { //dispatch cart
         dispatch(addToCart(e.target.id));
-        console.log(e.target.id)
+        // console.log(e.target.id)
+        swal("¡Producto agregado!", "Su producto se encuentra en su carrito de compras.")
     }
 
-    
 
     return (
         <>
