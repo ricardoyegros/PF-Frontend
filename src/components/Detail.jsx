@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDetailProduct } from "../redux/actions";
-import { createTheme } from "@mui/material";
+import { createTheme, Checkbox } from "@mui/material";
 import { addToCart } from "../redux/actions/cart-actions";
 import { styled } from '@mui/material/styles';
 import { clearDetail } from "../redux/actions/detail-actions";
@@ -13,6 +13,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import './Detail.css'
 import { addFavorite, removeFavorite } from "../redux/actions/wishlistActions";
+import { FavoriteBorder, Favorite } from "@mui/icons-material";
 
 
 
@@ -25,6 +26,19 @@ const StyledBoxPrice = styled(Box)(({}) => ({
     alignItems: "center",
     boxShadow: "0px 1px 2px 0px rgba(151, 154, 141, 1)",
 }));
+
+const heartIcon = {
+  // margin: "15px 5px 0px 0px",
+  color: "red",
+  "&:hover": {
+      cursor: "pointer",
+      border: "#F1948A  2px solid",
+      background: "#F5B7B1",
+      // borderRadius: "50%",
+      padding: "7px"
+  }
+}
+
 
 export default function Detail() {
 
@@ -50,24 +64,30 @@ export default function Detail() {
     const [checked, setChecked] = useState(false);
 
     const handleChange = (event) => { //dispatch favorites
-      console.log("event ===>", event)
-      // setChecked(!checked);
-      // if (!checked) {
-      //     dispatch(addFavorite(localStorage.id,event.target.id))
-      // }
-      // if (checked) {
-      //     // console.log(event.target.id)
-      //     // console.log(localStorage.id)
-      //     // dispatch(removeFavorite(localStorage.id,event.target.id))
-      // }
+      console.log("event ===>", event.target.id)
+      setChecked(!checked);
+      if (!checked) {
+        dispatch(addFavorite(localStorage.id,event.target.id))
+      }
+
+      if (checked) {
+          // console.log(event.target.id)
+          // console.log(localStorage.id)
+        dispatch(removeFavorite(localStorage.id,event.target.id))
+      }
 
   };
 
   let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
   const arrayFavorites = useSelector((state) => state.wishlistReducer.favorite);
 
+  useEffect(() => {
+    if(arrayFavorites.includes(detailProduct.id)) setChecked(!checked)
+  }, [])
+
   console.log(detailProduct," <=== detail producto")
   console.log(arrayFavorites," <=== favoritos")
+
     const theme = createTheme({
         palette: {
             primary: {
@@ -176,7 +196,17 @@ export default function Detail() {
                "justifyContent":"center",
                "margin":"4rem 0 2rem 0"}}>
 						<Button color="success" onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button>
-						<Button color="error" onClick={handleChange} id={detailProduct.id}><FavoriteBorderIcon fontSize={"large"}/></Button>
+						{/* <Button color="error" onClick={handleChange} id={detailProduct.id}><FavoriteBorderIcon fontSize={"large"}/></Button> */}
+            <Checkbox
+              checked={checked}
+              onChange={handleChange}
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+              sx={heartIcon}
+              color="error"
+              inputProps={{ 'aria-label': 'controlled' }}
+              id={detailProduct.id}
+            />
 						</div>
 					</div>
 				</div>
