@@ -14,7 +14,7 @@ export default function adminUsersReducer(state = initialState, action) {
             };
         case CHANGE_ADMIN:
             const newUsers = state.users.map( (user) => {
-                if(user.id == action.payload.id){
+                if(user.id === action.payload.id){
                     return action.payload
                 }
                 return user
