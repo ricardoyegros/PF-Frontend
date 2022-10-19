@@ -26,6 +26,10 @@ export const Navbar2 = () => {
     const handleSearchInput = (event) => {
         setSearch(event.target.value);
     };
+
+    // console.log("cart", cart)
+    const amountOfProducts = cart.reduce((acc, cur) => acc + cur.quantity, 0)
+    // console.log(amountOfProducts)
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-light">

@@ -2,7 +2,7 @@ import { DETAIL_PRODUCT } from "../actions";
 import { CLEAR } from "../actions/detail-actions";
 
 const initialState = {
-    detailProduct: [],
+    detailProduct: {},
 };
 
 export default function detailProductReducer(state = initialState, action) {

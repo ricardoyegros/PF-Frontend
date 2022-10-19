@@ -17,7 +17,7 @@ export function addFavorite(idUser, idProduct) {
             
             return dispatch({ type: ADD_FAVORITE, payload: addFav.data });
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         }
     }
 };
