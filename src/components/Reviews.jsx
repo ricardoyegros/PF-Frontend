@@ -26,7 +26,8 @@ export default function Reviews({ id }) {
 
     const reduxState = useSelector(state => state.reviewsReducer.reviews);
 
-
+    
+    
 
     const handleClick = (e) => {
         if (!localStorage.token) return navigate('/login');
@@ -41,10 +42,10 @@ export default function Reviews({ id }) {
     if (reduxState?.content && reduxState.content.length === 0) {
         return (
             <>
-                <Box justifyContent={'center'} alignItems="center" display={"grid"}>
+                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
                     <h3>REVIEWS</h3>
-                    <h4>Se el primero en comentar!<Button onClick={handleClick}
-                    >Crear Review</Button></h4>
+                  
+                  <Button variant='outlined' onClick={handleClick}>Crear Review</Button>
                 </Box>
                 <Box justifyContent={'center'} alignItems="center" display={"grid"}>
                     {state.open ? <ReviewForm setState2={setState} productId={id} /> : null}
@@ -54,8 +55,8 @@ export default function Reviews({ id }) {
     } else {
         return (
             <>
-                <Box justifyContent={'center'} alignItems="center" display={"grid"}><h3>REVIEWS</h3>
-                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' ,border:"solid black"}}>
+                <Box justifyContent={'center'} alignItems="center" display={"flex"} flexDirection={"column"}><h3>REVIEWS</h3>
+                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
                         {
                             reduxState && reduxState.content.map(e =>
                                 <ListItem alignItems="flex-start">
@@ -64,7 +65,7 @@ export default function Reviews({ id }) {
                                 
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={`${e.user.fullName}: ${e.detail}`}
+                                        primary={`${e.user ? e.user.fullName : "null"}: ${e.detail}`}
                                         secondary={
                                             <React.Fragment>
                                                 <Rating name="half-rating-read" defaultValue={e.stars} precision={0.5} readOnly />
