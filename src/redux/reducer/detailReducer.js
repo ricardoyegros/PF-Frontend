@@ -21,4 +21,4 @@ export default function detailProductReducer(state = initialState, action) {
         default:
             return state;
     }
-}
+};
