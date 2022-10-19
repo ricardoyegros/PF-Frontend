@@ -40,7 +40,7 @@ export const UserProfile = () => {
             <div className="row">
                         <div className="col">
                             <p>
-                                <button className={state.pending === "pending" ? "btn btn-primary" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" value="pending" onClick={handleClick}>
+                                <button className={state.pending === "pending" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" value="pending" onClick={handleClick}>
                                     Pendientes
                                 </button>
                             </p>
@@ -58,7 +58,7 @@ export const UserProfile = () => {
                 <div className="row">
                     <div className="col">
                         <p>
-                            <button className={state.onway === "onway" ? "btn btn-primary" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample" value="onway" onClick={handleClick}>Esta en camino</button>
+                            <button className={state.onway === "onway" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample" value="onway" onClick={handleClick}>Esta en camino</button>
                         </p>
                         <div className="collapse" id="collapseExample0">
                             <div className="card card-body">
@@ -72,7 +72,7 @@ export const UserProfile = () => {
                     <div className="row">
                         <div className="col">
                             <p>
-                                <button className={state.finish === "finish" ? "btn btn-primary" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" value="finish" onClick={handleClick}>
+                                <button className={state.finish === "finish" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" value="finish" onClick={handleClick}>
                                     Finalizados
                                 </button>
                             </p>

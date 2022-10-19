@@ -38,7 +38,7 @@ export const UserConfig = () => {
                     <div style={gridCenter}>
                         <h6>Nombre usuario: {localStorage.name}</h6>
                         <h6>Email: {localStorage.email} </h6>
-                        <button type="button" className="btn btn-secundary" onClick={handleClick} >Modificar Informacion</button>
+                        <button type="button" className="btn btn-danger" onClick={handleClick} >Modificar Informacion</button>
                         <br />
                     </div>
                     <br />
