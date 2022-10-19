@@ -1,0 +1,15 @@
+.secondariesImages {
+    border: #F7DC6F solid 2px;
+    margin: 10px;
+    border-radius: 15px;
+    list-style-type: none;
+}
+
+.secondariesImages:hover {
+    border: #58D68D solid 2px,
+}
+
+img {
+    mix-blend-mode: multiply;
+    cursor: pointer;
+}

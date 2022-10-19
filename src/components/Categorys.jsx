@@ -435,7 +435,7 @@ export default function Categorys() {
                     nombre={e.name}
                     key={e.id}
                     imagen={
-                      e.images[0]?.url ||
+                      e.images.length > 0 ? e.images :
                       "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
                     }
                     precioVenta={e.salePrice}

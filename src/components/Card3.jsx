@@ -111,6 +111,7 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
         setChecked(favorite)
     }, [favorite])
     
+    // console.log("card3 ===>", imagen)
 
     const [checked, setChecked] = useState(favorite);
     const dispatch = useDispatch()
@@ -218,9 +219,9 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
                                 <Link to={`/detalle/${id}`} underline="none">
                                     <CardMedia
                                         component="img"
-                                        image={imagen}
+                                        image={typeof imagen !== "string" ? imagen[0].url : imagen}
                                         sx={cardMedia}
-                                    />
+                                    /> 
                                 </Link>
                                 <Rating sx={{ "padding": "5px" }} Controlled />
                             </CardContent>

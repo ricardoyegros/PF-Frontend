@@ -11,6 +11,8 @@ export const Navbar2 = () => {
     let dispatch = useDispatch();
     const [search, setSearch] = useState("");
     const user = useSelector((state) => state.usersReducers.user);
+    const cart = useSelector((state) => state.shoppingCartReducer.cart);
+    
     const handleSubmitSearch = (event) => {
         event.preventDefault();
         dispatch(preFilter({ name: search }));
@@ -20,6 +22,10 @@ export const Navbar2 = () => {
     const handleSearchInput = (event) => {
         setSearch(event.target.value);
     };
+
+    // console.log("cart", cart)
+    const amountOfProducts = cart.reduce((acc, cur) => acc + cur.quantity, 0)
+    // console.log(amountOfProducts)
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-light">
@@ -127,7 +133,7 @@ export const Navbar2 = () => {
                                 to={"/shopping-cart"}
                                 className="navbar-brand"
                             >
-                            <Badge badgeContent={100} color="success">
+                            <Badge badgeContent={amountOfProducts} color="success">
                                 <span class="material-symbols-outlined">
                                     shopping_cart
                                 </span>

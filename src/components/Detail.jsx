@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDetailProduct } from "../redux/actions";
@@ -11,7 +11,8 @@ import Loading from "./Loading";
 import Reviews from "./Reviews";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import './Detail.css'
+import { addFavorite, removeFavorite } from "../redux/actions/wishlistActions";
 
 
 
@@ -46,10 +47,27 @@ export default function Detail() {
         dispatch(getDetailProduct(i));
     }, []);
 
+    const [checked, setChecked] = useState(false);
 
+    const handleChange = (event) => { //dispatch favorites
+      console.log("event ===>", event)
+      // setChecked(!checked);
+      // if (!checked) {
+      //     dispatch(addFavorite(localStorage.id,event.target.id))
+      // }
+      // if (checked) {
+      //     // console.log(event.target.id)
+      //     // console.log(localStorage.id)
+      //     // dispatch(removeFavorite(localStorage.id,event.target.id))
+      // }
+
+  };
 
   let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
-console.log(allReviews,"mauricio")
+  const arrayFavorites = useSelector((state) => state.wishlistReducer.favorite);
+
+  console.log(detailProduct," <=== detail producto")
+  console.log(arrayFavorites," <=== favoritos")
     const theme = createTheme({
         palette: {
             primary: {
@@ -76,7 +94,13 @@ console.log(allReviews,"mauricio")
         navigate("/shopping-cart");
     }
 
+    const [image, setImage] = useState(0)
 
+    // console.log(imagen)
+    const handleOnClickImage = (index) => {
+      // console.log(index)
+      setImage(index)
+    }
 
   return (
     <Box
@@ -90,11 +114,45 @@ console.log(allReviews,"mauricio")
 			<div class="container-fliud">
 				<div class="wrapper row">
 					<div class="col-md-6" 
-          style={{
-          "display": "flex",
-          "justifyContent":"center",
-          "alignItems":"center"}}>
-						  <div id="pic-1"><img src={detailProduct.images && detailProduct.images[0].url} style={{"maxWidth":"20rem","marginBottom":"0.5rem"}} /></div>
+            style={{
+              "display": "flex",
+              "justifyContent":"center",
+              "alignItems":"center",
+              "flexWrap": "wrap",
+              "alignItems": "center",
+              "backgroundColor": "#BFC9CA"
+            }}>
+            <div 
+              style={{
+                "display": "flex",
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "margin": "20px",
+                // "border": "2px solid black"
+              }}
+            >
+              <ul>
+                {detailProduct.images?.map((img, index) => (
+                  <li key={img.id} onClick={() => handleOnClickImage(index)} 
+                    className="secondariesImages"
+                    // style={{
+                    //   "listStyleType": "none",
+                    //   "border": "#F7DC6F solid 2px",
+                    //   "margin": "10px",
+                    //   "borderRadius": "15px",
+                    // }}
+                    >
+                    <img src={img.url} width="80px" height="80px" alt="logo-imagen" />
+                  </li>
+                ))}
+              </ul>
+            </div>
+						<div id="pic-1">
+              <img src={
+                  // detailProduct.length > 0 && (typeof detailProduct.images !== "string" ? detailProduct.images[0].url : detailProduct.images[0].url)
+                detailProduct.images && detailProduct.images[image].url
+              } style={{"maxWidth":"15rem","marginBottom":"0.5rem"}} />
+            </div>
 					</div>
 					<div class="details col-md-6">
 						<h3 class="product-title" style={{"margin": "3rem 1rem 3rem 1rem","textAlign":"justify"}}>{detailProduct.name && detailProduct.name}</h3>
@@ -117,8 +175,8 @@ console.log(allReviews,"mauricio")
                "flexDirection": "row",
                "justifyContent":"center",
                "margin":"4rem 0 2rem 0"}}>
-						<Button color="success"  onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button>
-						<Button color="error"><FavoriteBorderIcon fontSize={"large"}/></Button>
+						<Button color="success" onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button>
+						<Button color="error" onClick={handleChange} id={detailProduct.id}><FavoriteBorderIcon fontSize={"large"}/></Button>
 						</div>
 					</div>
 				</div>
