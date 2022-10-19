@@ -49,7 +49,7 @@ export default function Detail() {
 
 
   let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
-console.log(allReviews,"mauricio")
+console.log(detailProduct,"mauricio")
     const theme = createTheme({
         palette: {
             primary: {
@@ -72,7 +72,7 @@ console.log(allReviews,"mauricio")
     });
 
     function handleClickButton(e) {
-        dispatch(addToCart(i));
+        dispatch(addToCart(detailProduct.name));
         navigate("/shopping-cart");
     }
 

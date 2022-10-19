@@ -144,8 +144,8 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
     }
 
     const handleClickButton = (e) => { //dispatch cart
-        dispatch(addToCart(e.target.id));
-        console.log(e.target.id)
+        dispatch(addToCart(nombre));
+        console.log(nombre, "ETN")
     }
 
     

@@ -7,12 +7,13 @@ export const ACTIONS = {
     SHIPPING_DATA : "SHIPPING_DATA"
 };
 
-export function addToCart (id) {
+export function addToCart (name) {
     return async function (dispatch){
         try {
             let product = await axios.get(
-                `https://techstore123.herokuapp.com/products/${id}`
+                `https://techstore123.herokuapp.com/products/carts?name=${name}`
             );
+            console.log(product, "soy el name")
             let cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
             let duplicate = cart.filter(p => p.name === product.data.name)
             if(duplicate.length === 0) {
@@ -22,7 +23,7 @@ export function addToCart (id) {
                 }
                 cart.push(productToAdd)
             }else {
-                cart = cart.map((item) => item.id === product.data.id ? {...item , quantity: item.quantity + 1}: item)
+                cart = cart.map((item) => item.name === product.data.name ? {...item , quantity: item.quantity + 1}: item)
             }
             localStorage.setItem("cart", JSON.stringify(cart))
             dispatch({

@@ -27,7 +27,7 @@ for (let i = 0; i < cart.length; i++) {
   let subtotal = cart[i].quantity * cart[i].salePrice;
   totalCarrito = totalCarrito + subtotal;
 }
-
+console.log(cart)
 return (
   <>
     <Typography variant={"h3"} m={2}>Carrito de Compras</Typography>
@@ -55,9 +55,9 @@ return (
      cart?.map((products, i) => (
         <Cart
           key={i}
-          id={products.id}
-          name={products.name}
-          salePrice={products.salePrice}
+          id={products.id  }
+          name={products.name }
+          salePrice={products.salePrice }
           stock={products.stock}
           quantity={products.quantity}
           image={

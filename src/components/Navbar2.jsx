@@ -10,7 +10,13 @@ import { Badge } from "@mui/material";
 export const Navbar2 = () => {
     let dispatch = useDispatch();
     const [search, setSearch] = useState("");
-    const user = useSelector((state) => state.usersReducers.user);
+    const user = localStorage.name;
+    // const user = useSelector((state) => state.usersReducers.user);
+    let cart = useSelector((state) => state.shoppingCartReducer.cart);
+    let numberForCart = 0;
+    for(let i = 0; i < cart.length; i++){
+        numberForCart = numberForCart + cart[i].quantity
+    }
     const handleSubmitSearch = (event) => {
         event.preventDefault();
         dispatch(preFilter({ name: search }));
@@ -108,8 +114,8 @@ export const Navbar2 = () => {
                                 alignItems: "center",
                             }}
                         >
-                            {user.name ? (
-                                <h5>Bienvenido/a {user.name}</h5>
+                            {localStorage.name ? (
+                                <h5>Bienvenido/a {localStorage.name} </h5>
                             ) : (
                                 <h5>Bienvenido/a Invitado</h5>
                             )}
@@ -127,7 +133,7 @@ export const Navbar2 = () => {
                                 to={"/shopping-cart"}
                                 className="navbar-brand"
                             >
-                            <Badge badgeContent={100} color="success">
+                            <Badge badgeContent={numberForCart} color="success">
                                 <span class="material-symbols-outlined">
                                     shopping_cart
                                 </span>
@@ -143,7 +149,7 @@ export const Navbar2 = () => {
                             <input
                                 className="form-control me-2"
                                 type="search"
-                                placeholder="Search"
+                                placeholder="Buscar..."
                                 aria-label="Search"
                                 onChange={handleSearchInput}
                             />
