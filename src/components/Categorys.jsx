@@ -63,6 +63,7 @@ export default function Categorys() {
   const reduxState3 = useSelector((state) => state.categorysNameReducer.brands);
   const reduxState4 = useSelector((state) => state.categorysNameReducer);
 
+  // console.log("productos ===>", reduxState2)
 
   if (!reduxState2) dispatch(preFilter({}));
 
@@ -439,6 +440,7 @@ export default function Categorys() {
                       "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
                     }
                     precioVenta={e.salePrice}
+                    rating={e.rating}
                     favorite={arrayFavorites.includes(e.id) ? true : false}
                   />
                 </Grid>

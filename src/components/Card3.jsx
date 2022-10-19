@@ -26,7 +26,8 @@ import { addToCart } from "../redux/actions/cart-actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '../redux/actions/wishlistActions'
 import { getFavorite } from "../redux/actions/wishlistActions"
-import swal from 'sweetalert';
+// import swal from 'sweetalert';
+// import Swal from 'sweetalert2';
 
 
 const cardGrid = {
@@ -105,14 +106,13 @@ const cartIcon = {
 
 
 
-export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
+export default function Card3({ nombre, imagen, precioVenta, id, favorite, rating }) {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     
     useEffect(() => {
         setChecked(favorite)
     }, [favorite])
     
-
 
     const [checked, setChecked] = useState(favorite);
     const dispatch = useDispatch()
@@ -134,9 +134,19 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
     const handleClickButton = (e) => { //dispatch cart
         dispatch(addToCart(e.target.id));
         // console.log(e.target.id)
-        swal("¡Producto agregado!", "Su producto se encuentra en su carrito de compras.")
+        //  Swal.fire({
+        //     position: 'top-end',
+        //     title: 'Agregado al carrito!',
+        //     showConfirmButton: false,
+        //     timer: 1000,
+        //     timerProgressBar: true,
+        //     backdrop: false,
+        //     width: '250px',
+        //     heightAuto: true
+        // })
     }
 
+    // console.log("rating ==>", rating)
 
     return (
         <>
@@ -210,7 +220,7 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
                                         sx={cardMedia}
                                     /> 
                                 </Link>
-                                <Rating sx={{ "padding": "5px" }} Controlled />
+                                <Rating sx={{ "padding": "5px" }} value={rating} readOnly />
                             </CardContent>
                             <CardContent sx={cardInfo}>
                                 <Typography gutterBottom variant="h5">
