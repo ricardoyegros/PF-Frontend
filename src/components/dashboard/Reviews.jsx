@@ -3,6 +3,7 @@ import { getAllReviews } from '../../redux/actions/reviewsDash-actions';
 import { useDispatch ,useSelector } from 'react-redux';
 import { useEffect, useState} from 'react';
 import { deleteReviewId } from '../../redux/actions/reviewsDash-actions';
+import Sidebar from './Sidebar';
 
 
 export function Review () {
@@ -23,10 +24,11 @@ useEffect(()=> {
     dispatch(getAllReviews())
 },[dispatch]);
 
-console.log(allReviews[0],"datos comentarios")
+console.log(allReviews,"datos comentarios")
 
     return (
       <>
+        <Sidebar />
 <Typography variant={"h3"} m={5} align={"center"} >Comentarios</Typography>
 <table class="table" style={{"marginBottom":"5rem"}}>
   <thead>
@@ -42,7 +44,7 @@ console.log(allReviews[0],"datos comentarios")
     {allReviews.length ? (
         allReviews.map((review) => (
             <tr >
-            <th scope="row">{review.user.email}</th>
+            <th scope="row">{review.user ? review.user.email : "null"}</th>
             <td>{review.product.name}</td>
             <td>{review.detail}</td>
             <td>{review.stars}</td>

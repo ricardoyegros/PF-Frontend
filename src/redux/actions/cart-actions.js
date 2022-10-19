@@ -29,7 +29,7 @@ export function addToCart (name) {
             dispatch({
                 type: ACTIONS.ADD_TO_CART,
                 payload: cart,
-            });  
+            });
         } catch (error) {
             console.log(error);
         }

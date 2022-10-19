@@ -15,7 +15,7 @@ import {
 } from "../redux/actions";
 import { useState } from "react";
 import { Box } from "@mui/system";
-import CardProduct2 from "./Card2";
+import  Geo  from "./Geo"
 import { Carrousel } from "./Carrousel";
 import Card3 from "./Card3";
 import { getFavorite } from "../redux/actions/wishlistActions"
@@ -34,7 +34,6 @@ const productBox = {
   display: "flex",
   flexDirection: "column",
   gridGap: "2rem",
-  // border: "2px rgb(241, 207, 9) solid",
   flex: 1,
 };
 
@@ -50,9 +49,6 @@ export default function Categorys() {
 
   
   const arrayFavorites = useSelector((state) => state.wishlistReducer.favorite);
-  
-
-  const [open, setOpen] = useState(false);
 
   const reduxState = useSelector(
     (state) => state.categorysNameReducer.categorys
@@ -63,6 +59,7 @@ export default function Categorys() {
   const reduxState3 = useSelector((state) => state.categorysNameReducer.brands);
   const reduxState4 = useSelector((state) => state.categorysNameReducer);
 
+  // console.log("productos ===>", reduxState2)
 
   if (!reduxState2) dispatch(preFilter({}));
 
@@ -435,11 +432,13 @@ export default function Categorys() {
                     nombre={e.name}
                     key={e.id}
                     imagen={
-                      e.images[0]?.url ||
+                      e.images.length > 0 ? e.images :
                       "https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
                     }
                     precioVenta={e.salePrice}
+                    rating={e.rating}
                     favorite={arrayFavorites.includes(e.id) ? true : false}
+                    stock={e.stock}
                   />
                 </Grid>
               ))}
@@ -465,6 +464,7 @@ export default function Categorys() {
           onChange={(e, p) => handlePage(e, p)}
         />
       </Box>
+        <Geo/>
     </>
   );
 }

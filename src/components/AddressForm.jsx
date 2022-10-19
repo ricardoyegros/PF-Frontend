@@ -1,15 +1,15 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
-import {useForm, FormProvider} from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AddressInput from "./AddressInput";
-import { shippingData } from "../redux/actions/cart-actions";
 import { paymentMethod } from "../redux/actions/payment";
+import axios from "axios";
+import swal from "sweetalert";
 
 
-export default function AddressForm ({nextStep}) {
-    const navigate = useNavigate()
+export default function AddressForm({ nextStep }) {
     const dispatch = useDispatch();
     const methods = useForm();
     return (
@@ -19,24 +19,43 @@ export default function AddressForm ({nextStep}) {
             </Typography>
             <FormProvider  {...methods}>
                 <form onSubmit={methods.handleSubmit(data => {
-                    // if(!localStorage.token) return navigate('/login')
-                    return dispatch(paymentMethod(JSON.parse(localStorage.state).dataBaseStorage.cartItems));
+                    let info = {
+                        total: 1,
+                        discount: 1,
+                        subTotal: 1,
+                        status: 'Preparando',
+                        userId: localStorage.id,
+                        sucursalId: 1,
+                        quantity: 1,
+                        productsId: {
+                            cart: JSON.parse(localStorage.cart),
+                            email: localStorage.email
+                        }
+                    };
+                    console.log(info);
+
+                    axios.post(`https://techstore123.herokuapp.com/orders`, info)
+                        .then(r => {
+                            swal('Exito', r.data, 'success');
+                            if (r.data === 'Orden Creada!') return dispatch(paymentMethod({ cart: JSON.parse(localStorage.cart), userId: localStorage.id }))
+                        })
+                        .catch(e => swal('Error!', e.message, 'error'));
                 })}>
                     <Grid mt={1} container spacing={3}>
-                        <AddressInput required name="fullName" label="Nombre Completo"/>
-                        <AddressInput required name="store" label="Sucursal"/>
-                        <AddressInput required name="phone" label="Numero de contacto"/>
-                        <AddressInput required name="email" label="Correo Electrónico"/>
-                        <AddressInput required name="Cp" label="Código Postal"/>
-                        <AddressInput required name="address" label="Dirección"/>
-                        <AddressInput required name="city" label="Ciudad"/>
-                        <AddressInput required name="province" label="Provincia"/>
+                        <AddressInput required name="fullName" label="Nombre Completo" />
+                        <AddressInput required name="store" label="Sucursal" />
+                        <AddressInput required name="phone" label="Numero de contacto" />
+                        <AddressInput required name="email" label="Correo Electrónico" />
+                        <AddressInput required name="Cp" label="Código Postal" />
+                        <AddressInput required name="address" label="Dirección" />
+                        <AddressInput required name="city" label="Ciudad" />
+                        <AddressInput required name="province" label="Provincia" />
                     </Grid>
-                    <div style={{display: "flex", justifyContent : "space-around", margin: "1rem"  }}>
+                    <div style={{ display: "flex", justifyContent: "space-around", margin: "1rem" }}>
                         <Button component={Link} to="/shopping-cart" variant="contained">Volver al Carrito</Button>
                         <Button type="submit" variant="contained">Siguiente</Button>
                     </div>
-                </form> 
+                </form>
             </FormProvider>
         </>
     )

@@ -13,7 +13,7 @@ export const UserProfile = () => {
     const arr = ['Procesando Pago', 'Preparando', 'Enviado', 'Completado', 'Anulado'];
 
     useEffect(() => {
-        dispatch(getOrdersOnPending(localStorage.id, 'Preparando'));
+        dispatch(getOrdersOnPending(localStorage.id, 'approved'));
         dispatch(getOrdersOnWay(localStorage.id, 'Enviado'));
         dispatch(getOrdersFinish(localStorage.id, 'Completado'));
     }, [dispatch]);
@@ -30,13 +30,35 @@ export const UserProfile = () => {
 
     };
 
+
+// console.log(reduxState.pendings)
+
     return (
         <>
             <div className="container text-center">
+
+            <div className="row">
+                        <div className="col">
+                            <p>
+                                <button className={state.pending === "pending" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" value="pending" onClick={handleClick}>
+                                    Pendientes
+                                </button>
+                            </p>
+                            <div className="collapse" id="collapseExample1">
+                                <div className="card card-body" >
+                                    {
+                                        reduxState.pendings[0] && reduxState.pendings.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} productsId={e.productsId} />)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 <div className="row">
                     <div className="col">
                         <p>
-                            <button className={state.onway === "onway" ? "btn btn-primary" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample" value="onway" onClick={handleClick}>Esta en camino</button>
+                            <button className={state.onway === "onway" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample" value="onway" onClick={handleClick}>Esta en camino</button>
                         </p>
                         <div className="collapse" id="collapseExample0">
                             <div className="card card-body">
@@ -50,25 +72,7 @@ export const UserProfile = () => {
                     <div className="row">
                         <div className="col">
                             <p>
-                                <button className={state.pending === "pending" ? "btn btn-primary" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" value="pending" onClick={handleClick}>
-                                    Pendientes
-                                </button>
-                            </p>
-                            <div className="collapse" id="collapseExample1">
-                                <div className="card card-body" >
-                                    {
-                                        reduxState.pendings[0] && reduxState.pendings.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} />)
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div className="row">
-                        <div className="col">
-                            <p>
-                                <button className={state.finish === "finish" ? "btn btn-primary" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" value="finish" onClick={handleClick}>
+                                <button className={state.finish === "finish" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" value="finish" onClick={handleClick}>
                                     Finalizados
                                 </button>
                             </p>
@@ -86,3 +90,6 @@ export const UserProfile = () => {
         </>
     )
 }
+
+
+//test_user_80176824@testuser.com

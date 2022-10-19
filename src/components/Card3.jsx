@@ -26,6 +26,8 @@ import { addToCart } from "../redux/actions/cart-actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '../redux/actions/wishlistActions'
 import { getFavorite } from "../redux/actions/wishlistActions"
+// import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 
 const cardGrid = {
@@ -104,51 +106,57 @@ const cartIcon = {
 
 
 
-export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
+export default function Card3({ nombre, imagen, precioVenta, id, favorite, rating, stock }) {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-    
+
     useEffect(() => {
         setChecked(favorite)
     }, [favorite])
-    
+
 
     const [checked, setChecked] = useState(favorite);
     const dispatch = useDispatch()
-    /* const [product, setProduct] = useState("");
-    const productos = useSelector((state) => state.wishlistReducer.favorite); */
-    
-    //console.log(productos)
-    const handleChange = (event) => { //dispatch favorites
+
+    const handleChange = (event) => {
         setChecked(event.target.checked);
-        // console.log(event)
         if (!checked) {
-            //console.log(event.target.id)
-            //console.log(localStorage.id)
-            dispatch(addFavorite(localStorage.id,event.target.id))
+
+            dispatch(addFavorite(localStorage.id, event.target.id))
+            Swal.fire({
+                position: 'top-end',
+                title: 'Agregado a favoritos!',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                backdrop: false,
+                width: '250px',
+                heightAuto: true
+
+            })
         }
         if (checked) {
             console.log(event.target.id)
             console.log(localStorage.id)
-            dispatch(removeFavorite(localStorage.id,event.target.id))
+            dispatch(removeFavorite(localStorage.id, event.target.id))
         }
-        //setProduct(event.target.id)
     };
 
-    /* useEffect(() => {
-        console.log(product)
-    }, [product]) */
-
-    const handleOnChange = (e) => {
-        e.preventDefault();
-        //console.log(e.target.id)
-    }
 
     const handleClickButton = (e) => { //dispatch cart
         dispatch(addToCart(nombre));
         console.log(nombre, "ETN")
+        Swal.fire({
+            position: 'top-end',
+            title: 'Agregado al carrito!',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            backdrop: false,
+            width: '250px',
+            heightAuto: true
+        })
     }
 
-    
 
     return (
         <>
@@ -196,16 +204,29 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
                                         id={id}
                                     />}
 
-                                    <Checkbox
-                                        checked={checked}
-                                        onChange={handleClickButton}
-                                        icon={<ShoppingCart />}
-                                        checkedIcon={<ShoppingCart />}
-                                        sx={cartIcon}
-                                        color="success"
-                                        inputProps={{ 'aria-label': 'controlled' }}
-                                        id={id}
-                                    />
+                                    {stock > 0 ?
+                                        <Checkbox
+                                            checked={checked}
+                                            onChange={handleClickButton}
+                                            icon={<ShoppingCart />}
+                                            checkedIcon={<ShoppingCart />}
+                                            sx={cartIcon}
+                                            color="success"
+                                            inputProps={{ 'aria-label': 'controlled' }}
+                                            id={id}
+                                        />
+                                        : <Checkbox
+                                            disabled
+                                            checked={checked}
+                                            onChange={handleClickButton}
+                                            icon={<ShoppingCart />}
+                                            checkedIcon={<ShoppingCart />}
+                                            sx={cartIcon}
+                                            color="success"
+                                            inputProps={{ 'aria-label': 'controlled' }}
+                                            id={id}
+                                        />
+                                    }
 
 
                                     {/* <IconButton
@@ -218,11 +239,11 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite }) {
                                 <Link to={`/detalle/${id}`} underline="none">
                                     <CardMedia
                                         component="img"
-                                        image={imagen}
+                                        image={typeof imagen !== "string" ? imagen[0].url : imagen}
                                         sx={cardMedia}
                                     />
                                 </Link>
-                                <Rating sx={{ "padding": "5px" }} Controlled />
+                                <Rating sx={{ "padding": "5px" }} value={rating} readOnly />
                             </CardContent>
                             <CardContent sx={cardInfo}>
                                 <Typography gutterBottom variant="h5">

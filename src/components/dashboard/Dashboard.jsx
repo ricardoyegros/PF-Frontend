@@ -27,6 +27,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import { MapDashboard } from './MapDashboard';
 
 export default function Dashboard() {
     const theme = createTheme({
@@ -90,7 +91,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Nuestras tiendas!!
-                                         <Map/> 
+                                         <MapDashboard/> 
                                     </Paper>
                                 </Grid>
                                 <Divider/>

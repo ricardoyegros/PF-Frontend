@@ -12,13 +12,12 @@ import allItemsCartReducer from "./allItemsCartReducer";
 import userProfileReducer from "./userProfileReducer";
 import geoReducer from "./geoReducer";
 import allUserReducer from "./allUserReducer";
-import wishlistReducer from "./wishlistReducer"
+import wishlistReducer from "./wishlistReducer";
 import reviewsDashReducer from "./reviewDashreducer";
 import adminProductsReducer from "./adminProductsReducer";
 import adminUpdateItemReducer from "./adminUpdateItemReducer";
 import adminUsersReducer from "./adminUsersReducer";
-
-
+import detailIdProductReducer from "./detailIdProductReducer";
 
 export default combineReducers({
     allProductsReducer,
@@ -38,5 +37,6 @@ export default combineReducers({
     reviewsDashReducer,
     adminProductsReducer,
     adminUpdateItemReducer,
-    adminUsersReducer
+    adminUsersReducer,
+    detailIdProductReducer,
 });
