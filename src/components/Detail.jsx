@@ -11,6 +11,8 @@ import Loading from "./Loading";
 import Reviews from "./Reviews";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import axios from "axios";
 
 
@@ -98,6 +100,9 @@ export default function Detail() {
 								<span class="fa fa-star"></span>
 							</div>
 						</div>
+            <div style={{"margin": "3rem 1rem 3rem 1rem"}}>
+              {detailProduct.stock > 0 ? <Button variant="outlined" color={"success"}><CheckCircleIcon/>Disponible</Button> : <Button variant="outlined"  color={"error"}><CancelIcon/>No disponible</Button>}
+            </div>
 						<p class="product-description" style={{"margin":"2rem 0 2rem 1rem"}}>{detailProduct.description && detailProduct.description}</p>
 						<h4 class="price" style={{"margin":"4rem 0 2rem 1rem"}}>Precio actual <span>${detailProduct.salePrice && detailProduct.salePrice}</span></h4>
 							<div class="action-buttons" 
@@ -107,7 +112,7 @@ export default function Detail() {
                "flexDirection": "row",
                "justifyContent":"center",
                "margin":"4rem 0 2rem 0"}}>
-						<Button color="success"  onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button>
+					   {detailProduct.stock > 0 ? <Button color="success"  onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button> : <Button color="success" disabled onClick={handleClickButton}><ShoppingCartIcon fontSize={"large"}/></Button>}	
 						<Button color="error"><FavoriteBorderIcon fontSize={"large"}/></Button>
 						</div>
 					</div>
