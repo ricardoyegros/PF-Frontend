@@ -9,6 +9,7 @@ export const paymentMethod = (form) => async () => {
             .then(r => {
                 swal('Exito!', "Seras enviado a MercadoPago", 'success');
                 console.log(r.data.data.init_point);
+                localStorage.removeItem('cart');
                 return window.location.href = r.data.data.init_point
             })
     } catch (error) {

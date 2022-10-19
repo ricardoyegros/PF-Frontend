@@ -117,11 +117,22 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite, ratin
     const [checked, setChecked] = useState(favorite);
     const dispatch = useDispatch()
 
-    const handleChange = (event) => { //dispatch favorites
+    const handleChange = (event) => {
         setChecked(event.target.checked);
         if (!checked) {
 
             dispatch(addFavorite(localStorage.id, event.target.id))
+            Swal.fire({
+                position: 'top-end',
+                title: 'Agregado a favoritos!',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                backdrop: false,
+                width: '250px',
+                heightAuto: true
+
+            })
         }
         if (checked) {
             console.log(event.target.id)
@@ -146,7 +157,6 @@ export default function Card3({ nombre, imagen, precioVenta, id, favorite, ratin
         })
     }
 
-    // console.log("rating ==>", rating)
 
     return (
         <>

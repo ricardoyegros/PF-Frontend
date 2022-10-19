@@ -1,7 +1,6 @@
 import Contact from "./components/Contact.jsx";
 import Detail from "./components/Detail";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import CreateUsers from "./components/CreateUsers";
 import CreateForm from "./components/CreateForm";
@@ -17,13 +16,11 @@ import Logout from "./components/Logout"
 import { useSelector } from "react-redux";
 import FinalShop from './components/FinalShop';
 import { Navbar2 } from './components/Navbar2';
-import { Home2 } from './components/Home2';
-import { UserProfile } from './components/UserProfile.jsx';
 import { UserConfig } from './components/UserConfig.jsx';
-import  Geo  from "./components/Geo"
+import Geo from "./components/Geo"
 import { Sucursales } from "./components/dashboard/Sucursales"
 import { Review } from './components/dashboard/Reviews.jsx';
-import CustomerDetail  from "./components/dashboard/CustomerDetail"
+import CustomerDetail from "./components/dashboard/CustomerDetail"
 import Wishlist from "./components/Wishlist.jsx";
 import SpanningTable from "./components/dashboard/SpanningTable.jsx";
 import DataTable from "./components/dashboard/DataTable";
@@ -81,13 +78,12 @@ export default function App() {
                         element={<CustomerDetail />}
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
-                    <Route path="/admin/sucursal" element={<Sucursales/>}/>
-                    <Route path="/admin/sales" element={<SpanningTable/>}/>
-                    <Route path="/admin/stock" element={<DataTable/>}/>
-                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
-                    <Route path="/admin/ordenes" element={<Ordenes/>}/>
-                    <Route path="/updateitem" element={<UpdateItem/>}/>
-
+                    <Route path="/admin/sucursal" element={<Sucursales />} />
+                    <Route path="/admin/sales" element={<SpanningTable />} />
+                    <Route path="/admin/stock" element={<DataTable />} />
+                    <Route path="/admin/newadmin" element={<CreateAdmin />} />
+                    <Route path="/admin/ordenes" element={<Ordenes />} />
+                    <Route path="/updateitem" element={<UpdateItem />} />
                 </Routes>
                 <Footer />
             </div>
@@ -95,23 +91,23 @@ export default function App() {
     } else {
         return (
             <div className="App">
-                <Navbar2/>
+                <Navbar2 />
                 <Routes>
-                    <Route path="/" element={<Categorys/>}/>
+                    <Route path="/" element={<Categorys />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/contacto" element={<Contact />}/>
-                    <Route path="/detalle/:i" element={<Detail />}/>
-                    <Route path="/register" element={<CreateUsers/>}/>
+                    <Route path="/contacto" element={<Contact />} />
+                    <Route path="/detalle/:i" element={<Detail />} />
+                    <Route path="/register" element={<CreateUsers />} />
                     <Route path="/creacion" element={<CreateForm />} />
-                    <Route path="/updateprofile" element={<ActualizarData/>} />
+                    <Route path="/updateprofile" element={<ActualizarData />} />
                     <Route path="/welcome" element={<Welcome />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/admin/sucursales" element={<Sucursales/>}/>
-                    <Route path="/admin/comentarios" element={<Review/>}/>
+                    <Route path="/admin/sucursales" element={<Sucursales />} />
+                    <Route path="/admin/comentarios" element={<Review />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
                     <Route path="/final-shopping" element={<FinalShop />} />
                     <Route path="/userprofile" element={<UserConfig />} />
@@ -121,13 +117,13 @@ export default function App() {
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route path="/wishlist" element={<Wishlist />} />
-                    <Route path="/admin/sucursal" element={<Sucursales/>}/>
-                    <Route path="/admin/sales" element={<SpanningTable/>}/>
-                    <Route path="/admin/stock" element={<DataTable/>}/>
-                    <Route path="/admin/userorden" element={<OrdenCostumer/>}/>
-                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
-                    <Route path="/admin/ordenes" element={<Ordenes/>}/>
-                    <Route path="/updateitem" element={<UpdateItem/>}/>
+                    <Route path="/admin/sucursal" element={<Sucursales />} />
+                    <Route path="/admin/sales" element={<SpanningTable />} />
+                    <Route path="/admin/stock" element={<DataTable />} />
+                    <Route path="/admin/userorden" element={<OrdenCostumer />} />
+                    <Route path="/admin/newadmin" element={<CreateAdmin />} />
+                    <Route path="/admin/ordenes" element={<Ordenes />} />
+                    <Route path="/updateitem" element={<UpdateItem />} />
                 </Routes>
                 <Footer />
             </div>
