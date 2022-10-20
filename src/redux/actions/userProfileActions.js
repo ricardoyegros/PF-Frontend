@@ -7,11 +7,13 @@ export const GET_ORDERS_FINISH = "GET_ORDERS_FINISH";
 
 
 export const getOrdersOnWay = (id, state) => async (dispatch) => {
+    console.log(state, id)
     try {
-        await axios.get(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
+        await fetch(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
+            .then(res => res.json())
             .then(r => dispatch({
                 type: GET_ORDERS_ONWAY,
-                payload: r.data
+                payload: r
             }))
     } catch (error) {
         console.log(error.message);
@@ -20,11 +22,13 @@ export const getOrdersOnWay = (id, state) => async (dispatch) => {
 }
 
 export const getOrdersOnPending = (id, state) => async (dispatch) => {
+    console.log(state, id)
     try {
-        await axios.get(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
+        await fetch(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
+            .then(res => res.json())
             .then(r => dispatch({
                 type: GET_ORDERS_PENDING,
-                payload: r.data
+                payload: r
             }));
     } catch (error) {
         console.log(error.message);
@@ -33,11 +37,13 @@ export const getOrdersOnPending = (id, state) => async (dispatch) => {
 }
 
 export const getOrdersFinish = (id, state) => async (dispatch) => {
+    console.log(state, id)
     try {
-        await axios.get(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
+        await fetch(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
+            .then(res => res.json())
             .then(r => dispatch({
                 type: GET_ORDERS_FINISH,
-                payload: r.data
+                payload: r
             }));
     } catch (error) {
         console.log(error.message);
