@@ -29,6 +29,7 @@ import Ordenes from './components/dashboard/Ordenes';
 import UpdateItem from './components/dashboard/UpdateItem'
 import OrdenCostumer from './components/dashboard/OrdenCustomer';
 import ChangePassword from "./components/ChangePassword.jsx";
+import Nosotros from "./components/Nosotros.jsx";
 
 
 export default function App() {
@@ -78,12 +79,15 @@ export default function App() {
                         element={<CustomerDetail />}
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
-                    <Route path="/admin/sucursal" element={<Sucursales />} />
-                    <Route path="/admin/sales" element={<SpanningTable />} />
-                    <Route path="/admin/stock" element={<DataTable />} />
-                    <Route path="/admin/newadmin" element={<CreateAdmin />} />
-                    <Route path="/admin/ordenes" element={<Ordenes />} />
-                    <Route path="/updateitem" element={<UpdateItem />} />
+                    <Route path='/geo' element={<Geo />} />
+                    <Route path='/nosotros' element={<Nosotros />} />
+                    <Route path="/admin/sucursal" element={<Sucursales/>}/>
+                    <Route path="/admin/sales" element={<SpanningTable/>}/>
+                    <Route path="/admin/stock" element={<DataTable/>}/>
+                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
+                    <Route path="/admin/ordenes" element={<Ordenes/>}/>
+                    <Route path="/updateitem" element={<UpdateItem/>}/>
+
                 </Routes>
                 <Footer />
             </div>
@@ -116,14 +120,14 @@ export default function App() {
                     />
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route path="/wishlist" element={<Wishlist />} />
-                    <Route path="/admin/sucursal" element={<Sucursales />} />
-                    <Route path="/admin/sales" element={<SpanningTable />} />
-                    <Route path="/admin/stock" element={<DataTable />} />
-                    <Route path="/admin/userorden" element={<OrdenCostumer />} />
-                    <Route path="/admin/newadmin" element={<CreateAdmin />} />
-                    <Route path="/admin/ordenes" element={<Ordenes />} />
-                    <Route path="/updateitem" element={<UpdateItem />} />
-                    {(window.localStorage.isAdmin === "true")?(<Route path="/dashboard" element={<Dashboard />} />) :(<Route path="/dashboard" element={<UserConfig/>}/>)}
+                    <Route path="/admin/sucursal" element={<Sucursales/>}/>
+                    <Route path="/admin/sales" element={<SpanningTable/>}/>
+                    <Route path="/admin/stock" element={<DataTable/>}/>
+                    <Route path="/admin/userorden" element={<OrdenCostumer/>}/>
+                    <Route path="/admin/newadmin" element={<CreateAdmin/>}/>
+                    <Route path="/admin/ordenes" element={<Ordenes/>}/>
+                    <Route path="/updateitem" element={<UpdateItem/>}/>
+                    <Route path='/nosotros' element={<Nosotros />} />
                 </Routes>
                 <Footer />
             </div>

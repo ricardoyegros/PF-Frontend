@@ -1,13 +1,11 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box , Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDetailProduct } from "../redux/actions";
 import { createTheme, Checkbox } from "@mui/material";
 import { addToCart } from "../redux/actions/cart-actions";
-import { styled } from '@mui/material/styles';
 import { clearDetail } from "../redux/actions/detail-actions";
-import Loading from "./Loading";
 import Reviews from "./Reviews";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -22,14 +20,6 @@ import { FavoriteBorder, Favorite } from "@mui/icons-material";
 
 
 
-const StyledBoxPrice = styled(Box)(({ }) => ({
-  marginTop: "10px",
-  paddingBottom: "5px",
-  display: "flex",
-  justifyContent: "flex-end",
-  alignItems: "center",
-  boxShadow: "0px 1px 2px 0px rgba(151, 154, 141, 1)",
-}));
 
 const heartIcon = {
   // margin: "15px 5px 0px 0px",
@@ -47,24 +37,40 @@ const heartIcon = {
 export default function Detail() {
   const { i } = useParams();
 
-  let dispatch = useDispatch();
-  let navigate = useNavigate();
+    let dispatch = useDispatch();
+    let navigate = useNavigate();
+
+    
+    let allReviews = useSelector((state)=> state.reviewsDashReducer.reviews)  
+    const  [data, setData] = useState({})
+    useEffect( async ()=>{
+      try {
+      let product = await axios.get( `https://techstore123.herokuapp.com/products/${i}`)
+        setData(product.data)
+      } catch (error) {
+        console.log(error)
+      }
+      
+    },[])
 
 
-  let allReviews = useSelector((state) => state.reviewsDashReducer.reviews)
+    useEffect(() => {
+        dispatch(clearDetail());
+    }, []);
 
-  const [data, setData] = useState({})
-  useEffect(async () => {
-    try {
-      let product = await axios.get(`https://techstore123.herokuapp.com/products/${i}`)
-      setData(product.data)
-    } catch (error) {
-      console.log(error)
+    useEffect(() => {
+        dispatch(getDetailProduct(i));
+    }, []);
+
+
+
+  let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
+
+
+    function handleClickButton(e) {
+        dispatch(addToCart(detailProduct.name));
+        navigate("/shopping-cart");
     }
-
-  }, [])
-
-
 
 
   useEffect(() => {
@@ -92,7 +98,6 @@ export default function Detail() {
 
   };
 
-  let detailProduct = useSelector(state => state.detailProductReducer.detailProduct)
   const arrayFavorites = useSelector((state) => state.wishlistReducer.favorite);
 
   useEffect(() => {
@@ -236,59 +241,3 @@ export default function Detail() {
 
   )
 };
-
-
-
-
-/* {detailProduct.salePrice ?
-  <StyledBoxPrice>
-  <Box  display={"flex"} alignItems={"center"} justifyContent={"flex-end"} mr={4} >
-  <Typography variant={"h5"}  sx={{ marginRight: 3 }}>
-    Precio
-  </Typography>
-  <Typography variant={"h5"} sx={{ marginRight: 5 }}>
-    {` $ ${detailProduct?.salePrice}`}
-  </Typography>
-  <Button
-    variant="contained"
-    size="large"
-    onClick={handleClickButton}
-  >Agregar al carrito</Button>
-  </Box>
-</StyledBoxPrice> : <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}><Loading/></Box>  }
-    
-       
-{(detailProduct.name && detailProduct.images && detailProduct.description) ?  
-<StyledBox >
-
-<Box width={"30%"}
-  sx={{display:{
-    xs:"none",
-    md:"flex"
-  }}}
-justifyContent={"center"}
-m={5}   >
-<Box
-  component="img"
-  src={detailProduct.images && detailProduct.images[0]?.url}
-  />
-
-</Box>
-<Box width={"60%"}
-height={450} 
-display={"flex"}
-flexDirection={"column"}
-alignItems={"flex-start"}
->
-  <Typography variant="h6" component="p" >
-    {`categoria > ${detailProduct.name && detailProduct.category.name}`}
-  </Typography>
-  <Typography variant="h4" component="p" marginTop={15}>
-    {detailProduct?.name}
-  </Typography>
-  <Typography variant="h6" component="p" marginTop={4}>
-    {`${detailProduct?.description}`}
-  </Typography>  
-</Box>
-</StyledBox> : <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}><Loading/></Box> }
-    <Reviews id={i} /> */
