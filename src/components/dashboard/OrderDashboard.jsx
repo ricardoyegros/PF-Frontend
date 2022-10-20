@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import React, { useState } from 'react'
-import Swal from 'sweetalert2';
+import swal from 'sweetalert';
 // import Sidebar from './Sidebar';
 
 export const OrderDashboard = () => {
@@ -12,7 +12,7 @@ export const OrderDashboard = () => {
         e.preventDefault();
         console.log(e.target.value)
         await axios.put('https://techstore123.herokuapp.com/orders', e.target.value)
-            .then(r => alert(r.data))
+            .then(r => swal('Exito',r.data, 'success'))
             .catch(e => alert(e));
     }
 

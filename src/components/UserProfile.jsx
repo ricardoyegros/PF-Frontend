@@ -31,8 +31,7 @@ export const UserProfile = () => {
 
     };
 
-
-    // console.log(reduxState.pendings)
+    console.log(reduxState)
 
     return (
         <>

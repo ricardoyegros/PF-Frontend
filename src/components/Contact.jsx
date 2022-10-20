@@ -6,8 +6,14 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import swal from "sweetalert";
 
 export default function Contact() {
+
+  const handleSubmit = (e) => {
+    return swal('Formulario enviado', 'enviado correctamente', 'success')
+  }
+
   return (
     <>
       <Typography gutterBottom variant="h3" align="center">
@@ -27,7 +33,7 @@ export default function Contact() {
             Completa el formulario y dentro de las 24 horas te estaremos
             respondiendo todas tus dudas
           </Typography>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Grid container spacing={1}>
               <Grid xs={12} sm={6} item>
                 <TextField
@@ -58,6 +64,7 @@ export default function Contact() {
               </Grid>
               <Grid xs={12} item>
                 <TextField
+                  type={'number'}
                   label="Telefono"
                   placeholder="Ingrese su numero de telefono..."
                   variant="outlined"
