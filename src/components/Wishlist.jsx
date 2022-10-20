@@ -52,9 +52,9 @@ export default function Wishlist() {
     }, [prod])
 
 
-    const handleCart = (id) => {
-        console.log(id)
-        dispatch(addToCart(id));
+    const handleCart = (name) => {
+        console.log(name)
+        dispatch(addToCart(name));
         navigate("/shopping-cart");
     }
     const handleRemove = (id) => {
@@ -108,7 +108,7 @@ export default function Wishlist() {
                                     <td >
                                         { e.stock > 0 ?  <Checkbox
                                             checked={false}
-                                            onChange={() => handleCart(e.id)}
+                                            onChange={() => handleCart(e.name)}
                                             icon={<ShoppingCart />}
                                             checkedIcon={<ShoppingCart />}
                                             sx={cartIcon}
