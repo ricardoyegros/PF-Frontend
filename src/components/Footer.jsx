@@ -37,11 +37,6 @@ export default function Footer() {
                     Sobre Nosotros
                   </Link>
                 </Box>
-                <Box>
-                  <Link href="/preguntas" color="secondary" underline="none">
-                    Preguntas Frecuentes
-                  </Link>
-                </Box>
               </Grid>
               <Grid item xs={12} sm={4}>
                 <Box borderBottom={1}>

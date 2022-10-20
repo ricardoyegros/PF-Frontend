@@ -1,4 +1,3 @@
-import axios from "axios"
 import swal from "sweetalert";
 
 export const GET_ORDERS_ONWAY = "GET_ORDERS_ONWAY";
@@ -7,7 +6,6 @@ export const GET_ORDERS_FINISH = "GET_ORDERS_FINISH";
 
 
 export const getOrdersOnWay = (id, state) => async (dispatch) => {
-    console.log(state, id)
     try {
         await fetch(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
             .then(res => res.json())
@@ -22,7 +20,6 @@ export const getOrdersOnWay = (id, state) => async (dispatch) => {
 }
 
 export const getOrdersOnPending = (id, state) => async (dispatch) => {
-    console.log(state, id)
     try {
         await fetch(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
             .then(res => res.json())
@@ -37,7 +34,6 @@ export const getOrdersOnPending = (id, state) => async (dispatch) => {
 }
 
 export const getOrdersFinish = (id, state) => async (dispatch) => {
-    console.log(state, id)
     try {
         await fetch(`https://techstore123.herokuapp.com/orders?id=${id}&state=${state}`)
             .then(res => res.json())

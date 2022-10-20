@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export default function userProfileReducer(state = initialState, action) {
-    // console.log(action.payload);
+    
     switch (action.type) {
         case GET_ORDERS_ONWAY:
             return {

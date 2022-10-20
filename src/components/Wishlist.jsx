@@ -106,7 +106,7 @@ export default function Wishlist() {
                                         />
                                     </td>
                                     <td >
-                                        <Checkbox
+                                        { e.stock > 0 ?  <Checkbox
                                             checked={false}
                                             onChange={() => handleCart(e.id)}
                                             icon={<ShoppingCart />}
@@ -115,7 +115,7 @@ export default function Wishlist() {
                                             color="success"
                                             inputProps={{ 'aria-label': 'controlled' }}
                                             id={e.id}
-                                        />
+                                        /> : null }
                                     </td>
                                 </tr>
 

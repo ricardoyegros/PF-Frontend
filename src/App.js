@@ -128,6 +128,8 @@ export default function App() {
                     <Route path="/admin/ordenes" element={<Ordenes/>}/>
                     <Route path="/updateitem" element={<UpdateItem/>}/>
                     <Route path='/nosotros' element={<Nosotros />} />
+                    {(window.localStorage.isAdmin === "true")?(<Route path="/dashboard" element={<Dashboard />} />) :(<Route path="/dashboard" element={<UserConfig/>}/>)}
+
                 </Routes>
                 <Footer />
             </div>

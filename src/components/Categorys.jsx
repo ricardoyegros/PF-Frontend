@@ -54,9 +54,14 @@ export default function Categorys() {
   const reduxState = useSelector(
     (state) => state.categorysNameReducer.categorys
   );
+
+    // console.log(reduxState);
+
   const reduxState2 = useSelector(
     (state) => state.categorysNameReducer.filtrado
   );
+
+
   const reduxState3 = useSelector((state) => state.categorysNameReducer.brands);
   const reduxState4 = useSelector((state) => state.categorysNameReducer);
 
@@ -74,7 +79,8 @@ export default function Categorys() {
   };
 
   const handleCategory = (e) => {
-    console.log(e.target.ondrop)
+    // console.log(e.target.ondrop)
+    console.log(e.target.value)
     setPage(1);
     if (state.categoryName === e.target.name) {
       setState({
@@ -151,7 +157,6 @@ export default function Categorys() {
         })
       );
     } else {
-      console.log(reduxState4);
       setState({
         ...state,
         brandId: e.target.value,
