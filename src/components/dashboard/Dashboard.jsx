@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link as Linkdom } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ import {
 import { styled, alpha } from "@mui/material/styles";
 import Sidebar from "./Sidebar";
 import SearchAppBar from "./SearchAppBar";
-import {Sucursales} from "./Sucursales";
+import { Sucursales } from "./Sucursales";
 import { Map } from './Map';
 import SpanningTable from './SpanningTable'
 import StoreIcon from '@mui/icons-material/Store';
@@ -28,6 +28,8 @@ import Diversity1Icon from '@mui/icons-material/Diversity1';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import { MapDashboard } from './MapDashboard';
+import axios from "axios";
+import { OrderDashboard } from "./OrderDashboard";
 
 export default function Dashboard() {
     const theme = createTheme({
@@ -57,11 +59,12 @@ export default function Dashboard() {
     //const token = useSelector((state) => state.usersReducers.token);
     let token = localStorage.token;
     //console.log(token)
+
     return (
         <>
-            
-                <SearchAppBar />
-                       
+
+            <SearchAppBar />
+
             <ThemeProvider theme={theme}>
                 <Box sx={{ display: "flex" }}>
                     <CssBaseline />
@@ -91,10 +94,10 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Nuestras tiendas!!
-                                         <MapDashboard/> 
+                                        <MapDashboard />
                                     </Paper>
                                 </Grid>
-                                <Divider/>
+                                <Divider />
                                 {/* Recent Deposits */}
                                 <Grid item xs={12} md={4} lg={3}>
                                     <Paper
@@ -104,45 +107,13 @@ export default function Dashboard() {
                                             flexDirection: "column",
                                             height: '380px'
                                         }}
-                                    > 
+                                    >
                                         Ventas
-                                        <PointOfSaleIcon/>
-                                    </Paper> 
+                                        <PointOfSaleIcon />
+                                    </Paper>
                                 </Grid>
                                 {/* Recent Orders */}
-                                <Grid item xs={12}>
-                                    <Paper
-                                        sx={{
-                                            p: 2,
-                                            display: "flex",
-                                            flexDirection: "column",
-                                        }}
-                                    >
-                                        'Orden 1'
-                                    </Paper>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Paper
-                                        sx={{
-                                            p: 2,
-                                            display: "flex",
-                                            flexDirection: "column",
-                                        }}
-                                    >
-                                        'Orden 2'
-                                    </Paper>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Paper
-                                        sx={{
-                                            p: 2,
-                                            display: "flex",
-                                            flexDirection: "column",
-                                        }}
-                                    >
-                                        'Orden 3'
-                                    </Paper>
-                                </Grid>
+                                        <OrderDashboard />
                                 <Grid item xs={12} md={4} lg={3}>
                                     <Paper
                                         sx={{
@@ -153,7 +124,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Social-Media
-                                        <Diversity1Icon/>
+                                        <Diversity1Icon />
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12} md={4} lg={3}>
@@ -166,7 +137,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Stock
-                                        <StoreIcon/>
+                                        <StoreIcon />
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12} md={4} lg={3}>
@@ -179,7 +150,7 @@ export default function Dashboard() {
                                         }}
                                     >
                                         Compras
-                                        <PointOfSaleIcon/>
+                                        <PointOfSaleIcon />
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12} md={4} lg={3}>
@@ -193,7 +164,7 @@ export default function Dashboard() {
                                     >
                                         Ganancias
 
-                                        <MonetizationOnIcon/>
+                                        <MonetizationOnIcon />
                                     </Paper>
                                 </Grid>
                             </Grid>

@@ -10,13 +10,14 @@ export const UserProfile = () => {
 
     const reduxState = useSelector(state => state.userProfileReducer);
 
-    const arr = ['Procesando Pago', 'Preparando', 'Enviado', 'Completado', 'Anulado'];
 
     useEffect(() => {
         dispatch(getOrdersOnPending(localStorage.id, 'approved'));
         dispatch(getOrdersOnWay(localStorage.id, 'Enviado'));
         dispatch(getOrdersFinish(localStorage.id, 'Completado'));
     }, [dispatch]);
+
+    // console.log(reduxState);
 
     const [state, setState] = useState({});
 
@@ -31,28 +32,28 @@ export const UserProfile = () => {
     };
 
 
-// console.log(reduxState.pendings)
+    // console.log(reduxState.pendings)
 
     return (
         <>
             <div className="container text-center">
 
-            <div className="row">
-                        <div className="col">
-                            <p>
-                                <button className={state.pending === "pending" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" value="pending" onClick={handleClick}>
-                                    Pendientes
-                                </button>
-                            </p>
-                            <div className="collapse" id="collapseExample1">
-                                <div className="card card-body" >
-                                    {
-                                        reduxState.pendings[0] && reduxState.pendings.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} productsId={e.productsId} />)
-                                    }
-                                </div>
+                <div className="row">
+                    <div className="col">
+                        <p>
+                            <button className={state.pending === "pending" ? "btn btn-success" : "btn btn-secundary"} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" value="pending" onClick={handleClick}>
+                                Pendientes
+                            </button>
+                        </p>
+                        <div className="collapse" id="collapseExample1">
+                            <div className="card card-body" >
+                                {
+                                    reduxState.pendings[0] && reduxState.pendings.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} productsId={e.productsId} />)
+                                }
                             </div>
                         </div>
                     </div>
+                </div>
 
 
                 <div className="row">
@@ -63,7 +64,7 @@ export const UserProfile = () => {
                         <div className="collapse" id="collapseExample0">
                             <div className="card card-body">
                                 {
-                                    reduxState.onway[0] && reduxState.onway.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} />)
+                                    reduxState.onway[0] && reduxState.onway.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} productsId={e.productsId} />)
                                 }
                             </div>
                         </div>
@@ -79,7 +80,7 @@ export const UserProfile = () => {
                             <div className="collapse" id="collapseExample2">
                                 <div className="card card-body">
                                     {
-                                        reduxState.finish[0] && reduxState.finish.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} />)
+                                        reduxState.finish[0] && reduxState.finish.map(e => <OrderCard id={e.id} key={e.id} orderDate={e.id} status={e.status} productsId={e.productsId} />)
                                     }
                                 </div>
                             </div>

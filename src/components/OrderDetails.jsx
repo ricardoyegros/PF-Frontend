@@ -2,7 +2,7 @@ import { Box } from '@mui/system';
 import React from 'react'
 
 export const OrderDetails = ({ id, toRender }) => {
-    console.log(toRender);
+    // console.log(toRender);
     return (
         <>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#staticBackdrop${id}`}>

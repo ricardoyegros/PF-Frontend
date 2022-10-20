@@ -2,7 +2,8 @@ import React from 'react'
 import { OrderDetails } from './OrderDetails';
 
 export const OrderCard = ({ orderDate, status, id, productsId }) => {
-    const cartForMap = JSON.parse(productsId).cart;
+    const cartForMap = productsId && JSON.parse(productsId).cart;
+
     return (
         <>
             <div className="card w-150">
