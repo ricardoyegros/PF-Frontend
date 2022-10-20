@@ -36,7 +36,7 @@ export default function Login() {
     emailLogin = input.email;
     setInput({});
     dispatch(getAllCartItems(emailLogin));
-    navigate("/welcome");
+    navigate("/");
   }
   const clientId =
     "701558810586-vvvkadjt3u0n7472ff5jfm3bnteejl4h.apps.googleusercontent.com";
@@ -51,7 +51,7 @@ export default function Login() {
     emailLogin = user.email;
     console.log(emailLogin, "estoy dentro");
     dispatch(getAllCartItems(emailLogin));
-    navigate("/welcome");
+    navigate("/");
   }
   function handleFailure(err) {
     console.log("failed:", err);

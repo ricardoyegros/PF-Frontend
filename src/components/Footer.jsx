@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { Box } from "@mui/material";
 import { Link } from "@mui/material";
 import { createTheme } from "@mui/material";
-import { Facebook, GitHub, Instagram, Twitter } from "@mui/icons-material";
+import { Facebook, GitHub, Instagram, Twitter, WhatsApp } from "@mui/icons-material";
 
 const theme = createTheme({
   palette: {
@@ -104,14 +104,14 @@ export default function Footer() {
                     color="secondary"
                     underline="none"
                   >
-                    <GitHub
+                    <WhatsApp
                       onClick={() =>
-                        window.open("https://www.github.com", "_blank")
+                        window.open("https://wa.me/3718530530", "_blank")
                       }
                     />
                   </Link>
                 </Box>
-              </Grid>
+              </Grid>u
             </Grid>
             <Box
               color="black"

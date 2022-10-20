@@ -72,7 +72,7 @@ export default function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/final-shopping" element={<FinalShop />} />
+                    <Route path="/final-shopping" element={<Login/>} />
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route
                         path="/admin/customers/customer/:id"
@@ -112,7 +112,6 @@ export default function App() {
                     <Route path="/admin/sucursales" element={<Sucursales />} />
                     <Route path="/admin/comentarios" element={<Review />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
-                    <Route path="/final-shopping" element={<FinalShop />} />
                     <Route path="/userprofile" element={<UserConfig />} />
                     <Route
                         path="/admin/customers/customer/:id"
@@ -129,7 +128,6 @@ export default function App() {
                     <Route path="/updateitem" element={<UpdateItem/>}/>
                     <Route path='/nosotros' element={<Nosotros />} />
                     {(window.localStorage.isAdmin === "true")?(<Route path="/dashboard" element={<Dashboard />} />) :(<Route path="/dashboard" element={<UserConfig/>}/>)}
-
                 </Routes>
                 <Footer />
             </div>
