@@ -46,7 +46,7 @@ function Logout() {
         localStorage.removeItem('isAdmin');
         localStorage.removeItem('id');
         dispatch(logoutUser());
-        // navigate('/');
+        navigate('/');
     }, []);
 
 

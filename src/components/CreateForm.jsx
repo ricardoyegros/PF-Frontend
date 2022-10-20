@@ -12,6 +12,8 @@ import {
   Button,
   MenuItem,
 } from "@mui/material";
+import swal from "sweetalert";
+
 
 const categories = [
   { value: "Mother Board", label: "Mother Board" },
@@ -72,7 +74,7 @@ export default function CreateForm() {
     e.preventDefault();
     dispatch(createProduct(formData));
     dispatch(getAllProducts());
-    alert("New product has been created");
+    swal('Exito!', 'Producto agregado correctamente!', 'success');
     navigate("/");
   }
 
@@ -206,6 +208,9 @@ export default function CreateForm() {
                     onChange={handleChangeFile}
                   />
                 </Button>
+                {
+                  file.image && <p>{file.image.name}</p>
+                }
               </Grid>
               <Grid xs={12} item>
                 <Button

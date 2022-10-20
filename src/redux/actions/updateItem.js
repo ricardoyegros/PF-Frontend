@@ -10,7 +10,7 @@ export function updateItem(input) {
         try {
             await axios
             .put(`https://techstore123.herokuapp.com/updateordelete/update`,input)
-            .then(r => swal('Exito', r.data, 'succes'))
+            .then(r => swal('Exito', r.data, 'success'))
             .catch(e => swal(e.message))
         } catch (error) {
             console.log(error);
