@@ -105,7 +105,6 @@ export default function App() {
                     <Route path="/passwordReset" element={<ForgotPassword />} />
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/admin/customers" element={<Customers />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/admin/sucursales" element={<Sucursales />} />
                     <Route path="/admin/comentarios" element={<Review />} />
                     <Route path='/final-shopping' element={<FinalShop />} />
@@ -124,6 +123,7 @@ export default function App() {
                     <Route path="/admin/newadmin" element={<CreateAdmin />} />
                     <Route path="/admin/ordenes" element={<Ordenes />} />
                     <Route path="/updateitem" element={<UpdateItem />} />
+                    {(window.localStorage.isAdmin === "true")?(<Route path="/dashboard" element={<Dashboard />} />) :(<Route path="/dashboard" element={<UserConfig/>}/>)}
                 </Routes>
                 <Footer />
             </div>

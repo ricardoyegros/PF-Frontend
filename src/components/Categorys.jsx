@@ -19,6 +19,7 @@ import  Geo  from "./Geo"
 import { Carrousel } from "./Carrousel";
 import Card3 from "./Card3";
 import { getFavorite } from "../redux/actions/wishlistActions"
+import { UserConfig } from "./UserConfig";
 
 
 const secondaryBox = {
