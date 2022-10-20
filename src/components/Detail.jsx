@@ -1,13 +1,11 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box , Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDetailProduct } from "../redux/actions";
 import { createTheme } from "@mui/material";
 import { addToCart } from "../redux/actions/cart-actions";
-import { styled } from '@mui/material/styles';
 import { clearDetail } from "../redux/actions/detail-actions";
-import Loading from "./Loading";
 import Reviews from "./Reviews";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -19,14 +17,6 @@ import axios from "axios";
 
 
 
-const StyledBoxPrice = styled(Box)(({}) => ({
-    marginTop: "10px",
-    paddingBottom: "5px",
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    boxShadow: "0px 1px 2px 0px rgba(151, 154, 141, 1)",
-}));
 
 export default function Detail() {
     const { i } = useParams();
@@ -35,8 +25,7 @@ export default function Detail() {
     let navigate = useNavigate();
 
     
-    let allReviews = useSelector((state)=> state.reviewsDashReducer.reviews)
-    
+    let allReviews = useSelector((state)=> state.reviewsDashReducer.reviews)  
     const  [data, setData] = useState({})
     useEffect( async ()=>{
       try {
@@ -65,7 +54,7 @@ export default function Detail() {
 
 
     function handleClickButton(e) {
-        dispatch(addToCart(i));
+        dispatch(addToCart(detailProduct.name));
         navigate("/shopping-cart");
     }
 
@@ -125,59 +114,3 @@ export default function Detail() {
     
   )
 };
-
-
-
-
-/* {detailProduct.salePrice ?
-  <StyledBoxPrice>
-  <Box  display={"flex"} alignItems={"center"} justifyContent={"flex-end"} mr={4} >
-  <Typography variant={"h5"}  sx={{ marginRight: 3 }}>
-    Precio
-  </Typography>
-  <Typography variant={"h5"} sx={{ marginRight: 5 }}>
-    {` $ ${detailProduct?.salePrice}`}
-  </Typography>
-  <Button
-    variant="contained"
-    size="large"
-    onClick={handleClickButton}
-  >Agregar al carrito</Button>
-  </Box>
-</StyledBoxPrice> : <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}><Loading/></Box>  }
-    
-       
-{(detailProduct.name && detailProduct.images && detailProduct.description) ?  
-<StyledBox >
-
-<Box width={"30%"}
-  sx={{display:{
-    xs:"none",
-    md:"flex"
-  }}}
-justifyContent={"center"}
-m={5}   >
-<Box
-  component="img"
-  src={detailProduct.images && detailProduct.images[0]?.url}
-  />
-
-</Box>
-<Box width={"60%"}
-height={450} 
-display={"flex"}
-flexDirection={"column"}
-alignItems={"flex-start"}
->
-  <Typography variant="h6" component="p" >
-    {`categoria > ${detailProduct.name && detailProduct.category.name}`}
-  </Typography>
-  <Typography variant="h4" component="p" marginTop={15}>
-    {detailProduct?.name}
-  </Typography>
-  <Typography variant="h6" component="p" marginTop={4}>
-    {`${detailProduct?.description}`}
-  </Typography>  
-</Box>
-</StyledBox> : <Box display={"flex"} justifyContent={"center"} alignItems={"center"} m={50}><Loading/></Box> }
-    <Reviews id={i} /> */

@@ -18,13 +18,13 @@ const StyledBox = styled(Box)(({ }) => ({
 }));
 export default function Cart ({name, salePrice, image, stock, id, quantity}) {
     let dispatch = useDispatch();
-    
+    console.log(name ,"name del cart")
     function handleButton (e){
         if(quantity > 1)
         dispatch(handleReduce1(id))
     }
     function handleButton2 (e){
-        dispatch(addToCart(id))
+        dispatch(addToCart(name))
     }
 
     function handleButton4 (e){
