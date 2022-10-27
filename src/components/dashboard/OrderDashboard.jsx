@@ -15,7 +15,7 @@ export const OrderDashboard = () => {
             .then(r => swal('Exito',r.data, 'success'))
             .catch(e => alert(e));
     }
-/* 
+ 
 
     const columns = [
         { field: "id", headerName: "Orden", width: 70 },
@@ -62,7 +62,7 @@ export const OrderDashboard = () => {
         },
     ];
 
- */
+ 
     const [state, setState] = useState(false);
 
 
@@ -114,29 +114,3 @@ export const OrderDashboard = () => {
         </>
     )
 }
-
-<table class="table" style={{"marginBottom":"5rem"}}>
-  <thead>
-    <tr>
-      <th scope="col">Usuario</th>
-      <th scope="col">Producto</th>
-      <th scope="col">Comentario</th>
-      <th scope="col">Rating</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    {allReviews.length ? (
-        allReviews.map((review) => (
-            <tr >
-            <th scope="row">{review.user ? review.user.email : "null"}</th>
-            <td>{review.product.name}</td>
-            <td>{review.detail}</td>
-            <td>{review.stars}</td>
-            <td><button onClick={(e) => handleDelete(e)} value={review.id} type="button" class="btn btn-danger">Borrar</button></td>
-            </tr>
-              
-        ))
-    ) :  <Box display={"flex"} justifyContent={"center"} alignItems={"center"}><Alert severity="error">No se encontraron comentarios!</Alert></Box> }
-  </tbody>
-</table>
