@@ -111,7 +111,7 @@ export default function Footer() {
                     />
                   </Link>
                 </Box>
-              </Grid>u
+              </Grid>
             </Grid>
             <Box
               color="black"
